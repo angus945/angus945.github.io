@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on AngusChan-website</title>
+    <link>https://angus945.github.io/en/tags/test/</link>
+    <description>Recent content in test on AngusChan-website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 05 May 2021 10:56:17 +0800</lastBuildDate><atom:link href="https://angus945.github.io/en/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test-note</title>
+      <link>https://angus945.github.io/en/notes/test/</link>
+      <pubDate>Wed, 05 May 2021 10:56:17 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/notes/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test-blog</title>
+      <link>https://angus945.github.io/en/blog/test/</link>
+      <pubDate>Tue, 04 May 2021 15:24:55 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/blog/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing tutorial folder and looongest title</title>
+      <link>https://angus945.github.io/en/tutorials/testfolder/</link>
+      <pubDate>Mon, 26 Apr 2021 13:14:06 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/tutorials/testfolder/</guid>
+      <description>&lt;p&gt;Just Testing&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

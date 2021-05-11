@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Setup - AngusChan-website</title>
+  <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Setup" />
+<meta property="og:description" content="Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-04-26T14:55:17&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-28T14:50:17&#43;08:00" />
+
+<meta itemprop="name" content="Setup">
+<meta itemprop="description" content="Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG"><meta itemprop="datePublished" content="2021-04-26T14:55:17&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-28T14:50:17&#43;08:00" />
+<meta itemprop="wordCount" content="687">
+<meta itemprop="keywords" content="shader," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Setup"/>
+<meta name="twitter:description" content="Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+      </header>
+        
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+      
+        
+        
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post"><div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目錄</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#setup">Setup</a>
+      <ul>
+        <li><a href="#前置作業和注意事項">前置作業和注意事項</a>
+          <ul>
+            <li><a href="#設置資料">設置資料</a></li>
+            <li><a href="#初始設置">初始設置</a></li>
+            <li><a href="#腳本設置">腳本設置</a></li>
+            <li><a href="#標準化空間">標準化空間</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><body>
+    <div class="post-content">
+      <h1 id="setup">Setup</h1>
+<h2 id="前置作業和注意事項">前置作業和注意事項</h2>
+<p>教學開始前的前置作業，後面部分不會在重複，請視情況自己執行</p>
+<h3 id="設置資料">設置資料</h3>
+<p>環境 Unity、2D</p>
+<p>版本 Unity 2019.4.2f1</p>
+<p>使用語言 Shaderlab (HLSL、CG)、C#</p>
+<p>腳本工具 Visual Studio Code</p>
+<p>紀錄工具 Unity Recorder</p>
+<p>攝影機比例 1 : 1</p>
+<h3 id="初始設置">初始設置</h3>
+<p>首先在場景建立一個 Quad 作為渲染目標，以及設置一顆材質球和 Image Shader，並隨便放一張 Texture 確保 Material 能夠渲染</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+<div class="image-center" style="width: ;" >
+    <img src="/zh-tw/tutorials/signeddistancefunction/setup/setup_0.jpg" alt="image display error, please report [/zh-tw/tutorials/signeddistancefunction/setup/setup_0.jpg]">
+</div>
+
+
+
+
+
+<p>選 quad 的原因是因為它的大小固定 1 unit，不像 sprite 會受到 texture 影響，但事實上這個著色器也能夠用在 SpriteRenderer，沒有硬性規定要使用哪種</p>
+<p>把 camera 的 size 改為 0.5，讓圖能夠剛好填滿 game view</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+<div class="image-center" style="width: ;" >
+    <img src="/zh-tw/tutorials/signeddistancefunction/setup/setup_1.jpg" alt="image display error, please report [/zh-tw/tutorials/signeddistancefunction/setup/setup_1.jpg]">
+</div>
+
+
+
+
+
+<p>也可以直接在 scene view 看效果，這項設置的目的主要是我要錄影的關係，然後要注意 game View 中只有在 paly mode 時才看的到時間相關的著色器變量效果</p>
+<h3 id="腳本設置">腳本設置</h3>
+<p>開啟腳本，如論你要用什麼工具都可以，我這裡使用的是 vscode </p>
+<p>為了確保渲染精度，我們會在片段 frag 著色器上面進行計算，所需的資料只有 uv</p>
+<p>首先繪製出 uv 空間，其他部分保持不動就好，沒有 Alpha Blend</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">frag</span> <span class="p">(</span><span class="n">v2f</span> <span class="n">i</span><span class="p">)</span> <span class="p">:</span> <span class="n">SV_Target</span>
+<span class="p">{</span>
+    <span class="n">fixed4</span> <span class="n">col</span> <span class="p">=</span> <span class="n">float4</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">uv</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">col</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/zh-tw/tutorials/signeddistancefunction/setup/setup_2.jpg" alt="image display error, please report [/zh-tw/tutorials/signeddistancefunction/setup/setup_2.jpg]">
+</div>
+
+
+
+
+
+<h3 id="標準化空間">標準化空間</h3>
+<p>原本的 uv 空間是從左下開始，從 0 ~ 1 的數值範圍，我們希望將圖畫在正中心，所以要將原點設置回圖片的中心，將範圍變成 -1 ~ 1</p>
+<p>這裡提供一個變量 scale，作為空間大小的輸入值，先用 1 即可，之後視情況更改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">float2</span> <span class="n">spaceNormalize</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">,</span> <span class="kt">float</span> <span class="n">scale</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">uv</span> <span class="p">-</span> <span class="m">0.5</span><span class="p">)</span> <span class="p">*</span> <span class="m">2</span> <span class="p">*</span> <span class="n">scale</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">fixed4</span> <span class="n">frag</span> <span class="p">(</span><span class="n">v2f</span> <span class="n">i</span><span class="p">)</span> <span class="p">:</span> <span class="n">SV_Target</span>
+<span class="p">{</span>
+    <span class="n">float2</span> <span class="n">uv</span> <span class="p">=</span> <span class="n">spaceNormalize</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">uv</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    
+    <span class="n">fixed4</span> <span class="n">col</span> <span class="p">=</span> <span class="n">float4</span><span class="p">(</span><span class="n">uv</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">col</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/zh-tw/tutorials/signeddistancefunction/setup/setup_3.jpg" alt="image display error, please report [/zh-tw/tutorials/signeddistancefunction/setup/setup_3.jpg]">
+</div>
+
+
+
+
+
+<p>教學內容偏長，極度不建議把全部東西都寫在同一個腳本裡，可以自己視情況使用新的腳本，只要記得完成初始設置以及複製使用到的距離場函數就好</p>
+<p>以上就是教學開始前的初步設置，後面的部分將省略這項作業，請注意每篇開頭的提醒</p>
+
+    </div>
+  </body>
+  
+  
+<hr>
+
+
+
+
+  
+  
+  <nav class="pagination">
+    
+    
+    
+    <a class="prev" href="/zh-tw/tutorials/signeddistancefunction/">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">Signed Distance Function</span>
+    </a>
+    
+    
+    
+      <a class="next" href="/zh-tw/tutorials/signeddistancefunction/preliminary/">
+        <span class="next-text"> Preliminary </span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+
+
+
+</article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

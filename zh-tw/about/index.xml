@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on AngusChan-website</title>
+    <link>https://angus945.github.io/zh-tw/about/</link>
+    <description>Recent content in About on AngusChan-website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 07 May 2021 13:38:18 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>關於這個網站</title>
+      <link>https://angus945.github.io/zh-tw/about/aboutthissite/</link>
+      <pubDate>Fri, 07 May 2021 15:36:10 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/about/aboutthissite/</guid>
+      <description>這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，目前還空空如也 :P 不定期更新，我的主要活動地點在巴哈姆特的小屋那裏，幾乎每天都會發日誌</description>
+    </item>
+    
+    <item>
+      <title>關於我</title>
+      <link>https://angus945.github.io/zh-tw/about/aboutme/</link>
+      <pubDate>Fri, 07 May 2021 15:36:01 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/about/aboutme/</guid>
+      <description>我是一位來自台灣的 19 歲青少年，興趣是遊戲開發以及程式 因為不適合現有的體制教育，所以在高中一年級時申請了&amp;quot;非學校型態實驗教育&amp;quo</description>
+    </item>
+    
+  </channel>
+</rss>

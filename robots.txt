@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://angus945.github.io/sitemap.xml
