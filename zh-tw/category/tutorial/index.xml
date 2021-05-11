@@ -17,39 +17,12 @@
     </item>
     
     <item>
-      <title>Distance</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</link>
-      <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</guid>
-      <description>Distance 標準化空間，大小為 10 &amp;ldquo;距離&amp;quot;場 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起</description>
-    </item>
-    
-    <item>
       <title>Signed Distance Function</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>
       <pubDate>Tue, 27 Apr 2021 21:53:27 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</guid>
       <description>距離場教學 - 數學原理以及運用方式 前言 為了能支撐住畫面渲染的效能消耗，GPU中多個核心可以平行運算數個像素的顏色 這也代表每個像素的運算是被孤立</description>
-    </item>
-    
-    <item>
-      <title>Preliminary</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</link>
-      <pubDate>Tue, 27 Apr 2021 21:34:48 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</guid>
-      <description>Preliminary 標準化空間，大小為 1 初步理解 在第一次接觸距離場時，可以先理解成 &amp;ldquo;一個判斷空間中任意點在不在形狀內&amp;rdquo; 的函數 我們從一個</description>
-    </item>
-    
-    <item>
-      <title>Setup</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</link>
-      <pubDate>Mon, 26 Apr 2021 14:55:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</guid>
-      <description>Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG</description>
     </item>
     
     <item>

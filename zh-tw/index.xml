@@ -26,57 +26,12 @@
     </item>
     
     <item>
-      <title>Test-note</title>
-      <link>https://angus945.github.io/zh-tw/notes/test/</link>
-      <pubDate>Wed, 05 May 2021 10:56:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/notes/test/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Test-blog</title>
-      <link>https://angus945.github.io/zh-tw/blog/test/</link>
-      <pubDate>Tue, 04 May 2021 15:24:55 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/blog/test/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>HomeContent</title>
       <link>https://angus945.github.io/zh-tw/homecontent/</link>
       <pubDate>Tue, 04 May 2021 11:58:15 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/homecontent/</guid>
       <description>HomeContent Tags .tag { margin-right: 5px; color: #c05b4d; word-break: break-all; break-after: always; } .tag::before { content: &#39;#&#39;; } shader test 施工中 ~~ Disqus 留言系統 Google analyties 流量追蹤 多語言測試 待維修 table of contens 頁面 About 自我介紹 Home page (顯示tag、重點文章)</description>
-    </item>
-    
-    <item>
-      <title>Distance</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</link>
-      <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</guid>
-      <description>Distance 標準化空間，大小為 10 &amp;ldquo;距離&amp;quot;場 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起</description>
-    </item>
-    
-    <item>
-      <title>Preliminary</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</link>
-      <pubDate>Tue, 27 Apr 2021 21:34:48 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</guid>
-      <description>Preliminary 標準化空間，大小為 1 初步理解 在第一次接觸距離場時，可以先理解成 &amp;ldquo;一個判斷空間中任意點在不在形狀內&amp;rdquo; 的函數 我們從一個</description>
-    </item>
-    
-    <item>
-      <title>Setup</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</link>
-      <pubDate>Mon, 26 Apr 2021 14:55:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</guid>
-      <description>Setup 前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity、2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG</description>
     </item>
     
   </channel>
