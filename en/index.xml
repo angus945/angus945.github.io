@@ -6,7 +6,30 @@
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 07 May 2021 14:34:43 +0800</lastBuildDate><atom:link href="https://angus945.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 May 2021 15:36:10 +0800</lastBuildDate><atom:link href="https://angus945.github.io/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About this site</title>
+      <link>https://angus945.github.io/en/about/en-aboutthissite/</link>
+      <pubDate>Fri, 07 May 2021 15:36:10 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/about/en-aboutthissite/</guid>
+      <description>my first website :)
+ahter that I well throw some tutorial, note ore blog in this site
+update by random time ~
+website is created by Hugo, theme is modify by Even</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://angus945.github.io/en/about/en-aboutme/</link>
+      <pubDate>Fri, 07 May 2021 15:36:01 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/about/en-aboutme/</guid>
+      <description>Hi, I&amp;rsquo;m nineteen years old juvenile from Taiwan with, interest in game development and programming
+because I&amp;rsquo;m not suitable for default education in Taiwan height school, so I chose the plan to let me can learn by my self at home
+this meed I don&amp;rsquo;t have any teacher can teach me, and I need to abandon all of the sources from height school, but now I have free choice for how about learning and learning direction :D</description>
+    </item>
+    
     <item>
       <title>HomeContent</title>
       <link>https://angus945.github.io/en/homecontent/</link>

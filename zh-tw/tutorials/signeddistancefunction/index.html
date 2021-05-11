@@ -150,13 +150,13 @@
         
         
         
-      
-        
-        
-        
           
             <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
           
+        
+      
+        
+        
         
         
 
@@ -221,11 +221,6 @@
 <p>在這種限制之下也使得一種特別的運算方式得以實現 - 距離場 Signed Distance Function</p>
 <p>一種能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，看似單純但距離場的組合特性以及空間操作性為它帶來無限的可能</p>
 <p>運用在圖像渲染中可以不靠一張貼圖就 &ldquo;計算出&rdquo; 複雜的形狀甚至是分形，也因此 SDF 算法是深受 program artists 喜愛的數學工具</p>
-<p>In order to support the performance consumption of screen rendering, multiple cores in the GPU can compute the colors of several pixels in parallel</p>
-<p>This also means that the calculation of each pixel is isolated, and the pixel cannot communicate with other pixels, and can only know the information it needs, such as: location</p>
-<p>Under this limitation, a special calculation method is realized-Signed Distance Function</p>
-<p>A function that can describe the distance of the virtual shape closest to the surface at any position in the space. It seems simple but the combination characteristics of the distance field and the spatial operability bring unlimited possibilities to it</p>
-<p>When used in image rendering, you can &ldquo;calculate&rdquo; complex shapes and even fractals without relying on a map. Therefore, the SDF algorithm is a mathematical tool loved by program artists.
 
 
 
@@ -248,7 +243,7 @@
 
 
 
-</p>
+
 <p>教學中會從頭解說距離場的數學原理，如何使用距離場繪製圖形和動畫，最終帶各位製作出一個完整的 2D 距離場動畫</p>
 <h3 id="基礎知識">基礎知識</h3>
 <p>閱讀這篇教學會需要基本的著色器以及線性代數知識，才能夠有效運用，裡面會省略基本的著色器數值特性，以及線代的數學算式</p>
@@ -281,27 +276,6 @@
 
   </section>
 
-<!-- 
-[Setup](https://www.notion.so/Setup-f2af25ec5b8341268dde2bf98eca4b63)
-[Preliminary](https://www.notion.so/Preliminary-22a13b44f6a146d0bbbd43e2f3733361)
-[Distance](https://www.notion.so/Distance-b2739dced1114819a728ccf85d4fd6f2)
-[Colored](https://www.notion.so/Colored-798f1fb89cea4126b1ba94ed0ff52cba)
-[Major Lines](https://www.notion.so/Major-Lines-3ad92014c15d481ab2292b599c16ab7f)
-[More Shapes](https://www.notion.so/More-Shapes-54532249ebfe41bd9d14a905c606bbac)
-[Transformation](https://www.notion.so/Transformation-fd68c930e5994197945f2a80e2eafaa2)
-[Combination](https://www.notion.so/Combination-849a6629ccc840dfb117b6214e38adf3)
-[Space Manipulation](https://www.notion.so/Space-Manipulation-0f32c1e320e643508907275a0318f89c)
-[Further Shapes](https://www.notion.so/Further-Shapes-4fb53d1abdcc400ebada7f8ba0960fb1)
-[Combination Example](https://www.notion.so/Combination-Example-1d35d084cb3b417f98fd57056ccc3fe5)
-[Animate Method](https://www.notion.so/Animate-Method-53e7c1484cad4d44845904e4ab01d1ea)
-[Animate Example](https://www.notion.so/Animate-Example-a632e01d20554f3293f0b542dc4b2fc7)
-[Animate Easing](https://www.notion.so/Animate-Easing-0ab616ec9172474798010a6f5ff789b9)
-[Animate Time line](https://www.notion.so/Animate-Time-line-afc7f7da4fad4148a443ada0dd369232)
-[Anti Aliasing](https://www.notion.so/Anti-Aliasing-f28738026a9f4532b5f880737f3b2ca4)
-[Further Drawing](https://www.notion.so/Further-Drawing-c88eb5e490d645d9ad80433efdf0606c)
-[Further Coloring](https://www.notion.so/Further-Coloring-13f7bc9ca049460b9db2d042481bdd8e)
-[Epilogue](https://www.notion.so/Epilogue-bff7a0261b8a413da59558003410e6f1) 
--->
 <h3 id="參考資料">參考資料</h3>
 <p><a href="https://www.ronja-tutorials.com/" target="_blank">Shader Tutorials by Ronja</a></p>
 <p><a href="https://thebookofshaders.com/" target="_blank">The Book of Shaders</a></p>
