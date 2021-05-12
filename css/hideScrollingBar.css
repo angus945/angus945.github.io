@@ -1,6 +1,7 @@
 html 
 {
     overflow: -moz-hidden-unscrollable;
+    overflow-x: none;
     height: 100%;
 }
 
