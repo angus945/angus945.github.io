@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shader on AngusChan-website</title>
+    <link>https://angus945.github.io/en/tags/shader/</link>
+    <description>Recent content in shader on AngusChan-website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Apr 2021 21:53:27 +0800</lastBuildDate><atom:link href="https://angus945.github.io/en/tags/shader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Signed Distance Function</title>
+      <link>https://angus945.github.io/en/tutorials/signeddistancefunction/</link>
+      <pubDate>Tue, 27 Apr 2021 21:53:27 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/en/tutorials/signeddistancefunction/</guid>
+      <description>.image-center{margin: auto;text-align: center;}</description>
+    </item>
+    
+  </channel>
+</rss>
