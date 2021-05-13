@@ -1,19 +1,16 @@
-html 
+
+
+
+
+
+html,body
 {
-    overflow: -moz-hidden-unscrollable;
-    overflow-x: none;
-    height: 100%;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
 }
 
-body
-{
-    -ms-overflow-style: none;
-    height: 100%;
-	width: calc(100vw + 18px);
-	overflow: auto;
-    overflow-x: hidden;
-}
-body::-webkit-scrollbar 
+body::-webkit-scrollbar
 {
     display: none;
 }
