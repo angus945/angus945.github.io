@@ -1,0 +1,21 @@
+.tab-column
+{
+    display: block;
+}
+
+.tab-underline
+{                
+    animation-direction: reverse;
+    
+    margin-right: 15px;
+    font-size: 30px;
+}
+.tab-underline.active
+{
+    animation-direction: normal;
+}
+ 
+.tab-content 
+{
+    display: none;
+}

@@ -210,31 +210,10 @@
 <article class="post">
   <body>
     <div>
-        <style>
-
-    .tab-column
-    {
-        display: block;
-    }
-
-    .tab-underline
-    {                
-        animation-direction: reverse;
-        
-        margin-right: 15px;
-        font-size: 30px;
-    }
-    .tab-underline.active
-    {
-        animation-direction: normal;
-    }
-     
-    .tabcontent 
-    {
-        display: none;
-    }
-
-</style>
+        <head>
+    <link rel="stylesheet" type="text/css" href="/css/headerTab.css">
+    <script src=" /js/tabHandler.js"></script>
+</head>
 
 
 
@@ -256,7 +235,7 @@
 
 
 
-    <div id="0" class="tabcontent post-content" >
+    <div id="0" class="tab-content post-content" >
         
             <p>我是一位來自台灣的 19 歲青少年，興趣是遊戲開發以及程式</p>
 <p>因為不適合現有的體制教育，所以在高中一年級時申請了&quot;非學校型態實驗教育&quot;，脫離學校開始了兩年的在家自學，這意味者我將沒有老師執導以及放棄高級中學提供的所有資源，但也代表我能夠自由選擇方向以及適合自己的學習方法</p>
@@ -273,7 +252,7 @@
         
     </div>
 
-    <div id="1" class="tabcontent post-content" >
+    <div id="1" class="tab-content post-content" >
         
             <p>人生的第一個網站 歐ya</p>
 <p>這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，目前還空空如也 :P</p>
@@ -286,25 +265,6 @@
 
 
 <script type="text/javascript">
-    function tabHandler(event, tabID) 
-    {
-        var i;
-        
-        var tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) 
-        {
-            tabcontent[i].style.display = "none";
-        }
-        document.getElementById(tabID).style.display = "block";
-
-        var tabUnderline = document.getElementsByClassName("tab-underline");
-        for (i = 0; i < tabUnderline.length; i++) 
-        {
-            tabUnderline[i].className = tabUnderline[i].className.replace(" active", "");
-        }               
-        event.currentTarget.className += " active";
-    }
-
     document.getElementById("tab-0").click();
 </script>
 

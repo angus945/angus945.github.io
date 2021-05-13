@@ -191,31 +191,10 @@
 <article class="post">
   <body>
     <div>
-        <style>
-
-    .tab-column
-    {
-        display: block;
-    }
-
-    .tab-underline
-    {                
-        animation-direction: reverse;
-        
-        margin-right: 15px;
-        font-size: 30px;
-    }
-    .tab-underline.active
-    {
-        animation-direction: normal;
-    }
-     
-    .tabcontent 
-    {
-        display: none;
-    }
-
-</style>
+        <head>
+    <link rel="stylesheet" type="text/css" href="/css/headerTab.css">
+    <script src=" /js/tabHandler.js"></script>
+</head>
 
 
 
@@ -237,7 +216,7 @@
 
 
 
-    <div id="0" class="tabcontent post-content" >
+    <div id="0" class="tab-content post-content" >
         
             <p>Hi, I&rsquo;m nineteen years old juvenile from Taiwan with, interest in game development and programming</p>
 <p>because I&rsquo;m not suitable for default education in Taiwan height school, so I chose the plan to let me can learn by my self at home</p>
@@ -257,7 +236,7 @@
         
     </div>
 
-    <div id="1" class="tabcontent post-content" >
+    <div id="1" class="tab-content post-content" >
         
             <p>my first website :)</p>
 <p>ahter that I well throw some tutorial, note ore blog in this site</p>
@@ -270,25 +249,6 @@
 
 
 <script type="text/javascript">
-    function tabHandler(event, tabID) 
-    {
-        var i;
-        
-        var tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) 
-        {
-            tabcontent[i].style.display = "none";
-        }
-        document.getElementById(tabID).style.display = "block";
-
-        var tabUnderline = document.getElementsByClassName("tab-underline");
-        for (i = 0; i < tabUnderline.length; i++) 
-        {
-            tabUnderline[i].className = tabUnderline[i].className.replace(" active", "");
-        }               
-        event.currentTarget.className += " active";
-    }
-
     document.getElementById("tab-0").click();
 </script>
 

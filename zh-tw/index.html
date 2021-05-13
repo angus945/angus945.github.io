@@ -204,14 +204,22 @@
       <main id="main" class="main">
         <div class="content-wrapper">
           <div id="content" class="content">
-            <head>
-      <script src=" /js/languageHomeNavigate.js"></script>
-  </head>
-  <section id="posts" class="posts">
-    
-
-    
-      <h1 id="homecontent">HomeContent</h1>
+            <style>
+  .tab-content
+  {
+    width: 90%; 
+    margin: 0 auto;
+  }
+</style>
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/headerTab.css">
+  <script src=" /js/languageHomeNavigate.js"></script>
+  <script src=" /js/tabHandler.js"></script>
+</head>
+  
+<section id="posts" class="posts">
+  
+    <h1 id="homecontent">HomeContent</h1>
 <p>Tags
 
 
@@ -237,13 +245,19 @@
 
 </p>
 <h1 id="施工中--">施工中  ~~</h1>
-<h3 id="待維修">待維修</h3>
-<ul>
-<li>粗體 header</li>
-</ul>
 <h3 id="頁面">頁面</h3>
 <ul>
-<li>Home page (顯示tag、重點文章)</li>
+<li>Home page
+<ul>
+<li>重點文章</li>
+<li>最新文章</li>
+<li>網站歷史</li>
+</ul>
+</li>
+</ul>
+<h3 id="待維修">待維修</h3>
+<ul>
+<li>英文頁面的留言板</li>
 </ul>
 <h3 id="觀察中">觀察中</h3>
 <ul>
@@ -252,8 +266,382 @@
 <li>hidden scroll bar</li>
 </ul>
 
+  
+</section>
+
+<hr>
+  
+  
+<article class="post">  
+  <div class="tab-column">  
+    <div class="post-header">
+      <a id="tab-0" class="post-link tab-underline" onclick="tabHandler(event, '0')"> 重點文章 </a>
+      <a id="tab-1" class="post-link tab-underline" onclick="tabHandler(event, '1')"> 近期文章 </a>
+      <a id="tab-2" class="post-link tab-underline" onclick="tabHandler(event, '2')"> 網站歷史 </a>
+    </div>
+  </div>
+
+  
+  
+
+  <div id="0" class="tab-content">
     
-  </section>
+    
+
+
+
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/tutorials/signeddistancefunction/tutorial_example_B.gif">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/signeddistancefunction/"> Signed Distance Function </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 2021-04-27 21:53:27 &#43;0800 CST </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/shader?tab=all" >
+                        shader
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            signed distance function tutorial
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/signeddistancefunction/"> Read more... </a>
+    </div>
+</div>
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/sendbox/loli.png">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/testfolder/"> testing tutorial folder and looongest title </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 2021-04-26 13:14:06 &#43;0800 CST </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/test?tab=all" >
+                        test
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            a long long long long long long long long long long long long  long long long long long long long long long long long long  long long long long long long long long long long long long long long long long long long long long long long long long description
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/testfolder/"> Read more... </a>
+    </div>
+</div>
+
+
+
+
+
+
+  </div>
+  
+  <div id="1" class="tab-content">
+    
+    
+
+
+
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/tutorials/signeddistancefunction/tutorial_example_B.gif">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/signeddistancefunction/"> Signed Distance Function </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 2021-04-27 21:53:27 &#43;0800 CST </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/shader?tab=all" >
+                        shader
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            signed distance function tutorial
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/signeddistancefunction/"> Read more... </a>
+    </div>
+</div>
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/sendbox/loli.png">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/testfolder/"> testing tutorial folder and looongest title </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 2021-04-26 13:14:06 &#43;0800 CST </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/test?tab=all" >
+                        test
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            a long long long long long long long long long long long long  long long long long long long long long long long long long  long long long long long long long long long long long long long long long long long long long long long long long long description
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/testfolder/"> Read more... </a>
+    </div>
+</div>
+
+
+
+
+
+
+  </div>
+
+  <div id="2" class="tab-content">
+
+  </div>
+
+</article>
+
+  
+  <script type="text/javascript">    
+    document.getElementById("tab-1").click();
+  </script>
           </div>
           <div class="comments">
             

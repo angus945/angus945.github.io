@@ -211,33 +211,10 @@
   <div style="padding: 0px 20px 0px 20px;">
     
     
-    <style>
-
-    .tab-column
-    {
-        height: 30px;
-        float: right;
-        padding-top: 10px;
-        user-select: none;
-    }
-
-    .tab-underline
-    {                
-        animation-direction: reverse;
-        font-size: 17px;
-    }
-    .tab-underline.active
-    {
-        animation-direction: normal;
-    }
-     
-    .tabcontent 
-    {
-        display: none;
-    }
-
-</style>
-
+    <head>
+    <link rel="stylesheet" type="text/css" href="/css/textTab.css">
+    <script src=" /js/tabHandler.js"></script>
+</head>
 
 
 
@@ -256,7 +233,7 @@
 </div>
 
 
-    <div id="tutorial" class="tabcontent">
+    <div id="tutorial" class="tab-content">
         
         
 
@@ -271,7 +248,7 @@
 </section>  
     </div>
 
-    <div id="note" class="tabcontent">
+    <div id="note" class="tab-content">
         
         
 
@@ -297,7 +274,7 @@
 </section>  
     </div>
 
-    <div id="blog" class="tabcontent">
+    <div id="blog" class="tab-content">
         
         
 
@@ -313,7 +290,7 @@
     </div>
 
 
-<div id="all" class="tabcontent">
+<div id="all" class="tab-content">
     
         
         
@@ -369,25 +346,6 @@
 
 
 <script type="text/javascript">
-    function tabHandler(event, tabID) 
-    {
-        var i;
-        
-        var tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) 
-        {
-            tabcontent[i].style.display = "none";
-        }
-        document.getElementById(tabID).style.display = "block";
-
-        var tabUnderline = document.getElementsByClassName("tab-underline");
-        for (i = 0; i < tabUnderline.length; i++) 
-        {
-            tabUnderline[i].className = tabUnderline[i].className.replace(" active", "");
-        }               
-        event.currentTarget.className += " active";
-    }
-
     function getParameterByName(name, url = window.location.href) 
     {
         name = name.replace(/[\[\]]/g, '\\$&');
