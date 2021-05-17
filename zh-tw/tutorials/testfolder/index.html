@@ -200,7 +200,7 @@
 
 
 
-
+        
       <main id="main" class="main">
         <div class="content-wrapper">
           <div id="content" class="content">
@@ -212,8 +212,8 @@
   <article class="post">  
     <h1> testing tutorial folder and looongest title </h1>
 
-        
       
+    
 
   <footer class="post-footer"></footer>
 
@@ -226,25 +226,27 @@
     <div class="comments">
         <h2>Comments</h2>
         <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+        {
+            document.write("Disqus comments not available by default when the website is previewed locally；");
             return;
         }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "anguschan-website" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'anguschan-website';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
           </div>
         </div>

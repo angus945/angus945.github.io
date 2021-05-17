@@ -181,7 +181,7 @@
 
 
 
-
+        
       <main id="main" class="main">
         <div class="content-wrapper">
           <div id="content" class="content">
@@ -193,9 +193,104 @@
   <article class="post">  
     <h1> Blog </h1>
 
+      
+    
+      
+      <style>
+    .pagination
+    {
+        user-select: none;
+    }
+</style>
+<head>
+    <script src=" /js/getParameterByName.js"></script>
+    <script src=" /js/insertUrlParam.js"></script>
+</head>
+
+
+
+
+
+
+
+
+    
+           
+
+    <div class="turnPage">
         
-      
-      
+    </div>
+
+
+
+<a id="pageIndex"></a>
+    
+<div class="pagination">
+    <a id="prev" class="prev" onclick="turnPageHandler(-1)">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text"> prev </span>
+    </a>
+    <a id="next" class="next" onclick="turnPageHandler(+1)">
+        <span class="next-text"> next </span>
+        <i class="iconfont icon-right"></i>
+    </a>
+</div>
+
+
+<script type="text/javascript">
+
+    var [current, pagesAmount] = (TurnPageDefault());
+    TurnPagesDisplay();
+    TurnButtonDisplay();
+
+    
+    function turnPageHandler(turnTo)
+    {
+        current += turnTo;
+        TurnPagesDisplay();
+        TurnButtonDisplay();
+
+        window.scrollTo(0, 0);
+
+        document.getElementById("pageIndex").innerHTML = current;
+
+    }
+    
+    function TurnPageDefault()
+    {
+        var current;
+        if(hasParameter('turn')) current = parseInt(getParameterByName('turn'));
+        else current = 0;
+        
+        var pagesAmount = parseInt("1");
+
+        return [current, pagesAmount]
+    }
+    function TurnPagesDisplay()
+    {
+        var turnPages = document.getElementsByClassName("turnPage");
+        for (i = 0; i < turnPages.length; i++) 
+        {
+            turnPages[i].style.display = "none";
+        }
+        turnPages[current].style.display = "block";
+    }
+    function TurnButtonDisplay()
+    {
+        document.getElementById("prev").style.display = "none";
+        document.getElementById("next").style.display = "none";
+
+        if(pagesAmount > 1)
+        {
+            if(current > 0) document.getElementById("prev").style.display = "block";
+            if(current < pagesAmount - 1) document.getElementById("next").style.display = "block";
+        }        
+    }
+
+    
+</script>
+
+
 
     
 

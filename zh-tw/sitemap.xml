@@ -120,4 +120,20 @@
     <priority>0.5</priority>
   </url>
   
+  <url>
+    <loc>https://angus945.github.io/zh-tw/draft/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/todo/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/websitehestory/</loc>
+    <priority>0</priority>
+  </url>
+  
 </urlset>

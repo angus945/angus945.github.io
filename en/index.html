@@ -181,11 +181,15 @@
 
 
 
-
+        
       <main id="main" class="main">
         <div class="content-wrapper">
           <div id="content" class="content">
             <style>
+  .tab-column
+  {
+    text-align: center;
+  }
   .tab-content
   {
     width: 90%; 
@@ -198,26 +202,27 @@
   <script src=" /js/tabHandler.js"></script>
 </head>
   
+
+
+
+
 <section id="posts" class="posts">
-  
-    <h1 id="homecontent">HomeContent</h1>
+  <h1 id="homecontent">HomeContent</h1>
 <h2 id="english-version-home">english version home</h2>
 <p>Under construction ~~</p>
 <p>Under construction ~~</p>
 <p>Under construction ~~</p>
 
-  
 </section>
-
-<hr>
-  
+ 
   
 <article class="post">  
   <div class="tab-column">  
     <div class="post-header">
-      <a id="tab-0" class="post-link tab-underline" onclick="tabHandler(event, '0')"> 重點文章 </a>
-      <a id="tab-1" class="post-link tab-underline" onclick="tabHandler(event, '1')"> 近期文章 </a>
-      <a id="tab-2" class="post-link tab-underline" onclick="tabHandler(event, '2')"> 網站歷史 </a>
+      <a id="tab-0" class="post-link tab-underline" onclick="tabHandler(event, '0')"> recommend </a>
+      <a id="tab-1" class="post-link tab-underline" onclick="tabHandler(event, '1')"> recent </a>
+      <a id="tab-2" class="post-link tab-underline" onclick="tabHandler(event, '2')"> hestory </a>
+      
     </div>
   </div>
 
@@ -253,15 +258,19 @@
   </div>
 
   <div id="2" class="tab-content">
-
+    
+  </div>
+  
+  <div id="3" class="tab-content">
+    
   </div>
 
 </article>
 
   
-  <script type="text/javascript">    
-    document.getElementById("tab-1").click();
-  </script>
+<script type="text/javascript">    
+  document.getElementById("tab-0").click();
+</script>
           </div>
           <div class="comments">
             

@@ -1,11 +1,11 @@
-.tag
+.pageTags
 {
     margin-right: 5px;
     color: #c05b4d;
     word-break: break-all;
     break-after: always;
 }
-.tag::before 
+.pageTags::before 
 {
   content: '#';
 }

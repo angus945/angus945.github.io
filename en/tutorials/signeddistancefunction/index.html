@@ -181,7 +181,7 @@
 
 
 
-
+        
       <main id="main" class="main">
         <div class="content-wrapper">
           <div id="content" class="content">
@@ -199,8 +199,8 @@
       <nav id="TableOfContents"></nav>
   </div>
 </div>
-        <div id="post-content" class="post-content ">
-          
+      <div id="post-content" class="post-content ">
+        
 
 
 
@@ -229,10 +229,10 @@
 
 
  
-        </div>
+      </div>
+    
       
-        
-      
+    
 
   <footer class="post-footer"></footer>
 
@@ -244,7 +244,28 @@
   
     <div class="comments">
         <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
         
+        
+        if (window.location.hostname == "localhost")
+        {
+            document.write("Disqus comments not available by default when the website is previewed locally；");
+            return;
+        }
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = '';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
           </div>
         </div>
