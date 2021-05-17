@@ -29,3 +29,4 @@ function insertUrlParam(key, value)
     // reload page with new params
     document.location.search = params;
 }
+

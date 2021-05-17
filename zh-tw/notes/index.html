@@ -241,6 +241,32 @@
     .pagination
     {
         user-select: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .index-container
+    {
+        margin: auto;
+        width: 50%;
+        padding: 3px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 300px;
+    }
+    .index-button
+    {
+        cursor: pointer;
+    }
+    .index-button:hover
+    {
+        border-bottom: 1px solid #c05b4d;
+    }
+    .index-button.current
+    {
+        color: #c05b4d;
+        border-bottom: 1px solid #c05b4d;
     }
 </style>
 <head>
@@ -255,22 +281,24 @@
 
 
 
-    
-           
-
-    <div class="turnPage">
-        
-    </div>
 
 
 
-<a id="pageIndex"></a>
-    
+
 <div class="pagination">
     <a id="prev" class="prev" onclick="turnPageHandler(-1)">
         <i class="iconfont icon-left"></i>
         <span class="prev-text"> prev </span>
     </a>
+    <div class="index-container">
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+        <a class="index-button"> index </a>
+    </div>
     <a id="next" class="next" onclick="turnPageHandler(+1)">
         <span class="next-text"> next </span>
         <i class="iconfont icon-right"></i>
@@ -280,30 +308,37 @@
 
 <script type="text/javascript">
 
-    var [current, pagesAmount] = (TurnPageDefault());
-    TurnPagesDisplay();
-    TurnButtonDisplay();
-
+    var [current, pagesAmount] = TurnPageDefault();
+    TurnIndexButtonInit();
+    TurnPagesUpdate();
     
-    function turnPageHandler(turnTo)
+    function TurnIndexButtonInit()
     {
-        current += turnTo;
-        TurnPagesDisplay();
-        TurnButtonDisplay();
-
-        window.scrollTo(0, 0);
-
-        document.getElementById("pageIndex").innerHTML = current;
-
+        var indexButtons = document.getElementsByClassName("index-button");
+        var buttonCenter = Math.floor(indexButtons.length / 2);
+        for(var i = 0; i < indexButtons.length; i++)
+        {
+            var button = indexButtons[i];
+            var indexDir = i - buttonCenter;
+            if(indexDir != 0) setTurnIndexButtonEvent(button, indexDir);
+        }      
     }
     
+    
+    function TurnPagesUpdate()
+    {
+        TurnPagesDisplay();
+        TurnButtonDisplay();
+        TurnIndexButtonDisplay();
+
+        window.scrollTo(0, 0);
+    }
     function TurnPageDefault()
     {
-        var current;
-        if(hasParameter('turn')) current = parseInt(getParameterByName('turn'));
-        else current = 0;
+        var turn = parseInt(getParameterByName('turn'));
+        var current = hasParameter('turn') ? turn : 0;
         
-        var pagesAmount = parseInt("1");
+        var pagesAmount = parseInt("0");
 
         return [current, pagesAmount]
     }
@@ -318,16 +353,47 @@
     }
     function TurnButtonDisplay()
     {
-        document.getElementById("prev").style.display = "none";
-        document.getElementById("next").style.display = "none";
+        document.getElementById("prev").style.visibility = "hidden";
+        document.getElementById("next").style.visibility = "hidden";
 
         if(pagesAmount > 1)
         {
-            if(current > 0) document.getElementById("prev").style.display = "block";
-            if(current < pagesAmount - 1) document.getElementById("next").style.display = "block";
+            if(current > 0) document.getElementById("prev").style.visibility = "visible";
+            if(current < pagesAmount - 1) document.getElementById("next").style.visibility = "visible";
+        }        
+    }
+    function TurnIndexButtonDisplay()
+    {
+        var indexButtons = document.getElementsByClassName("index-button");
+                
+        var buttonCenter = Math.floor(indexButtons.length / 2);
+        for(var i = 0; i < indexButtons.length; i++)
+        {
+            var button = indexButtons[i];
+            var butIndex = current - buttonCenter + i;
+
+            button.style.visibility = (butIndex < 0 || butIndex >= pagesAmount) ? "hidden" : "visible";
+            button.className = (butIndex == current) ? "index-button current" : "index-button"; 
+
+            indexButtons[i].innerHTML = butIndex;
         }        
     }
 
+    
+    
+    function turnPageHandler(turnTo)
+    {
+        current += turnTo;
+
+        insertUrlParam("turn", current);
+    }
+    function setTurnIndexButtonEvent(button, buttonDir)
+    {
+        button.addEventListener("click", function()
+        {
+            turnPageHandler(buttonDir);
+        });
+    }
     
 </script>
 
