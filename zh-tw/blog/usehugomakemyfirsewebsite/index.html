@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>建立人生的第一個網站 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="建立人生的第一個網站" />
+<meta property="og:description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-05-11T20:27:14&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-11T20:27:14&#43;08:00" />
+
+<meta itemprop="name" content="建立人生的第一個網站">
+<meta itemprop="description" content="從頭學習前端和使用 Hugo 建立網站的過程"><meta itemprop="datePublished" content="2021-05-11T20:27:14&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-11T20:27:14&#43;08:00" />
+<meta itemprop="wordCount" content="3522">
+<meta itemprop="keywords" content="hugo,website," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="建立人生的第一個網站"/>
+<meta name="twitter:description" content="從頭學習前端和使用 Hugo 建立網站的過程"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+    
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>建立人生的第一個網站</h1>
+    </header>
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#為什麼想建立網站">為什麼想建立網站</a>
+          <ul>
+            <li><a href="#參考資料">參考資料</a></li>
+            <li><a href="#選擇主題">選擇主題</a></li>
+          </ul>
+        </li>
+        <li><a href="#修修改改">修修改改</a>
+          <ul>
+            <li><a href="#教學主頁">教學主頁</a></li>
+            <li><a href="#上一章-下一章">上一章 下一章</a></li>
+            <li><a href="#圖片顯示">圖片顯示</a></li>
+            <li><a href="#閱讀更多">閱讀更多</a></li>
+            <li><a href="#翻頁列表">翻頁列表</a></li>
+            <li><a href="#文章標籤">文章標籤</a></li>
+            <li><a href="#移除滾動條">移除滾動條</a></li>
+            <li><a href="#內容導覽">內容導覽</a></li>
+            <li><a href="#關於頁面">關於頁面</a></li>
+            <li><a href="#語言設置">語言設置</a></li>
+            <li><a href="#網站託管">網站託管</a></li>
+            <li><a href="#留言板">留言板</a></li>
+            <li><a href="#流量追蹤">流量追蹤</a></li>
+            <li><a href="#主頁面">主頁面</a></li>
+          </ul>
+        </li>
+        <li><a href="#結語">結語</a>
+          <ul>
+            <li><a href="#翻譯文章">翻譯文章</a></li>
+            <li><a href="#感謝閱讀">感謝閱讀</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <h2 id="為什麼想建立網站">為什麼想建立網站</h2>
+<p>在寫完我的第一篇長篇教學後，想說寫的還蠻不錯的(自肥)所以也想搞個個人網站用來專放教學和筆記，不然平時都只在巴哈上發紀錄文，文章和日誌混在一起有點亂，如果未來想當履歷交什麼的也不方便</p>
+<p>再來是巴哈上的客群主要都中文語系這塊，我也希望能和一些外國的人交流，開拓視野而且多少能和讓英文進步一點</p>
+<p>剛開始找了些可以用來建立部落格的網站或工具 Blogger、wordpress，挑來挑去都不是很理想，所以最後還是決定好好網頁前端自己做，使用 Hugo 搭配 github page 來建立靜態網站</p>
+<p>這是我學程式三年到現在第一次接觸前端，在這之前連 html 都不會，但有了過去兩年多的自學經驗現在從頭學也不是一項難事&hellip;至少以能建立自己的網站為標準不是難事 :P</p>
+<h3 id="參考資料">參考資料</h3>
+<p>我主要參考為 Mike Dane 的 Web Development 系列教學，其餘的就是邊做邊查資料</p>
+<p>HTML - <a href="https://www.youtube.com/watch?v=Ny1g1eQHnCI&amp;list=PLLAZ4kZ9dFpMSXUYwxDFOvyxlssug29Fu" target="_blank">HTML - Build a Website | Tutorial</a></p>
+<p>CSS - <a href="https://www.youtube.com/watch?v=WZ2uqGkHoR0&amp;list=PLLAZ4kZ9dFpNO7ScZFr-WTmtcBY3AN1M7" target="_blank">CSS - Style Your Website | Tutorial</a></p>
+<p>Javascript - <a href="https://www.youtube.com/watch?v=_jlPywA4dKs&amp;list=PLLAZ4kZ9dFpPQbcrA-SzALJeFm23tPrAI" target="_blank">Javascript - Programming Language | Tutorial</a></p>
+<p>Hugo - <a href="https://www.youtube.com/watch?v=qtIqKaDlqXo&amp;list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3" target="_blank">Hugo - Static Site Generator | Tutorial</a></p>
+<h3 id="選擇主題">選擇主題</h3>
+<p>Hugo 有不少的社群製作的<a href="https://themes.gohugo.io/" target="_blank">主題</a>能夠使用，導入也很方便，只需要下載後放進 themes 資料夾就好</p>
+<p>花了一些時間找到理想的主題，也就是你們現在看到的這個，版面乾淨簡潔而且內文格式和 Notion 蠻相似的，然後又有畫面自適應功能所以就決定是他了 - <a href="https://themes.gohugo.io/hugo-theme-even/" target="_blank">Even</a></p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/theme.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/theme.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h2 id="修修改改">修修改改</h2>
+<p>決定了主題之後就拿裡面的模板開始修改，主要考量到時間因素而且畢竟我主修也不是網頁，拿現有的模板來修改才是最適合的選項</p>
+<p>雖然這個主題已經有不少功能，但有些地方還是要自己做才能達成目的，把寫好的文章放進去看看，摸一摸主題裡提供的模板之後就可以開始修修改改了</p>
+
+
+
+<span style="color: green">
+    
+  備註 : 這篇文章不是教學，只是製作網站的過程分享，如果對文章中某個部分有興趣的話可以留言告訴我，有空可以在寫教學
+
+</span>
+
+
+
+
+
+
+
+<h3 id="教學主頁">教學主頁</h3>
+<p>為了讓不同系列的教學有各自的主頁面，我使用資料夾將相同系列的教學放在一起，使用 _index.md 當主頁面文件</p>
+<p>這個主題中 _index.md 使用的模板是 section，但主題中提供的 section template 只有列出資料夾文件的功能，無法讀取 _index.md 的內容來顯示，所以為了達到教學主頁面的目的我必須修改預設模板</p>
+<p>首先是內容的部分，只需要使用 Hugo 語法的<code>{{ .Content }}</code>就能取得，但模板會一口氣畫出所以有文字內容，這樣子我的子頁面就只能在主頁面的最底部列出了</p>
+<p>但我希望搭配文字內容列出頁面，所以我也將原本模板中的列出功能移至獨立的 shortcode 中，好讓我在 markdown 文件中自由選擇列表放置的位置</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/listoutPages.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/listoutPages.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="上一章-下一章">上一章 下一章</h3>
+<p>有了主頁面，接下來就是教學頁面</p>
+<p>基本的頁面使用的是 single template，沒什麼好修改的，但為了讓訪客在閱讀系列教學時更方便，我將教學頁面的底部添加移動到上下章的連結</p>
+<p>因為基本頁面中不會有資料夾其他頁面的資訊，所以我得讓它先取得父層後在取得這個資料夾裏的所有頁面，並且用索引值找出上下章</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/nextPage.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/nextPage.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="圖片顯示">圖片顯示</h3>
+<p>文章中會附上圖片來搭配閱讀，雖然 Hugo 本身就有提供基本的 shortcode 來方便使用者在文章中放置圖片，但它必須輸入絕對路徑才能找到圖片位置</p>
+<p>由於個人習慣，我的資料夾結構和檔案名稱都比較複雜，所以輸入絕對路徑還是不夠方便，為了省去一長串路徑我也寫了一個 shortcode 來自動找圖片的路徑，透過文檔的路徑來存取在 static 資料家中相同相對路徑的圖片</p>
+<p>這樣一來我只需要輸入圖片的名稱就能顯示圖片了 <code>sc_pathImage displayImage.jpg</code></p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/displayImage.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/displayImage.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="閱讀更多">閱讀更多</h3>
+<p>網站預計會有幾種類型的文章 - 教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只有單純的列出頁面標題而已</p>
+<p>我想要有大標題、描述和文章預覽圖，所以又再修改了一次 section temaplet (因為也是資料夾頁面)，並使用文章的前題變量來選擇頁面類型</p>
+<p>主題中本來就有提供相關的 css 使用了，所以我直接參考主題網站裏提供的 <a href="https://themes.gohugo.io/theme/hugo-theme-even/" target="_blank">Demo</a> 來做出期望的列表樣式，並且添加覽圖在區塊的右側</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/readmore.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/readmore.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>然後我也讓顯示標題下面列出標籤用來簡單分類文章</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/tags.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/tags.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="翻頁列表">翻頁列表</h3>
+<p>我使用&quot;閱讀更多&quot;的區塊來列出當前類型的所有文章，但文章多的時候全部列出來會好長一條，所以要限制一次列出的數目方便閱讀</p>
+<p>我透過 Hugo 語法裡陣列的 first 和 last 寫了一個 partials 模板來取得特定範圍間的頁面，使用時只需要輸入起點和數目就好</p>
+<p>使用迴圈將不同範圍中的頁面包進 Html 容器中，再透過 javascript 判斷 URL paramater 的當前的頁面來切換容器顯示</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/turnpageList.gif" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/turnpageList.gif]">
+</div>
+    
+
+
+
+
+
+
+<p>這麼做有個問題就是，每次翻頁瀏覽器都會把完整的列表載入一次，再重新設置 display 一部分，不過就先到此為止吧，等文章量大到載入變慢再來找解決方法 :P</p>
+<h3 id="文章標籤">文章標籤</h3>
+<p>Hugo 本身就有很方便的標籤系統，他能夠自動產生符合列出文章的頁面，但因為所我有文章都使用同個標籤系統，所以自動產生的頁面會把所有類型的文章混在一起</p>
+<p>為了防止這點，我在標籤頁面裡加了 tabview 來對列出的文章進行過濾，這是我網站裡花最多時間研究的部份了，因為使用的主題裡完全沒有相似的功能，所以得找 javascript 資料來讀</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/tagTabview1.gif" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/tagTabview1.gif]">
+</div>
+    
+
+
+
+
+
+
+<p>最後在使用主題裡的 css 修改出一個適合 tabview 的版本</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/tagTabview2.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/tagTabview2.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>參考資料</p>
+<p><a href="https://www.w3schools.com/howto/howto_js_tabs.asp" target="_blank">tabview</a></p>
+<h3 id="移除滾動條">移除滾動條</h3>
+<p>沒什麼特別的原因，因為很醜所以我將滾動條移除了，為了移除他我也花了不少時間，瀏覽器差異讓人很頭痛，修好一個壞一個 ):</p>
+<p>在經過不斷的查詢和修改後，終於整理出了能夠在三大瀏覽器上正常運作的 css 腳本了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-CSS" data-lang="CSS"><span class="nt">html</span><span class="o">,</span><span class="nt">body</span>
+<span class="p">{</span>
+    <span class="k">overflow</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+    <span class="kp">-ms-</span><span class="k">overflow-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span> 
+    <span class="n">scrollbar-width</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="nt">body</span><span class="p">::</span><span class="nd">-webkit-scrollbar</span>
+<span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="內容導覽">內容導覽</h3>
+<p>把滾動條移除後為了讓讀者能夠知道自己看到哪裡，文章需要在提供內容導覽才行</p>
+<p>雖然這個主題本身就有提供內容導覽的模板，但因為我的修修改改不小心弄壞他了，所以也花不少時間才找出被弄壞的地方</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/tableOfContent.png" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/tableOfContent.png]">
+</div>
+    
+
+
+
+
+
+
+<p>修的時候也注意到主題作者 javascript 裡的計算有些錯誤，在判斷距離的時候少減了一次間隔導致畫面捲動時看起來不順暢，修正後就大功告成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="c1">//                              there
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nx">scrollTop</span> <span class="o">&lt;</span> <span class="nx">minScrollTop</span> <span class="o">-</span> <span class="nx">SPACING</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">$toc</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="nx">tocState</span><span class="p">.</span><span class="nx">start</span><span class="p">);</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="關於頁面">關於頁面</h3>
+<p>自我介紹在網站中也是不可或缺的部分，我的關於頁面有兩個部分 - 自我介紹和網站介紹，原本寫在同一個文件中但發現用串列的放介紹不太合適，所以就拿之前的 tabview 過來修出顯示內容的功能</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/about.gif" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/about.gif]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="語言設置">語言設置</h3>
+<p>多語言 - 這也是我建立網站的主要目的之一，Hugo因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/languages1.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/languages1.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>在訪客第一次進入網站主頁面的時候，我使用 javascript 取得訪客時瀏覽器使用的語言重新導向到對應的網頁</p>
+<p>以及做出一個語言選擇器，點擊展開後就可以切換語言，並用 localstorage 來儲存語言設置</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/languages2.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/languages2.jpg]">
+</div>
+    
+
+
+
+
+
+
+<h3 id="網站託管">網站託管</h3>
+<p>我使用 github page 來進行網站託管，真的是蠻方便的功能，只需要建立一個 username.github.io 的儲存庫後，將建置的 public 資料夾上傳就好了 :D</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/2MsN8gpT6jY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="留言板">留言板</h3>
+<p>為了不讓網站像只有我一個人自嗨，所以能和其他人交流的首要選項就是添加留言板 !</p>
+<p>我使用的是 <a href="https://disqus.com/" target="_blank">Disqus</a> 提供的留言板，Hugo 中只需要設置 ID 後調用內建模板<code>_internal/disqus.html</code>就能使用了</p>
+<p>但因為某些未知原因我的留言系統效果不完整，所以又找了資料重新設置整個 disqus partial</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/comment.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/comment.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>為了不用登入就能留言，我到 Disqus 那裏設置了允許訪客留言，訪客只需要輸入名稱和 email 就可以留言，不過未登錄的留言好像要經過審核才會顯示，不確定審核會花多少時間，所以還是盡量登入留言吧 :P</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/guest.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/guest.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>參考資料</p>
+<p><a href="https://gohugo.io/templates/internal/" target="_blank">Internal Templates</a></p>
+<h3 id="流量追蹤">流量追蹤</h3>
+<p>為了分析訪客的偏好和類型，我使用 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析</p>
+<p>這個主題裡也有完成流量追蹤的功能，只不過 Google Analytics 更新到第 4 版了，主題裡的功能似乎過舊所以就重新找了資料修正&hellip;雖然我也不確定現在這樣有沒有正確運作</p>
+<p>噢看來他有效，我一直忘記要放進 html 的 <code>&lt;head&gt;&lt;/head&gt;</code> 裡了
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/googleAnaltics.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/googleAnaltics.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>但是不斷的編輯網頁造成有九成的流量都是我自己，所以要設定流量過濾</p>
+<blockquote>
+<p>目前僅顯示通用 Analytics (分析) 資源的篩選器。篩選器無法套用到 Google Analytics (分析) 4 資源。
+Displaying Filters for Universal Analytics Properties only. Filters cannot be applied to Google Analytics 4 Properties.</p>
+</blockquote>
+<p>因為版本問題無法設置過濾，找半天才發現好像是版本的問題，舊版本的過濾器沒辦法用所以要到 &ldquo;資源 &gt; 資料設定 &gt; 資料篩選器&rdquo; 那裏設定才行</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/analtics_filte1.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/analtics_filte1.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>總之現在流量追蹤也能正常運作了</p>
+<p>參考資料</p>
+<p><a href="https://support.google.com/analytics/thread/89743745/can-t-create-filter-views-even-though-i-have-all-admin-accesses-in-all-levels?hl=en" target="_blank">Can&rsquo;t create filter views even though I have all ADMIN accesses in all levels </a></p>
+<p><a href="https://support.google.com/analytics/answer/10108813" target="_blank">GA4 Data filters</a></p>
+<h3 id="主頁面">主頁面</h3>
+<p>該有的功能都有了，最後也是最重要的就是 - 主頁面</p>
+<p>但其實網站剛做出來我對主頁面還沒想法，所以就先打招呼之後列出幾個文章給訪客看</p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+    }
+</style>
+
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/blog/usehugomakemyfirsewebsite/home.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/home.jpg]">
+</div>
+    
+
+
+
+
+
+
+<p>簡單也有簡單的好 ~</p>
+<h2 id="結語">結語</h2>
+<p>從開始學網頁到現在大概一個月了，說真的也做到有點厭倦了，雖然過程學到不少東西但畢竟興趣不在這，所以見好就收吧 !</p>
+<p>總結來說，我對人生中的第一個網頁相當滿意，和我期望中的網頁幾乎一模一樣 :D</p>
+<p>之後會在這裡更新一些教學、筆記和部落格文章，敬請期待 ~</p>
+<h3 id="翻譯文章">翻譯文章</h3>
+<p>英文版本的文章我是透過 Grammarly 進行輔助翻譯的，但我的英文能力慘不忍睹，希望翻譯的過程能多少讓我進步點 D:</p>
+<p>我在修正文章翻譯時都會保留筆記的，如果可以請能幫我指出翻譯文章的句子和語法的錯誤 Orz</p>
+<h3 id="感謝閱讀">感謝閱讀</h3>
+<p>感謝閱讀到這裡的各位，你們的關注是我持續更新的最大動力 !</p>
+<p>順帶一題，如果是從其他地方點進網站的人可能不清楚，我的主要活動地點在巴哈姆特的<a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank">小屋</a>，那裏幾乎每天都會發日誌，歡迎來蕉流蕉流 ~</p>
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/hugo/?tab=blog">hugo</a>
+        
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/website/?tab=blog">website</a>
+        
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+
+
+
+
+  </article>
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+        {
+            document.write("Disqus comments not available by default when the website is previewed locally；");
+            return;
+        }
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'anguschan-website';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.58eddd08986c2c0214911796c007b2c046efe7cdb5baf86155c52d805cd38a3a.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

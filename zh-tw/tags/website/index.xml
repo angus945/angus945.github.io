@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog on AngusChan-website</title>
-    <link>https://angus945.github.io/zh-tw/blog/</link>
-    <description>Recent content in Blog on AngusChan-website</description>
+    <title>website on AngusChan-website</title>
+    <link>https://angus945.github.io/zh-tw/tags/website/</link>
+    <description>Recent content in website on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Apr 2021 15:59:25 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 20:27:14 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/website/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>建立人生的第一個網站</title>
       <link>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</link>

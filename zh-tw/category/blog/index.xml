@@ -6,7 +6,16 @@
     <description>Recent content in blog on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Apr 2021 15:59:25 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 20:27:14 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>建立人生的第一個網站</title>
+      <link>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</link>
+      <pubDate>Tue, 11 May 2021 20:27:14 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Blog</title>
       <link>https://angus945.github.io/zh-tw/blog/</link>

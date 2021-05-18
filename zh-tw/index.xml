@@ -6,7 +6,16 @@
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 07 May 2021 15:36:10 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 20:27:14 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>建立人生的第一個網站</title>
+      <link>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</link>
+      <pubDate>Tue, 11 May 2021 20:27:14 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>關於這個網站</title>
       <link>https://angus945.github.io/zh-tw/about/aboutthissite/</link>
@@ -31,7 +40,7 @@
       <pubDate>Tue, 04 May 2021 11:58:15 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/homecontent/</guid>
-      <description>HomeContent 施工中 列表下一頁 頁面 Home page 待維修 觀察中 Google analyties 流量追蹤 留言板 網站標籤 shader test</description>
+      <description>歡迎來到樂小呈的部落格 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 網站標籤 hugo shader test website</description>
     </item>
     
     <item>
