@@ -6,7 +6,16 @@
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 11 May 2021 20:27:14 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 19:55:10 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的第一個專案 - 投擲地牢</title>
+      <link>https://angus945.github.io/zh-tw/blog/myfirstproject/</link>
+      <pubDate>Tue, 18 May 2021 19:55:10 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/blog/myfirstproject/</guid>
+      <description>第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只</description>
+    </item>
+    
     <item>
       <title>建立人生的第一個網站</title>
       <link>https://angus945.github.io/zh-tw/blog/usehugomakemyfirsewebsite/</link>
@@ -40,7 +49,7 @@
       <pubDate>Tue, 04 May 2021 11:58:15 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/homecontent/</guid>
-      <description>歡迎來到樂小呈的部落格 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 網站標籤 hugo shader test website</description>
+      <description>歡迎來到樂小呈的部落格 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 網站標籤 devlog gamedev hugo shader test website</description>
     </item>
     
     <item>

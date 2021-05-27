@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>我的第一個專案 - 投擲地牢 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="人生中第一個完成的遊戲專案，開發過程及心得" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/blog/myfirstproject/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="我的第一個專案 - 投擲地牢" />
+<meta property="og:description" content="人生中第一個完成的遊戲專案，開發過程及心得" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/blog/myfirstproject/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2021-05-18T19:55:10&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-18T19:55:10&#43;08:00" />
+
+<meta itemprop="name" content="我的第一個專案 - 投擲地牢">
+<meta itemprop="description" content="人生中第一個完成的遊戲專案，開發過程及心得"><meta itemprop="datePublished" content="2021-05-18T19:55:10&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-18T19:55:10&#43;08:00" />
+<meta itemprop="wordCount" content="4258">
+<meta itemprop="keywords" content="gamedev,devlog," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="我的第一個專案 - 投擲地牢"/>
+<meta name="twitter:description" content="人生中第一個完成的遊戲專案，開發過程及心得"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+    
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>我的第一個專案 - 投擲地牢</h1>
+    </header>
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#第一個完成的專案">第一個完成的專案</a>
+          <ul>
+            <li><a href="#道具和庫存系統">道具和庫存系統</a></li>
+          </ul>
+        </li>
+        <li><a href="#投擲地牢-">投擲地牢 !</a>
+          <ul>
+            <li><a href="#瞄準投擲">瞄準，投擲</a></li>
+            <li><a href="#更多道具">更多道具</a></li>
+            <li><a href="#敵人">敵人</a></li>
+            <li><a href="#更多敵人">更多敵人</a></li>
+            <li><a href="#地圖">地圖</a></li>
+            <li><a href="#遊戲循環">遊戲循環</a></li>
+            <li><a href="#音效">音效</a></li>
+            <li><a href="#背景音樂">背景音樂</a></li>
+            <li><a href="#回饋加強">回饋加強</a></li>
+          </ul>
+        </li>
+        <li><a href="#結語">結語</a>
+          <ul>
+            <li><a href="#真正的構想">真正的構想</a></li>
+            <li><a href="#缺陷">缺陷</a></li>
+            <li><a href="#改進">改進</a></li>
+            <li><a href="#使用資源">使用資源</a></li>
+            <li><a href="#感謝閱讀-">感謝閱讀 !</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <h2 id="第一個完成的專案">第一個完成的專案</h2>
+<p>在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢</p>
+<p>當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ?</p>
+<p>再來是年初時也離我非學的期中報告蠻接近的，但在這之前我的所有專案都只有做出簡單的雛型就停止了，許多構想都超出當時的能力範圍，所以就想說嘗試做個相較完整的專案來當報告的成品</p>
+<p>綜合以上因素，於是我就開始這項專案了 !</p>
+<p>事隔多年有些細節已經忘了，這篇文章是根據過去開發紀錄所寫出的濃縮版開發過程以及心得</p>
+<h3 id="道具和庫存系統">道具和庫存系統</h3>
+<p>在兩年前我做了個道具和庫存系統，它被做的相當泛用，導入就後也不需要多做設定，只要建立道具的 Prefab 然後設置識別 ID 和屬性就好，其他如放置、疊加和丟棄的功能都被包括在系統中</p>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/inventory.gif" alt="image display error, please report [/blog/myfirstproject/inventory.gif]">
+</div>
+    
+
+
+
+
+
+
+<p>所以也是專案中使用的核心系統之一 ~</p>
+<h2 id="投擲地牢-">投擲地牢 !</h2>
+<p>遊戲的核心機制是所有道具都只能&quot;丟&quot;，劍不要用丟的來傷害敵人，魔法棒要用丟的來施放法術 (ﾟ∀。)</p>
+<h3 id="瞄準投擲">瞄準，投擲</h3>
+<p>遊戲的核心機制 - 投擲 !</p>
+<p>拾取和投擲 - 當玩家靠近道具時可以使用空白鍵拾取，並透過滑鼠左鍵瞄準投擲
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/player_throw.gif" alt="image display error, please report [/blog/myfirstproject/player_throw.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>輔助瞄準 - 瞄準時會出現線條和準心，並使用程式為瞄準線添加簡單的動畫，線條虛線是透過滾動 uv 來達成的
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/player_aiming.gif" alt="image display error, please report [/blog/myfirstproject/player_aiming.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>穿牆修復 - 遊戲中高速移動的物體，可能因為幀數不足而發生穿隧的現象，最簡單的修正方法就是對道具經過的路徑進行設限投射，檢查路徑上是否有障礙物
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/blog/myfirstproject/player_raycast.jpg" alt="image display error, please report [/blog/myfirstproject/player_raycast.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>起初在玩家進行瞄準時，會有些微的攝影機縮放和位移來增加視線範圍，但後來測試感覺效果不好就移除了，因為不斷的撿取和投擲會導致畫面劇烈晃動&hellip;但仔細想想應該是我程式的設計不良的問題才對 D:</p>
+<h3 id="更多道具">更多道具</h3>
+<p>添加更多不同的道具和武器來提高遊戲豐富度，不過為了保留一點神秘感這裡就不詳細解釋它們的效果</p>
+<p>基礎武器 - 基本的武器，各自都有不同的耐久以及殺傷力
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_basis.jpg" alt="image display error, please report [/blog/myfirstproject/item_basis.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>消耗品 - 只能投擲一次的消耗性道具，但是可以疊加好幾個並連續投擲
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_throwing.jpg" alt="image display error, please report [/blog/myfirstproject/item_throwing.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>法杖 - 兩種類型的魔法杖，相當稀有的掉落物
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_magicWand.jpg" alt="image display error, please report [/blog/myfirstproject/item_magicWand.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>魔法劍 - 三種擁有擁有特殊效果的的魔法劍，只能和商人購買
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_magicSword.jpg" alt="image display error, please report [/blog/myfirstproject/item_magicSword.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>藥水瓶 - 一次性使用的藥水瓶，扔出破裂後會有殺傷性的特殊效果
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_potions.jpg" alt="image display error, please report [/blog/myfirstproject/item_potions.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>炸彈 - 投擲後可以造成範圍殺傷的兩種炸彈，也可能炸傷玩家
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_bombs.jpg" alt="image display error, please report [/blog/myfirstproject/item_bombs.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>錢幣 - 遊戲中的貨幣，可以和商人購買稀有武器或是也拿來丟
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_money.jpg" alt="image display error, please report [/blog/myfirstproject/item_money.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>心形容器 - 遊戲中的回復手段，只要使用它來投擲敵人就行，而回復的血量就是疊加數量
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/item_healHeart.jpg" alt="image display error, please report [/blog/myfirstproject/item_healHeart.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>不同武器獲得的機率不同，適合對付的對象也有差異，所以玩家無法使用一種武器打遍天下</p>
+<p>並且因為只能夠投擲的設計，扔出武器後就得移動去找其他武器或嘗試撿回來，這意味著玩家必須在不斷移動的同時尋找目標及適合的武器 !</p>
+<h3 id="敵人">敵人</h3>
+<p>為了不讓玩家一個人在地圖中自嗨，需要為遊戲添加一個敵人 !</p>
+<p>追逐 - 最最基本的敵人行為，不斷朝玩家的方向移動
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_tracing.gif" alt="image display error, please report [/blog/myfirstproject/enemy_tracing.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>攻擊 - 敵人攻擊前會有會有簡單的變色和停頓作為前搖，然後朝玩家當時所在的方向進行衝撞，所以玩家必須要在攻擊前就先離開敵人的攻擊路徑才能避開攻擊
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_attack.gif" alt="image display error, please report [/blog/myfirstproject/enemy_attack.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>道具 - 擊殺怪物後會隨機掉落不同的基礎道具以及落符合自身定位的特殊道具，這也是玩家的主要道具來源
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_treasure.gif" alt="image display error, please report [/blog/myfirstproject/enemy_treasure.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<h3 id="更多敵人">更多敵人</h3>
+<p>除了只有追逐行為的基礎敵人，我也添加了幾種額外的類型來提高遊戲的豐富度及環境的變化性</p>
+<p>射手 - 遠距離射擊的射手怪物，待在原地蓄能一段時間後朝玩家方向發射子彈，能夠在遠處干擾玩家並為進戰敵人提供掩護，當玩家靠近時會試圖保持距離，用有較少的血量
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_shooter.gif" alt="image display error, please report [/blog/myfirstproject/enemy_shooter.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>砲手 - 遠距離投射滯物的史萊姆，如果玩家待在滯留物裡的話會持續受到傷害，能夠有效限制玩家的的走位範圍，移動緩慢但是血量很厚
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_slime.gif" alt="image display error, please report [/blog/myfirstproject/enemy_slime.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>召喚師 - 每隔一段時間會產生出一隻小鬼來追擊玩家的召喚師，如果不將他解決將會永無止境的產生小鬼出來</p>
+<p>
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_summoner.gif" alt="image display error, please report [/blog/myfirstproject/enemy_summoner.gif]">
+</div>
+    
+
+
+
+
+
+
+小鬼 - 速度較快但血量和攻擊範圍較小的惱人小鬼們，在玩家缺少武器時能夠施加當大的壓力，只會被召喚師召喚 (註: 這是舊圖，其中一隻後來變成召喚師了)
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_little.gif" alt="image display error, please report [/blog/myfirstproject/enemy_little.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>為了防止地圖被小鬼淹沒，所以每隻召喚師都有各自的召喚上限，當存活的小鬼達到一定數量時就會暫停召喚</p>
+<p>補給怪 - 他們是會掉落回血道具和錢幣的特殊怪物，頭上有小圖案來提示自己會掉落什麼道具
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/enemy_supply.jpg" alt="image display error, please report [/blog/myfirstproject/enemy_supply.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>這幾種類型就能為遊戲添加相當大的刺激和變化性，究竟該先處理眼下最具威脅性的追兵? 還是不斷進行遠距離干擾的射手? 又或者是召喚一堆小鬼讓戰鬥沒完沒了的召喚師?</p>
+<p>每種類型的怪物累積到一定程度後都會相當棘手，所以玩家必須不斷改變戰略才能在混亂的環境中存活</p>
+<h3 id="地圖">地圖</h3>
+<p>遊戲中使用的地圖和場景，我是使用 Unity Tile map 布置的</p>
+<p>地圖 - 遊戲的地圖，使用簡單的錐形來提高開闊感，左右和下方是怪物出現的位置
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/map.jpg" alt="image display error, please report [/blog/myfirstproject/map.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>陷阱 - 當有目標從上方經過時會戳傷目標的尖刺陷阱
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/map_trap.jpg" alt="image display error, please report [/blog/myfirstproject/map_trap.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>清除 - 因為敵人不斷的掉落道具會導致場景中有過多的武器在地上，所以系統會在每一波開始時清除場景中的低階道具
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/map_clear.gif" alt="image display error, please report [/blog/myfirstproject/map_clear.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>儲存箱 - 用來保存道具的箱子，避免道具被清除 (但好像沒什麼用，因為我把清除道具改成只清除低階的了)
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/map_chest.gif" alt="image display error, please report [/blog/myfirstproject/map_chest.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>商人 - 在地圖最上方的商人，玩家可以收集金幣並向商人購買稀有武器，只需要將錢錢扔給他並撿起道具就好，商人會判斷金幣的疊加數量是否足以購買道具 :D
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/map_shop.gif" alt="image display error, please report [/blog/myfirstproject/map_shop.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<h3 id="遊戲循環">遊戲循環</h3>
+<p>遊戲採用的是街機類型的無盡模式，所以會持續進行直到玩家死亡，這種模式實作簡單也不需要花太多時間設計關卡，相當適合作為遊戲原型的運作機制</p>
+<p>標題 - 簡單布置了一下進入遊戲時的標題畫面
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/scene_title.gif" alt="image display error, please report [/blog/myfirstproject/scene_title.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>轉場 - 使用主角和南瓜頭的動畫當轉場畫面 :D
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/scene_translate.gif" alt="image display error, please report [/blog/myfirstproject/scene_translate.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>暫停 - 遊戲中可以使用 esc 暫停，畫面右上角的問號可以觀看教學說明
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/scene_pause.jpg" alt="image display error, please report [/blog/myfirstproject/scene_pause.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>生怪 - 遊戲中的怪物以會一波一波形式出現，前六波為遊戲的教學關，分別展示了各種不同類型的怪物，每波結束後可以撿起地圖中央的獎勵道具進入下一波
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/rrv-nQufUzQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>雖然遊戲是採用無盡模式，但我的生怪算法讓會每一波的難度提升相當顯著，敵人會隨著波數提高而逐漸增加總數量、出生頻率以及場景中的最大怪物數量，以避免重複作業的冗餘和煩躁感，反而會提供不斷提升難度的刺激感</p>
+<h3 id="音效">音效</h3>
+<p>遊戲的音效是我找 CC0 素材後再自己使用 Audacity 調整出來的，修改頻率音高等等，讓音效更適合遊戲的風格
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/audio.jpg" alt="image display error, please report [/blog/myfirstproject/audio.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>這裡就稍微放幾個音效展示 ~</p>
+<p>投擲道具 - 高速飛行的風切聲</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_throw.mp3">
+    <source src="/blog/myfirstproject/audio_throw.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_audio_throw.mp3");
+    audio.volume = "0.8"
+</script>
+<p>丟棄道具 - 娛樂性較高的彈出音效 XD</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_dropItem.mp3">
+    <source src="/blog/myfirstproject/audio_dropItem.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_audio_dropItem.mp3");
+    audio.volume = "0.8"
+</script>
+<p>購買道具 - 當然是標誌性的收銀機音效 !</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_cashRegister.mp3">
+    <source src="/blog/myfirstproject/audio_cashRegister.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_audio_cashRegister.mp3");
+    audio.volume = "0.8"
+</script>
+<p>道具損毀 - 響亮的金屬碎裂聲</p>
+
+
+
+
+
+
+
+<audio controls id="audio_feedback_itemBroken.mp3">
+    <source src="/blog/myfirstproject/feedback_itemBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_feedback_itemBroken.mp3");
+    audio.volume = "0.5"
+</script>
+<p>金屬武器擊中 - ㄎㄧㄤ</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_metalHit.mp3">
+    <source src="/blog/myfirstproject/audio_metalHit.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_audio_metalHit.mp3");
+    audio.volume = "0.8"
+</script>
+<p>藥水瓶碎裂 - ㄆㄧㄤ ~</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_glassBroken.mp3">
+    <source src="/blog/myfirstproject/audio_glassBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+
+<script>
+    var audio = document.getElementById("audio_audio_glassBroken.mp3");
+    audio.volume = "0.8"
+</script>
+<p>除了編輯音效以外，使用程式微調音高也是遊戲中慣用的技巧，音效在撥放時都會隨機的小幅度修改音高和音量，以避免重複播放造成的單一感</p>
+<h3 id="背景音樂">背景音樂</h3>
+<p>遊戲的背景音樂是使用 8bit 音樂編曲軟體 BoscaCeoilscaCeoil 製作的，但因為過去沒學過任何編曲知識，所以只有透過簡單的旋律循環來當背景音樂
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/bgm.jpg" alt="image display error, please report [/blog/myfirstproject/bgm.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>雖然只使用簡單的旋律，不過可以透過程式來動點手腳讓它不那麼單調 ~</p>
+<p>我將音樂輸出為三個不同音軌，並讓它們它們隨著遊戲的狀態進行切換，在標題和暫停畫面時只會撥放單純的節拍，而另外兩種主旋律會在波數和中間的休息狀態切換
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/e6j6wsMgWWk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>不知道為何輸出的不同音軌有些延遲，所以也得想辦法修正到完全同步
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/bgm_tracks.jpg" alt="image display error, please report [/blog/myfirstproject/bgm_tracks.jpg]">
+</div>
+    
+
+
+
+
+
+</p>
+<h3 id="回饋加強">回饋加強</h3>
+<p>如果要在混亂的環境讓玩家知道重要的資訊，遊戲必須要透過某些明顯的手段提示玩家才行，但又不能因此而破壞破壞沉浸感，所以適合的選項就是特效和音效 !</p>
+<p>敵人攻擊 - 敵人攻擊前也添加了粒子效果提示，並且攻擊後會在路徑上留下一些粒子來提高辨識度
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/feedback_attack.gif" alt="image display error, please report [/blog/myfirstproject/feedback_attack.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>玩家受傷 - 受傷時添加了攝影機晃動和短暫的放慢效果來提高辨識度，大量的粒子來提示敵人的攻擊方向以及沉悶的受傷音效加強衝擊感，效果挺不錯的 :D
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/feedback_hurt.gif" alt="image display error, please report [/blog/myfirstproject/feedback_hurt.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>道具損毀 - 道具損毀時會播放明顯的音效及特效加強打擊感
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/feedback_itemborken.gif" alt="image display error, please report [/blog/myfirstproject/feedback_itemborken.gif]">
+</div>
+    
+
+
+
+
+
+</p>
+<p>除此之外也還有不少的細節，但這專案已經是一年前的了所以我也忘了很多東西，剩下的就請在遊戲中體驗吧 ~</p>
+<h2 id="結語">結語</h2>
+<p>專案的開發時長為一個多月，作為第一次完成的遊戲作品，我其實是相當滿意的 :D</p>
+<p>附上最終遊玩畫面的影片，然後幀數有點低是我電腦錄製的問題 ):</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube-nocookie.com/embed/rp3Zl8S3GPg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="真正的構想">真正的構想</h3>
+<p>其實專案一開始不是要做成街機遊戲的無盡模式，我真正想做的其實是一個半解謎類型的地牢</p>
+<p>原本道具系統裡還有簡單的物理交互效果，玩家可以透過投擲道具來進行物理解謎</p>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 70%;" >
+    <img src="/blog/myfirstproject/real_interaction.gif" alt="image display error, please report [/blog/myfirstproject/real_interaction.gif]">
+</div>
+    
+
+
+
+
+
+
+<p>差不多就是投擲木製品引火把門燒開，用或丟水球滅火來通過一些區域這種，想說先做的簡單的小地圖測試，成功了在擴大</p>
+<p>但這還是超出當時的能力範圍了，沒辦法繼續做下去，所以才想說先做個簡單一點的，讓4月的報告有東西可以看，就改成現在這種一波一波打怪的形式</p>
+<p>機會還是希望能真正完成它啦，現在的程式能力和觀念相比過去也提升許多了，但最缺的就是時間了 D:</p>
+<p><a href="https://home.gamer.com.tw/creationDetail.php?sn=4680762" target="_blank">當時的心得文章</a></p>
+<p><a href="https://home.gamer.com.tw/creationCategory.php?owner=angus945&amp;c=450268" target="_blank">完整的開發日誌</a></p>
+<h3 id="缺陷">缺陷</h3>
+<p>當然以現在的角度來看遊戲中有許多相當大缺陷</p>
+<p>首先我當時沒有數據化的概念，每個道具都用 Prefab 儲存在資料夾中會佔據相當大的空間，而且在遊戲場景裝也都用各自的實體物件儲存，而不是透過道具容器替換資料達到重用物件的做法</p>
+<p>那個道具系統在這專案之後就被我封存了，不過在那時我對這個系統還蠻滿意的 :D</p>
+<p>再來是對設計模式和遊戲架構的熟悉度不夠，封裝沒做好而且維護性也不高導致程式碼就像打結的毛線球一樣，重頭再做一次都比修改來的輕鬆吧</p>
+<p>最後是設計上的問題 - 難度過高，因為自己在測試的時候不斷試玩導致很容易習慣遊戲的難度，於是就不斷提高遊戲難度導致對不熟悉遊戲的人來說相當困難，果然外部意見真的很重要阿</p>
+<h3 id="改進">改進</h3>
+<p>以現在的程度能夠做的比以前好很多，首先是上面說到的數據化，我可以用一個文字檔儲存各種道具的數據或行為，例如: json</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="err">Item.json</span>
+<span class="p">{</span>
+  <span class="nt">&#34;damage&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="nt">&#34;durable&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nt">&#34;onPickup&#34;</span><span class="p">:</span> <span class="err">PushAround</span> <span class="mi">70</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="nt">&#34;onBroken&#34;</span><span class="p">:</span> <span class="err">Explosion</span> <span class="mi">10</span> <span class="mi">45</span><span class="p">,</span>
+  <span class="nt">&#34;onHit&#34;</span><span class="p">:</span> <span class="err">Heal</span> <span class="mi">5</span> <span class="mi">3</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>並且自訂語法解析器來分析道具的文字檔，在載入文件時創建簡單的道具資料庫，當遊戲要使用這個時就能把事件和參數寫入道具容器中</p>
+<p>更進一步說不定還能讓遊戲支援模組開發，不過這都是之後的事了，果然最缺的永遠都是時間 D:</p>
+<h3 id="使用資源">使用資源</h3>
+<p>專案使用的美術資源為 itch.io 作者 <a href="https://itch.io/profile/0x72" target="_blank">0x72</a> 繪製的 CC0 Pixel art</p>
+<p><a href="https://0x72.itch.io/16x16-dungeon-tileset" target="_blank">16x16 Dungeon Tileset</a></p>
+<p><a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">dungeontileset-ii</a></p>
+<p>至於音效是到處去 CC0 素材庫拼湊的，所以詳細的來源我也忘了 D:</p>
+<h3 id="感謝閱讀-">感謝閱讀 !</h3>
+<p>感謝各位閱讀到這 &lt;3</p>
+<p>遊戲最終發佈在 Itch.io 上，有興趣的可以下載來玩玩看 - <a href="https://angus945.itch.io/drop-throw-dungeon" target="_blank">點我下載</a></p>
+<p>也有在國內的遊戲平台木屋發佈歐 - <a href="https://indiecabin.net/project/DropThrowDungeon_p" target="_blank">點我下載</a></p>
+
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/gamedev/?tab=blog">gamedev</a>
+        
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/devlog/?tab=blog">devlog</a>
+        
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+
+
+
+
+  </article>
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    (function () {
+        
+        
+        if (window.location.hostname == "localhost")
+        {
+            document.write("Disqus comments not available by default when the website is previewed locally；");
+            return;
+        }
+
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        var disqus_shortname = 'anguschan-website';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.bd3716361717e8f0b99eb740fc6dbdb6da457f51c648fc7a70f5d05d80af7802.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>
