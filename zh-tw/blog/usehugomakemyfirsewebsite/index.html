@@ -70,7 +70,7 @@
 <meta itemprop="name" content="建立人生的第一個網站">
 <meta itemprop="description" content="從頭學習前端和使用 Hugo 建立網站的過程"><meta itemprop="datePublished" content="2021-05-11T20:27:14&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-11T20:27:14&#43;08:00" />
-<meta itemprop="wordCount" content="3558">
+<meta itemprop="wordCount" content="3457">
 <meta itemprop="keywords" content="hugo,website,devlog," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="建立人生的第一個網站"/>
 <meta name="twitter:description" content="從頭學習前端和使用 Hugo 建立網站的過程"/>
@@ -776,8 +776,8 @@
 
 <h3 id="留言板">留言板</h3>
 <p>為了不讓網站像只有我一個人自嗨，所以能和其他人交流的首要選項就是添加留言板 !</p>
-<p>我使用的是 <a href="https://disqus.com/" target="_blank">Disqus</a> 提供的留言板，Hugo 中只需要設置 ID 後調用內建模板<code>_internal/disqus.html</code>就能使用了</p>
-<p>但因為某些未知原因我的留言系統效果不完整，所以又找了資料重新設置整個 disqus partial</p>
+<p><del>我使用的是 Disqus 提供的留言板，Hugo 中只需要設置&hellip;</del> NOPE Disqus 會強制塞一個比留言板本身還要大的廣告 ==</p>
+<p>所以我改用 <a href="https://commentbox.io/" target="_blank">CommentBox</a> 當網站的留言版了，它裝起來方便而且版面也乾淨許多，留言時也可以方便的登入</p>
 
 
 
@@ -807,38 +807,6 @@
 
 
 
-<p>為了不用登入就能留言，我到 Disqus 那裏設置了允許訪客留言，訪客只需要輸入名稱和 email 就可以留言，不過未登錄的留言好像要經過審核才會顯示，不確定審核會花多少時間，所以還是盡量登入留言吧 :P</p>
-
-
-
-
-
-
-
-
-<style>
-    .image-center
-    {
-        margin: auto;
-        text-align: center;
-        padding-bottom: 10px;
-    }
-</style>
-
-
-
-<div class="image-center" style="width: ;" >
-    <img src="/blog/usehugomakemyfirsewebsite/guest.jpg" alt="image display error, please report [/blog/usehugomakemyfirsewebsite/guest.jpg]">
-</div>
-    
-
-
-
-
-
-
-<p>參考資料</p>
-<p><a href="https://gohugo.io/templates/internal/" target="_blank">Internal Templates</a></p>
 <h3 id="流量追蹤">流量追蹤</h3>
 <p>為了分析訪客的偏好和類型，我使用 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析</p>
 <p>這個主題裡也有完成流量追蹤的功能，只不過 Google Analytics 更新到第 4 版了，主題裡的功能似乎過舊所以就重新找了資料修正&hellip;雖然我也不確定現在這樣有沒有正確運作</p>
@@ -992,6 +960,14 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
 
 
   </article>
+            
+
+
+
+
+
+
+
           </div>
           <div class="comments">
             
@@ -1009,7 +985,6 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
     commentBox('5747947559976960-proj')
 </script>
 
-        
     </div>
           </div>
         </div>
