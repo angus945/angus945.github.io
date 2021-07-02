@@ -25,6 +25,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
     <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -245,7 +246,9 @@
 
 <section id="posts" class="posts" style="padding-bottom: 10px;">
   <h2 id="歡迎來到樂小呈的部落格">歡迎來到樂小呈的部落格</h2>
+<p>HI</p>
 <p>這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P</p>
+<p>還在想怎麼讓主頁更豐富@@</p>
 <h3 id="網站標籤">網站標籤</h3>
 
 
@@ -271,7 +274,7 @@
             
          
             
-                <a class="pageTags" href= "/zh-tw/tags/shader/?tab=all">shader</a>
+                <a class="pageTags" href= "/zh-tw/tags/learning/?tab=all">learning</a>
             
          
             
@@ -342,6 +345,103 @@
     .header-warp
     {
         overflow-x: auto;
+        margin-bottom: 10px !important;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/blog/aboutlearning/featured.jpg">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/aboutlearning/"> 自學了三年，分享自己對學習的看法和感想 </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 
+                
+
+
+
+2021-06-29
+
+
+
+
+
+   
+                
+                約 7781 字 
+            </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/learning?tab=all" >
+                        learning
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            自學了三年多，分享一下對自己過去以及自學時累積的感想，以及對學習的看法
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/blog/aboutlearning/"> Read more... </a>
+    </div>
+</div>
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -368,9 +468,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/myfirstproject/"> 我的第一個專案 - 投擲地牢 </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-05-18 19:55:10 &#43;0800 CST            
                 
-                / 約 4258 字 
+
+
+
+2021-05-18
+
+
+
+
+
+   
+                
+                約 4258 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -432,6 +542,7 @@
     .header-warp
     {
         overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -458,9 +569,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/usehugomakemyfirsewebsite/"> 建立人生的第一個網站 </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-05-11 20:27:14 &#43;0800 CST            
                 
-                / 約 3457 字 
+
+
+
+2021-05-11
+
+
+
+
+
+   
+                
+                約 3457 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -527,91 +648,7 @@
     .header-warp
     {
         overflow-x: auto;
-    }
-
-    .pagetag
-    {
-        color: #8a8a8a
-    }
-
-    .read-more
-    {
-        position: absolute;
-        bottom: 5px;
-        font-style: 50px;
-    }
-</style>
-
-
-
-
-
-<div class="block">
-    <img class="feature-image" src="/tutorials/signeddistancefunction/tutorial_example_B.gif">
-
-    <header class="post-header header-warp">
-        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/signeddistancefunction/"> Signed Distance Function </a></h1>
-        <div class="post-meta">
-            <span class="post-time"> 
-                2021-04-27 21:53:27 &#43;0800 CST            
-                
-                / 約 632 字 
-            </span>
-            <div> 
-                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
-                
-                    
-                    <a class="pagetag" href="/zh-tw/tags/shader?tab=all" >
-                        shader
-                    </a>
-                
-            </div>
-        </div>
-    </header>
-    
-    <div class="post-content" style="padding-bottom: 25px;">
-        <div class="post-summary">
-            signed distance function tutorial
-        </div>
-    </div>
-
-    <div class="post-content read-more">
-        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/signeddistancefunction/"> Read more... </a>
-    </div>
-</div>
-
-
-    
-
-
-<style>
-    .block
-    {
-        position: relative;
-        min-height: 160px;
-        margin: 0px 0px 10px 0px;
-        border-bottom: 1px solid;
-        border-bottom-color:hsla(0, 0%, 73%, 0.589);
-    }
-
-    .feature-image
-    {
-        width: 140px;
-        float:  right;
-        
-        margin: 5px 5px 5px 5px;
-    }
-    @media screen and (max-width: 600px)
-    {   
-        .feature-image
-        {
-            display: none;
-        }
-    }
-
-    .header-warp
-    {
-        overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -638,9 +675,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/testfolder/"> testing tutorial folder and looongest title </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-04-26 13:14:06 &#43;0800 CST            
                 
-                / 約 2 字 
+
+
+
+2021-04-26
+
+
+
+
+
+   
+                
+                約 2 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -711,6 +758,103 @@
     .header-warp
     {
         overflow-x: auto;
+        margin-bottom: 10px !important;
+    }
+
+    .pagetag
+    {
+        color: #8a8a8a
+    }
+
+    .read-more
+    {
+        position: absolute;
+        bottom: 5px;
+        font-style: 50px;
+    }
+</style>
+
+
+
+
+
+<div class="block">
+    <img class="feature-image" src="/blog/aboutlearning/featured.jpg">
+
+    <header class="post-header header-warp">
+        <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/aboutlearning/"> 自學了三年，分享自己對學習的看法和感想 </a></h1>
+        <div class="post-meta">
+            <span class="post-time"> 
+                
+
+
+
+2021-06-29
+
+
+
+
+
+   
+                
+                約 7781 字 
+            </span>
+            <div> 
+                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
+                
+                    
+                    <a class="pagetag" href="/zh-tw/tags/learning?tab=all" >
+                        learning
+                    </a>
+                
+            </div>
+        </div>
+    </header>
+    
+    <div class="post-content" style="padding-bottom: 25px;">
+        <div class="post-summary">
+            自學了三年多，分享一下對自己過去以及自學時累積的感想，以及對學習的看法
+        </div>
+    </div>
+
+    <div class="post-content read-more">
+        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/blog/aboutlearning/"> Read more... </a>
+    </div>
+</div>
+
+
+    
+
+
+<style>
+    .block
+    {
+        position: relative;
+        min-height: 160px;
+        margin: 0px 0px 10px 0px;
+        border-bottom: 1px solid;
+        border-bottom-color:hsla(0, 0%, 73%, 0.589);
+    }
+
+    .feature-image
+    {
+        width: 140px;
+        float:  right;
+        
+        margin: 5px 5px 5px 5px;
+    }
+    @media screen and (max-width: 600px)
+    {   
+        .feature-image
+        {
+            display: none;
+        }
+    }
+
+    .header-warp
+    {
+        overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -737,9 +881,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/myfirstproject/"> 我的第一個專案 - 投擲地牢 </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-05-18 19:55:10 &#43;0800 CST            
                 
-                / 約 4258 字 
+
+
+
+2021-05-18
+
+
+
+
+
+   
+                
+                約 4258 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -801,6 +955,7 @@
     .header-warp
     {
         overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -827,9 +982,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/blog/usehugomakemyfirsewebsite/"> 建立人生的第一個網站 </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-05-11 20:27:14 &#43;0800 CST            
                 
-                / 約 3457 字 
+
+
+
+2021-05-11
+
+
+
+
+
+   
+                
+                約 3457 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -896,91 +1061,7 @@
     .header-warp
     {
         overflow-x: auto;
-    }
-
-    .pagetag
-    {
-        color: #8a8a8a
-    }
-
-    .read-more
-    {
-        position: absolute;
-        bottom: 5px;
-        font-style: 50px;
-    }
-</style>
-
-
-
-
-
-<div class="block">
-    <img class="feature-image" src="/tutorials/signeddistancefunction/tutorial_example_B.gif">
-
-    <header class="post-header header-warp">
-        <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/signeddistancefunction/"> Signed Distance Function </a></h1>
-        <div class="post-meta">
-            <span class="post-time"> 
-                2021-04-27 21:53:27 &#43;0800 CST            
-                
-                / 約 632 字 
-            </span>
-            <div> 
-                <a class="pagetag" href="/zh-tw/tags" > tags: </a>
-                
-                    
-                    <a class="pagetag" href="/zh-tw/tags/shader?tab=all" >
-                        shader
-                    </a>
-                
-            </div>
-        </div>
-    </header>
-    
-    <div class="post-content" style="padding-bottom: 25px;">
-        <div class="post-summary">
-            signed distance function tutorial
-        </div>
-    </div>
-
-    <div class="post-content read-more">
-        <a class="read-more-link" style="font-size: 20px" href="/zh-tw/tutorials/signeddistancefunction/"> Read more... </a>
-    </div>
-</div>
-
-
-    
-
-
-<style>
-    .block
-    {
-        position: relative;
-        min-height: 160px;
-        margin: 0px 0px 10px 0px;
-        border-bottom: 1px solid;
-        border-bottom-color:hsla(0, 0%, 73%, 0.589);
-    }
-
-    .feature-image
-    {
-        width: 140px;
-        float:  right;
-        
-        margin: 5px 5px 5px 5px;
-    }
-    @media screen and (max-width: 600px)
-    {   
-        .feature-image
-        {
-            display: none;
-        }
-    }
-
-    .header-warp
-    {
-        overflow-x: auto;
+        margin-bottom: 10px !important;
     }
 
     .pagetag
@@ -1007,9 +1088,19 @@
         <h1 class="post-title"><a class="post-link" href="/zh-tw/tutorials/testfolder/"> testing tutorial folder and looongest title </a></h1>
         <div class="post-meta">
             <span class="post-time"> 
-                2021-04-26 13:14:06 &#43;0800 CST            
                 
-                / 約 2 字 
+
+
+
+2021-04-26
+
+
+
+
+
+   
+                
+                約 2 字 
             </span>
             <div> 
                 <a class="pagetag" href="/zh-tw/tags" > tags: </a>
@@ -1071,12 +1162,6 @@
   document.getElementById("tab-0").click();
 </script>
             
-
-
-
-
-
-
 
           </div>
           <div class="comments">

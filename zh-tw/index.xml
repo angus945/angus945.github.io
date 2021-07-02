@@ -5,8 +5,17 @@
     <link>https://angus945.github.io/zh-tw/</link>
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 18 May 2021 19:55:10 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 29 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自學了三年，分享自己對學習的看法和感想</title>
+      <link>https://angus945.github.io/zh-tw/blog/aboutlearning/</link>
+      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/blog/aboutlearning/</guid>
+      <description>前言 因為不適合台灣的制式教育，於是我在高二時開始了在家自學，持續到現在已經三年了，雖然出了點意外導致還沒讀大學，但學習並不會因此而中斷~ 剛好</description>
+    </item>
+    
     <item>
       <title>我的第一個專案 - 投擲地牢</title>
       <link>https://angus945.github.io/zh-tw/blog/myfirstproject/</link>
@@ -49,7 +58,7 @@
       <pubDate>Tue, 04 May 2021 11:58:15 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/homecontent/</guid>
-      <description>歡迎來到樂小呈的部落格 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 網站標籤 devlog gamedev hugo shader test website</description>
+      <description>歡迎來到樂小呈的部落格 HI 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 還在想怎麼讓主頁更豐富@@ 網站標籤 devlog gamedev hugo learning test website</description>
     </item>
     
     <item>
