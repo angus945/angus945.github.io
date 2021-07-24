@@ -3,7 +3,56 @@
   
   <url>
     <loc>https://angus945.github.io/zh-tw/</loc>
-    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/beginner/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/gamedevelopment/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/learning/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/tutorial/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tags/unity/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/sourcesforunitybeginner/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,20 +73,6 @@
   
   <url>
     <loc>https://angus945.github.io/zh-tw/tags/education/</loc>
-    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://angus945.github.io/zh-tw/tags/learning/</loc>
-    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://angus945.github.io/zh-tw/tags/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -150,7 +185,7 @@
   
   <url>
     <loc>https://angus945.github.io/zh-tw/category/tutorial/</loc>
-    <lastmod>2021-04-29T13:14:06+08:00</lastmod>
+    <lastmod>2021-04-28T20:38:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -158,20 +193,6 @@
   <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/</loc>
     <lastmod>2021-04-28T20:38:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://angus945.github.io/zh-tw/tags/test/</loc>
-    <lastmod>2021-04-29T13:14:06+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://angus945.github.io/zh-tw/tutorials/testfolder/</loc>
-    <lastmod>2021-04-29T13:14:06+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

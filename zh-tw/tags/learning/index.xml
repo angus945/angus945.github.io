@@ -6,7 +6,16 @@
     <description>Recent content in learning on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>整理給 Unity 初學者的起步資源</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/sourcesforunitybeginner/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/sourcesforunitybeginner/</guid>
+      <description>自學 Unity 了兩年多，過程中也累積了不少學習資源，雖然過去有整理過幾次，但都很雜亂反而會讓初學者不知道怎麼起步，所以這次我又重新整理了一系列適合初</description>
+    </item>
+    
     <item>
       <title>遊戲的教育意義，我們能從遊戲設計的理論中學到什麼</title>
       <link>https://angus945.github.io/zh-tw/blog/educationandgamedesign/</link>

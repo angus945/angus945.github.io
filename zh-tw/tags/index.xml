@@ -6,22 +6,58 @@
     <description>Recent content in Tags on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>education</title>
-      <link>https://angus945.github.io/zh-tw/tags/education/</link>
-      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <title>beginner</title>
+      <link>https://angus945.github.io/zh-tw/tags/beginner/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/zh-tw/tags/education/</guid>
+      <guid>https://angus945.github.io/zh-tw/tags/beginner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gameDevelopment</title>
+      <link>https://angus945.github.io/zh-tw/tags/gamedevelopment/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tags/gamedevelopment/</guid>
       <description></description>
     </item>
     
     <item>
       <title>learning</title>
       <link>https://angus945.github.io/zh-tw/tags/learning/</link>
-      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/tags/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tutorial</title>
+      <link>https://angus945.github.io/zh-tw/tags/tutorial/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unity</title>
+      <link>https://angus945.github.io/zh-tw/tags/unity/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tags/unity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>education</title>
+      <link>https://angus945.github.io/zh-tw/tags/education/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tags/education/</guid>
       <description></description>
     </item>
     
@@ -58,15 +94,6 @@
       <pubDate>Tue, 11 May 2021 20:27:14 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/tags/website/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>test</title>
-      <link>https://angus945.github.io/zh-tw/tags/test/</link>
-      <pubDate>Mon, 26 Apr 2021 13:14:06 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tags/test/</guid>
       <description></description>
     </item>
     
