@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="bDGYZG1U4Y1MZoDILkYAImkYhKfKkTxSABaK0OzcFa4" />
+    <title>運用多場景機制進行資料傳遞 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="運用多場景機制進行資料傳遞" />
+<meta property="og:description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-07-25T14:29:23&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-25T14:29:23&#43;08:00" />
+
+<meta itemprop="name" content="運用多場景機制進行資料傳遞">
+<meta itemprop="description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某"><meta itemprop="datePublished" content="2021-07-25T14:29:23&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-25T14:29:23&#43;08:00" />
+<meta itemprop="wordCount" content="3101">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="運用多場景機制進行資料傳遞"/>
+<meta name="twitter:description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+    
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>運用多場景機制進行資料傳遞</h1>
+    </header>
+
+<div class="post-toc" id="post-toc" style="margin-top: 20px;">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a>
+          <ul>
+            <li><a href="#dontdestroy">DontDestroy</a></li>
+            <li><a href="#unity-的場景機制">Unity 的場景機制</a></li>
+            <li><a href="#場景相關的函式">場景相關的函式</a></li>
+          </ul>
+        </li>
+        <li><a href="#如何運用多場景機制">如何運用多場景機制</a>
+          <ul>
+            <li><a href="#進行資料傳遞">進行資料傳遞</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <p>DontDestroyOnLoad 的運作原理與多場景的運用</p>
+<h2 id="前言">前言</h2>
+<h3 id="dontdestroy">DontDestroy</h3>
+<p>眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某些物件怎麼辦 ?</p>
+<p>Unity 當然知道這點，為此在他們的 Object 中有一項函式，我們可以透過這個函式將物件設定成不會在轉場時隨著場景銷毀。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">static</span> <span class="k">void</span> <span class="n">DontDestroyOnLoad</span><span class="p">(</span><span class="n">Object</span> <span class="n">target</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>為什麼設置之後就不會被銷毀了呢 ?</p>
+<p>它的原理是這樣的，當場景中有物件被設置為 dontDestroy 時，Unity 建立一個名為DontDestroyOnLoad 的場景在遊戲中，並將所被設置的物件移至該場景。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/example_dontDestroy.jpg" alt="image display error, please report [/tutorials/multiplescenepassmessage/example_dontDestroy.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>在進行常規的轉場時，系統會自動忽略掉這個場景，只將原本的場景釋放掉並載入新場景，因而保存了這些物件，這就是 DontDestroyOnLoad 的運作原理。知道了原理之後又能做什麼 ?</p>
+<p>只要知道原理之後我們就能夠自己製作一項系統來重現這個功能，至於要用來做什麼可以先思考一下有什麼狀況是原本我們會透過 DontDestroyOnLoad 實現的。通常會使用 dontDestroy 的情況就是希望物件不會在轉場時被銷毀(廢話)。</p>
+<p>例如 GameManager，這應該是少數真正需要永遠存在東西了，因為直到玩家關閉遊戲前他都得持續管理整個遊戲流程。再來可能是背景音樂的撥放器，因為不想要讓音樂在轉場時被中斷，所以也將它保留。</p>
+<p>除此之外更多人使用他是為了將訊息在場景之間傳遞，畢竟原本儲存數據的物件被銷毀就沒辦法傳遞了，將物件保留是最簡單的方法。</p>
+<p>但是當這些物件其實在傳遞完資訊後就不需要了，又要一個一個銷毀掉，否則再次轉場時可能發會生衝突，我們將物件設置成永遠存在後，又將他銷毀顯然多此一舉。</p>
+<p>所以這篇文章就是要教各位如何使用的不同的方法在場景間傳遞資料 ~~</p>
+<h3 id="unity-的場景機制">Unity 的場景機制</h3>
+<p>首先，上面的部分應該有暗示到 Unity 是允許同時存在多個場景的，你可以簡單的將資料夾中的場景拖曳到 Hierarchy 來添加複數場景。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/example_multipleScene.gif" alt="image display error, please report [/tutorials/multiplescenepassmessage/example_multipleScene.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>運作中的場景一共有兩種類型，活躍的 (Active) 也就是主要場景，他會在 Hierarchy 中用粗體字表示，再來是附加的 (Additive) 也就是附加上的次要場景。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/example_hierarchy.jpg" alt="image display error, please report [/tutorials/multiplescenepassmessage/example_hierarchy.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>這兩者的差別在於允不允許實例化(Instantiate)物件，無論調用實例化函式物件存在於哪個場景，實例化一律都只會將物件創建在 Active Scene 中，而複數場景中一定會有一個是 Active 的。</p>
+<h3 id="場景相關的函式">場景相關的函式</h3>
+<p>在進入主題以前，先簡單介紹一下轉場相關的函式。首先要調用轉場得要先引用命名空間，任何場景相關的操作都得經過 Unity 的 SceneManager。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">UnityEngine.SceneManagement</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>場景載入的函式，雖然他擁有許多多載，但這邊先關注一個就好。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">LoadScene</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">,</span> <span class="n">LoadSceneMode</span> <span class="n">mode</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>LoadSceneMode 為載入場景的模式，有 Single 和 Additive 兩種。Single 就是一般的載入模式，只允許單一場景存在，他會銷毀自身(和 dontdestroy)以外的所有場景。而 Additive 就是附加場景，這會將新場景用附加的形式添加入遊戲。若調用時在沒有指定模式的時候預設都是 Single。</p>
+<p>而於 Additive 就是今天的主角了，這裡先稍微介紹過。再來是卸載場景，當有複數場景被啟用時，可以透過場景名稱將特定的場景移除。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="n">AsyncOperation</span> <span class="n">UnloadSceneAsync</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="如何運用多場景機制">如何運用多場景機制</h2>
+<p>鋪陳了那麼久總算要進入主題了 (X</p>
+<h3 id="進行資料傳遞">進行資料傳遞</h3>
+<p>首先定義一下我們要傳遞的東西，為了方便範例所以教學這邊就先用 string 當作傳遞的資料類型。</p>
+<p>場景的部分一共需要三種</p>
+<ul>
+<li>主場景 - 也就是資料的來源</li>
+<li>遊戲場景 - 要傳遞的目標</li>
+<li>傳遞場景 - 負責傳遞資料場景，我們這裡就叫他信差吧</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/scenes.jpg" alt="image display error, please report [/tutorials/multiplescenepassmessage/scenes.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>轉場的部分，因為需要額外的訊息傳遞功能，所以我們也得寫一個自己的轉場系統來達成目的。建立一個 CustomSceneManager.cs 的腳本附在場景物件上，並進行單例設置和建立讓外部可以調用轉場功能的靜態接口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">UnityEngine.SceneManagement</span><span class="p">;</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">CustomSceneManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">CustomSceneManager</span> <span class="n">instance</span><span class="p">;</span>
+    <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="n">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
+
+            <span class="n">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">LoadScene</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再來是實作轉場的功能，因為場景是在命令被調用的那幀結束之後載入的，所以為了配合訊息傳遞的功能，我們必須將原本的轉場流程拆成三個部分。</p>
+<ol>
+<li>載入信差場景，畢竟信差要先來我們才能把東西交給他</li>
+<li>將要傳遞的資料交信差，並卸載主場景，載入遊戲場景</li>
+<li>將遊戲場景設為 ActiveScene，而信差也在會在這幀將東西交給應該交給的對象，完成工作後退下</li>
+</ol>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/signal.jpg" alt="image display error, please report [/tutorials/multiplescenepassmessage/signal.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>建立靜態方法將轉場函式公開，並使用 Coroutine 來達成分段載入的功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">LoadScene</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">instance</span><span class="p">.</span><span class="n">LoadingScene</span><span class="p">(</span><span class="n">sceneName</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="k">void</span> <span class="n">LoadingScene</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">StartCoroutine</span><span class="p">(</span><span class="n">LoadingRoutine</span><span class="p">(</span><span class="n">sceneName</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="n">IEnumerator</span> <span class="n">LoadingRoutine</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">LoadScene</span><span class="p">(</span><span class="s">&#34;messenger&#34;</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+
+    <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">UnloadSceneAsync</span><span class="p">(</span><span class="n">activeScene</span><span class="p">);</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">LoadScene</span><span class="p">(</span><span class="n">sceneName</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+
+    <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">SetActiveScene</span><span class="p">(</span><span class="n">SceneManager</span><span class="p">.</span><span class="n">GetSceneByName</span><span class="p">(</span><span class="n">sceneName</span><span class="p">));</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">UnloadSceneAsync</span><span class="p">(</span><span class="s">&#34;messenger&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再來是信差的部分，建立一個 SceneMessenger.cs 並附加在信差場景中的物件上。同樣的，設置成單例以方便進行存取。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">SceneMessenger</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="n">SceneMessenger</span> <span class="n">instance</span><span class="p">;</span>
+
+    <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">instance</span> <span class="p">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>因為實際情況可能會有許多資料要傳遞，所以我們可以透過 Dictionary 來保存以避免通通混雜在一起。</p>
+<p>實作傳遞方法，函式接收兩個字串作為輸入。第一為傳遞地址 address，用來辨識資料要傳遞給誰，也就是字典的 key。第二則是要傳遞的訊息 message。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp">
+<span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">messages</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;();</span>
+
+<span class="k">public</span> <span class="k">void</span> <span class="n">PassMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">,</span> <span class="kt">string</span> <span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="kt">string</span> <span class="n">GetMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="kt">string</span> <span class="n">message</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">message</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>至於場景物件傳遞和取得訊息的時機，可以為我們的轉場腳本添加事件來達成。回到 CustomSceneManager.cs 進行修改，添加兩個轉場事件，當 &ldquo;場景載入&rdquo; 和當 &ldquo;場景載入完畢&rdquo; 時。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">static</span> <span class="n">Action</span> <span class="n">onScenesLoadingEvent</span><span class="p">;</span>
+<span class="k">public</span> <span class="k">static</span> <span class="n">Action</span> <span class="n">onScenesLoadedEvent</span><span class="p">;</span>
+
+<span class="n">IEnumerator</span> <span class="n">LoadingRoutine</span><span class="p">(</span><span class="kt">string</span> <span class="n">sceneName</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">LoadScene</span><span class="p">(</span><span class="s">&#34;messenger&#34;</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+
+    <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="n">onScenesLoadingEvent</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">();</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">UnloadSceneAsync</span><span class="p">(</span><span class="n">activeScene</span><span class="p">);</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">LoadScene</span><span class="p">(</span><span class="n">sceneName</span><span class="p">,</span> <span class="n">LoadSceneMode</span><span class="p">.</span><span class="n">Additive</span><span class="p">);</span>
+
+    <span class="k">yield</span> <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="n">onScenesLoadedEvent</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">();</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">SetActiveScene</span><span class="p">(</span><span class="n">SceneManager</span><span class="p">.</span><span class="n">GetSceneByName</span><span class="p">(</span><span class="n">sceneName</span><span class="p">));</span>
+    <span class="n">SceneManager</span><span class="p">.</span><span class="n">UnloadSceneAsync</span><span class="p">(</span><span class="s">&#34;messenger&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>有了這兩個事件，我們就可以讓要傳遞訊息的腳本在轉場時將資料交給信差，並在轉場結束後讓接收對象從信差那裏接收訊息。</p>
+<p>現在，為了測試效果我們建立一個 PlayerProperty.cs 並附在主場景中的物件上，並添加幾個簡單的屬性作為要傳遞的訊息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">PlayerProperty</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+<span class="na">    [SerializeField]</span> <span class="kt">int</span> <span class="n">playerHealth</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="na">    [SerializeField]</span> <span class="kt">int</span> <span class="n">playerDamage</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="na">    [SerializeField]</span> <span class="kt">int</span> <span class="n">playerExprience</span> <span class="p">=</span> <span class="m">100</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>接下來實作出一個將玩家屬性交給信差的函式，並註冊在 onScenesLoadingEvent 上。如此一來當場景轉換時，玩家屬性的資料就會被交給信差了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">void</span> <span class="n">Start</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">CustomSceneManager</span><span class="p">.</span><span class="n">onScenesLoadingEvent</span> <span class="p">+=</span> <span class="n">PassDataToMessanger</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">CustomSceneManager</span><span class="p">.</span><span class="n">onScenesLoadingEvent</span> <span class="p">-=</span> <span class="n">PassDataToMessanger</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="n">PassDataToMessanger</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">PassMessage</span><span class="p">(</span><span class="s">&#34;playerHealth&#34;</span><span class="p">,</span> <span class="n">playerHealth</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+    <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">PassMessage</span><span class="p">(</span><span class="s">&#34;playerDamage&#34;</span><span class="p">,</span> <span class="n">playerDamage</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+    <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">PassMessage</span><span class="p">(</span><span class="s">&#34;playerExprience&#34;</span><span class="p">,</span> <span class="n">playerExprience</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最後，當訊息被傳出後還需要一個接收者來接收訊息，我們建立一個 Player.cs 腳本並附加在 GamePlayScene 中的物件上，他就是我們的接收者。</p>
+<p>在 Start 中註冊一項取的資料的函式在 onScenesLoadedEvent 上，如此一來當場景傳換完畢時，玩家就能夠接收到上個場景中屬性傳遞的資料了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">Player</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="n">Start</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">CustomSceneManager</span><span class="p">.</span><span class="n">onScenesLoadedEvent</span> <span class="p">+=</span> <span class="n">LoadPlayerProterties</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">void</span> <span class="n">OnDestroy</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">CustomSceneManager</span><span class="p">.</span><span class="n">onScenesLoadedEvent</span> <span class="p">-=</span> <span class="n">LoadPlayerProterties</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="n">LoadPlayerProterties</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">string</span> <span class="n">playerHealth</span> <span class="p">=</span> <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">GetMessage</span><span class="p">(</span><span class="s">&#34;playerHealth&#34;</span><span class="p">);</span>
+        <span class="kt">string</span> <span class="n">playerDamage</span> <span class="p">=</span> <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">GetMessage</span><span class="p">(</span><span class="s">&#34;playerDamage&#34;</span><span class="p">);</span>
+        <span class="kt">string</span> <span class="n">playerExprience</span> <span class="p">=</span> <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">GetMessage</span><span class="p">(</span><span class="s">&#34;playerExprience&#34;</span><span class="p">);</span>
+
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;health: &#34;</span> <span class="p">+</span> <span class="n">playerHealth</span><span class="p">);</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;damage: &#34;</span> <span class="p">+</span> <span class="n">playerDamage</span><span class="p">);</span>
+        <span class="n">Debug</span><span class="p">.</span><span class="n">Log</span><span class="p">(</span><span class="s">&#34;exprience: &#34;</span> <span class="p">+</span> <span class="n">playerExprience</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>為了測試結果我們將他用 debug.Log() 打印出來，雖然取得的資料是字串但實際使用時可以透過 int.Parse 將他轉型為整數。現在所需的一切都齊全了，讓我們回到主場景中並添加一個轉場腳本進行測試。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">ToNextScene</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+    <span class="k">void</span> <span class="n">Update</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">Input</span><span class="p">.</span><span class="n">GetKeyDown</span><span class="p">(</span><span class="n">KeyCode</span><span class="p">.</span><span class="n">Space</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">CustomSceneManager</span><span class="p">.</span><span class="n">LoadScene</span><span class="p">(</span><span class="s">&#34;GamePlayScene&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/passMessage.gif" alt="image display error, please report [/tutorials/multiplescenepassmessage/passMessage.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>而當然，除了純數據資料以外這種作法也能夠傳遞 GameObject，只需要額外建立一個儲存物件的字典，以及提供傳遞的接口即可。透過設置父物件來將物件轉移到不同場景。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">GameObject</span><span class="p">&gt;</span> <span class="n">objects</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">GameObject</span><span class="p">&gt;();</span>
+
+<span class="k">public</span> <span class="k">void</span> <span class="n">PassObject</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">,</span> <span class="n">GameObject</span> <span class="n">gameObject</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">objects</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">gameObject</span><span class="p">);</span>
+    <span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">transform</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">public</span> <span class="n">GameObject</span> <span class="n">GetObject</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">,</span> <span class="n">Transform</span> <span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">objects</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="n">GameObject</span> <span class="n">gameObject</span><span class="p">);</span>
+    <span class="n">gameObject</span><span class="p">.</span><span class="n">transform</span><span class="p">.</span><span class="n">parent</span> <span class="p">=</span> <span class="n">parent</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: ;" >
+    <img src="/tutorials/multiplescenepassmessage/passObject.gif" alt="image display error, please report [/tutorials/multiplescenepassmessage/passObject.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>以上就是透過 Unity 多場景機制進行資料傳遞基本的作法，教學中的範例相當粗糙，只是提供一種思路而已。畢竟真的要舉的話，例子也舉不完，實際還是北根據需求自己設計系統才行。</p>
+<p>如果要更進階的也可以透過繼承介面來將整個 class 或 struct 當傳遞的訊息，不只能提高傳遞的資訊複雜度，還能夠封裝訊息的類型，補充個簡單的範例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">interface</span> <span class="n">ISceneMessage</span>
+<span class="p">{</span>
+    <span class="kt">string</span> <span class="n">address</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">struct</span> <span class="nc">PlayerData</span> <span class="p">:</span> <span class="n">ISceneMessage</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">address</span> <span class="p">{</span> <span class="k">get</span> <span class="p">=&gt;</span> <span class="s">&#34;playerData&#34;</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">playerHealth</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">playerDamage</span><span class="p">;</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">playerExprience</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>而信差的部分改為接收實作了抽象介面的物件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">ISceneMessage</span><span class="p">&gt;</span> <span class="n">messages</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">ISceneMessage</span><span class="p">&gt;();</span>
+<span class="k">protected</span> <span class="k">internal</span> <span class="k">static</span> <span class="k">void</span> <span class="n">PassMessage</span><span class="p">(</span><span class="n">ISceneMessage</span> <span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="n">address</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">protected</span> <span class="k">internal</span> <span class="k">static</span> <span class="n">ISceneMessage</span> <span class="n">GetMessage</span><span class="p">(</span><span class="kt">string</span> <span class="n">address</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="k">out</span> <span class="n">ISceneMessage</span> <span class="n">message</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">message</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>傳遞的部分類似這樣，將數據包裝進繼承介面的結構中，如此一來就不需要每個數據都傳遞一次，而且還被限制為字串，大大提升了方便性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">void</span> <span class="n">PassDataToMessanger</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">PlayerData</span> <span class="n">playerData</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PlayerData</span><span class="p">(</span><span class="n">playerHealth</span><span class="p">,</span> <span class="n">playerDamage</span><span class="p">,</span> <span class="n">playerExprience</span><span class="p">);</span>
+    <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">PassMessage</span><span class="p">(</span><span class="n">playerData</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">void</span> <span class="n">LoadPlayerProterties</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ISceneMessage</span> <span class="n">message</span> <span class="p">=</span> <span class="n">SceneMessenger</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">GetMessage</span><span class="p">(</span><span class="s">&#34;playerExprience&#34;</span><span class="p">);</span>
+
+    <span class="n">PlayerProperty</span> <span class="n">datas</span> <span class="p">=</span> <span class="n">message</span> <span class="k">as</span> <span class="n">PlayerData</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>教學到這裡告一段落，感謝閱讀 ~</p>
+<!-- 感謝趴趴鼠提供建議 -->
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+
+
+
+
+  </article>
+            
+
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        
+        <div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    
+    
+    
+    
+    
+    commentBox('5747947559976960-proj')
+</script>
+
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.9fbb63c9c02bdabd03212f9895f0120830c3f215088aa3d7c7db22a4527290a7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>
