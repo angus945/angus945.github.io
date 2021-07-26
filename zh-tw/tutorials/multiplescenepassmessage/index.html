@@ -72,7 +72,7 @@
 <meta itemprop="name" content="運用多場景機制進行資料傳遞">
 <meta itemprop="description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某"><meta itemprop="datePublished" content="2021-07-25T14:29:23&#43;08:00" />
 <meta itemprop="dateModified" content="2021-07-25T14:29:23&#43;08:00" />
-<meta itemprop="wordCount" content="3101">
+<meta itemprop="wordCount" content="3102">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="運用多場景機制進行資料傳遞"/>
 <meta name="twitter:description" content="DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某"/>
@@ -474,9 +474,11 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">UnityEngine.SceneManagement</span><span class="p">;</span>
+
 <span class="k">public</span> <span class="k">class</span> <span class="nc">CustomSceneManager</span> <span class="p">:</span> <span class="n">MonoBehaviour</span>
 <span class="p">{</span>
     <span class="k">static</span> <span class="n">CustomSceneManager</span> <span class="n">instance</span><span class="p">;</span>

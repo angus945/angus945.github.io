@@ -6,7 +6,16 @@
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Sun, 25 Jul 2021 14:29:23 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Jul 2021 15:49:12 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ObjectPool</title>
+      <link>https://angus945.github.io/zh-tw/notes/designpatterns/objectpool/</link>
+      <pubDate>Mon, 26 Jul 2021 15:48:40 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/notes/designpatterns/objectpool/</guid>
+      <description>避免單獨的分配和釋放記憶體空間，在固定的池中重用物件以提高效能和記憶體使用率 使用動機 我們在處理遊戲的視覺效果，當法師施放法術時畫面上將爆發炫</description>
+    </item>
+    
     <item>
       <title>運用多場景機制進行資料傳遞</title>
       <link>https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/</link>
