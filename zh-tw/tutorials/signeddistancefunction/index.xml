@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Signed Distance Function on AngusChan-website</title>
+    <title>距離場的數學原理以及圖形繪製方法 on AngusChan-website</title>
     <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>
-    <description>Recent content in Signed Distance Function on AngusChan-website</description>
+    <description>Recent content in 距離場的數學原理以及圖形繪製方法 on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 27 Apr 2021 21:53:27 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

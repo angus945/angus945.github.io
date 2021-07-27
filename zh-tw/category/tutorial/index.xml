@@ -6,7 +6,16 @@
     <description>Recent content in tutorial on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 28 Apr 2021 20:38:46 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>距離場的數學原理以及圖形繪製方法</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</guid>
+      <description>Signed Distance Function 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的</description>
+    </item>
+    
     <item>
       <title>Tutorials</title>
       <link>https://angus945.github.io/zh-tw/tutorials/</link>

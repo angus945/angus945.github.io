@@ -5,15 +5,15 @@
     <link>https://angus945.github.io/zh-tw/tags/shader/</link>
     <description>Recent content in shader on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 27 Apr 2021 21:53:27 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/shader/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/shader/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Signed Distance Function</title>
+      <title>距離場的數學原理以及圖形繪製方法</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>
-      <pubDate>Tue, 27 Apr 2021 21:53:27 +0800</pubDate>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</guid>
-      <description>距離場教學 - 數學原理以及運用方式 前言 為了能支撐住畫面渲染的效能消耗，GPU中多個核心可以平行運算數個像素的顏色 這也代表每個像素的運算是被孤立</description>
+      <description>Signed Distance Function 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的</description>
     </item>
     
   </channel>
