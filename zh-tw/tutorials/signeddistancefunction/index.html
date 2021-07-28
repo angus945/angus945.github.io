@@ -83,24 +83,6 @@
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 
-    
-
-
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LTVT6WYDT4');
-</script>
-
-
-
-
-
-
   </head>
   <body>
     <div id="mobile-navbar" class="mobile-navbar">
@@ -240,9 +222,8 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#signed-distance-function">Signed Distance Function</a>
+        <li><a href="#序章">序章</a>
           <ul>
-            <li><a href="#序章">序章</a></li>
             <li><a href="#基礎知識">基礎知識</a></li>
             <li><a href="#章節題目">章節題目</a></li>
             <li><a href="#錯誤備註">錯誤備註</a></li>
@@ -257,11 +238,10 @@
   </div>
 </div>
       <div id="post-content" class="post-content ">
-        <h2 id="signed-distance-function">Signed Distance Function</h2>
-<h3 id="序章">序章</h3>
+        <h2 id="序章">序章</h2>
 <p>為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是被孤立的，像素不能和其他像素溝通，只能夠知道自己所需的訊息，例如 : 位置。</p>
 <p>在這種限制之下，也使得一種特別的運算方式得以實現 - 距離場 Signed Distance Function</p>
-<p>這是一種能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，看似單純但距離場的組合特性以及空間操作性為它帶來無限的可能。運用在圖像渲染中可以不靠一張貼圖就 &ldquo;計算出&rdquo; 複雜的形狀，甚至是分形。也因此 SDF 算法是深受 programming artists 喜愛的數學工具，尤其在 shadertoy 上能看到各種令人驚豔的藝術創作。</p>
+<p>這是一種能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，看似單純但距離場的組合特性以及空間操作性為它帶來無限的可能。運用在圖像渲染中可以不靠一張貼圖就 &ldquo;計算出&rdquo; 複雜的形狀，甚至是分形。也因此 SDF 算法是深受 programming artists 喜愛的數學工具，尤其在 <a href="https://www.shadertoy.com/" target="_blank">shadertoy</a> 上能看到各種令人驚豔的藝術創作。</p>
 <p>這個教學會從頭解說距離場的數學原理，如何使用距離場繪製圖形和動畫，並最終帶各位製作出一個完整的 2D 距離場動畫。</p>
 
 
@@ -317,27 +297,48 @@
 <p>由於作者本人學藝不精，對著色器的知識不夠齊全，教學中有些部分自作聰明將判斷式改為 lerp step 等函數運算，但事實上這對效能的幫助不大，甚至還會造成負優化，所以在過程中看到這部分的修改時可以忽略沒關係 (如果我沒刪乾淨)</p>
 <p><a href="https://zhuanlan.zhihu.com/p/33260382" target="_blank">Shader中if和for的效率问题以及使用策略</a></p>
 <h3 id="教學頁面-更新中">教學頁面 (更新中)</h3>
-<p>基本設置</p>
-<p>初步理解</p>
-<p>距離計算</p>
-<p>距離上色</p>
-<p>距離判斷</p>
-<p>更多形狀</p>
-<p>位移旋轉</p>
-<p>形狀組合</p>
-<p>空間操作</p>
-<p>進階形狀</p>
-<p>組合範例</p>
-<p>動畫方法</p>
-<p>動畫範例</p>
-<p>動畫緩動</p>
-<p>動畫時間</p>
-<p>反鋸齒修</p>
-<p>進階繪圖</p>
-<p>進階上色</p>
-<p>分形繪製</p>
-<p>最終範例</p>
-<p>結語</p>
+
+
+
+
+<section id="archive" class="archive"> 
+
+  <div class="archive-title">
+    <span class="archive-post-counter">
+      共計 3 篇文章
+    </span>
+  </div><div class="archive-post">      
+
+      
+
+      <span class="archive-post-title">
+        <a href="/zh-tw/tutorials/signeddistancefunction/setup/" class="archive-post-link">
+          第零章 基本設置
+        </a>
+      </span>
+
+    </div><div class="archive-post">      
+
+      
+
+      <span class="archive-post-title">
+        <a href="/zh-tw/tutorials/signeddistancefunction/preliminary/" class="archive-post-link">
+          第一章 初步理解
+        </a>
+      </span>
+
+    </div><div class="archive-post">      
+
+      
+
+      <span class="archive-post-title">
+        <a href="/zh-tw/tutorials/signeddistancefunction/distance/" class="archive-post-link">
+          第二章 距離計算
+        </a>
+      </span>
+
+    </div></section>
+
 <h3 id="特別感謝">特別感謝</h3>
 <p>派大星教授加博士先生</p>
  

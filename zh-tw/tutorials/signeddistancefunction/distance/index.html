@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="bDGYZG1U4Y1MZoDILkYAImkYhKfKkTxSABaK0OzcFa4" />
+    <title>第二章 距離計算 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="第二章 距離計算" />
+<meta property="og:description" content="標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-04-28T14:52:15&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-28T14:52:15&#43;08:00" />
+
+<meta itemprop="name" content="第二章 距離計算">
+<meta itemprop="description" content="標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直"><meta itemprop="datePublished" content="2021-04-28T14:52:15&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-28T14:52:15&#43;08:00" />
+<meta itemprop="wordCount" content="645">
+<meta itemprop="keywords" content="SDF," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="第二章 距離計算"/>
+<meta name="twitter:description" content="標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>第二章 距離計算</h1>
+    </header>
+
+<div class="post-toc" id="post-toc" style="margin-top: 20px;">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#距離場的真實意義">距離場的真實意義</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <p>標準化空間，大小為 10</p>
+<h2 id="距離場的真實意義">距離場的真實意義</h2>
+<p>一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直接用實例解說它的意思吧。</p>
+<p>距離，向量的長度，如何計算向量的長度相信各位在國中就有學過了 : <code>a^2 + b^2 = c^2</code> ，其中 a 和 b 就是向量的 x y，而 c 就是我們需要的長度，首先讓我們畫出任意點距離中心的長度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">col</span> <span class="p">=</span> <span class="n">length</span><span class="p">(</span><span class="n">uv</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>出現了一個由深到淺的圓型，從空間的中心開始長度為 0，越往外的長度越長，直到超出 1 變成完整的白色，最基本的距提場函數完成了，它描述了&quot;任意點到空間中心的距離&quot;。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/distance/distance_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/distance/distance_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>雖然看起來是圓型，但這不是圓型的距離場 - 而是一個 &ldquo;點&rdquo; 的，因為它沒有半徑，那我們要如何算出和圓型表面的距離 ? 答案是用減的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">SDF_circle</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">,</span> <span class="kt">float</span> <span class="n">radius</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">length</span><span class="p">(</span><span class="n">uv</span><span class="p">)</span> <span class="p">-</span> <span class="n">radius</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">col</span> <span class="p">=</span> <span class="n">SDF_circle</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/distance/distance_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/distance/distance_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>為什麼有效呢，請聽我娓娓道來~</p>
+<p>以半徑 5 為例，原本在空間中距離為 5 的地方，它的距離值被減去 5 於是變成了 0，也就是圓型的表面，而在圓內部的距離會小於 0，圓外部則大於 0。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/distance/distance_3.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/distance/distance_3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>讓我們回到一開始，距離場是能夠描述 &ldquo;空間中任意位置對於虛擬形狀最接近表面的距離&rdquo; 的函數，當你們消化完上面的東時，就能夠理解這段描述的意思了。</p>
+<p>現在畫出來的圓型表面還有一段過度，這段過度是 0 到 1 之間的浮點數造成的，如果我們不想要這段過度只需要將距離值 &ldquo;無條件進位&rdquo;。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">col</span> <span class="p">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">SDF_circle</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">5</span><span class="p">));</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/distance/distance_4.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/distance/distance_4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>恭喜，你的第一個距離場函數完成了</p>
+
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/sdf/?tab=tutorial">SDF</a>
+        
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+  
+  
+  <nav class="pagination">
+    
+    
+    
+    <a class="prev" href="/zh-tw/tutorials/signeddistancefunction/preliminary/">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">第一章 初步理解</span>
+    </a>
+    
+    
+    
+  </nav>
+
+
+
+
+
+  </article>
+            
+
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        
+        <div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    
+    
+    
+    
+    
+    commentBox('5747947559976960-proj')
+</script>
+
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.9fbb63c9c02bdabd03212f9895f0120830c3f215088aa3d7c7db22a4527290a7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

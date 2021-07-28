@@ -13,7 +13,7 @@
       <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</guid>
-      <description>Signed Distance Function 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的</description>
+      <description>序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是</description>
     </item>
     
   </channel>
