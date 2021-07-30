@@ -6,7 +6,34 @@
     <description>Recent content in SDF on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/sdf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jul 2021 10:20:32 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tags/sdf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第三章 距離著色</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</guid>
+      <description>標準化空間，大小為 10 內外顏色 原本的黑白太單調了，我們可以為它們上不同顏色 ! 建立顏色屬性以及相對應的變數，為了方便區分形狀內外，所以我們用兩種</description>
+    </item>
+    
+    <item>
+      <title>第五章 更多形狀</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩</description>
+    </item>
+    
+    <item>
+      <title>第四章 距離辨識</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</guid>
+      <description>標準化空間，大小為 10、距離場上色 繪製距離環 我們為距離場的內外繪製上了不同的顏色用於辨識，但除了形狀自身之外，我們也想知道他位置的距離值，以</description>
+    </item>
+    
     <item>
       <title>距離場的數學原理以及圖形繪製方法</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>

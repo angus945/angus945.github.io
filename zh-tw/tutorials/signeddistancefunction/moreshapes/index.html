@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="bDGYZG1U4Y1MZoDILkYAImkYhKfKkTxSABaK0OzcFa4" />
+    <title>第五章 更多形狀 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="第五章 更多形狀" />
+<meta property="og:description" content="標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-07-28T10:20:32&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-28T10:20:32&#43;08:00" />
+
+<meta itemprop="name" content="第五章 更多形狀">
+<meta itemprop="description" content="標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩"><meta itemprop="datePublished" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="wordCount" content="1194">
+<meta itemprop="keywords" content="SDF," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="第五章 更多形狀"/>
+<meta name="twitter:description" content="標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>第五章 更多形狀</h1>
+    </header>
+
+<div class="post-toc" id="post-toc" style="margin-top: 20px;">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#矩形和線段">矩形和線段</a>
+          <ul>
+            <li><a href="#線段">線段</a></li>
+            <li><a href="#矩形">矩形</a></li>
+            <li><a href="#章節題目">章節題目</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <p>標準化空間，大小為 10、距離場上色、距離環</p>
+<h2 id="矩形和線段">矩形和線段</h2>
+<p>從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。</p>
+<h3 id="線段">線段</h3>
+<p>如果我們想畫出由兩個點連接而成的線段，情況就開始複雜了，要如何計算點到線段的距離 ?</p>
+<p>首先我們可以將一條線段拆解為三個部分，線頭、線段、線尾，並判斷點最靠近的是線條的哪個部分。只要透過點積 dot product 進行投影，就能取的需要的數值。</p>
+<p>透過兩點相減，取的線段指向的向量後，將要計算的位置投影至線段上。如此一來，我們就能透過投影結果，判斷出位置最接近的是線段的哪一部分。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/projection_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/projection_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>首先我們取得線段朝向的方向以及它的長度，用來後續計算。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">SDF_line</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">,</span> <span class="n">float2</span> <span class="n">pointA</span><span class="p">,</span> <span class="n">float2</span> <span class="n">pointB</span><span class="p">,</span> <span class="kt">float</span> <span class="n">thickness</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">float2</span> <span class="n">lineDirection</span> <span class="p">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">pointB</span> <span class="p">-</span> <span class="n">pointA</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">lineLength</span> <span class="p">=</span> <span class="n">length</span><span class="p">(</span><span class="n">pointB</span> <span class="p">-</span> <span class="n">pointA</span><span class="p">);</span>           
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再來將輸入的點投影至方向的向量上就能夠取得長度參考。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">projectionToLine</span> <span class="p">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">uv</span> <span class="p">-</span> <span class="n">pointA</span><span class="p">,</span> <span class="n">lineDirection</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最後我們使用判斷式檢查長度，如果小於 0 就代表點離起點最近，反之大於線段長度就代表離線尾最近。距離線兩端的距離就和圓形計算一樣，記得要減去厚度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">if</span><span class="p">(</span><span class="n">projectionToLine</span> <span class="p">&lt;</span> <span class="m">0</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">length</span><span class="p">(</span><span class="n">uv</span> <span class="p">-</span> <span class="n">pointA</span><span class="p">)</span> <span class="p">-</span> <span class="n">thickness</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">projectionToLine</span> <span class="p">&gt;</span> <span class="n">lineLength</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">length</span><span class="p">(</span><span class="n">uv</span> <span class="p">-</span> <span class="n">pointB</span><span class="p">)</span> <span class="p">-</span> <span class="n">thickness</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">return</span> <span class="m">0</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/line_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/line_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>線的兩端有了，接者我們需要將它連接起來，所以得計算黑色範圍的距離。點到線中段的距離計算也很簡單，同樣只需要使用投影的方法，但這次是投影到線段的法向量上。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/projection_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/projection_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>使用外積 corss 函數取得線段朝向的法向量，並將點投影至法向量上的結果就是我們要的距離。不過這裡要注意的是，線段另一邊的投影結果會是負的，但我們不需要負的距離所以得進行絕對值。最後減去線段厚度就大功告成了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">else</span> 
+<span class="p">{</span>
+    <span class="n">float2</span> <span class="n">lineNormal</span> <span class="p">=</span> <span class="n">cross</span><span class="p">(</span><span class="n">float3</span><span class="p">(</span><span class="n">lineDirection</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">float3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">abs</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">uv</span> <span class="p">-</span> <span class="n">pointA</span><span class="p">,</span> <span class="n">lineNormal</span><span class="p">))</span> <span class="p">-</span> <span class="n">thickness</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/line_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/line_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>線段還要注意的是，線頭線尾如果在同一點上的話，會導致無法預料的錯誤 (除以 0)，我這裡沒有添加防呆計算，所以使用時要注意。</p>
+<h3 id="矩形">矩形</h3>
+<p>矩形的距離場，如果你們有做出初步理解的題目的話，那作法大概是 uv.x &gt; -size.x * 0.5 &amp;&amp;&hellip;，進行四次判斷檢查位置是不是在矩形內部。</p>
+<p>而教學這裡即將讓你們接觸的就是距離場的第一個特性 - 空間操作性，一個落在空間中心的矩形，他會被四等分並平均分佈在四個象限中，意思是矩形完全對稱於座標軸。</p>
+<p>距離場中我們不在乎點的真實位置，只在乎它相對於形狀最接近表面的距離，這代表我們不必真的在四個象限中進行計算，什麼意思呢 ? 請看下面的示意圖</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/abs.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/abs.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>我們可以使用絕對值將落在其他三個象限的位置全部映射到第一象限，這樣一來我們只需要在第一象限計算距離就好。</p>
+<p>使用 abs 函數將輸入絕對值，並減去矩形大小，但兩個邊各自的的長度不同，所以最後要再使用 max 函數取得最近邊的距離。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">SDF_Rect</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">,</span> <span class="n">float2</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">float2</span> <span class="n">dist</span> <span class="p">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">uv</span><span class="p">)</span> <span class="p">-</span> <span class="n">size</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">dist</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">dist</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>                
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/rect_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/rect_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>於是矩形的距離場也大功告成 ?</p>
+<p>不對，聰明的你們應該能看出問題，雖然矩形本身沒問題，但距離環告訴我們斜角的距離計算有誤。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/rect_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/rect_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<h3 id="章節題目">章節題目</h3>
+<p>請試寫出正確的矩形距離場，提示 : 和線段一樣分成三等份。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/moreshapes/rect_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/moreshapes/rect_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+     
+        
+            <a class="pageTags" href= "/zh-tw/tags/sdf/?tab=">SDF</a>
+        
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+  
+  
+  <nav class="pagination">
+    
+    
+    
+    <a class="prev" href="/zh-tw/tutorials/signeddistancefunction/distanceline/">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">第四章 距離辨識</span>
+    </a>
+    
+    
+    
+      <a class="next" href="/zh-tw/tutorials/signeddistancefunction/transformation/">
+        <span class="next-text"> 第六章 位移旋轉 </span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+
+
+
+  </article>
+            
+
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        
+        <div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    
+    
+    
+    
+    
+    commentBox('5747947559976960-proj')
+</script>
+
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.9fbb63c9c02bdabd03212f9895f0120830c3f215088aa3d7c7db22a4527290a7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

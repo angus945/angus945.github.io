@@ -8,6 +8,60 @@
     <language>zh-tw</language>
     <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>第七章 形狀組合</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環 距離場組合 目前為止我們都只用到一個距離場，為了讓事情更有趣我們可以多加一個距離場? 不，我們能做到的</description>
+    </item>
+    
+    <item>
+      <title>第三章 距離著色</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</guid>
+      <description>標準化空間，大小為 10 內外顏色 原本的黑白太單調了，我們可以為它們上不同顏色 ! 建立顏色屬性以及相對應的變數，為了方便區分形狀內外，所以我們用兩種</description>
+    </item>
+    
+    <item>
+      <title>第五章 更多形狀</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩</description>
+    </item>
+    
+    <item>
+      <title>第八章 空間操作</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/spacemanipulation/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/spacemanipulation/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環、游標距離場。 更進階的空間操作 除了基本的平移、旋轉和縮放外，距離場空間操作性也讓他只需要增加些微的</description>
+    </item>
+    
+    <item>
+      <title>第六章 位移旋轉</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</guid>
+      <description>標準化空間，大小為 3 位移、旋轉和縮放 我們將正式接觸距離場的的一個特性 - 空間操作性，在一般的空間轉換當中，我們會使用齊次座標矩陣進行轉換，但在</description>
+    </item>
+    
+    <item>
+      <title>第四章 距離辨識</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</guid>
+      <description>標準化空間，大小為 10、距離場上色 繪製距離環 我們為距離場的內外繪製上了不同的顏色用於辨識，但除了形狀自身之外，我們也想知道他位置的距離值，以</description>
+    </item>
+    
+    <item>
       <title>第二章 距離計算</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</link>
       <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
