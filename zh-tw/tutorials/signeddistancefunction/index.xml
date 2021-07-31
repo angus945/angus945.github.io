@@ -8,6 +8,15 @@
     <language>zh-tw</language>
     <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>十一章 動畫方法</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</guid>
+      <description>標準化空間，大小為 10、距離場上色 添加動畫的方法 目前為止，我們使用距離場繪製的圖形都是靜態的，所以下一步就是要讓距離場動起來。 教學這裡將播放</description>
+    </item>
+    
+    <item>
       <title>第七章 形狀組合</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
