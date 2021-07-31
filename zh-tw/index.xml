@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>第九章 進階形狀</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthershapes/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthershapes/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環 更多進階形狀 目前為止，扣掉使用組合情況我們也只有三種形狀距離場，但有了進階的空間操作後，我們就能畫</description>
+    </item>
+    
+    <item>
       <title>第五章 更多形狀</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
@@ -50,6 +59,15 @@
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</guid>
       <description>標準化空間，大小為 3 位移、旋轉和縮放 我們將正式接觸距離場的的一個特性 - 空間操作性，在一般的空間轉換當中，我們會使用齊次座標矩陣進行轉換，但在</description>
+    </item>
+    
+    <item>
+      <title>第十章 組合範例</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combinationexample/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combinationexample/</guid>
+      <description>標準化空間，大小為 10、距離場上色、距離環 進階形狀範例 教學到目前已經教了各種形狀、空間操作以及組合方法，這章就提供一些進階型狀的範例。 扇形環</description>
     </item>
     
     <item>

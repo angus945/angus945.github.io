@@ -37,6 +37,13 @@
   </url>
   
   <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthershapes/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</loc>
     <lastmod>2021-07-28T10:20:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -52,6 +59,13 @@
   
   <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combinationexample/</loc>
     <lastmod>2021-07-28T10:20:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
