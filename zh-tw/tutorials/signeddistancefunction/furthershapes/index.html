@@ -913,11 +913,11 @@
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
 </span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+</span><span class="hl"><span class="lnt"> 6
+</span></span><span class="hl"><span class="lnt"> 7
+</span></span><span class="hl"><span class="lnt"> 8
+</span></span><span class="hl"><span class="lnt"> 9
+</span></span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">SDF_Regular</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">,</span> <span class="kt">float</span> <span class="n">radius</span><span class="p">,</span> <span class="kt">float</span> <span class="n">edgeAmount</span><span class="p">)</span>
@@ -925,11 +925,11 @@
     <span class="n">float2</span> <span class="n">edgeNormal</span><span class="p">;</span>
     <span class="n">uv</span> <span class="p">=</span> <span class="n">radial</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">edgeAmount</span><span class="p">,</span> <span class="n">edgeNormal</span><span class="p">);</span>
 
-    <span class="p">**</span><span class="kt">float</span> <span class="n">projRadius</span> <span class="p">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">edgeNormal</span> <span class="p">*</span> <span class="n">radius</span><span class="p">);</span>
-    <span class="kt">float</span> <span class="n">edgeDistance</span> <span class="p">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">edgeNormal</span><span class="p">)</span> <span class="p">-</span> <span class="n">projRadius</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="n">edgeDistance</span><span class="p">;**</span>
-<span class="p">}</span>
+<span class="hl">    <span class="kt">float</span> <span class="n">projRadius</span> <span class="p">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">edgeNormal</span> <span class="p">*</span> <span class="n">radius</span><span class="p">);</span>
+</span><span class="hl">    <span class="kt">float</span> <span class="n">edgeDistance</span> <span class="p">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">edgeNormal</span><span class="p">)</span> <span class="p">-</span> <span class="n">projRadius</span><span class="p">;</span>
+</span><span class="hl">
+</span><span class="hl">    <span class="k">return</span> <span class="n">edgeDistance</span><span class="p">;</span>
+</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div>

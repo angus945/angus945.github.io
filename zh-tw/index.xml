@@ -17,6 +17,33 @@
     </item>
     
     <item>
+      <title>十三章 動畫緩動</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedeasing/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedeasing/</guid>
+      <description>標準化空間，大小為 10、距離場上色 緩動動畫 目前為止我們已經能夠播放距離場動畫了，但播放起來種覺得還少什麼 ? 阿，物理慣性 ! 由於整個播放的速度都</description>
+    </item>
+    
+    <item>
+      <title>十二章 動畫範例</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</guid>
+      <description>標準化空間，大小為 10、距離場上色 動畫範例 上一章教學教了兩種播放動畫的方法，在這章中我們將實際製作幾項不同的動態效果。 旋轉動畫 圓環是個很好舉</description>
+    </item>
+    
+    <item>
+      <title>十四章 動畫時間</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedtimeline/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedtimeline/</guid>
+      <description>標準化空間，大小為 10、距離場上色 動畫時間軸 上一章學到了讓動畫更流暢的方法，我們還差最後一步 - 讓動畫的播出更戲劇化 ! 目前為止，所有動畫都在同</description>
+    </item>
+    
+    <item>
       <title>第七章 形狀組合</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
