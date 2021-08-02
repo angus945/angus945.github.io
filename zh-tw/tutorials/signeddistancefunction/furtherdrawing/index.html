@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="bDGYZG1U4Y1MZoDILkYAImkYhKfKkTxSABaK0OzcFa4" />
+    <title>十六章 進階繪圖 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="十六章 進階繪圖" />
+<meta property="og:description" content="標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-07-28T10:20:32&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-28T10:20:32&#43;08:00" />
+
+<meta itemprop="name" content="十六章 進階繪圖">
+<meta itemprop="description" content="標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做"><meta itemprop="datePublished" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="wordCount" content="1132">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="十六章 進階繪圖"/>
+<meta name="twitter:description" content="標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>十六章 進階繪圖</h1>
+    </header>
+
+<div class="post-toc" id="post-toc" style="margin-top: 20px;">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#進階繪圖">進階繪圖</a>
+          <ul>
+            <li><a href="#光暈">光暈</a></li>
+            <li><a href="#膨脹">膨脹</a></li>
+            <li><a href="#輪廓線">輪廓線</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <p>標準化空間，大小為 10</p>
+<h2 id="進階繪圖">進階繪圖</h2>
+<p>更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。</p>
+<h3 id="光暈">光暈</h3>
+<p>畫出了精美的圖形和富有層次感的動畫之後，我們還能做什麼讓距離場看起來更酷 ? 還用說，當然是添加一個發光效果啊 !</p>
+<p>而且距離場的繪製特性讓我們能很方便的給圖形添加光暈效果，不需要複雜的額外計算，為了解說其原理讓我們先回到一開始的矩形，但這次不將距離值無條件進位。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">distance</span> <span class="p">=</span> <span class="n">SDF_Rect</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">));</span>
+<span class="k">return</span> <span class="m">1</span> <span class="p">-</span> <span class="n">distance</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到在圖形的外圍有一個短暫的過度，那是距離在 0 ~ 1 時所產生的。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/halo_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/halo_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>我們可以利用這段過度的漸層，只要將他的強度弱化看起來就會像微微散發的光暈。</p>
+<p>首先我們將要做為光暈的部分獨立出來，可以使用剃除的算法來達到，將完整的距離值剃除掉進行進位後距離值，就可以取的邊緣過度的部分了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">halo</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">));</span> 
+<span class="k">return</span> <span class="m">1</span> <span class="p">-</span> <span class="n">halo</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/halo_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/halo_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>接下來我們要將這段光暈的強度減弱，為了做出非線性的弱化需要使用 pow 函數。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">halo</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">));</span> 
+<span class="p">**</span><span class="n">halo</span> <span class="p">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">halo</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);**</span>
+<span class="k">return</span> <span class="m">1</span> <span class="p">-</span> <span class="n">halo</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/halo_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/halo_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>最後只需要將他添加回原本的距離場上，進行上色就完成了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">halo</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">));</span> 
+<span class="n">halo</span> <span class="p">=</span> <span class="n">pow</span><span class="p">(</span><span class="n">halo</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);</span>
+
+<span class="p">**</span><span class="n">distance</span> <span class="p">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">);**</span>
+<span class="p">**</span><span class="n">distance</span> <span class="p">=</span> <span class="n">min</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">halo</span><span class="p">);**</span>
+<span class="p">**</span><span class="n">fixed4</span> <span class="n">color</span> <span class="p">=</span> <span class="n">colorDistance</span><span class="p">(</span><span class="n">distance</span><span class="p">);**</span>
+<span class="p">**</span><span class="k">return</span> <span class="n">color</span><span class="p">;**</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/halo_3.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/halo_3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<h3 id="膨脹">膨脹</h3>
+<p>目前為止的多邊形距離場都是菱角分明的，如果想要讓形狀的頂點別那麼尖銳怎麼辦 ? 同樣，距離場特性能夠簡單的幫助我們做到。</p>
+<p>再次回到一開始的形狀，我們能夠明顯的看到在原本形狀之外，因為距離計算的原因過度部分的頂點是個圓角。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/swell_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/swell_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>只是過渡的部分會被後續無條件進位給剃除掉，所以我們在最終圖形中看不到，如果要將這部分也加入圖案的話，我們可以讓形狀膨脹。</p>
+<p>只要在單個形狀計算完成後，再次減去膨脹值就可以做到了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">distance</span> <span class="p">=</span> <span class="n">SDF_Rect</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span> <span class="p">-</span> <span class="m">1</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/swell_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/swell_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>可以看到中間的主形狀因此獲得圓角了，只要再進行進位剃除後就大功告成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">distance</span> <span class="p">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/swell_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/swell_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<h3 id="輪廓線">輪廓線</h3>
+<p>最後的進階繪圖，為圖形添加輪廓線條，這部份將透過閥值函數來達成，首先添加外輪廓顏色和厚度的屬性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">_OutLineColor</span><span class="p">(</span><span class="s">&#34;OutLineColor&#34;</span><span class="p">,</span> <span class="n">Color</span><span class="p">)</span> <span class="p">=</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">)</span>
+<span class="n">_OutLineThickness</span><span class="p">(</span><span class="s">&#34;OutThickness&#34;</span><span class="p">,</span> <span class="n">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0.5</span><span class="p">))</span> <span class="p">=</span> <span class="m">0.2</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">_OutLineColor</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">_OutLineThickness</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>回到一開始的地方，但是這次使用 step 將過度變為硬邊。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">distance</span> <span class="p">=</span> <span class="n">SDF_Rect</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">));</span>
+
+<span class="kt">float</span> <span class="n">outline</span> <span class="p">=</span> <span class="n">max</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">));</span> 
+<span class="n">outline</span> <span class="p">=</span> <span class="n">step</span><span class="p">(</span><span class="n">_OutLineThickness</span><span class="p">,</span> <span class="n">outline</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="m">1</span> <span class="p">-</span> <span class="n">outline</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/outline_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/outline_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>最後我們將外輪廓上色後，添加回原本的形狀就有不同顏色的輪廓線了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">color</span> <span class="p">=</span> <span class="n">colorDistance</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">distance</span><span class="p">));</span>
+<span class="n">color</span> <span class="p">=</span> <span class="n">lerp</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">_OutLineColor</span><span class="p">,</span> <span class="m">1</span> <span class="p">-</span> <span class="n">outline</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">color</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/furtherdrawing/outline_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/furtherdrawing/outline_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>以上就是透過形狀邊緣的過度進行操作的教學，不過使用這種作法時有幾個點要注意。</p>
+<ul>
+<li>
+<p>我們是透過距離場邊緣的漸變來做出操作，所以效果的大小不受圖形本身的大小引響，而是固定的距離。因此一個大小為零的 &ldquo;點&rdquo; 也會產生效果。如果距離場有動畫的話，會需要搭配動畫開關或減弱這些修改，比免出現多餘的色點。</p>
+</li>
+<li>
+<p>反鋸齒的算法因為回傳距離值經過修改，所以會導致操作無效，所以進行這類操作以前要先將數值隔離。</p>
+</li>
+</ul>
+
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+  
+  
+  <nav class="pagination">
+    
+    
+    
+    <a class="prev" href="/zh-tw/tutorials/signeddistancefunction/antialiasing/">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">十五章 修正鋸齒</span>
+    </a>
+    
+    
+    
+      <a class="next" href="/zh-tw/tutorials/signeddistancefunction/furthercoloring/">
+        <span class="next-text"> 十七章 進階上色 </span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+
+
+
+  </article>
+            
+
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        
+        <div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    
+    
+    
+    
+    
+    commentBox('5747947559976960-proj')
+</script>
+
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.9fbb63c9c02bdabd03212f9895f0120830c3f215088aa3d7c7db22a4527290a7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

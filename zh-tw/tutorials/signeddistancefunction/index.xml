@@ -17,6 +17,15 @@
     </item>
     
     <item>
+      <title>十七章 進階上色</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthercoloring/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthercoloring/</guid>
+      <description>標準化空間，大小為 10 進階上色 目前為止的距離場圖形只有用到兩種顏色，距離場內和距離場外，不過我們還可以使用更多種顏色來繪製距離場圖形。 組合上色</description>
+    </item>
+    
+    <item>
       <title>十三章 動畫緩動</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedeasing/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
@@ -32,6 +41,24 @@
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</guid>
       <description>標準化空間，大小為 10、距離場上色 動畫範例 上一章教學教了兩種播放動畫的方法，在這章中我們將實際製作幾項不同的動態效果。 旋轉動畫 圓環是個很好舉</description>
+    </item>
+    
+    <item>
+      <title>十五章 修正鋸齒</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</guid>
+      <description>標準化空間，大小為 10、距離場上色 反鋸齒修正 在繪製圖形的過程中，相信各位都有注意到圖形的邊緣會是塊狀的，在視覺上相當不美觀，所以要想辦法將它</description>
+    </item>
+    
+    <item>
+      <title>十六章 進階繪圖</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/</guid>
+      <description>標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做</description>
     </item>
     
     <item>
