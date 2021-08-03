@@ -8,6 +8,15 @@
     <language>zh-tw</language>
     <lastBuildDate>Wed, 28 Jul 2021 10:20:32 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>二十章 結語</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/epilogue/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/epilogue/</guid>
+      <description>揮灑創意 恭喜各位，了解距離場背後的數學原理的你們，現在能夠畫出各種精美的圖形和設計細緻的動畫了，請在程式的畫布裡盡情揮灑吧 ! .image-center { margin: auto; text-align: center; padding-bottom: 5px;</description>
+    </item>
+    
+    <item>
       <title>十一章 動畫方法</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
@@ -35,6 +44,15 @@
     </item>
     
     <item>
+      <title>十九章 最終範例</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/finialexample/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/finialexample/</guid>
+      <description>標準化空間，大小為 50 最終範例 最後的最後就讓教學帶著各位從頭實作一次更複雜的距離場動畫吧，我們將一次用到各種教學中使用的計算方法，從組合到空間</description>
+    </item>
+    
+    <item>
       <title>十二章 動畫範例</title>
       <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</link>
       <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
@@ -50,6 +68,15 @@
       
       <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</guid>
       <description>標準化空間，大小為 10、距離場上色 反鋸齒修正 在繪製圖形的過程中，相信各位都有注意到圖形的邊緣會是塊狀的，在視覺上相當不美觀，所以要想辦法將它</description>
+    </item>
+    
+    <item>
+      <title>十八章 分形繪製</title>
+      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/</link>
+      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/</guid>
+      <description>標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾</description>
     </item>
     
     <item>

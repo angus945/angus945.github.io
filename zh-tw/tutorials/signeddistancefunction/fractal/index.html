@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-site-verification" content="bDGYZG1U4Y1MZoDILkYAImkYhKfKkTxSABaK0OzcFa4" />
+    <title>十八章 分形繪製 - AngusChan-website</title>
+    
+      
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/hideScrollingBar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/global.css" />
+    <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="angus chan" /><meta name="description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.82.0 with theme even" />
+
+
+<link rel="canonical" href="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="十八章 分形繪製" />
+<meta property="og:description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/" /><meta property="article:section" content="tutorials" />
+<meta property="article:published_time" content="2021-07-28T10:20:32&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-28T10:20:32&#43;08:00" />
+
+<meta itemprop="name" content="十八章 分形繪製">
+<meta itemprop="description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾"><meta itemprop="datePublished" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-28T10:20:32&#43;08:00" />
+<meta itemprop="wordCount" content="1757">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="十八章 分形繪製"/>
+<meta name="twitter:description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/zh-tw/" class="logo">AngusChan-website</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/zh-tw/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/zh-tw/tutorials/">
+        <li class="mobile-menu-item">Tutorial</li>
+      </a><a href="/zh-tw/notes/">
+        <li class="mobile-menu-item">Note</li>
+      </a><a href="/zh-tw/blog/">
+        <li class="mobile-menu-item">Blog</li>
+      </a><a href="/zh-tw/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header">
+          <div class="logo-wrapper" style="user-select: none;">
+  <a href="/zh-tw/" class="logo">AngusChan-website</a>
+</div>
+
+<nav class="site-navbar" style="user-select: none;">
+  <ul id="menu" class="menu">
+    
+    <li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/">Home</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/tutorials/">Tutorial</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/notes/">Note</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/blog/">Blog</a>
+    </li><li class="menu-item">
+      <a class="menu-item-link" href="/zh-tw/about/">About</a>
+    </li>
+  </ul>
+</nav>
+
+
+        </header>
+          
+
+<style>
+  .languageBar
+  {
+    float: right;
+    margin-right: 60px;
+    user-select: none;
+  }
+  .languageActive
+  {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+  }
+  #languageSelect
+  {
+    display: none;
+    color: gray;
+    text-align: right;
+  }
+</style>
+
+
+  <div class="languageBar">
+    
+    <a class="languageActive" onclick="languageHandler(event, 'handler')"> zh-tw </a> 
+
+      
+        
+        
+        
+      
+        
+        
+        
+          
+            <a id="languageSelect" onclick="switchLanguage(&#34;en&#34;)" href="https://angus945.github.io/en/">en</a>
+          
+        
+        
+
+  </div>
+
+
+<script type="text/javascript">
+  function languageHandler(event, id)
+  {
+    var languageSelect = document.getElementById("languageSelect");
+    var display = languageSelect.style.display;
+    languageSelect.style.display = (display == "block") ? "none" : "block";  
+  }
+  function switchLanguage(language)
+  {
+    localStorage.setItem("language", language);
+  }
+
+</script>
+
+
+
+        
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            <article class="post">
+    
+    <header class="post-header">
+      <h1>十八章 分形繪製</h1>
+    </header>
+
+<div class="post-toc" id="post-toc" style="margin-top: 20px;">
+  <h2 class="post-toc-title">文章目錄</h2>
+  
+  <div class="post-toc-content always-active">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#分形">分形</a>
+          <ul>
+            <li><a href="#謝爾賓斯基三角形">謝爾賓斯基三角形</a></li>
+            <li><a href="#三角形">三角形</a></li>
+            <li><a href="#放大再放大">放大再放大</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div><div class="post-content">
+      <p>標準化空間，大小為 10</p>
+<h2 id="分形">分形</h2>
+<p>距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾賓斯基三角形 Sierpinski triangle 為例進行解說。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/preview.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/preview.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<h3 id="謝爾賓斯基三角形">謝爾賓斯基三角形</h3>
+<p>首先解說一下他的結構，首先從一個三角形開始，並在正中間挖空四分之一大小的反三角形，讓將原本的結構分成三等份的小三角形。並接著對小三角形再次執行相同動作，當進行無限次迭代後就能夠獲得謝爾賓斯基三角形。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/introduction_0.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/introduction_0.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>雖然說是挖空，但我們其實可以反向用 &ldquo;組合&rdquo; 的方式來理解謝爾賓斯基三角形。我們先使用三個小三角形組成一層的解謝爾賓斯基三角形，在用這層組出第二層、接著第三層最終迭代無限次。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/introduction_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/introduction_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>從組合的方式理解做起來就簡單多了，我們只要不斷繪製三角形距離場就能夠組合出解謝爾賓斯基三角形。</p>
+<p>雖然繪製一大堆三角形來組合能達到效果，但是在距離場的世界中我們有更方便的手段可以使用 - 鏡射，使用鏡射將三角形複製三份組成第一層，並再次對整體鏡射出第二層、第三層。</p>
+<p>進行數次迭代後最終只需要繪製一次三角形距離場就能夠形成謝爾賓斯基三角形 !</p>
+<h3 id="三角形">三角形</h3>
+<p>首先回到基本的三角形開始，我們可以使用先前的正多邊形距離場達到目的，繪製一個邊數為三的正三角形，把半徑定在最上方以便使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">fixed4</span> <span class="n">sierpinskiTriangle</span><span class="p">(</span><span class="n">float2</span> <span class="n">uv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">radius</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">SDF_Regular</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="kt">float</span> <span class="n">distance</span> <span class="p">=</span> <span class="n">sierpinskiTriangle</span><span class="p">(</span><span class="n">uv</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="n">AntiAliasingColor</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/triangle_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/triangle_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>接著我們要進行鏡射來將三角形複製成三分，至於要沿著哪條軸鏡射呢 ?</p>
+<p>假設初始圖形在左上方的話，首先可以沿著水平軸鏡射出下方的三角形，接著是沿著一個 60 度角的軸線鏡射出正右方的三角形，這裡提供一張示意圖幫助你們理解。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/triangle_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/triangle_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>將鏡像操作添加至 uv 上，不同角度的鏡射軸我們可以透過旋轉函數達到，但要注意鏡射法線的方向，所以實際上是要旋轉 -60 度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt">1
+</span></span><span class="hl"><span class="lnt">2
+</span></span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+</span><span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">rotate</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="p">-</span><span class="m">60</span><span class="p">));</span>
+</span>
+<span class="k">return</span> <span class="n">SDF_Regular</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/triangle_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/triangle_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>嗯，怎麼還是一樣 ? 這是因為鏡射平面的中心和形狀同樣在空間中心，導致鏡射後看起來也一一樣。為了能夠正確鏡射出另外兩個三角形，我們必須添加偏移讓兩個頂點切在投影軸上。</p>
+
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/triangle_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/triangle_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>首先是 y 軸的偏移，很好理解就是形狀邊長的一半，我們可以直接透過繪製圖形時的半徑用特殊三角形邊長比 1 : sqrt(3) : 2 求出。</p>
+<p>至於 x 軸偏移就是形狀的內切圓半徑，我們可以直接將原本的半徑除以二取得。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt">1
+</span></span><span class="hl"><span class="lnt">2
+</span></span><span class="hl"><span class="lnt">3
+</span></span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="hl"><span class="lnt">7
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="hl"><span class="kt">float</span> <span class="n">y</span> <span class="p">=</span> <span class="n">radius</span> <span class="p">/</span> <span class="m">2</span> <span class="p">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="m">3</span><span class="p">);</span>
+</span><span class="hl"><span class="kt">float</span> <span class="n">x</span> <span class="p">=</span> <span class="p">-</span><span class="n">radius</span> <span class="p">/</span> <span class="m">2</span><span class="p">;</span>
+</span><span class="hl"><span class="n">float2</span> <span class="n">offset</span> <span class="p">=</span> <span class="n">float2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span>
+<span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+<span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">rotate</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="p">-</span><span class="m">60</span><span class="p">));</span>
+<span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/fractal_0.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/fractal_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>成功，我們現在透過鏡射複製出了另外兩個三角形，有了第一層的爾賓斯基三角形後，我們只需要再使用相同的做法複製數次就能夠繪製出分形結構了，透過迴圈執行多次鏡射。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="m">5</span><span class="p">;</span> <span class="n">i</span> <span class="p">++)</span>
+<span class="p">{</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">rotate</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="p">-</span><span class="m">60</span><span class="p">));</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/fractal_1.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/fractal_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>嗯&hellip;又是哪裡有問題 ? 造成這種狀況的原因是，每當我們進行一層的鏡射後三角形的大小也大了一號，所以再次鏡射時的鏡射軸沒有正確切在頂點上。</p>
+<p>要修復這點只需要在鏡射前先將三角形縮小就好，如此一來組合出的三角形就會和先前的一樣大。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">_Anim</span> <span class="p">*</span> <span class="m">5</span><span class="p">;</span> <span class="n">i</span> <span class="p">++)</span>
+<span class="p">{</span>
+<span class="hl">    <span class="n">uv</span> <span class="p">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0.5</span><span class="p">);</span>
+</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">));</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">mirror</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">rotate</span><span class="p">(</span><span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="p">-</span><span class="m">60</span><span class="p">));</span>
+    <span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/fractal_2.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/fractal_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>大功告成 ! 我們可以將它旋轉 90 度並把半徑和迭代數量調大，好好觀賞這美麗的圖案。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">uv</span> <span class="p">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">90</span><span class="p">);</span>
+
+<span class="c1">//for(){ }
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/fractal_3.jpg" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/fractal_3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<h3 id="放大再放大">放大再放大</h3>
+<p>我們是透過數次的迭代組合來繪製出分形的，所以當畫面不段放大時最終還是會出現破綻，那麼要如何做出看似無限放大的效果呢 ?</p>
+<p>最簡單的方法就是不斷重複，透過不斷重複播放特定範圍內的放大畫面視覺上就像是不斷地放大，只要透過對時間取餘就能達成不斷重複的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="hl"><span class="lnt">1
+</span></span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="hl"><span class="kt">float</span> <span class="n">time</span> <span class="p">=</span> <span class="n">_Time</span><span class="p">.</span><span class="n">y</span> <span class="p">*</span> <span class="m">3</span><span class="p">;</span>
+</span>
+<span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">lerp</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">frac</span><span class="p">(</span><span class="n">time</span><span class="p">)));</span>
+</span>
+<span class="n">uv</span> <span class="p">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="m">90</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/anim_0.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/anim_0.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>重複放大的效果有了，但由於是從正中心開始放大的所以讓圖形看起來像不斷抽搐，我們可以將圖形向下移一點讓頂點在正中心上，可以避免畫面的抽動</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="hl"><span class="lnt">2
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">uv</span> <span class="p">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">lerp</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">frac</span><span class="p">(</span><span class="n">time</span><span class="p">)));</span>
+<span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="n">radius</span><span class="p">));</span>
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/anim_1.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/anim_1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>縮放正常了，但是因為頂點在正中心所以導致圖形只顯示了一半，我們讓縮放中心往上移一些就能顯示出更大的圖形了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="hl"><span class="lnt">3
+</span></span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">radius</span> <span class="p">*</span> <span class="m">0.5</span><span class="p">));</span>
+<span class="n">uv</span> <span class="p">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">lerp</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">frac</span><span class="p">(</span><span class="n">time</span><span class="p">)));</span>
+<span class="hl"><span class="n">uv</span> <span class="p">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">uv</span><span class="p">,</span> <span class="n">float2</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">-</span><span class="n">radius</span><span class="p">));</span>
+</span></code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/anim_2.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/anim_2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>完成了無限循環的放大動畫，最後可以將距離場空間縮小一點讓分形佔據更大位置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-csharp" data-lang="csharp"><span class="n">float2</span> <span class="n">uv</span> <span class="p">=</span> <span class="n">spaceNormalize</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">uv</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    .image-center
+    {
+        margin: auto;
+        text-align: center;
+        padding-bottom: 5px;
+    }
+</style>
+
+
+
+<div class="image-center" style="width: 50%;" >
+    <img src="/tutorials/signeddistancefunction/fractal/anim_3.gif" alt="image display error, please report [/tutorials/signeddistancefunction/fractal/anim_3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+    
+
+
+
+
+
+
+<p>大功告成 ! 恭喜各位完成了謝爾賓斯基三角形 ~</p>
+
+    </div>
+    
+    <footer class="post-footer">
+      <head>
+    <link rel="stylesheet" type="text/css" href="/css/tag.css">
+</head>
+
+
+
+<div class="post-tags">
+    
+</div>
+
+    </footer>
+    
+    
+<hr>
+
+
+
+
+  
+  
+  <nav class="pagination">
+    
+    
+    
+    <a class="prev" href="/zh-tw/tutorials/signeddistancefunction/furthercoloring/">
+      <i class="iconfont icon-left"></i>
+      <span class="prev-text">十七章 進階上色</span>
+    </a>
+    
+    
+    
+      <a class="next" href="/zh-tw/tutorials/signeddistancefunction/finialexample/">
+        <span class="next-text"> 十九章 最終範例 </span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+
+
+
+  </article>
+            
+
+          </div>
+          <div class="comments">
+            
+  
+    <div class="comments">
+        
+        <div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    
+    
+    
+    
+    
+    commentBox('5747947559976960-proj')
+</script>
+
+    </div>
+          </div>
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+        <div class="social-links">
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 強力驅動
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主題 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>angus chan</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.9fbb63c9c02bdabd03212f9895f0120830c3f215088aa3d7c7db22a4527290a7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'G-LTVT6WYDT4', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

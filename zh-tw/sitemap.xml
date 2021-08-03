@@ -23,6 +23,13 @@
   </url>
   
   <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/epilogue/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</loc>
     <lastmod>2021-07-28T10:20:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -44,6 +51,13 @@
   </url>
   
   <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/finialexample/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</loc>
     <lastmod>2021-07-28T10:20:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -52,6 +66,13 @@
   
   <url>
     <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/</loc>
     <lastmod>2021-07-28T10:20:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
