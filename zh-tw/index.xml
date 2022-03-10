@@ -6,169 +6,7 @@
     <description>Recent content on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 28 Jul 2021 10:20:32 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>二十章 結語</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/epilogue/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/epilogue/</guid>
-      <description>揮灑創意 恭喜各位，了解距離場背後的數學原理的你們，現在能夠畫出各種精美的圖形和設計細緻的動畫了，請在程式的畫布裡盡情揮灑吧 ! .image-center { margin: auto; text-align: center; padding-bottom: 5px;</description>
-    </item>
-    
-    <item>
-      <title>十一章 動畫方法</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedmethod/</guid>
-      <description>標準化空間，大小為 10、距離場上色 添加動畫的方法 目前為止，我們使用距離場繪製的圖形都是靜態的，所以下一步就是要讓距離場動起來。 教學這裡將播放</description>
-    </item>
-    
-    <item>
-      <title>十七章 進階上色</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthercoloring/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthercoloring/</guid>
-      <description>標準化空間，大小為 10 進階上色 目前為止的距離場圖形只有用到兩種顏色，距離場內和距離場外，不過我們還可以使用更多種顏色來繪製距離場圖形。 組合上色</description>
-    </item>
-    
-    <item>
-      <title>十三章 動畫緩動</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedeasing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedeasing/</guid>
-      <description>標準化空間，大小為 10、距離場上色 緩動動畫 目前為止我們已經能夠播放距離場動畫了，但播放起來種覺得還少什麼 ? 阿，物理慣性 ! 由於整個播放的速度都</description>
-    </item>
-    
-    <item>
-      <title>十九章 最終範例</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/finialexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/finialexample/</guid>
-      <description>標準化空間，大小為 50 最終範例 最後的最後就讓教學帶著各位從頭實作一次更複雜的距離場動畫吧，我們將一次用到各種教學中使用的計算方法，從組合到空間</description>
-    </item>
-    
-    <item>
-      <title>十二章 動畫範例</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedexample/</guid>
-      <description>標準化空間，大小為 10、距離場上色 動畫範例 上一章教學教了兩種播放動畫的方法，在這章中我們將實際製作幾項不同的動態效果。 旋轉動畫 圓環是個很好舉</description>
-    </item>
-    
-    <item>
-      <title>十五章 修正鋸齒</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/antialiasing/</guid>
-      <description>標準化空間，大小為 10、距離場上色 反鋸齒修正 在繪製圖形的過程中，相信各位都有注意到圖形的邊緣會是塊狀的，在視覺上相當不美觀，所以要想辦法將它</description>
-    </item>
-    
-    <item>
-      <title>十八章 分形繪製</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/fractal/</guid>
-      <description>標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾</description>
-    </item>
-    
-    <item>
-      <title>十六章 進階繪圖</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furtherdrawing/</guid>
-      <description>標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做</description>
-    </item>
-    
-    <item>
-      <title>十四章 動畫時間</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedtimeline/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/animatedtimeline/</guid>
-      <description>標準化空間，大小為 10、距離場上色 動畫時間軸 上一章學到了讓動畫更流暢的方法，我們還差最後一步 - 讓動畫的播出更戲劇化 ! 目前為止，所有動畫都在同</description>
-    </item>
-    
-    <item>
-      <title>第七章 形狀組合</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combination/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 距離場組合 目前為止我們都只用到一個距離場，為了讓事情更有趣我們可以多加一個距離場? 不，我們能做到的</description>
-    </item>
-    
-    <item>
-      <title>第三章 距離著色</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/colored/</guid>
-      <description>標準化空間，大小為 10 內外顏色 原本的黑白太單調了，我們可以為它們上不同顏色 ! 建立顏色屬性以及相對應的變數，為了方便區分形狀內外，所以我們用兩種</description>
-    </item>
-    
-    <item>
-      <title>第九章 進階形狀</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthershapes/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/furthershapes/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 更多進階形狀 目前為止，扣掉使用組合情況我們也只有三種形狀距離場，但有了進階的空間操作後，我們就能畫</description>
-    </item>
-    
-    <item>
-      <title>第五章 更多形狀</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/moreshapes/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩</description>
-    </item>
-    
-    <item>
-      <title>第八章 空間操作</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/spacemanipulation/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/spacemanipulation/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環、游標距離場。 更進階的空間操作 除了基本的平移、旋轉和縮放外，距離場空間操作性也讓他只需要增加些微的</description>
-    </item>
-    
-    <item>
-      <title>第六章 位移旋轉</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/transformation/</guid>
-      <description>標準化空間，大小為 3 位移、旋轉和縮放 我們將正式接觸距離場的的一個特性 - 空間操作性，在一般的空間轉換當中，我們會使用齊次座標矩陣進行轉換，但在</description>
-    </item>
-    
-    <item>
-      <title>第十章 組合範例</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combinationexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/combinationexample/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 進階形狀範例 教學到目前已經教了各種形狀、空間操作以及組合方法，這章就提供一些進階型狀的範例。 扇形環</description>
-    </item>
-    
-    <item>
-      <title>第四章 距離辨識</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distanceline/</guid>
-      <description>標準化空間，大小為 10、距離場上色 繪製距離環 我們為距離場的內外繪製上了不同的顏色用於辨識，但除了形狀自身之外，我們也想知道他位置的距離值，以</description>
-    </item>
-    
+    <lastBuildDate>Mon, 26 Jul 2021 15:49:12 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>設計模式筆記 ObjectPool</title>
       <link>https://angus945.github.io/zh-tw/notes/designpatterns/objectpool/</link>
@@ -176,15 +14,6 @@
       
       <guid>https://angus945.github.io/zh-tw/notes/designpatterns/objectpool/</guid>
       <description>避免單獨的分配和釋放記憶體空間，在固定的池中重用物件以提高效能和記憶體使用率。 使用動機 我們在處理遊戲的視覺效果，當法師施放法術時畫面上將爆發</description>
-    </item>
-    
-    <item>
-      <title>運用多場景機制進行資料傳遞</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/</link>
-      <pubDate>Sun, 25 Jul 2021 14:29:23 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/</guid>
-      <description>DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某</description>
     </item>
     
     <item>
@@ -256,34 +85,7 @@
       <pubDate>Tue, 04 May 2021 11:58:15 +0800</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/homecontent/</guid>
-      <description>歡迎來到樂小呈的部落格 HI 這個網站主要會放一些教學、筆記和一些和長篇的部落格文章，不定時更新 :P 還在想怎麼讓主頁更豐富@@ 近況 最近都在忙備審的東</description>
-    </item>
-    
-    <item>
-      <title>第二章 距離計算</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</link>
-      <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</guid>
-      <description>標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直</description>
-    </item>
-    
-    <item>
-      <title>第一章 初步理解</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</link>
-      <pubDate>Tue, 27 Apr 2021 21:34:48 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</guid>
-      <description>標準化空間，大小為 1 對距離場原理的初步理解 在第一次接觸距離場時，可以先理解成一個 &amp;ldquo;判斷空間中任意位置在不在虛擬形狀內&amp;rdquo</description>
-    </item>
-    
-    <item>
-      <title>第零章 基本設置</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</link>
-      <pubDate>Mon, 26 Apr 2021 14:55:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</guid>
-      <description>前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity 2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG)、C# 腳本工</description>
+      <description>歡迎來到樂小呈的部落格 HI 一年前弄好就被擱置的個人網站 重新開始&amp;hellip;大改造 ! 網站標籤 beginner devlog education gamedev gamedevelopment hugo learning tutorial unity website</description>
     </item>
     
     <item>
@@ -292,7 +94,9 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://angus945.github.io/zh-tw/todo/</guid>
-      <description>施工中 ~~ 頁面  Home page  待維修  英文頁面的留言板  觀察中  Google analyties 流量追蹤 留言板  </description>
+      <description>施工清單 分類類別 教學 Tutorials 文章 Post 日誌 devlog 筆記 notes
+Layout 背景顏色更改 相同字距字體
+頁面  Home page  待維修  英文頁面的留言板 首頁頁面的推薦  待寫文章  如何自學，開始遊戲開發  </description>
     </item>
     
     <item>

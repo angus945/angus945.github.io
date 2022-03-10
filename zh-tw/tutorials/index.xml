@@ -8,15 +8,6 @@
     <language>zh-tw</language>
     <lastBuildDate>Wed, 28 Apr 2021 20:38:46 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/tutorials/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>運用多場景機制進行資料傳遞</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/</link>
-      <pubDate>Sun, 25 Jul 2021 14:29:23 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/multiplescenepassmessage/</guid>
-      <description>DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某</description>
-    </item>
-    
-    <item>
       <title>整理給 Unity 初學者的起步資源</title>
       <link>https://angus945.github.io/zh-tw/tutorials/sourcesforunitybeginner/</link>
       <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>

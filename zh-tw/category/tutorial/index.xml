@@ -6,16 +6,7 @@
     <description>Recent content in tutorial on AngusChan-website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/tutorial/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>距離場的數學原理以及圖形繪製方法</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</link>
-      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/</guid>
-      <description>序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是</description>
-    </item>
-    
+    <lastBuildDate>Wed, 28 Apr 2021 20:38:46 +0800</lastBuildDate><atom:link href="https://angus945.github.io/zh-tw/category/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tutorials</title>
       <link>https://angus945.github.io/zh-tw/tutorials/</link>
@@ -23,33 +14,6 @@
       
       <guid>https://angus945.github.io/zh-tw/tutorials/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>第二章 距離計算</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</link>
-      <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/distance/</guid>
-      <description>標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直</description>
-    </item>
-    
-    <item>
-      <title>第一章 初步理解</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</link>
-      <pubDate>Tue, 27 Apr 2021 21:34:48 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/preliminary/</guid>
-      <description>標準化空間，大小為 1 對距離場原理的初步理解 在第一次接觸距離場時，可以先理解成一個 &amp;ldquo;判斷空間中任意位置在不在虛擬形狀內&amp;rdquo</description>
-    </item>
-    
-    <item>
-      <title>第零章 基本設置</title>
-      <link>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</link>
-      <pubDate>Mon, 26 Apr 2021 14:55:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/zh-tw/tutorials/signeddistancefunction/setup/</guid>
-      <description>前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity 2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG)、C# 腳本工</description>
     </item>
     
   </channel>
