@@ -111,7 +111,7 @@
     <div class="post-item post-meta">
         <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-03-14</span>
 
-<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;245 words</span>
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;405 words</span>
 
 <span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/test">test</a>&nbsp;<a href="/tags/shader">shader</a>&nbsp;</span>
 
@@ -139,123 +139,116 @@
 
 
 
+<head>
+    <link rel="stylesheet" type="text/css" href="/shader/shaderContainer.css">
+</head>
 
-HALL
 
-[300 300]
+<div id="container"></div>
+<script src="https://threejs.org/build/three.min.js"></script>
 
+<script>
+    var container, rect;
+    var camera, scene, renderer, clock;
+    var uniforms;
+    var mouse = {x:0, y:0};
 
-    <div id="container"></div>
-    <script src="https://threejs.org/build/three.min.js"></script>
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+    
+    init();
+    animate();
 
-    <style>
-        .shader-container
-        {
-            max-width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>    
+    function init() {
+        container = document.getElementById( 'container' );
 
-    <script id="vertexShader" type="x-shader/x-vertex">
-        void main() 
-{
-    gl_Position = vec4(position, 1.0);
-}
-    </script>
+        camera = new THREE.Camera();
+        camera.position.z = 1;
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+        scene = new THREE.Scene();
+        clock = new THREE.Clock();
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+        uniforms = {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() }
+        };
+
+        var material = new THREE.ShaderMaterial( {
+            uniforms: uniforms,
+            vertexShader: 'void main() \r\n{\r\n    gl_Position = vec4(position, 1.0);\r\n}',
+            fragmentShader: '\n#ifdef GL_ES\nprecision mediump float;\n#endif\n\nuniform vec2 u_resolution;\nuniform vec2 u_mouse;\nuniform float u_time;\n\n#define deg2rad 0.0174532925;\n\nvec2 uvRotate(vec2 uv, float degree)\n{\n    float radian = degree * deg2rad;\n    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));\n    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));\n\n    return ihat \u002b jhat;\n}\nfloat rect(vec2 uv, vec2 position, float rotate, vec2 size)\n{\n    uv = uv - position;\n    uv = uvRotate(uv, rotate);\n\n    vec2 dist = abs(uv) - size;\n\n    return max(dist.x, dist.y);\n}\nvec4 frag(vec2 uv, vec2 mouse)\n{\n    uv = (uv - 0.5) * 2.0;\n    mouse = (mouse - 0.5) * 2.0;\n\n    float scale = 10.0;\n    uv = uv * scale;\n    mouse = mouse * scale;\n    \n    float dist = 100.0;\n    dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(3, 1)));\n    dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(1, 3)));\n    dist = ceil(dist);\n\n    return vec4(dist, dist, dist, 1);\n}\nvoid main() \n{\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\n    vec2 mouse = u_mouse \/ u_resolution.xy;\n\n    gl_FragColor = frag(uv, mouse);\n}\n\n\n'
+        } );
+
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        container.appendChild( renderer.domElement );
+        container.classList.add('shader-container');
+
+        onWindowResize();
+        window.addEventListener( 'resize', onWindowResize, false );
         
-    uniform vec2 u_resolution;
-    uniform vec2 u_mouse;
-    uniform float u_time;
-
-    void main() {
-        vec2 st = gl_FragCoord.xy / u_resolution.xy;
-        gl_FragColor=vec4(st.x, st.y,0.0,1.0);
+        window.addEventListener( 'mousemove', updateMouse, false );
     }
 
-    </script>
+    function onWindowResize( event ) {
+        var maxWidth = container.parentElement.clientWidth;
+        var canvasWidth = '300';
+        var canvasHeight = '300';
+        var ratio = Math.min(maxWidth, canvasWidth) / canvasWidth;
+        renderer.setSize(canvasWidth * ratio, canvasHeight * ratio);   
 
-    <script>
-        var container;
-        var camera, scene, renderer, clock;
-        var uniforms;
-        var mouse = {x:0, y:0};
+        uniforms.u_resolution.value.x = renderer.domElement.width;
+        uniforms.u_resolution.value.y = renderer.domElement.height;
 
-        document.onmousemove = getMouseXY;
+        rect = container.getBoundingClientRect();
+    }
 
-        init();
-        animate();
+    function updateMouse( event )
+    {
+        mouse.x = event.clientX - rect.left;
+        mouse.y = rect.height - (event.clientY - rect.top)  - window.scrollY;
 
-        function getMouseXY(e) {
-            mouse.x = e.pageX;
-            mouse.y = e.pageY;
-        }
+        mouse.x = clamp(mouse.x, 0, rect.width);
+        mouse.y = clamp(mouse.y, 0, rect.height);
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
 
-        function init() {
-            container = document.getElementById( 'container' );
+    function animate() {
+        requestAnimationFrame( animate );
+        render();
+    }
 
-            camera = new THREE.Camera();
-            camera.position.z = 1;
-
-            scene = new THREE.Scene();
-            clock = new THREE.Clock();
-
-            var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
-
-            uniforms = {
-                u_time: { type: "f", value: 1.0 },
-                u_mouse: { type: "v2", value: new THREE.Vector2() },
-                u_resolution: { type: "v2", value: new THREE.Vector2() }
-            };
-
-            var material = new THREE.ShaderMaterial( {
-                uniforms: uniforms,
-                vertexShader: document.getElementById( 'vertexShader' ).textContent,
-                fragmentShader: document.getElementById( 'fragmentShader' ).textContent
-            } );
-
-            var mesh = new THREE.Mesh( geometry, material );
-            scene.add( mesh );
-
-            renderer = new THREE.WebGLRenderer();
-            renderer.setPixelRatio( window.devicePixelRatio );
-
-            container.appendChild( renderer.domElement );
-            container.classList.add('shader-container');
-
-            onWindowResize();
-            window.addEventListener( 'resize', onWindowResize, false );
-        }
-
-        function onWindowResize( event ) {
-            var maxWidth = container.parentElement.clientWidth;
-            var canvasWidth = '300';
-            var canvasHeight = '300';
-            var ratio = Math.min(maxWidth, canvasWidth) / canvasWidth;
-            renderer.setSize(canvasWidth * ratio, canvasHeight * ratio);   
-
-            uniforms.u_resolution.value.x = renderer.domElement.width;
-            uniforms.u_resolution.value.y = renderer.domElement.height;
-            uniforms.u_mouse.value.x = mouse.x;
-            uniforms.u_mouse.value.y = mouse.y;
-        }
-
-        function animate() {
-            requestAnimationFrame( animate );
-            render();
-        }
-
-        function render() {
-            uniforms.u_time.value += clock.getDelta();
-            renderer.render( scene, camera );
-        }
-    </script>
+    function render() {
+        uniforms.u_time.value += clock.getDelta();
+        renderer.render( scene, camera );
+    }
+</script>
 
 
 
-<!--more-->
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
+<p>line</p>
     </div>
 </article>
 
