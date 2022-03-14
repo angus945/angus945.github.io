@@ -22,23 +22,25 @@
 <meta name="theme-color" content="#ffffff" />
 
 
-<title>Hugo Theme Fuji - A minimal Hugo theme.</title>
+<title>Emoji Support - Hugo Theme Fuji</title>
 
 
 <meta name="author" content="DSRKafuU" />
 
 
-<meta name="description" content="A minimal Hugo theme with nice theme color." />
+<meta name="description" content="Guide to emoji usage in Hugo" />
 
 
-<link rel="alternate" type="application/rss+xml" href="https://github.dsrkafuu.net/hugo-theme-fuji/index.xml" title="Hugo Theme Fuji" />
+<meta name="keywords" content="emoji" />
 
-<meta property="og:title" content="Hugo Theme Fuji" />
-<meta name="twitter:title" content="Hugo Theme Fuji" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://github.dsrkafuu.net/hugo-theme-fuji/" /><meta property="og:image" content="https://github.dsrkafuu.net/img/og.png" />
+
+<meta property="og:title" content="Emoji Support" />
+<meta name="twitter:title" content="Emoji Support" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.dsrkafuu.net/hugo-theme-fuji/post/emoji-support/" /><meta property="og:description" content="Guide to emoji usage in Hugo" />
+<meta name="twitter:description" content="Guide to emoji usage in Hugo" /><meta property="og:image" content="https://github.dsrkafuu.net/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://github.dsrkafuu.net/img/og.png" /><meta property="og:updated_time" content="2022-03-14T00:00:00+08:00" />
+<meta name="twitter:image" content="https://github.dsrkafuu.net/img/og.png" /><meta property="article:published_time" content="2019-03-05T00:00:00+00:00" /><meta property="article:modified_time" content="2019-03-05T00:00:00+00:00" />
 
 
 <style>
@@ -101,56 +103,44 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-
-
-<div class="post">
+<article>
+    
     <h2 class="post-item post-title">
-        <a href="https://github.dsrkafuu.net/hugo-theme-fuji/post/shadertesting/">重新施工中~~~~</a>
+        <a href="https://github.dsrkafuu.net/hugo-theme-fuji/post/emoji-support/">Emoji Support</a>
     </h2>
     <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2022-03-14</span>
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2019-03-05</span>
 
-<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;245 words</span>
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;138 words</span>
 
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/hugo-theme-fuji/tags/test">test</a>&nbsp;<a href="/hugo-theme-fuji/tags/shader">shader</a>&nbsp;</span>
-
-    </div>
-    <div class="post-item post-summary markdown-body">
-        <p>測試各種新玩具</p>
-    </div>
-</div>
-
-<div class="post">
-    <h2 class="post-item post-title">
-        <a href="https://github.dsrkafuu.net/hugo-theme-fuji/post/math-typesetting/">Math Typesetting</a>
-    </h2>
-    <div class="post-item post-meta">
-        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-08</span>
-
-<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;122 words</span>
-
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/hugo-theme-fuji/tags/emoji">emoji</a>&nbsp;</span>
 
     </div>
-    <div class="post-item post-summary markdown-body">
-        <p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.</p>
-<p>In this example we will be using <a href="https://katex.org/" target="_blank">KaTeX</a></p>
-<ul>
-<li>Create a partial under <code>/layouts/partials/math.html</code></li>
-<li>Within this partial reference the <a href="https://katex.org/docs/autorender.html" target="_blank">Auto-render Extension</a> or host these scripts locally.</li>
-<li>Include the partial in your templates like so:</li>
-</ul>
-<pre><code>{{ if or .Params.math .Site.Params.math }}
-{{ partial &quot;math.html&quot; . }}
-{{ end }}
+    
+    <div class="post-content markdown-body">
+        <p>Emoji can be enabled in a Hugo project in a number of ways.</p>
+<p>The <a href="https://gohugo.io/functions/emojify/" target="_blank"><code>emojify</code></a> function can be called directly in templates or <a href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes" target="_blank">Inline Shortcodes</a>.</p>
+<p>To enable emoji globally, set <code>enableEmoji</code> to <code>true</code> in your site’s <a href="https://gohugo.io/getting-started/configuration/" target="_blank">configuration</a> and then you can type emoji shorthand codes directly in content files; e.g.</p>
+<p><code>:s ee_no_evil:[Remove the space]</code> 🙈 <code>:h ear_no_evil:[Remove the space]</code> 🙉 <code>:s peak_no_evil:[Remove the space]</code> 🙊</p>
+<p>The <a href="http://www.emoji-cheat-sheet.com/" target="_blank">Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
+<hr>
+<p><strong>N.B.</strong> The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.</p>
+<pre><code class="language-css">.emoji {
+    font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+}
 </code></pre>
-<ul>
-<li>To enable KaTex globally set the parameter <code>math</code> to <code>true</code> in a project&rsquo;s configuration</li>
-<li>To enable KaTex on a per page basis include the parameter <code>math: true</code> in content files.</li>
-</ul>
     </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>Unless otherwise noted, the content of this site is licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+               target="_blank">CC BY-NC-SA 4.0</a>.</p>
+    </blockquote>
 </div>
+
+
 
             </div>
             <aside class="col-12 col-md-3 float-left sidebar">
@@ -206,6 +196,30 @@
         <div>
             
             <span>
+                <a href="/hugo-theme-fuji/tags/aplayer/">aplayer</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/cjk/">cjk</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/css/">css</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/emoji/">emoji</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/html/">html</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/markdown/">markdown</a>
+            </span>
+            
+            <span>
                 <a href="/hugo-theme-fuji/tags/shader/">shader</a>
             </span>
             
@@ -213,10 +227,20 @@
                 <a href="/hugo-theme-fuji/tags/test/">test</a>
             </span>
             
+            <span>
+                <a href="/hugo-theme-fuji/tags/text/">text</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/themes/">themes</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/wtf/">wtf</a>
+            </span>
+            
         </div>
     </div>
-    
-    
     
 </aside>
 
@@ -286,6 +310,30 @@
         <div>
             
             <span>
+                <a href="/hugo-theme-fuji/tags/aplayer/">aplayer</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/cjk/">cjk</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/css/">css</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/emoji/">emoji</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/html/">html</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/markdown/">markdown</a>
+            </span>
+            
+            <span>
                 <a href="/hugo-theme-fuji/tags/shader/">shader</a>
             </span>
             
@@ -293,8 +341,22 @@
                 <a href="/hugo-theme-fuji/tags/test/">test</a>
             </span>
             
+            <span>
+                <a href="/hugo-theme-fuji/tags/text/">text</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/themes/">themes</a>
+            </span>
+            
+            <span>
+                <a href="/hugo-theme-fuji/tags/wtf/">wtf</a>
+            </span>
+            
         </div>
     </div>
+    
+    
     
     
   </div>
