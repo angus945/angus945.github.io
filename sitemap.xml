@@ -3,27 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://angus945.github.io/</loc>
-    <lastmod>2022-03-14T00:00:00+08:00</lastmod>
+    <lastmod>2022-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/post/</loc>
-    <lastmod>2022-03-14T00:00:00+08:00</lastmod>
+    <lastmod>2022-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/tags/shader/</loc>
-    <lastmod>2022-03-14T00:00:00+08:00</lastmod>
+    <lastmod>2022-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/tags/test/</loc>
-    <lastmod>2022-03-14T00:00:00+08:00</lastmod>
+    <lastmod>2022-03-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/post/shadertesting/</loc>
-    <lastmod>2022-03-14T00:00:00+08:00</lastmod>
+    <lastmod>2022-03-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/about/</loc>
+    <loc>https://angus945.github.io/draft/about/</loc>
     <lastmod>2020-04-11T19:15:32+08:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/post/math-typesetting/</loc>
+    <loc>https://angus945.github.io/draft/</loc>
+    <lastmod>2020-04-11T19:15:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/draft/math-typesetting/</loc>
     <lastmod>2020-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/archives/</loc>
+    <loc>https://angus945.github.io/draft/command/</loc>
+  </url><url>
+    <loc>https://angus945.github.io/learn/</loc>
+  </url><url>
+    <loc>https://angus945.github.io/devlog/</loc>
   </url><url>
     <loc>https://angus945.github.io/search/</loc>
   </url>
