@@ -19,7 +19,7 @@
 <link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<title>404 Page not found - AngusChan-blog</title>
+<title>Examples - AngusChan-blog</title>
 
 
 <meta name="author" content="AngusChan" />
@@ -28,13 +28,14 @@
 <meta name="description" content="AngusChan&#39;s website" />
 
 
+<link rel="alternate" type="application/rss+xml" href="https://angus945.github.io/example/index.xml" title="AngusChan-blog" />
 
-<meta property="og:title" content="404 Page not found" />
-<meta name="twitter:title" content="404 Page not found" />
+<meta property="og:title" content="Examples" />
+<meta name="twitter:title" content="Examples" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://angus945.github.io/404.html" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta property="og:url" content="https://angus945.github.io/example/" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="og:updated_time" content="2020-04-11T19:15:32+08:00" />
 
 
 <style>
@@ -119,8 +120,73 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-<div class="404-not-found" style="font-size: 2rem; padding-top: 1.5rem;">
-    <span>404 NOT FOUND</span>
+
+
+
+
+
+<head>
+    <link rel="stylesheet" href="https://angus945.github.io/feature-image.fb41ef3275f902c6e97eaac408412e7262cccfb87dd6b3ce3ae7bd62867e542e.css" integrity="sha256-&#43;0HvMnX5AsbpfqrECEEucmLMz7h91rPOOue9YoZ&#43;VC4=">
+</head>
+
+
+
+
+
+
+<div class="post">
+    <img class="feature-image" src="">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/example/about/">About Hugo</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-04-11</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;148 words</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+Hugo makes use of a variety of open source projects including:
+ https://github.com/yuin/goldmark https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper  Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases. </div>
+    </div>
+    <a href="https://angus945.github.io/example/about/"> (...ReadMore) </a>
+</div>
+
+<div class="post">
+    <img class="feature-image" src="">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/example/math-typesetting/">Math Typesetting</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span><i class="iconfont icon-today-sharp"></i>&nbsp;2020-03-08</span>
+
+<span><i class="iconfont icon-file-tray-sharp"></i>&nbsp;122 words</span>
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> <p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.</p>
+<p>In this example we will be using <a href="https://katex.org/" target="_blank">KaTeX</a></p>
+<ul>
+<li>Create a partial under <code>/layouts/partials/math.html</code></li>
+<li>Within this partial reference the <a href="https://katex.org/docs/autorender.html" target="_blank">Auto-render Extension</a> or host these scripts locally.</li>
+<li>Include the partial in your templates like so:</li>
+</ul>
+<pre><code>{{ if or .Params.math .Site.Params.math }}
+{{ partial &quot;math.html&quot; . }}
+{{ end }}
+</code></pre>
+<ul>
+<li>To enable KaTex globally set the parameter <code>math</code> to <code>true</code> in a project&rsquo;s configuration</li>
+<li>To enable KaTex on a per page basis include the parameter <code>math: true</code> in content files.</li>
+</ul> </div>
+    </div>
+    <a href="https://angus945.github.io/example/math-typesetting/"> (...ReadMore) </a>
 </div>
 
             </div>

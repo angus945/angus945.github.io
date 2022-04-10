@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on AngusChan-blog</title>
+    <link>https://angus945.github.io/about/</link>
+    <description>Recent content in About on AngusChan-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 09 Apr 2022 16:44:40 +0800</lastBuildDate><atom:link href="https://angus945.github.io/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>https://angus945.github.io/about/about-me/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/about/about-me/</guid>
+      <description>&lt;p&gt;關於我&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About This WebSite</title>
+      <link>https://angus945.github.io/about/about-this-site/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/about/about-this-site/</guid>
+      <description>&lt;p&gt;關於這個網站&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
