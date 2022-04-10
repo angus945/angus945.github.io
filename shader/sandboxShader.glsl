@@ -38,8 +38,9 @@ vec4 frag(vec2 uv, vec2 mouse)
     dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(3, 1)));
     dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(1, 3)));
     dist = ceil(dist);
+    dist = 1.0 - dist;
 
-    return vec4(dist, dist, dist, 1);
+    return vec4(dist, dist, dist, dist);
 }
 void main() 
 {
