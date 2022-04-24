@@ -6,6 +6,10 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+uniform float u_input0;
+uniform float u_input1;
+uniform float u_input2;
+
 #define deg2rad 0.0174532925;
 
 vec2 uvRotate(vec2 uv, float degree)
@@ -25,7 +29,7 @@ float rect(vec2 uv, vec2 position, float rotate, vec2 size)
 
     return max(dist.x, dist.y);
 }
-vec4 frag(vec2 uv, vec2 mouse)
+float cross(vec2 uv, vec2 mouse)
 {
     uv = (uv - 0.5) * 2.0;
     mouse = (mouse - 0.5) * 2.0;
@@ -38,16 +42,19 @@ vec4 frag(vec2 uv, vec2 mouse)
     dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(3, 1)));
     dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(1, 3)));
     dist = ceil(dist);
-    dist = 1.0 - dist;
 
-    return vec4(dist, dist, dist, dist);
+    return dist;
 }
 void main() 
 {
-    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-    vec2 mouse = u_mouse / u_resolution.xy;
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    vec2 mouse = u_mouse / u_resolution.xx;
 
-    gl_FragColor = frag(uv, mouse);
+    float dist = cross(uv, mouse);
+    vec4 color = vec4(u_input0, u_input1, u_input2, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);
+    // gl_FragColor = u_color;
 }
 
 

@@ -1,0 +1,33 @@
+html, body {
+  margin: 0;
+  padding: 0; }
+
+body {
+  overflow: overlay; }
+
+body::-webkit-scrollbar {
+  width: 9px;
+  height: 9px; }
+
+body::-webkit-scrollbar-button:start:decrement,
+body::-webkit-scrollbar-button:end:increment {
+  display: block;
+  height: 0;
+  background-color: transparent; }
+
+body::-webkit-scrollbar-track-piece {
+  background-color: #ffffff00;
+  opacity: 0.2;
+  -webkit-border-radius: 0;
+  -webkit-border-bottom-right-radius: 14px;
+  -webkit-border-bottom-left-radius: 14px; }
+
+body::-webkit-scrollbar-thumb:vertical {
+  height: 50px;
+  background-color: var(--color-font);
+  -webkit-border-radius: 8px; }
+
+:root {
+  --overflow: overlay;
+  scrollbar-color: var(--color-font) transparent !important;
+  scrollbar-width: thin !important; }

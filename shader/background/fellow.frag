@@ -21,7 +21,7 @@ vec4 readBuffer(sampler2D buffer, vec2 coord)
 
 void main() 
 {
-    float width = min(u_resolution.x, u_resolution.y);
+    float width = (u_resolution.x);
     vec2 uv = gl_FragCoord.xy / width;
     vec2 mouse = u_mouse.xy / width;
 

@@ -23,7 +23,7 @@ void main()
     vec2 coord = floor(uv * 10.0);
 
     float value = random(coord.xy);
-    gl_FragColor = vec4(value);
+    gl_FragColor = vec4(value, value, value, 1);
     // gl_FragColor = vec4(cell, 0, 1);
     // gl_FragColor = vec4(coord / 10.0, 0, 1);
 }

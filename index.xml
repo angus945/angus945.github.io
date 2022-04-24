@@ -6,46 +6,7 @@
     <description>Recent content on AngusChan-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 10 Apr 2022 10:21:22 +0800</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Shader Sandbox</title>
-      <link>https://angus945.github.io/post/shader-sandbox/</link>
-      <pubDate>Sun, 10 Apr 2022 10:21:22 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/post/shader-sandbox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>About Me</title>
-      <link>https://angus945.github.io/about/about-me/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/about/about-me/</guid>
-      <description>&lt;p&gt;關於我&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>About This WebSite</title>
-      <link>https://angus945.github.io/about/about-this-site/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/about/about-this-site/</guid>
-      <description>&lt;p&gt;關於這個網站&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://angus945.github.io/post/test-copy/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-copy/</guid>
-      <description>&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;</description>
-    </item>
-    
+    <lastBuildDate>Thu, 14 Apr 2022 20:08:25 +0800</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>重新施工中~~~~</title>
       <link>https://angus945.github.io/post/content-test/</link>
@@ -56,50 +17,12 @@
     </item>
     
     <item>
-      <title>Test</title>
-      <link>https://angus945.github.io/post/test/</link>
-      <pubDate>Wed, 06 Apr 2022 21:56:38 +0800</pubDate>
+      <title>自學了三年，分享自己對學習的看法和感想</title>
+      <link>https://angus945.github.io/post/aboutlearning/</link>
+      <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/post/test/</guid>
-      <description>&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;
-&lt;p&gt;Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>About Hugo</title>
-      <link>https://angus945.github.io/example/about/</link>
-      <pubDate>Sat, 11 Apr 2020 19:15:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/example/about/</guid>
-      <description>Written in Go, Hugo is an open source static site generator available under the Apache Licence 2.0. Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
-Hugo makes use of a variety of open source projects including:
- https://github.com/yuin/goldmark https://github.com/alecthomas/chroma https://github.com/muesli/smartcrop https://github.com/spf13/cobra https://github.com/spf13/viper  Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.</description>
-    </item>
-    
-    <item>
-      <title>Math Typesetting</title>
-      <link>https://angus945.github.io/example/math-typesetting/</link>
-      <pubDate>Sun, 08 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/example/math-typesetting/</guid>
-      <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
-&lt;p&gt;In this example we will be using &lt;a href=&#34;https://katex.org/&#34; target=&#34;_blank&#34;&gt;KaTeX&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Create a partial under &lt;code&gt;/layouts/partials/math.html&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Within this partial reference the &lt;a href=&#34;https://katex.org/docs/autorender.html&#34; target=&#34;_blank&#34;&gt;Auto-render Extension&lt;/a&gt; or host these scripts locally.&lt;/li&gt;
-&lt;li&gt;Include the partial in your templates like so:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;{{ if or .Params.math .Site.Params.math }}
-{{ partial &amp;quot;math.html&amp;quot; . }}
-{{ end }}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;To enable KaTex globally set the parameter &lt;code&gt;math&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in a project&amp;rsquo;s configuration&lt;/li&gt;
-&lt;li&gt;To enable KaTex on a per page basis include the parameter &lt;code&gt;math: true&lt;/code&gt; in content files.&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <guid>https://angus945.github.io/post/aboutlearning/</guid>
+      <description>https://stackoverflow.com/questions/25535836/how-to-restyle-em-tag-to-be-bold-instead-of-italic https://stackoverflow.com/questions/35465557/how-to-apply-color-in-markdown 前言 因為不適合台灣的制式教育，於是我在高二時開始了在家自學，持續到現在已經三年了，雖然出了點意外導致還沒讀大學，但學習並不會因此而中斷~ 剛好，自己的網站在幾個月前完成了，就藉此機會分享自己對於學習</description>
     </item>
     
   </channel>
