@@ -29,7 +29,7 @@ float rect(vec2 uv, vec2 position, float rotate, vec2 size)
 
     return max(dist.x, dist.y);
 }
-float cross(vec2 uv, vec2 mouse)
+float sdf_cross(vec2 uv, vec2 mouse)
 {
     uv = (uv - 0.5) * 2.0;
     mouse = (mouse - 0.5) * 2.0;
@@ -50,7 +50,7 @@ void main()
     vec2 uv = gl_FragCoord.xy / u_resolution.xx;
     vec2 mouse = u_mouse / u_resolution.xx;
 
-    float dist = cross(uv, vec2(0.5));
+    float dist = sdf_cross(uv, vec2(0.5));
     vec4 color = vec4(u_input0, u_input1, u_input2, 1);
     gl_FragColor = mix(vec4(0), color, 1.0 - dist);
     // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);
