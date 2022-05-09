@@ -2,6 +2,7 @@
 
 
 Themes
+https://github.com/dsrkafuu/hugo-theme-fuji/blob/master/README_CN.md
 https://themes.gohugo.io/themes/hugo-theme-fuji/
 https://github.com/s4n7h0/hugo-theme-timeline
 
