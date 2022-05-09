@@ -5,6 +5,16 @@
     <link>https://angus945.github.io/devlog/</link>
     <description>Recent content in Devlog on AngusChan-blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://angus945.github.io/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 06 Apr 2022 21:56:44 +0800</lastBuildDate><atom:link href="https://angus945.github.io/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test</title>
+      <link>https://angus945.github.io/devlog/test/</link>
+      <pubDate>Wed, 06 Apr 2022 21:56:44 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/test/</guid>
+      <description>&lt;p&gt;Test Page for Post&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

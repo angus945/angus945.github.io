@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>舊筆記資料夾 on AngusChan-blog</title>
+    <link>https://angus945.github.io/learn/old-notes/</link>
+    <description>Recent content in 舊筆記資料夾 on AngusChan-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 13 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/learn/old-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Extension and Operator</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/extension-and-operator/</link>
+      <pubDate>Sat, 13 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/extension-and-operator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shaderlab Cginclude</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-cginclude/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-cginclude/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Postprocessing Basis</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/postprocessing-basis/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/postprocessing-basis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interface Healthsystem</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/interface-healthsystem/</link>
+      <pubDate>Tue, 06 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/interface-healthsystem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shaderlab Depthbuffer</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-depthbuffer/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-depthbuffer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vertexshader Lighting</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-lighting/</link>
+      <pubDate>Sat, 25 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-lighting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vertexshader Coloring</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-coloring/</link>
+      <pubDate>Mon, 20 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-coloring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vertexshader Basis</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-basis/</link>
+      <pubDate>Sun, 19 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/vertexshader-basis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Blending</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-blending/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-blending/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Lighting Custom Model</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-custom/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-custom/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Lighting Output</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-output/</link>
+      <pubDate>Tue, 07 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-output/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Lighting Models</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-models/</link>
+      <pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-lighting-models/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Surface</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-surface/</link>
+      <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-surface/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surfaceshader Bufferandqueue</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-bufferandqueue/</link>
+      <pubDate>Thu, 02 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-bufferandqueue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SurfaceShader Channel</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-channel/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-channel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SurfaceShader Inputstruct</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-input-struct/</link>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-input-struct/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SurfaceShader Properties</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-properties/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/surfaceshader-properties/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shaderlab Variable</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-variable/</link>
+      <pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-shader/shaderlab-variable/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scriptableobject Coroutine</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject-coroutine/</link>
+      <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject-coroutine/</guid>
+      <description>&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=4803322 --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scriptableobject Coroutine Event</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject-coroutine-event/</link>
+      <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject-coroutine-event/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scriptableobject</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject/</link>
+      <pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/scriptableobject/</guid>
+      <description>&lt;p&gt;早期的舊筆記&lt;/p&gt;
+&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=4786801 --&gt;</description>
+    </item>
+    
+    <item>
+      <title>Call Type</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/calltype/</link>
+      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/calltype/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Calltype Array</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/calltype-array/</link>
+      <pubDate>Sun, 23 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/calltype-array/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Handler</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/event-handler/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/event-handler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Implement</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/event-implement/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/event-implement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Input Event</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/event-input/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/event-input/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event</title>
+      <link>https://angus945.github.io/learn/old-notes/unity-coding/event/</link>
+      <pubDate>Tue, 24 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/old-notes/unity-coding/event/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&amp;mdash;&amp;ndash;無輸入event&amp;mdash;&amp;ndash;&amp;lt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;-基本-&amp;lt;
+建立基本的無輸入event
+public event Action NotInputEvent;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;註冊事件
+NotInputEvent += FunctionA; (void FunctionA() { print(&amp;ldquo;A&amp;rdquo;); })
+NotInputEvent += FunctionB; (void FunctionB() { print(&amp;ldquo;B&amp;rdquo;); })
+NotInputEvent += FunctionC; (void FunctionC() { print(&amp;ldquo;C&amp;rdquo;); })&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

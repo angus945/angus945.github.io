@@ -1,0 +1,8 @@
+/* override default theme stylesheet */
+.h1, h2 {
+  border-bottom: none !important; }
+
+.image {
+  margin: auto;
+  text-align: center;
+  padding-bottom: 5px; }
