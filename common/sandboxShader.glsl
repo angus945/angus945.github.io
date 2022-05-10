@@ -9,6 +9,7 @@ uniform float u_time;
 uniform float u_input0;
 uniform float u_input1;
 uniform float u_input2;
+uniform vec2 u_position;
 
 #define deg2rad 0.0174532925;
 
@@ -50,7 +51,7 @@ void main()
     vec2 uv = gl_FragCoord.xy / u_resolution.xx;
     vec2 mouse = u_mouse / u_resolution.xx;
 
-    float dist = sdf_cross(uv, vec2(0.5));
+    float dist = sdf_cross(uv, u_position);
     vec4 color = vec4(u_input0, u_input1, u_input2, 1);
     gl_FragColor = mix(vec4(0), color, 1.0 - dist);
     // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);

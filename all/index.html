@@ -105,48 +105,79 @@
 <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
 
 
+<link type="text/css" rel="stylesheet" href="https://rawgit.com/patriciogonzalezvivo/glslEditor/gh-pages/build/glslEditor.css">
+<script type="application/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslEditor/gh-pages/build/glslEditor.js"></script>
 
 
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 
 <script type="text/javascript">
-
+    var seed = Math.random();
+    var frag_codes = ("#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\n\r\n#ifdef BUFFER_0\r\n\r\nvec4 readBuffer(sampler2D buffer, vec2 coord)\r\n{\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    return texture2D(buffer, uv, 0.0);\r\n}\r\n\r\nvoid main() \r\n{\r\n    float width = (u_resolution.x);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n    vec2 mouse = u_mouse.xy \/ width;\r\n\r\n    float value = readBuffer(u_buffer0, gl_FragCoord.xy).a;\r\n    float circle = 1. - ceil(length(uv - mouse) - .05);\r\n\r\n    value = value * 0.95;\r\n    value = max(value, circle);\r\n\r\n    value = clamp(value, 0.0, 1.0);\r\n    gl_FragColor = vec4(value);\r\n}\r\n\r\n#else\r\n\r\nvoid main() {\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    vec4 color = texture2D(u_buffer0, uv, 0.0);\r\n\r\n    gl_FragColor = color;\r\n}\r\n\r\n#endif\u003cslice-identifier\u003e#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\nfloat random(vec2 st)\r\n{\r\n    return fract(sin(dot(st.xy, vec2(12.9898, u_seed))) * 43758.5453123);\r\n}\r\nvoid main()\r\n{\r\n    float width = min(u_resolution.x, u_resolution.y);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n\r\n    vec2 cell = fract(uv * 10.0);\r\n    vec2 coord = floor(uv * 10.0);\r\n\r\n    float value = random(coord.xy);\r\n    gl_FragColor = vec4(value, value, value, 1);\r\n    \/\/ gl_FragColor = vec4(cell, 0, 1);\r\n    \/\/ gl_FragColor = vec4(coord \/ 10.0, 0, 1);\r\n}\r\n\u003cslice-identifier\u003e").split("\u003cslice-identifier\u003e");
+    var frag_shader_code = randomFragment();
+  
+    function randomFragment()
+    {
+        var max = frag_codes.length - 1;
+        var rndIndex = Math.floor(Math.random() * max);
+        var rndFragment = frag_codes[rndIndex];
+    
+        return rndFragment;
+    }
+    
+    var canvas = document.createElement("canvas");
+    canvas.classList.add("shader-background");
+    
+    function updateSize()
+    {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    function updatePosition()
+    {
+        canvas.style.top = 0;
+    }
+    
     window.addEventListener('load', function () 
     {
-        var elements = document.getElementsByClassName("shader-container");
-        for(var i = 0; i < elements.length; i ++)
-        {
-            setCanvas(elements[i]);           
-        }
-        function setCanvas(container)
-        {       
-            var canvas = container.getElementsByTagName("canvas")[0];
-            var sandbox = new GlslCanvas(canvas);
-                        
-            var fields = container.getElementsByTagName("input");
-            for(var i = 0; i < fields.length; i ++)
-            {
-                initial(fields[i]);
-                setEvent(fields[i]);
-            }
+        var sandbox = new GlslCanvas(canvas);
         
-            function initial(field)
-            {
-                sandbox.setUniform(field.name, parseFloat(field.value));
-            }
-            function setEvent(field)
-            {
-                field.addEventListener('input', (event) => {
-                    var field = event.target;
-                    console.log(field.value);
-                    sandbox.setUniform(field.name, parseFloat(field.value));
-                });
-            }
-        }
+        sandbox.load(frag_shader_code);
+        sandbox.setUniform("u_seed", seed);
+        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+        
+        updateSize();
+        updatePosition();
     });
     
+    window.onresize = function()
+    {
+        updateSize();
+        updatePosition();
+    }
+
+    
 </script>
+
 
 
 
@@ -369,7 +400,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;127 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;417 words
 </span>
 
 
@@ -379,7 +410,7 @@
 
     </div>
     <div class="post-item post-summary markdown-body" style="display: flex">
-        <div> <p>測試各種新玩具 Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test</p> </div>
+        <div> <!-- 測試各種新玩具 Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test --> </div>
     </div>
     <a href="https://angus945.github.io/post/content-test/"> (...ReadMore) </a>
 </div>

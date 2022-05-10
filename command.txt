@@ -7,10 +7,9 @@ https://themes.gohugo.io/themes/hugo-theme-fuji/
 https://github.com/s4n7h0/hugo-theme-timeline
 
 WebGL, Shader
-https://github.com/patriciogonzalezvivo/glslEditor
 https://github.com/patriciogonzalezvivo/glslCanvas
+https://github.com/patriciogonzalezvivo/glslEditor
 https://thebookofshaders.com/04/
-https://docs.pmnd.rs/drei/staging/use-matcap-texture
 https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas
 
 https://github.com/actarian/glsl-canvas
