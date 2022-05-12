@@ -100,7 +100,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/shader-container.55eba668fad024f5ec06324e10c69b38ac9d695733d5c663d4895aa85ee563f6.css" integrity="sha256-VeumaPrQJPXsBjJOEMabOKydaVcz1cZj1IlaqF7lY/Y=">
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.719cb331710118852454a0ece9cbe2f547b6e927f809264f15d4d192ba341820.css" integrity="sha256-cZyzMXEBGIUkVKDs6cvi9Ue26Sf4CSZPFdTRkro0GCA=">
 
 
 
@@ -234,7 +234,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;453 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;708 words
 </span>
 
 
@@ -250,53 +250,10 @@
         
         
         
-        <!-- 測試各種新玩具 Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test -->
-<!-- 
-
-
-
-
-
-
-<div class="image" style="width: 50%;" >
-    <img src="/common/gears.gif" alt="image display error, please report: [/common/gears.gif]">
-    <p style="opacity: 0.5">
-        comment
-    </p>
-</div>
-
- -->
-<!-- 
-
-
-
-
-
-
-<audio controls id="audio_audio_throw.mp3">
-    <source src="/common/audio_throw.mp3">
-    Your browser does not support the audio tag.
-</audio> 
-
-<script>
-    var audio = document.getElementById("audio_audio_throw.mp3");
-    audio.volume = "0.8"
-</script> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <p>測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試</p>
+<h2 id="自定義功能測試">自定義功能測試</h2>
+<h3 id="測試著色器嵌入">測試著色器嵌入</h3>
+<p>測試一般 Shader 嵌入
 
 
 
@@ -308,28 +265,14 @@
 
 
     
-    
-    
-
-    
-    
-    
-        
-        
-        
-        
-
-    
-
-    
-        
-            
 
 
 
 
 
-<div id="shader-0" class="shader-container">
+
+
+<div class="shader-container">
     <canvas class="glslCanvas" data-fragment="#ifdef GL_ES
 precision mediump float;
 #endif
@@ -381,12 +324,14 @@ float sdf_cross(vec2 uv, vec2 mouse)
 void main() 
 {
     vec2 uv = gl_FragCoord.xy / u_resolution.xx;
-    vec2 mouse = u_mouse / u_resolution.xx;
+    // vec2 mouse = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
 
     float dist = sdf_cross(uv, u_position);
     vec4 color = vec4(u_input0, u_input1, u_input2, 1);
     gl_FragColor = mix(vec4(0), color, 1.0 - dist);
-    // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);
     // gl_FragColor = u_color;
 }
 
@@ -394,152 +339,13 @@ void main()
 
 
 " width="300" height="300"></canvas>
-
-    <div class="shader-input">
-        
-        
-        
-        
-        
-
-        <div id="u_position" class="shader-input-field"> 
-            <div id="text" style="display:flex; justify-content:space-between">
-                <div id="name"> u_position </div>
-                <div id="value"> value </div>
-            </div>
-
-            
-
-            
-        </div>
-
-        
-    </div>
 </div>
 
 
 
-<script type="text/javascript">
 
-    window.addEventListener('load', function () 
-    {
-        var datas = JSON.parse("[{\u0022default\u0022:{\u0022x\u0022:\u00220\u0022,\u0022y\u0022:\u00220\u0022},\u0022max\u0022:{\u0022x\u0022:\u00221\u0022,\u0022y\u0022:\u00221\u0022},\u0022min\u0022:{\u0022x\u0022:\u00220\u0022,\u0022y\u0022:\u00220\u0022},\u0022name\u0022:\u0022u_position\u0022,\u0022type\u0022:\u0022vector\u0022}]");
-
-        var container = document.getElementById("shader-0");   
-        var canvas = container.getElementsByTagName("canvas")[0];
-        var sandbox = new GlslCanvas(canvas);
-      
-        for(var i = 0; i < datas.length; i ++)
-        {
-            var data = datas[i];
-            
-
-            switch(data.type)
-            {
-                case "int":
-                    rangeField(container, data, 1, 0);
-                    break;
-
-                case "float":
-                    rangeField(container, data, "any", 2);
-                    break;
-
-                case "vector":
-                    vectorField(container, data);
-                    break;
-            }
-        }
-        
-        function rangeField(container, data, step, fixed)
-        {
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            var slider = field.getElementsByTagName("input")[0];
-
-            slider.addEventListener('input', (event) => {
-                var input = parseFloat(slider.value);
-
-                setUniform_1D(data.name, input);
-                value.innerHTML = input.toFixed(fixed);
-            });
-
-            value.innerHTML = parseFloat(slider.value).toFixed(fixed);
-            setUniform_1D(data.name, parseFloat(slider.value));
-        }
-        function vectorField(container, data)
-        {            
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            value.innerHTML = data.default;
-            
-            var picker = document.createElement("input");
-            picker.width = 150;
-            picker.height = 150;
-            picker.type = "image";
-            picker.src = "/common/gridmap.jpg";
-
-            var minX = parseFloat(data.min.x);
-            var maxX = parseFloat(data.max.x);
-            var minY = parseFloat(data.min.y);
-            var maxY = parseFloat(data.max.y);
-            
-            picker.addEventListener('click', (event) => {
-                var rect = picker.getBoundingClientRect();
-                var x = (event.pageX - picker.offsetLeft) / rect.width;
-                var y = 1 - (event.clientY - rect.top) / rect.height;
-
-                x = minX + (maxX - minX) * x;
-                y = minY + (maxY - minY) * y;
-                
-                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
-                setUniform_2D(data.name, x, y);              
-            });
-
-            field.appendChild(picker);
-        }
-        
-        function setUniform_1D(name, value)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, value);
-            
-        }
-        function setUniform_2D(name, x, y)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, x, y);
-            
-        }
-    });
-    
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</p>
+<p>測試 Float Silder
 
 
 
@@ -551,22 +357,19 @@ void main()
 
 
     
-    
-    
 
-    
-    
-    
-        
-        
-        
-        
-        
-    
 
-    
-        
-            
+
+
+
+
+
+
+
+
+
+
+
 
 
     
@@ -681,12 +484,14 @@ float sdf_cross(vec2 uv, vec2 mouse)
 void main() 
 {
     vec2 uv = gl_FragCoord.xy / u_resolution.xx;
-    vec2 mouse = u_mouse / u_resolution.xx;
+    // vec2 mouse = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
 
     float dist = sdf_cross(uv, u_position);
     vec4 color = vec4(u_input0, u_input1, u_input2, 1);
     gl_FragColor = mix(vec4(0), color, 1.0 - dist);
-    // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);
     // gl_FragColor = u_color;
 }
 
@@ -746,22 +551,6 @@ void main()
         </div>
 
         
-        
-        
-        
-
-        <div id="u_test" class="shader-input-field"> 
-            <div id="text" style="display:flex; justify-content:space-between">
-                <div id="name"> u_test </div>
-                <div id="value"> value </div>
-            </div>
-
-            
-            <input class="shader-input-silder" type="range" min="0" max="10" value="0" step="1" >
-            
-        </div>
-
-        
     </div>
 </div>
 
@@ -771,7 +560,7 @@ void main()
 
     window.addEventListener('load', function () 
     {
-        var datas = JSON.parse("[{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input0\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input1\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input2\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220\u0022,\u0022max\u0022:\u002210\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_test\u0022,\u0022type\u0022:\u0022int\u0022}]");
+        var datas = JSON.parse("[{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input0\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input1\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input2\u0022,\u0022type\u0022:\u0022float\u0022}]");
 
         var container = document.getElementById("shader-1");   
         var canvas = container.getElementsByTagName("canvas")[0];
@@ -785,11 +574,11 @@ void main()
             switch(data.type)
             {
                 case "int":
-                    rangeField(container, data, 1, 0);
+                    rangeField(container, data, 0);
                     break;
 
                 case "float":
-                    rangeField(container, data, "any", 2);
+                    rangeField(container, data, 2);
                     break;
 
                 case "vector":
@@ -798,7 +587,7 @@ void main()
             }
         }
         
-        function rangeField(container, data, step, fixed)
+        function rangeField(container, data, fixed)
         {
             var field = container.querySelector(`#${data.name}`);
 
@@ -822,30 +611,57 @@ void main()
             var value = field.querySelector("#value");
             value.innerHTML = data.default;
             
-            var picker = document.createElement("input");
-            picker.width = 150;
-            picker.height = 150;
-            picker.type = "image";
-            picker.src = "/common/gridmap.jpg";
+            var picker = field.getElementsByTagName("canvas")[0];
+            picker.width = picker.clientWidth;
+            picker.height = picker.clientHeight;
+            picker.style.display = "none";
+
+            var context = picker.getContext('2d');
 
             var minX = parseFloat(data.min.x);
             var maxX = parseFloat(data.max.x);
             var minY = parseFloat(data.min.y);
             var maxY = parseFloat(data.max.y);
+
+            var popup = false;
+            var mouseDown = false;
             
-            picker.addEventListener('click', (event) => {
-                var rect = picker.getBoundingClientRect();
-                var x = (event.pageX - picker.offsetLeft) / rect.width;
-                var y = 1 - (event.clientY - rect.top) / rect.height;
-
-                x = minX + (maxX - minX) * x;
-                y = minY + (maxY - minY) * y;
-                
-                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
-                setUniform_2D(data.name, x, y);              
+            value.addEventListener('click', (event) => {
+                popup = !popup;
+                picker.style.display = popup ? "block" : "none";
             });
+            picker.addEventListener('mousedown', (event) => {
+                mouseDown = true;
 
-            field.appendChild(picker);
+                pickPosition(event);
+            });
+            picker.addEventListener('mousemove', (event) => {
+
+                if(!mouseDown) return;
+
+                pickPosition(event);                
+            });
+            picker.addEventListener('mouseup', (event) => {
+                mouseDown = false;
+            });
+                        
+            function pickPosition(event)
+            {
+                var rect = picker.getBoundingClientRect();
+                var clickX = event.pageX - picker.offsetLeft;
+                var clickY = event.clientY - rect.top;
+                
+                var uvX = (clickX) / rect.width;
+                var uvY = 1 - (clickY) / rect.height;
+
+                var x = minX + (maxX - minX) * uvX;
+                var y = minY + (maxY - minY) * uvY;
+
+                drawPoint(picker, context, clickX, clickY, 'red', 5);
+                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+                
+                setUniform_2D(data.name, x, y);              
+            }
         }
         
         function setUniform_1D(name, value)
@@ -868,59 +684,372 @@ void main()
             sandbox.setUniform(name, x, y);
             
         }
+
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+      }
+        
     });
     
 </script>
 
 
-<!-- <div id="glsl_editor"></div>
+
+</p>
+<p>測試 Vector Picker
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+
+    
+
+    
+        
+            
+
+
+
+
+
+<div id="shader-0" class="shader-container">
+    <canvas class="glslCanvas" data-fragment="#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform float u_input0;
+uniform float u_input1;
+uniform float u_input2;
+uniform vec2 u_position;
+
+#define deg2rad 0.0174532925;
+
+vec2 uvRotate(vec2 uv, float degree)
+{
+    float radian = degree * deg2rad;
+    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));
+    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));
+
+    return ihat &#43; jhat;
+}
+float rect(vec2 uv, vec2 position, float rotate, vec2 size)
+{
+    uv = uv - position;
+    uv = uvRotate(uv, rotate);
+
+    vec2 dist = abs(uv) - size;
+
+    return max(dist.x, dist.y);
+}
+float sdf_cross(vec2 uv, vec2 mouse)
+{
+    uv = (uv - 0.5) * 2.0;
+    mouse = (mouse - 0.5) * 2.0;
+
+    float scale = 10.0;
+    uv = uv * scale;
+    mouse = mouse * scale;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(3, 1)));
+    dist = min(dist, rect(uv, mouse, u_time * 50.0, vec2(1, 3)));
+    dist = ceil(dist);
+
+    return dist;
+}
+void main() 
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    // vec2 mouse = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
+
+    float dist = sdf_cross(uv, u_position);
+    vec4 color = vec4(u_input0, u_input1, u_input2, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = u_color;
+}
+
+
+
+
+" width="300" height="300"></canvas>
+
+    <div class="shader-input">
+        
+        
+        
+        
+        
+
+        <div id="u_position" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_position </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            
+            <canvas class="shader-input-vector"></canvas>
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
 
 <script type="text/javascript">
-    const glslEditor = new GlslEditor('#glsl_editor', { 
-        canvas_size: 250,
-        canvas_draggable: true,
-        canvas_follow: false,
-        theme: 'monokai',
-        multipleBuffers: true,
-        watchHash: true,
-        fileDrops: true,
-        menu: true
+
+    window.addEventListener('load', function () 
+    {
+        var datas = JSON.parse("[{\u0022default\u0022:{\u0022x\u0022:\u00220\u0022,\u0022y\u0022:\u00220\u0022},\u0022max\u0022:{\u0022x\u0022:\u00221\u0022,\u0022y\u0022:\u00221\u0022},\u0022min\u0022:{\u0022x\u0022:\u0022-1\u0022,\u0022y\u0022:\u0022-1\u0022},\u0022name\u0022:\u0022u_position\u0022,\u0022type\u0022:\u0022vector\u0022}]");
+
+        var container = document.getElementById("shader-0");   
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+      
+        for(var i = 0; i < datas.length; i ++)
+        {
+            var data = datas[i];
+            
+
+            switch(data.type)
+            {
+                case "int":
+                    rangeField(container, data, 0);
+                    break;
+
+                case "float":
+                    rangeField(container, data, 2);
+                    break;
+
+                case "vector":
+                    vectorField(container, data);
+                    break;
+            }
+        }
+        
+        function rangeField(container, data, fixed)
+        {
+            var field = container.querySelector(`#${data.name}`);
+
+            var value = field.querySelector("#value");
+            var slider = field.getElementsByTagName("input")[0];
+
+            slider.addEventListener('input', (event) => {
+                var input = parseFloat(slider.value);
+
+                setUniform_1D(data.name, input);
+                value.innerHTML = input.toFixed(fixed);
+            });
+
+            value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+            setUniform_1D(data.name, parseFloat(slider.value));
+        }
+        function vectorField(container, data)
+        {            
+            var field = container.querySelector(`#${data.name}`);
+
+            var value = field.querySelector("#value");
+            value.innerHTML = data.default;
+            
+            var picker = field.getElementsByTagName("canvas")[0];
+            picker.width = picker.clientWidth;
+            picker.height = picker.clientHeight;
+            picker.style.display = "none";
+
+            var context = picker.getContext('2d');
+
+            var minX = parseFloat(data.min.x);
+            var maxX = parseFloat(data.max.x);
+            var minY = parseFloat(data.min.y);
+            var maxY = parseFloat(data.max.y);
+
+            var popup = false;
+            var mouseDown = false;
+            
+            value.addEventListener('click', (event) => {
+                popup = !popup;
+                picker.style.display = popup ? "block" : "none";
+            });
+            picker.addEventListener('mousedown', (event) => {
+                mouseDown = true;
+
+                pickPosition(event);
+            });
+            picker.addEventListener('mousemove', (event) => {
+
+                if(!mouseDown) return;
+
+                pickPosition(event);                
+            });
+            picker.addEventListener('mouseup', (event) => {
+                mouseDown = false;
+            });
+                        
+            function pickPosition(event)
+            {
+                var rect = picker.getBoundingClientRect();
+                var clickX = event.pageX - picker.offsetLeft;
+                var clickY = event.clientY - rect.top;
+                
+                var uvX = (clickX) / rect.width;
+                var uvY = 1 - (clickY) / rect.height;
+
+                var x = minX + (maxX - minX) * uvX;
+                var y = minY + (maxY - minY) * uvY;
+
+                drawPoint(picker, context, clickX, clickY, 'red', 5);
+                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+                
+                setUniform_2D(data.name, x, y);              
+            }
+        }
+        
+        function setUniform_1D(name, value)
+        {
+            if(sandbox == null)
+            {
+                sandbox = new GlslCanvas(canvas)
+            }
+            
+            sandbox.setUniform(name, value);
+            
+        }
+        function setUniform_2D(name, x, y)
+        {
+            if(sandbox == null)
+            {
+                sandbox = new GlslCanvas(canvas)
+            }
+            
+            sandbox.setUniform(name, x, y);
+            
+        }
+
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+      }
+        
     });
-</script> -->
-<pre><code class="language-cs">void function()
+    
+</script>
+
+
+
+</p>
+<pre><code class="language-glsl">//language - glsl
+uniform float u_input0;
+uniform float u_input1;
+uniform float u_input2;
+uniform vec2 u_position;
+
+void main() 
 {
-    int a = 0;
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
 
-    function();
+    uv = mix(vec2(-1), vec2(1), uv);
 
-    abcdefghijk();
-    ABCDEFGHIJK();
+    float dist = sdf_cross(uv, u_position);
+    vec4 color = vec4(u_input0, u_input1, u_input2, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
 }
 </code></pre>
-<p>Line</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>LineLine</p>
-<p>Line</p>
+<h3 id="測試其他東西嵌入">測試其他東西嵌入</h3>
+<p>嵌入圖片資源</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/common/gears.gif" alt="image display error, please report: [/common/gears.gif]">
+    <p style="opacity: 0.5">
+        comment
+    </p>
+</div>
+
+
+<p>嵌入音效資源</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_throw.mp3">
+    <source src="/common/audio_throw.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_throw.mp3");
+    audio.volume = "0.8"
+</script>
+<h2 id="原生模板功能測試">原生模板功能測試</h2>
+<p>code block</p>
+<pre><code class="language-cs">void Start()
+{
+    Debug.Log(&quot;Hello World&quot;);
+}
+</code></pre>
     </div>
 </article>
 
@@ -1005,7 +1134,17 @@ void main()
         </div>
     </div>
     <div class="sidebar-item sidebar-toc">
-        <h3>Table of Contents</h3><nav id="TableOfContents"></nav></div>
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#自定義功能測試">自定義功能測試</a>
+      <ul>
+        <li><a href="#測試著色器嵌入">測試著色器嵌入</a></li>
+        <li><a href="#測試其他東西嵌入">測試其他東西嵌入</a></li>
+      </ul>
+    </li>
+    <li><a href="#原生模板功能測試">原生模板功能測試</a></li>
+  </ul>
+</nav></div>
 </aside>
 
         </div>
@@ -1092,7 +1231,17 @@ void main()
     
     <div class="sidebar-item sidebar-toc">
         <h3>Table of Contents</h3>
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#自定義功能測試">自定義功能測試</a>
+      <ul>
+        <li><a href="#測試著色器嵌入">測試著色器嵌入</a></li>
+        <li><a href="#測試其他東西嵌入">測試其他東西嵌入</a></li>
+      </ul>
+    </li>
+    <li><a href="#原生模板功能測試">原生模板功能測試</a></li>
+  </ul>
+</nav>
     </div>
     
     

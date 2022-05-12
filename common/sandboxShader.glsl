@@ -49,12 +49,14 @@ float sdf_cross(vec2 uv, vec2 mouse)
 void main() 
 {
     vec2 uv = gl_FragCoord.xy / u_resolution.xx;
-    vec2 mouse = u_mouse / u_resolution.xx;
+    // vec2 mouse = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
 
     float dist = sdf_cross(uv, u_position);
     vec4 color = vec4(u_input0, u_input1, u_input2, 1);
     gl_FragColor = mix(vec4(0), color, 1.0 - dist);
-    // gl_FragColor = mix(vec4(0), vec4(1), 1.0 - dist);
     // gl_FragColor = u_color;
 }
 
