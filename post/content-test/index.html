@@ -112,6 +112,140 @@
 
 
 
+<script type="text/javascript">
+
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+        var datas = JSON.parse(input.dataset.inputs);
+
+        for(var i = 0; i < fields.length; i ++)
+        {
+            setInput(sandbox, fields[i], datas[i]);
+        }
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                console.log("int value");
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                console.log("float value");
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                console.log("vec value");
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+
 
 
 
@@ -234,7 +368,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;708 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;164 words
 </span>
 
 
@@ -254,7 +388,6 @@
 <h2 id="自定義功能測試">自定義功能測試</h2>
 <h3 id="測試著色器嵌入">測試著色器嵌入</h3>
 <p>測試一般 Shader 嵌入
-
 
 
 
@@ -355,10 +488,7 @@ void main()
 
 
 
-
     
-
-
 
 
 
@@ -432,7 +562,7 @@ void main()
 
 
 
-<div id="shader-1" class="shader-container">
+<div class="shader-container">
     <canvas class="glslCanvas" data-fragment="#ifdef GL_ES
 precision mediump float;
 #endif
@@ -500,7 +630,7 @@ void main()
 
 " width="300" height="300"></canvas>
 
-    <div class="shader-input">
+    <div class="shader-input" data-inputs="[{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_input0&#34;,&#34;type&#34;:&#34;float&#34;},{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_input1&#34;,&#34;type&#34;:&#34;float&#34;},{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_input2&#34;,&#34;type&#34;:&#34;float&#34;}]">
         
         
         
@@ -556,149 +686,6 @@ void main()
 
 
 
-<script type="text/javascript">
-
-    window.addEventListener('load', function () 
-    {
-        var datas = JSON.parse("[{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input0\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input1\u0022,\u0022type\u0022:\u0022float\u0022},{\u0022default\u0022:\u00220.5\u0022,\u0022max\u0022:\u00221\u0022,\u0022min\u0022:\u00220\u0022,\u0022name\u0022:\u0022u_input2\u0022,\u0022type\u0022:\u0022float\u0022}]");
-
-        var container = document.getElementById("shader-1");   
-        var canvas = container.getElementsByTagName("canvas")[0];
-        var sandbox = new GlslCanvas(canvas);
-      
-        for(var i = 0; i < datas.length; i ++)
-        {
-            var data = datas[i];
-            
-
-            switch(data.type)
-            {
-                case "int":
-                    rangeField(container, data, 0);
-                    break;
-
-                case "float":
-                    rangeField(container, data, 2);
-                    break;
-
-                case "vector":
-                    vectorField(container, data);
-                    break;
-            }
-        }
-        
-        function rangeField(container, data, fixed)
-        {
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            var slider = field.getElementsByTagName("input")[0];
-
-            slider.addEventListener('input', (event) => {
-                var input = parseFloat(slider.value);
-
-                setUniform_1D(data.name, input);
-                value.innerHTML = input.toFixed(fixed);
-            });
-
-            value.innerHTML = parseFloat(slider.value).toFixed(fixed);
-            setUniform_1D(data.name, parseFloat(slider.value));
-        }
-        function vectorField(container, data)
-        {            
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            value.innerHTML = data.default;
-            
-            var picker = field.getElementsByTagName("canvas")[0];
-            picker.width = picker.clientWidth;
-            picker.height = picker.clientHeight;
-            picker.style.display = "none";
-
-            var context = picker.getContext('2d');
-
-            var minX = parseFloat(data.min.x);
-            var maxX = parseFloat(data.max.x);
-            var minY = parseFloat(data.min.y);
-            var maxY = parseFloat(data.max.y);
-
-            var popup = false;
-            var mouseDown = false;
-            
-            value.addEventListener('click', (event) => {
-                popup = !popup;
-                picker.style.display = popup ? "block" : "none";
-            });
-            picker.addEventListener('mousedown', (event) => {
-                mouseDown = true;
-
-                pickPosition(event);
-            });
-            picker.addEventListener('mousemove', (event) => {
-
-                if(!mouseDown) return;
-
-                pickPosition(event);                
-            });
-            picker.addEventListener('mouseup', (event) => {
-                mouseDown = false;
-            });
-                        
-            function pickPosition(event)
-            {
-                var rect = picker.getBoundingClientRect();
-                var clickX = event.pageX - picker.offsetLeft;
-                var clickY = event.clientY - rect.top;
-                
-                var uvX = (clickX) / rect.width;
-                var uvY = 1 - (clickY) / rect.height;
-
-                var x = minX + (maxX - minX) * uvX;
-                var y = minY + (maxY - minY) * uvY;
-
-                drawPoint(picker, context, clickX, clickY, 'red', 5);
-                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
-                
-                setUniform_2D(data.name, x, y);              
-            }
-        }
-        
-        function setUniform_1D(name, value)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, value);
-            
-        }
-        function setUniform_2D(name, x, y)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, x, y);
-            
-        }
-
-        function drawPoint(canvas, context, x, y, color, radius) 
-        {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.fillStyle = "red"; 
-            
-            context.beginPath();
-            context.arc(x, y, radius, 0, 2 * Math.PI, true);
-            context.fill();
-      }
-        
-    });
-    
-</script>
 
 
 
@@ -713,10 +700,7 @@ void main()
 
 
 
-
     
-
-
 
 
 
@@ -752,7 +736,7 @@ void main()
 
 
 
-<div id="shader-0" class="shader-container">
+<div class="shader-container">
     <canvas class="glslCanvas" data-fragment="#ifdef GL_ES
 precision mediump float;
 #endif
@@ -820,7 +804,7 @@ void main()
 
 " width="300" height="300"></canvas>
 
-    <div class="shader-input">
+    <div class="shader-input" data-inputs="[{&#34;default&#34;:{&#34;x&#34;:&#34;0&#34;,&#34;y&#34;:&#34;0&#34;},&#34;max&#34;:{&#34;x&#34;:&#34;1&#34;,&#34;y&#34;:&#34;1&#34;},&#34;min&#34;:{&#34;x&#34;:&#34;-1&#34;,&#34;y&#34;:&#34;-1&#34;},&#34;name&#34;:&#34;u_position&#34;,&#34;type&#34;:&#34;vector&#34;}]">
         
         
         
@@ -845,149 +829,6 @@ void main()
 
 
 
-<script type="text/javascript">
-
-    window.addEventListener('load', function () 
-    {
-        var datas = JSON.parse("[{\u0022default\u0022:{\u0022x\u0022:\u00220\u0022,\u0022y\u0022:\u00220\u0022},\u0022max\u0022:{\u0022x\u0022:\u00221\u0022,\u0022y\u0022:\u00221\u0022},\u0022min\u0022:{\u0022x\u0022:\u0022-1\u0022,\u0022y\u0022:\u0022-1\u0022},\u0022name\u0022:\u0022u_position\u0022,\u0022type\u0022:\u0022vector\u0022}]");
-
-        var container = document.getElementById("shader-0");   
-        var canvas = container.getElementsByTagName("canvas")[0];
-        var sandbox = new GlslCanvas(canvas);
-      
-        for(var i = 0; i < datas.length; i ++)
-        {
-            var data = datas[i];
-            
-
-            switch(data.type)
-            {
-                case "int":
-                    rangeField(container, data, 0);
-                    break;
-
-                case "float":
-                    rangeField(container, data, 2);
-                    break;
-
-                case "vector":
-                    vectorField(container, data);
-                    break;
-            }
-        }
-        
-        function rangeField(container, data, fixed)
-        {
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            var slider = field.getElementsByTagName("input")[0];
-
-            slider.addEventListener('input', (event) => {
-                var input = parseFloat(slider.value);
-
-                setUniform_1D(data.name, input);
-                value.innerHTML = input.toFixed(fixed);
-            });
-
-            value.innerHTML = parseFloat(slider.value).toFixed(fixed);
-            setUniform_1D(data.name, parseFloat(slider.value));
-        }
-        function vectorField(container, data)
-        {            
-            var field = container.querySelector(`#${data.name}`);
-
-            var value = field.querySelector("#value");
-            value.innerHTML = data.default;
-            
-            var picker = field.getElementsByTagName("canvas")[0];
-            picker.width = picker.clientWidth;
-            picker.height = picker.clientHeight;
-            picker.style.display = "none";
-
-            var context = picker.getContext('2d');
-
-            var minX = parseFloat(data.min.x);
-            var maxX = parseFloat(data.max.x);
-            var minY = parseFloat(data.min.y);
-            var maxY = parseFloat(data.max.y);
-
-            var popup = false;
-            var mouseDown = false;
-            
-            value.addEventListener('click', (event) => {
-                popup = !popup;
-                picker.style.display = popup ? "block" : "none";
-            });
-            picker.addEventListener('mousedown', (event) => {
-                mouseDown = true;
-
-                pickPosition(event);
-            });
-            picker.addEventListener('mousemove', (event) => {
-
-                if(!mouseDown) return;
-
-                pickPosition(event);                
-            });
-            picker.addEventListener('mouseup', (event) => {
-                mouseDown = false;
-            });
-                        
-            function pickPosition(event)
-            {
-                var rect = picker.getBoundingClientRect();
-                var clickX = event.pageX - picker.offsetLeft;
-                var clickY = event.clientY - rect.top;
-                
-                var uvX = (clickX) / rect.width;
-                var uvY = 1 - (clickY) / rect.height;
-
-                var x = minX + (maxX - minX) * uvX;
-                var y = minY + (maxY - minY) * uvY;
-
-                drawPoint(picker, context, clickX, clickY, 'red', 5);
-                value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
-                
-                setUniform_2D(data.name, x, y);              
-            }
-        }
-        
-        function setUniform_1D(name, value)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, value);
-            
-        }
-        function setUniform_2D(name, x, y)
-        {
-            if(sandbox == null)
-            {
-                sandbox = new GlslCanvas(canvas)
-            }
-            
-            sandbox.setUniform(name, x, y);
-            
-        }
-
-        function drawPoint(canvas, context, x, y, color, radius) 
-        {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            context.fillStyle = "red"; 
-            
-            context.beginPath();
-            context.arc(x, y, radius, 0, 2 * Math.PI, true);
-            context.fill();
-      }
-        
-    });
-    
-</script>
 
 
 
