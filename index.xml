@@ -1,57 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AngusChan-blog</title>
+    <title>AngusChan&#39;s Devlog</title>
     <link>https://angus945.github.io/</link>
-    <description>Recent content on AngusChan-blog</description>
+    <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 14 Apr 2022 20:08:25 +0800</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>test a</title>
-      <link>https://angus945.github.io/post/test-a/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-a/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test b</title>
-      <link>https://angus945.github.io/post/test-b/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-b/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test c</title>
-      <link>https://angus945.github.io/post/test-c/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-c/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test d</title>
-      <link>https://angus945.github.io/post/test-d/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-d/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test e</title>
-      <link>https://angus945.github.io/post/test-e/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-e/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
     <item>
       <title>重新施工中~~~~</title>
       <link>https://angus945.github.io/post/content-test/</link>
@@ -59,15 +14,6 @@
       
       <guid>https://angus945.github.io/post/content-test/</guid>
       <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://angus945.github.io/devlog/test/</link>
-      <pubDate>Wed, 06 Apr 2022 21:56:44 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/devlog/test/</guid>
-      <description>&lt;p&gt;Test Page for Post&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -86,6 +32,24 @@
       
       <guid>https://angus945.github.io/post/about-learning/</guid>
       <description>前言 因為不適合台灣的制式教育，於是我在高二時開始了在家自學，持續到現在已經三年了，雖然出了點意外導致還沒讀大學，但學習並不會因此而中斷~ 剛好，自己的網站在幾個月前完成了，就藉此機會分享自己對於學習這件</description>
+    </item>
+    
+    <item>
+      <title>我的第一個專案 - 投擲地牢</title>
+      <link>https://angus945.github.io/devlog/drop-throw-dungeon/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/drop-throw-dungeon/</guid>
+      <description>第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ? 再來是年初時也離我非學的期中報告蠻接近的，但</description>
+    </item>
+    
+    <item>
+      <title>建立人生的第一個網站</title>
+      <link>https://angus945.github.io/devlog/build-the-fistsite/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/build-the-fistsite/</guid>
+      <description></description>
     </item>
     
     <item>

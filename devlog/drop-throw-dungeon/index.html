@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>我的第一個專案 - 投擲地牢 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="人生中第一個完成的遊戲專案，開發過程及心得" />
+
+
+<meta name="keywords" content="devlog" />
+
+
+<meta property="og:title" content="我的第一個專案 - 投擲地牢" />
+<meta name="twitter:title" content="我的第一個專案 - 投擲地牢" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/drop-throw-dungeon/" /><meta property="og:description" content="人生中第一個完成的遊戲專案，開發過程及心得" />
+<meta name="twitter:description" content="人生中第一個完成的遊戲專案，開發過程及心得" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-05-18T00:00:00+00:00" /><meta property="article:modified_time" content="2021-05-18T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'G-LTVT6WYDT4';
+    window.ga_api = '';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.f7f979510a7bc05869213079d893c73427c5b7586aa1611927345d0b27b29111.css" integrity="sha256-9/l5UQp7wFhpITB52JPHNCfFt1hqoWEZJzRdCyeykRE=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.5cd8349e5c843c09e5079c4325ad56f5ab1b21d818fccb06382eb77dd40f1b99.css" integrity="sha256-XNg0nlyEPAnlB5xDJa1W9asbIdgY/MsGOC63fdQPG5k=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.719cb331710118852454a0ece9cbe2f547b6e927f809264f15d4d192ba341820.css" integrity="sha256-cZyzMXEBGIUkVKDs6cvi9Ue26Sf4CSZPFdTRkro0GCA=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+        var datas = JSON.parse(input.dataset.inputs);
+
+        for(var i = 0; i < fields.length; i ++)
+        {
+            setInput(sandbox, fields[i], datas[i]);
+        }
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+<script type="text/javascript">
+    var seed = Math.random();
+    var frag_codes = ("#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\n\r\n#ifdef BUFFER_0\r\n\r\nvec4 readBuffer(sampler2D buffer, vec2 coord)\r\n{\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    return texture2D(buffer, uv, 0.0);\r\n}\r\n\r\nvoid main() \r\n{\r\n    float width = (u_resolution.x);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n    vec2 mouse = u_mouse.xy \/ width;\r\n\r\n    float value = readBuffer(u_buffer0, gl_FragCoord.xy).a;\r\n    float circle = 1. - ceil(length(uv - mouse) - .05);\r\n\r\n    value = value * 0.95;\r\n    value = max(value, circle);\r\n\r\n    value = clamp(value, 0.0, 1.0);\r\n    gl_FragColor = vec4(value);\r\n}\r\n\r\n#else\r\n\r\nvoid main() {\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    vec4 color = texture2D(u_buffer0, uv, 0.0);\r\n\r\n    gl_FragColor = color;\r\n}\r\n\r\n#endif\u003cslice-identifier\u003e#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\nfloat random(vec2 st)\r\n{\r\n    return fract(sin(dot(st.xy, vec2(12.9898, u_seed))) * 43758.5453123);\r\n}\r\nvoid main()\r\n{\r\n    float width = min(u_resolution.x, u_resolution.y);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n\r\n    vec2 cell = fract(uv * 10.0);\r\n    vec2 coord = floor(uv * 10.0);\r\n\r\n    float value = random(coord.xy);\r\n    gl_FragColor = vec4(value, value, value, 1);\r\n    \/\/ gl_FragColor = vec4(cell, 0, 1);\r\n    \/\/ gl_FragColor = vec4(coord \/ 10.0, 0, 1);\r\n}\r\n\u003cslice-identifier\u003e").split("\u003cslice-identifier\u003e");
+    var frag_shader_code = randomFragment();
+  
+    function randomFragment()
+    {
+        var max = frag_codes.length - 1;
+        var rndIndex = Math.floor(Math.random() * max);
+        var rndFragment = frag_codes[rndIndex];
+    
+        return rndFragment;
+    }
+    
+    var canvas = document.createElement("canvas");
+    canvas.classList.add("shader-background");
+    
+    function updateSize()
+    {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    function updatePosition()
+    {
+        canvas.style.top = 0;
+    }
+    
+    window.addEventListener('load', function () 
+    {
+        var sandbox = new GlslCanvas(canvas);
+        
+        sandbox.load(frag_shader_code);
+        sandbox.setUniform("u_seed", seed);
+        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+        
+        updateSize();
+        updatePosition();
+    });
+    
+    window.onresize = function()
+    {
+        updateSize();
+        updatePosition();
+    }
+
+    
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">subTitle</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/devlog/drop-throw-dungeon/">我的第一個專案 - 投擲地牢</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-05-18
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;3935 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/devlog">devlog</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        
+        
+        
+        
+        
+        <h2 id="第一個完成的專案">第一個完成的專案</h2>
+<p>在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢</p>
+<p>當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ?</p>
+<p>再來是年初時也離我非學的期中報告蠻接近的，但在這之前我的所有專案都只有做出簡單的雛型就停止了，許多構想都超出當時的能力範圍，所以就想說嘗試做個相較完整的專案來當報告的成品</p>
+<p>綜合以上因素，於是我就開始這項專案了 !</p>
+<p>事隔多年有些細節已經忘了，這篇文章是根據過去開發紀錄所寫出的濃縮版開發過程以及心得</p>
+<h3 id="道具和庫存系統">道具和庫存系統</h3>
+<p>在兩年前我做了個道具和庫存系統，它被做的相當泛用，導入就後也不需要多做設定，只要建立道具的 Prefab 然後設置識別 ID 和屬性就好，其他如放置、疊加和丟棄的功能都被包括在系統中</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/inventory.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/inventory.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>所以也是專案中使用的核心系統之一 ~</p>
+<h2 id="投擲地牢-">投擲地牢 !</h2>
+<p>遊戲的核心機制是所有道具都只能&quot;丟&quot;，劍不要用丟的來傷害敵人，魔法棒要用丟的來施放法術 (ﾟ∀。)</p>
+<h3 id="瞄準投擲">瞄準，投擲</h3>
+<p>遊戲的核心機制 - 投擲 !</p>
+<p>拾取和投擲 - 當玩家靠近道具時可以使用空白鍵拾取，並透過滑鼠左鍵瞄準投擲
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_throw.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_throw.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>輔助瞄準 - 瞄準時會出現線條和準心，並使用程式為瞄準線添加簡單的動畫，線條虛線是透過滾動 uv 來達成的
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_aiming.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_aiming.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>穿牆修復 - 遊戲中高速移動的物體，可能因為幀數不足而發生穿隧的現象，最簡單的修正方法就是對道具經過的路徑進行設限投射，檢查路徑上是否有障礙物
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/drop-throw-dungeon/player_raycast.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_raycast.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>起初在玩家進行瞄準時，會有些微的攝影機縮放和位移來增加視線範圍，但後來測試感覺效果不好就移除了，因為不斷的撿取和投擲會導致畫面劇烈晃動&hellip;但仔細想想應該是我程式的設計不良的問題才對 D:</p>
+<h3 id="更多道具">更多道具</h3>
+<p>添加更多不同的道具和武器來提高遊戲豐富度，不過為了保留一點神秘感這裡就不詳細解釋它們的效果</p>
+<p>基礎武器 - 基本的武器，各自都有不同的耐久以及殺傷力
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_basis.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_basis.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>消耗品 - 只能投擲一次的消耗性道具，但是可以疊加好幾個並連續投擲
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_throwing.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_throwing.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>法杖 - 兩種類型的魔法杖，相當稀有的掉落物
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicWand.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicWand.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>魔法劍 - 三種擁有擁有特殊效果的的魔法劍，只能和商人購買
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicSword.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicSword.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>藥水瓶 - 一次性使用的藥水瓶，扔出破裂後會有殺傷性的特殊效果
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_potions.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_potions.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>炸彈 - 投擲後可以造成範圍殺傷的兩種炸彈，也可能炸傷玩家
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_bombs.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_bombs.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>錢幣 - 遊戲中的貨幣，可以和商人購買稀有武器或是也拿來丟
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_money.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_money.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>心形容器 - 遊戲中的回復手段，只要使用它來投擲敵人就行，而回復的血量就是疊加數量
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_healHeart.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_healHeart.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>不同武器獲得的機率不同，適合對付的對象也有差異，所以玩家無法使用一種武器打遍天下</p>
+<p>並且因為只能夠投擲的設計，扔出武器後就得移動去找其他武器或嘗試撿回來，這意味著玩家必須在不斷移動的同時尋找目標及適合的武器 !</p>
+<h3 id="敵人">敵人</h3>
+<p>為了不讓玩家一個人在地圖中自嗨，需要為遊戲添加一個敵人 !</p>
+<p>追逐 - 最最基本的敵人行為，不斷朝玩家的方向移動
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_tracing.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_tracing.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>攻擊 - 敵人攻擊前會有會有簡單的變色和停頓作為前搖，然後朝玩家當時所在的方向進行衝撞，所以玩家必須要在攻擊前就先離開敵人的攻擊路徑才能避開攻擊
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_attack.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>道具 - 擊殺怪物後會隨機掉落不同的基礎道具以及落符合自身定位的特殊道具，這也是玩家的主要道具來源
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_treasure.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_treasure.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<h3 id="更多敵人">更多敵人</h3>
+<p>除了只有追逐行為的基礎敵人，我也添加了幾種額外的類型來提高遊戲的豐富度及環境的變化性</p>
+<p>射手 - 遠距離射擊的射手怪物，待在原地蓄能一段時間後朝玩家方向發射子彈，能夠在遠處干擾玩家並為進戰敵人提供掩護，當玩家靠近時會試圖保持距離，用有較少的血量
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_shooter.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_shooter.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>砲手 - 遠距離投射滯物的史萊姆，如果玩家待在滯留物裡的話會持續受到傷害，能夠有效限制玩家的的走位範圍，移動緩慢但是血量很厚
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_slime.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_slime.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>召喚師 - 每隔一段時間會產生出一隻小鬼來追擊玩家的召喚師，如果不將他解決將會永無止境的產生小鬼出來</p>
+<p>
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_summoner.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_summoner.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+小鬼 - 速度較快但血量和攻擊範圍較小的惱人小鬼們，在玩家缺少武器時能夠施加當大的壓力，只會被召喚師召喚 (註: 這是舊圖，其中一隻後來變成召喚師了)
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_little.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_little.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>為了防止地圖被小鬼淹沒，所以每隻召喚師都有各自的召喚上限，當存活的小鬼達到一定數量時就會暫停召喚</p>
+<p>補給怪 - 他們是會掉落回血道具和錢幣的特殊怪物，頭上有小圖案來提示自己會掉落什麼道具
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_supply.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_supply.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>這幾種類型就能為遊戲添加相當大的刺激和變化性，究竟該先處理眼下最具威脅性的追兵? 還是不斷進行遠距離干擾的射手? 又或者是召喚一堆小鬼讓戰鬥沒完沒了的召喚師?</p>
+<p>每種類型的怪物累積到一定程度後都會相當棘手，所以玩家必須不斷改變戰略才能在混亂的環境中存活</p>
+<h3 id="地圖">地圖</h3>
+<p>遊戲中使用的地圖和場景，我是使用 Unity Tile map 布置的</p>
+<p>地圖 - 遊戲的地圖，使用簡單的錐形來提高開闊感，左右和下方是怪物出現的位置
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>陷阱 - 當有目標從上方經過時會戳傷目標的尖刺陷阱
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_trap.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_trap.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>清除 - 因為敵人不斷的掉落道具會導致場景中有過多的武器在地上，所以系統會在每一波開始時清除場景中的低階道具
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_clear.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_clear.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>儲存箱 - 用來保存道具的箱子，避免道具被清除 (但好像沒什麼用，因為我把清除道具改成只清除低階的了)
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_chest.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_chest.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>商人 - 在地圖最上方的商人，玩家可以收集金幣並向商人購買稀有武器，只需要將錢錢扔給他並撿起道具就好，商人會判斷金幣的疊加數量是否足以購買道具 :D
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_shop.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_shop.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<h3 id="遊戲循環">遊戲循環</h3>
+<p>遊戲採用的是街機類型的無盡模式，所以會持續進行直到玩家死亡，這種模式實作簡單也不需要花太多時間設計關卡，相當適合作為遊戲原型的運作機制</p>
+<p>標題 - 簡單布置了一下進入遊戲時的標題畫面
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_title.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_title.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>轉場 - 使用主角和南瓜頭的動畫當轉場畫面 :D
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_translate.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_translate.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>暫停 - 遊戲中可以使用 esc 暫停，畫面右上角的問號可以觀看教學說明
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_pause.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_pause.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>生怪 - 遊戲中的怪物以會一波一波形式出現，前六波為遊戲的教學關，分別展示了各種不同類型的怪物，每波結束後可以撿起地圖中央的獎勵道具進入下一波
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rrv-nQufUzQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>雖然遊戲是採用無盡模式，但我的生怪算法讓會每一波的難度提升相當顯著，敵人會隨著波數提高而逐漸增加總數量、出生頻率以及場景中的最大怪物數量，以避免重複作業的冗餘和煩躁感，反而會提供不斷提升難度的刺激感</p>
+<h3 id="音效">音效</h3>
+<p>遊戲的音效是我找 CC0 素材後再自己使用 Audacity 調整出來的，修改頻率音高等等，讓音效更適合遊戲的風格
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/audio.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/audio.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>這裡就稍微放幾個音效展示 ~</p>
+<p>投擲道具 - 高速飛行的風切聲</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_throw.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_throw.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_throw.mp3");
+    audio.volume = "0.8"
+</script>
+<p>丟棄道具 - 娛樂性較高的彈出音效 XD</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_dropItem.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_dropItem.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_dropItem.mp3");
+    audio.volume = "0.8"
+</script>
+<p>購買道具 - 當然是標誌性的收銀機音效 !</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_cashRegister.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_cashRegister.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_cashRegister.mp3");
+    audio.volume = "0.8"
+</script>
+<p>道具損毀 - 響亮的金屬碎裂聲</p>
+
+
+
+
+
+
+
+<audio controls id="audio_feedback_itemBroken.mp3">
+    <source src="/devlog/drop-throw-dungeon/feedback_itemBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_feedback_itemBroken.mp3");
+    audio.volume = "0.5"
+</script>
+<p>金屬武器擊中 - ㄎㄧㄤ</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_metalHit.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_metalHit.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_metalHit.mp3");
+    audio.volume = "0.8"
+</script>
+<p>藥水瓶碎裂 - ㄆㄧㄤ ~</p>
+
+
+
+
+
+
+
+<audio controls id="audio_audio_glassBroken.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_glassBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_glassBroken.mp3");
+    audio.volume = "0.8"
+</script>
+<p>除了編輯音效以外，使用程式微調音高也是遊戲中慣用的技巧，音效在撥放時都會隨機的小幅度修改音高和音量，以避免重複播放造成的單一感</p>
+<h3 id="背景音樂">背景音樂</h3>
+<p>遊戲的背景音樂是使用 8bit 音樂編曲軟體 BoscaCeoilscaCeoil 製作的，但因為過去沒學過任何編曲知識，所以只有透過簡單的旋律循環來當背景音樂
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>雖然只使用簡單的旋律，不過可以透過程式來動點手腳讓它不那麼單調 ~</p>
+<p>我將音樂輸出為三個不同音軌，並讓它們它們隨著遊戲的狀態進行切換，在標題和暫停畫面時只會撥放單純的節拍，而另外兩種主旋律會在波數和中間的休息狀態切換
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/e6j6wsMgWWk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+<p>不知道為何輸出的不同音軌有些延遲，所以也得想辦法修正到完全同步
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm_tracks.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm_tracks.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<h3 id="回饋加強">回饋加強</h3>
+<p>如果要在混亂的環境讓玩家知道重要的資訊，遊戲必須要透過某些明顯的手段提示玩家才行，但又不能因此而破壞破壞沉浸感，所以適合的選項就是特效和音效 !</p>
+<p>敵人攻擊 - 敵人攻擊前也添加了粒子效果提示，並且攻擊後會在路徑上留下一些粒子來提高辨識度
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_attack.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>玩家受傷 - 受傷時添加了攝影機晃動和短暫的放慢效果來提高辨識度，大量的粒子來提示敵人的攻擊方向以及沉悶的受傷音效加強衝擊感，效果挺不錯的 :D
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_hurt.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_hurt.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>道具損毀 - 道具損毀時會播放明顯的音效及特效加強打擊感
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_itemborken.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_itemborken.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>除此之外也還有不少的細節，但這專案已經是一年前的了所以我也忘了很多東西，剩下的就請在遊戲中體驗吧 ~</p>
+<h2 id="結語">結語</h2>
+<p>專案的開發時長為一個多月，作為第一次完成的遊戲作品，我其實是相當滿意的 :D</p>
+<p>附上最終遊玩畫面的影片，然後幀數有點低是我電腦錄製的問題 ):</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rp3Zl8S3GPg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="真正的構想">真正的構想</h3>
+<p>其實專案一開始不是要做成街機遊戲的無盡模式，我真正想做的其實是一個半解謎類型的地牢</p>
+<p>原本道具系統裡還有簡單的物理交互效果，玩家可以透過投擲道具來進行物理解謎</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/real_interaction.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/real_interaction.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>差不多就是投擲木製品引火把門燒開，用或丟水球滅火來通過一些區域這種，想說先做的簡單的小地圖測試，成功了在擴大</p>
+<p>但這還是超出當時的能力範圍了，沒辦法繼續做下去，所以才想說先做個簡單一點的，讓4月的報告有東西可以看，就改成現在這種一波一波打怪的形式</p>
+<p>機會還是希望能真正完成它啦，現在的程式能力和觀念相比過去也提升許多了，但最缺的就是時間了 D:</p>
+<p><a href="https://home.gamer.com.tw/creationDetail.php?sn=4680762" target="_blank">當時的心得文章</a></p>
+<p><a href="https://home.gamer.com.tw/creationCategory.php?owner=angus945&amp;c=450268" target="_blank">完整的開發日誌</a></p>
+<h3 id="缺陷">缺陷</h3>
+<p>當然以現在的角度來看遊戲中有許多相當大缺陷</p>
+<p>首先我當時沒有數據化的概念，每個道具都用 Prefab 儲存在資料夾中會佔據相當大的空間，而且在遊戲場景裝也都用各自的實體物件儲存，而不是透過道具容器替換資料達到重用物件的做法</p>
+<p>那個道具系統在這專案之後就被我封存了，不過在那時我對這個系統還蠻滿意的 :D</p>
+<p>再來是對設計模式和遊戲架構的熟悉度不夠，封裝沒做好而且維護性也不高導致程式碼就像打結的毛線球一樣，重頭再做一次都比修改來的輕鬆吧</p>
+<p>最後是設計上的問題 - 難度過高，因為自己在測試的時候不斷試玩導致很容易習慣遊戲的難度，於是就不斷提高遊戲難度導致對不熟悉遊戲的人來說相當困難，果然外部意見真的很重要阿</p>
+<h3 id="改進">改進</h3>
+<p>以現在的程度能夠做的比以前好很多，首先是上面說到的數據化，我可以用一個文字檔儲存各種道具的數據或行為，例如: json</p>
+<pre><code class="language-json">Item.json
+{
+  &quot;damage&quot;: 20,
+  &quot;durable&quot;: 5,
+  &quot;onPickup&quot;: PushAround 70 12,
+  &quot;onBroken&quot;: Explosion 10 45,
+  &quot;onHit&quot;: Heal 5 3,
+}
+</code></pre>
+<p>並且自訂語法解析器來分析道具的文字檔，在載入文件時創建簡單的道具資料庫，當遊戲要使用這個時就能把事件和參數寫入道具容器中</p>
+<p>更進一步說不定還能讓遊戲支援模組開發，不過這都是之後的事了，果然最缺的永遠都是時間 D:</p>
+<h3 id="使用資源">使用資源</h3>
+<p>專案使用的美術資源為 itch.io 作者 <a href="https://itch.io/profile/0x72" target="_blank">0x72</a> 繪製的 CC0 Pixel art</p>
+<p><a href="https://0x72.itch.io/16x16-dungeon-tileset" target="_blank">16x16 Dungeon Tileset</a></p>
+<p><a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">dungeontileset-ii</a></p>
+<p>至於音效是到處去 CC0 素材庫拼湊的，所以詳細的來源我也忘了 D:</p>
+<h3 id="感謝閱讀-">感謝閱讀 !</h3>
+<p>感謝各位閱讀到這 &lt;3</p>
+<p>遊戲最終發佈在 Itch.io 上，有興趣的可以下載來玩玩看 - <a href="https://angus945.itch.io/drop-throw-dungeon" target="_blank">點我下載</a></p>
+<p>也有在國內的遊戲平台木屋發佈歐 - <a href="https://indiecabin.net/project/DropThrowDungeon_p" target="_blank">點我下載</a></p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#第一個完成的專案">第一個完成的專案</a>
+      <ul>
+        <li><a href="#道具和庫存系統">道具和庫存系統</a></li>
+      </ul>
+    </li>
+    <li><a href="#投擲地牢-">投擲地牢 !</a>
+      <ul>
+        <li><a href="#瞄準投擲">瞄準，投擲</a></li>
+        <li><a href="#更多道具">更多道具</a></li>
+        <li><a href="#敵人">敵人</a></li>
+        <li><a href="#更多敵人">更多敵人</a></li>
+        <li><a href="#地圖">地圖</a></li>
+        <li><a href="#遊戲循環">遊戲循環</a></li>
+        <li><a href="#音效">音效</a></li>
+        <li><a href="#背景音樂">背景音樂</a></li>
+        <li><a href="#回饋加強">回饋加強</a></li>
+      </ul>
+    </li>
+    <li><a href="#結語">結語</a>
+      <ul>
+        <li><a href="#真正的構想">真正的構想</a></li>
+        <li><a href="#缺陷">缺陷</a></li>
+        <li><a href="#改進">改進</a></li>
+        <li><a href="#使用資源">使用資源</a></li>
+        <li><a href="#感謝閱讀-">感謝閱讀 !</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

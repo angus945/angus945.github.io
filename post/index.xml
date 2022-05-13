@@ -1,57 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Post on AngusChan-blog</title>
+    <title>Post on AngusChan&#39;s Devlog</title>
     <link>https://angus945.github.io/post/</link>
-    <description>Recent content in Post on AngusChan-blog</description>
+    <description>Recent content in Post on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 08 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/post/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>test a</title>
-      <link>https://angus945.github.io/post/test-a/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-a/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test b</title>
-      <link>https://angus945.github.io/post/test-b/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-b/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test c</title>
-      <link>https://angus945.github.io/post/test-c/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-c/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test d</title>
-      <link>https://angus945.github.io/post/test-d/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-d/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
-    <item>
-      <title>test e</title>
-      <link>https://angus945.github.io/post/test-e/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/post/test-e/</guid>
-      <description>test page for recommand</description>
-    </item>
-    
     <item>
       <title>重新施工中~~~~</title>
       <link>https://angus945.github.io/post/content-test/</link>

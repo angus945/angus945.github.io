@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>devlog on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/devlog/</link>
+    <description>Recent content in devlog on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的第一個專案 - 投擲地牢</title>
+      <link>https://angus945.github.io/devlog/drop-throw-dungeon/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/drop-throw-dungeon/</guid>
+      <description>第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ? 再來是年初時也離我非學的期中報告蠻接近的，但</description>
+    </item>
+    
+    <item>
+      <title>建立人生的第一個網站</title>
+      <link>https://angus945.github.io/devlog/build-the-fistsite/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/build-the-fistsite/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

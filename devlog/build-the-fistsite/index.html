@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>建立人生的第一個網站 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
+
+
+<meta name="keywords" content="website, devlog" />
+
+
+<meta property="og:title" content="建立人生的第一個網站" />
+<meta name="twitter:title" content="建立人生的第一個網站" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/build-the-fistsite/" /><meta property="og:description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
+<meta name="twitter:description" content="從頭學習前端和使用 Hugo 建立網站的過程" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-05-11T00:00:00+00:00" /><meta property="article:modified_time" content="2021-05-11T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'G-LTVT6WYDT4';
+    window.ga_api = '';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.f7f979510a7bc05869213079d893c73427c5b7586aa1611927345d0b27b29111.css" integrity="sha256-9/l5UQp7wFhpITB52JPHNCfFt1hqoWEZJzRdCyeykRE=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.5cd8349e5c843c09e5079c4325ad56f5ab1b21d818fccb06382eb77dd40f1b99.css" integrity="sha256-XNg0nlyEPAnlB5xDJa1W9asbIdgY/MsGOC63fdQPG5k=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.719cb331710118852454a0ece9cbe2f547b6e927f809264f15d4d192ba341820.css" integrity="sha256-cZyzMXEBGIUkVKDs6cvi9Ue26Sf4CSZPFdTRkro0GCA=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+        var datas = JSON.parse(input.dataset.inputs);
+
+        for(var i = 0; i < fields.length; i ++)
+        {
+            setInput(sandbox, fields[i], datas[i]);
+        }
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+<script type="text/javascript">
+    var seed = Math.random();
+    var frag_codes = ("#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\n\r\n#ifdef BUFFER_0\r\n\r\nvec4 readBuffer(sampler2D buffer, vec2 coord)\r\n{\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    return texture2D(buffer, uv, 0.0);\r\n}\r\n\r\nvoid main() \r\n{\r\n    float width = (u_resolution.x);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n    vec2 mouse = u_mouse.xy \/ width;\r\n\r\n    float value = readBuffer(u_buffer0, gl_FragCoord.xy).a;\r\n    float circle = 1. - ceil(length(uv - mouse) - .05);\r\n\r\n    value = value * 0.95;\r\n    value = max(value, circle);\r\n\r\n    value = clamp(value, 0.0, 1.0);\r\n    gl_FragColor = vec4(value);\r\n}\r\n\r\n#else\r\n\r\nvoid main() {\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    vec4 color = texture2D(u_buffer0, uv, 0.0);\r\n\r\n    gl_FragColor = color;\r\n}\r\n\r\n#endif\u003cslice-identifier\u003e#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\nfloat random(vec2 st)\r\n{\r\n    return fract(sin(dot(st.xy, vec2(12.9898, u_seed))) * 43758.5453123);\r\n}\r\nvoid main()\r\n{\r\n    float width = min(u_resolution.x, u_resolution.y);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n\r\n    vec2 cell = fract(uv * 10.0);\r\n    vec2 coord = floor(uv * 10.0);\r\n\r\n    float value = random(coord.xy);\r\n    gl_FragColor = vec4(value, value, value, 1);\r\n    \/\/ gl_FragColor = vec4(cell, 0, 1);\r\n    \/\/ gl_FragColor = vec4(coord \/ 10.0, 0, 1);\r\n}\r\n\u003cslice-identifier\u003e").split("\u003cslice-identifier\u003e");
+    var frag_shader_code = randomFragment();
+  
+    function randomFragment()
+    {
+        var max = frag_codes.length - 1;
+        var rndIndex = Math.floor(Math.random() * max);
+        var rndFragment = frag_codes[rndIndex];
+    
+        return rndFragment;
+    }
+    
+    var canvas = document.createElement("canvas");
+    canvas.classList.add("shader-background");
+    
+    function updateSize()
+    {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    function updatePosition()
+    {
+        canvas.style.top = 0;
+    }
+    
+    window.addEventListener('load', function () 
+    {
+        var sandbox = new GlslCanvas(canvas);
+        
+        sandbox.load(frag_shader_code);
+        sandbox.setUniform("u_seed", seed);
+        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+        
+        updateSize();
+        updatePosition();
+    });
+    
+    window.onresize = function()
+    {
+        updateSize();
+        updatePosition();
+    }
+
+    
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">subTitle</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/devlog/build-the-fistsite/">建立人生的第一個網站</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-05-11
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;3234 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/website">website</a>&nbsp;<a href="/tags/devlog">devlog</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        
+        
+        
+        
+        
+        <h2 id="為什麼想建立網站">為什麼想建立網站</h2>
+<p>在寫完我的第一篇長篇教學後，想說寫的還蠻不錯的(自肥)所以也想搞個個人網站用來專放教學和筆記，不然平時都只在巴哈上發紀錄文，文章和日誌混在一起有點亂，如果未來想當履歷交什麼的也不方便</p>
+<p>再來是巴哈上的客群主要都中文語系這塊，我也希望能和一些外國的人交流，開拓視野而且多少能和讓英文進步一點</p>
+<p>剛開始找了些可以用來建立部落格的網站或工具 Blogger、wordpress，挑來挑去都不是很理想，所以最後還是決定好好網頁前端自己做，使用 Hugo 搭配 github page 來建立靜態網站</p>
+<p>這是我學程式三年到現在第一次接觸前端，在這之前連 html 都不會，但有了過去兩年多的自學經驗現在從頭學也不是一項難事&hellip;至少以能建立自己的網站為標準不是難事 :P</p>
+<h3 id="參考資料">參考資料</h3>
+<p>我主要參考為 Mike Dane 的 Web Development 系列教學，其餘的就是邊做邊查資料</p>
+<p>HTML - <a href="https://www.youtube.com/watch?v=Ny1g1eQHnCI&amp;list=PLLAZ4kZ9dFpMSXUYwxDFOvyxlssug29Fu" target="_blank">HTML - Build a Website | Tutorial</a></p>
+<p>CSS - <a href="https://www.youtube.com/watch?v=WZ2uqGkHoR0&amp;list=PLLAZ4kZ9dFpNO7ScZFr-WTmtcBY3AN1M7" target="_blank">CSS - Style Your Website | Tutorial</a></p>
+<p>Javascript - <a href="https://www.youtube.com/watch?v=_jlPywA4dKs&amp;list=PLLAZ4kZ9dFpPQbcrA-SzALJeFm23tPrAI" target="_blank">Javascript - Programming Language | Tutorial</a></p>
+<p>Hugo - <a href="https://www.youtube.com/watch?v=qtIqKaDlqXo&amp;list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3" target="_blank">Hugo - Static Site Generator | Tutorial</a></p>
+<h3 id="選擇主題">選擇主題</h3>
+<p>Hugo 有不少的社群製作的<a href="https://themes.gohugo.io/" target="_blank">主題</a>能夠使用，導入也很方便，只需要下載後放進 themes 資料夾就好</p>
+<p>花了一些時間找到理想的主題，也就是你們現在看到的這個，版面乾淨簡潔而且內文格式和 Notion 蠻相似的，然後又有畫面自適應功能所以就決定是他了 - <a href="https://themes.gohugo.io/hugo-theme-even/" target="_blank">Even</a></p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/theme.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/theme.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="修修改改">修修改改</h2>
+<p>決定了主題之後就拿裡面的模板開始修改，主要考量到時間因素而且畢竟我主修也不是網頁，拿現有的模板來修改才是最適合的選項</p>
+<p>雖然這個主題已經有不少功能，但有些地方還是要自己做才能達成目的，把寫好的文章放進去看看，摸一摸主題裡提供的模板之後就可以開始修修改改了</p>
+<h3 id="教學主頁">教學主頁</h3>
+<p>為了讓不同系列的教學有各自的主頁面，我使用資料夾將相同系列的教學放在一起，使用 _index.md 當主頁面文件</p>
+<p>這個主題中 _index.md 使用的模板是 section，但主題中提供的 section template 只有列出資料夾文件的功能，無法讀取 _index.md 的內容來顯示，所以為了達到教學主頁面的目的我必須修改預設模板</p>
+<p>首先是內容的部分，只需要使用 Hugo 語法的<code>{{ .Content }}</code>就能取得，但模板會一口氣畫出所以有文字內容，這樣子我的子頁面就只能在主頁面的最底部列出了</p>
+<p>但我希望搭配文字內容列出頁面，所以我也將原本模板中的列出功能移至獨立的 shortcode 中，好讓我在 markdown 文件中自由選擇列表放置的位置</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/listoutPages.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/listoutPages.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="上一章-下一章">上一章 下一章</h3>
+<p>有了主頁面，接下來就是教學頁面</p>
+<p>基本的頁面使用的是 single template，沒什麼好修改的，但為了讓訪客在閱讀系列教學時更方便，我將教學頁面的底部添加移動到上下章的連結</p>
+<p>因為基本頁面中不會有資料夾其他頁面的資訊，所以我得讓它先取得父層後在取得這個資料夾裏的所有頁面，並且用索引值找出上下章</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/nextPage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/nextPage.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="圖片顯示">圖片顯示</h3>
+<p>文章中會附上圖片來搭配閱讀，雖然 Hugo 本身就有提供基本的 shortcode 來方便使用者在文章中放置圖片，但它必須輸入絕對路徑才能找到圖片位置</p>
+<p>由於個人習慣，我的資料夾結構和檔案名稱都比較複雜，所以輸入絕對路徑還是不夠方便，為了省去一長串路徑我也寫了一個 shortcode 來自動找圖片的路徑，透過文檔的路徑來存取在 static 資料家中相同相對路徑的圖片</p>
+<p>這樣一來我只需要輸入圖片的名稱就能顯示圖片了 <code>resources/image displayImage.jpg</code></p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/displayImage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/displayImage.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="閱讀更多">閱讀更多</h3>
+<p>網站預計會有幾種類型的文章 - 教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只有單純的列出頁面標題而已</p>
+<p>我想要有大標題、描述和文章預覽圖，所以又再修改了一次 section temaplet (因為也是資料夾頁面)，並使用文章的前題變量來選擇頁面類型</p>
+<p>主題中本來就有提供相關的 css 使用了，所以我直接參考主題網站裏提供的 <a href="https://themes.gohugo.io/theme/hugo-theme-even/" target="_blank">Demo</a> 來做出期望的列表樣式，並且添加覽圖在區塊的右側</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/readmore.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/readmore.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>然後我也讓顯示標題下面列出標籤用來簡單分類文章</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tags.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tags.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="翻頁列表">翻頁列表</h3>
+<p>我使用&quot;閱讀更多&quot;的區塊來列出當前類型的所有文章，但文章多的時候全部列出來會好長一條，所以要限制一次列出的數目方便閱讀</p>
+<p>我透過 Hugo 語法裡陣列的 first 和 last 寫了一個 partials 模板來取得特定範圍間的頁面，使用時只需要輸入起點和數目就好</p>
+<p>使用迴圈將不同範圍中的頁面包進 Html 容器中，再透過 javascript 判斷 URL paramater 的當前的頁面來切換容器顯示</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/turnpageList.gif" alt="image display error, please report: [/devlog/build-the-fistsite/turnpageList.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>這麼做有個問題就是，每次翻頁瀏覽器都會把完整的列表載入一次，再重新設置 display 一部分，不過就先到此為止吧，等文章量大到載入變慢再來找解決方法 :P</p>
+<h3 id="文章標籤">文章標籤</h3>
+<p>Hugo 本身就有很方便的標籤系統，他能夠自動產生符合列出文章的頁面，但因為所我有文章都使用同個標籤系統，所以自動產生的頁面會把所有類型的文章混在一起</p>
+<p>為了防止這點，我在標籤頁面裡加了 tabview 來對列出的文章進行過濾，這是我網站裡花最多時間研究的部份了，因為使用的主題裡完全沒有相似的功能，所以得找 javascript 資料來讀</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tagTabview1.gif" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>最後在使用主題裡的 css 修改出一個適合 tabview 的版本</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tagTabview2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>參考資料</p>
+<p><a href="https://www.w3schools.com/howto/howto_js_tabs.asp" target="_blank">tabview</a></p>
+<h3 id="移除滾動條">移除滾動條</h3>
+<p>沒什麼特別的原因，因為很醜所以我將滾動條移除了，為了移除他我也花了不少時間，瀏覽器差異讓人很頭痛，修好一個壞一個 ):</p>
+<p>在經過不斷的查詢和修改後，終於整理出了能夠在三大瀏覽器上正常運作的 css 腳本了</p>
+<pre><code class="language-CSS">html,body
+{
+    overflow: auto;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+body::-webkit-scrollbar
+{
+    display: none;
+}
+</code></pre>
+<h3 id="內容導覽">內容導覽</h3>
+<p>把滾動條移除後為了讓讀者能夠知道自己看到哪裡，文章需要在提供內容導覽才行</p>
+<p>雖然這個主題本身就有提供內容導覽的模板，但因為我的修修改改不小心弄壞他了，所以也花不少時間才找出被弄壞的地方</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tableOfContent.png" alt="image display error, please report: [/devlog/build-the-fistsite/tableOfContent.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>修的時候也注意到主題作者 javascript 裡的計算有些錯誤，在判斷距離的時候少減了一次間隔導致畫面捲動時看起來不順暢，修正後就大功告成了</p>
+<pre><code class="language-js">//                              there
+if (scrollTop &lt; minScrollTop - SPACING)
+{
+  $toc.css(tocState.start);
+} 
+</code></pre>
+<h3 id="關於頁面">關於頁面</h3>
+<p>自我介紹在網站中也是不可或缺的部分，我的關於頁面有兩個部分 - 自我介紹和網站介紹，原本寫在同一個文件中但發現用串列的放介紹不太合適，所以就拿之前的 tabview 過來修出顯示內容的功能</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/about.gif" alt="image display error, please report: [/devlog/build-the-fistsite/about.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="語言設置">語言設置</h3>
+<p>多語言 - 這也是我建立網站的主要目的之一，Hugo因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/languages1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>在訪客第一次進入網站主頁面的時候，我使用 javascript 取得訪客時瀏覽器使用的語言重新導向到對應的網頁</p>
+<p>以及做出一個語言選擇器，點擊展開後就可以切換語言，並用 localstorage 來儲存語言設置</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/languages2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="網站託管">網站託管</h3>
+<p>我使用 github page 來進行網站託管，真的是蠻方便的功能，只需要建立一個 username.github.io 的儲存庫後，將建置的 public 資料夾上傳就好了 :D</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/2MsN8gpT6jY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="留言板">留言板</h3>
+<p>為了不讓網站像只有我一個人自嗨，所以能和其他人交流的首要選項就是添加留言板 !</p>
+<p><del>我使用的是 Disqus 提供的留言板，Hugo 中只需要設置&hellip;</del> NOPE Disqus 會強制塞一個比留言板本身還要大的廣告 ==</p>
+<p>所以我改用 <a href="https://commentbox.io/" target="_blank">CommentBox</a> 當網站的留言版了，它裝起來方便而且版面也乾淨許多，留言時也可以方便的登入</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/comment.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/comment.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="流量追蹤">流量追蹤</h3>
+<p>為了分析訪客的偏好和類型，我使用 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析</p>
+<p>這個主題裡也有完成流量追蹤的功能，只不過 Google Analytics 更新到第 4 版了，主題裡的功能似乎過舊所以就重新找了資料修正&hellip;雖然我也不確定現在這樣有沒有正確運作</p>
+<p>噢看來他有效，我一直忘記要放進 html 的 <code>&lt;head&gt;&lt;/head&gt;</code> 裡了
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/googleAnaltics.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/googleAnaltics.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+</p>
+<p>但是不斷的編輯網頁造成有九成的流量都是我自己，所以要設定流量過濾</p>
+<blockquote>
+<p>目前僅顯示通用 Analytics (分析) 資源的篩選器。篩選器無法套用到 Google Analytics (分析) 4 資源。
+Displaying Filters for Universal Analytics Properties only. Filters cannot be applied to Google Analytics 4 Properties.</p>
+</blockquote>
+<p>因為版本問題無法設置過濾，找半天才發現好像是版本的問題，舊版本的過濾器沒辦法用所以要到 &ldquo;資源 &gt; 資料設定 &gt; 資料篩選器&rdquo; 那裏設定才行</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/analtics_filte1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/analtics_filte1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>總之現在流量追蹤也能正常運作了</p>
+<p>參考資料</p>
+<p><a href="https://support.google.com/analytics/thread/89743745/can-t-create-filter-views-even-though-i-have-all-admin-accesses-in-all-levels?hl=en" target="_blank">Can&rsquo;t create filter views even though I have all ADMIN accesses in all levels </a></p>
+<p><a href="https://support.google.com/analytics/answer/10108813" target="_blank">GA4 Data filters</a></p>
+<h3 id="主頁面">主頁面</h3>
+<p>該有的功能都有了，最後也是最重要的就是 - 主頁面</p>
+<p>但其實網站剛做出來我對主頁面還沒想法，所以就先打招呼之後列出幾個文章給訪客看</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/home.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/home.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>簡單也有簡單的好 ~</p>
+<h2 id="結語">結語</h2>
+<p>從開始學網頁到現在大概一個月了，說真的也做到有點厭倦了，雖然過程學到不少東西但畢竟興趣不在這，所以見好就收吧 !</p>
+<p>總結來說，我對人生中的第一個網頁相當滿意，和我期望中的網頁幾乎一模一樣 :D</p>
+<p>之後會在這裡更新一些教學、筆記和部落格文章，敬請期待 ~</p>
+<h3 id="翻譯文章">翻譯文章</h3>
+<p>英文版本的文章我是透過 Grammarly 進行輔助翻譯的，但我的英文能力慘不忍睹，希望翻譯的過程能多少讓我進步點 D:</p>
+<p>我在修正文章翻譯時都會保留筆記的，如果可以請能幫我指出翻譯文章的句子和語法的錯誤 Orz</p>
+<h3 id="感謝閱讀">感謝閱讀</h3>
+<p>感謝閱讀到這裡的各位，你們的關注是我持續更新的最大動力 !</p>
+<p>順帶一題，如果是從其他地方點進網站的人可能不清楚，我的主要活動地點在巴哈姆特的<a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank">小屋</a>，那裏幾乎每天都會發日誌，歡迎來蕉流蕉流 ~</p>
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#為什麼想建立網站">為什麼想建立網站</a>
+      <ul>
+        <li><a href="#參考資料">參考資料</a></li>
+        <li><a href="#選擇主題">選擇主題</a></li>
+      </ul>
+    </li>
+    <li><a href="#修修改改">修修改改</a>
+      <ul>
+        <li><a href="#教學主頁">教學主頁</a></li>
+        <li><a href="#上一章-下一章">上一章 下一章</a></li>
+        <li><a href="#圖片顯示">圖片顯示</a></li>
+        <li><a href="#閱讀更多">閱讀更多</a></li>
+        <li><a href="#翻頁列表">翻頁列表</a></li>
+        <li><a href="#文章標籤">文章標籤</a></li>
+        <li><a href="#移除滾動條">移除滾動條</a></li>
+        <li><a href="#內容導覽">內容導覽</a></li>
+        <li><a href="#關於頁面">關於頁面</a></li>
+        <li><a href="#語言設置">語言設置</a></li>
+        <li><a href="#網站託管">網站託管</a></li>
+        <li><a href="#留言板">留言板</a></li>
+        <li><a href="#流量追蹤">流量追蹤</a></li>
+        <li><a href="#主頁面">主頁面</a></li>
+      </ul>
+    </li>
+    <li><a href="#結語">結語</a>
+      <ul>
+        <li><a href="#翻譯文章">翻譯文章</a></li>
+        <li><a href="#感謝閱讀">感謝閱讀</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
