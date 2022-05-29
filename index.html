@@ -467,23 +467,6 @@
 
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-    
-        
-    
-
-
-
 
 
 
@@ -620,7 +603,7 @@
 
 
 <script>
-    const datas = shuffle(JSON.parse("[{\u0022date\u0022:\u00222022-05-14\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222022-05-14\u0022,\u0022summary\u0022:\u0022概括 \u002b 計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，目的在透過 GPU 的大量核心進行平行運算，以獲得效能。正式開始前先稍微帶過計算著色器的兩大難點： 並行運算 與 資料傳遞 並行運算 \u002b 首\u0022,\u0022tags\u0022:[\u0022Unity\u0022,\u0022ComputeShader\u0022],\u0022title\u0022:\u0022【筆記】入門重點，計算著色器\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/draft\/compute-shader\/\u0022,\u0022word\u0022:\u00226100 words\u0022},{\u0022date\u0022:\u00222022-04-08\u0022,\u0022feature\u0022:\u0022\/common\/gears.gif\u0022,\u0022lastmod\u0022:\u00222022-04-08\u0022,\u0022summary\u0022:\u0022\\u003cp\\u003e測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試\\u003c\/p\\u003e\u0022,\u0022tags\u0022:[\u0022test\u0022,\u0022shader\u0022],\u0022title\u0022:\u0022重新施工中~~~~\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/post\/content-test\/\u0022,\u0022word\u0022:\u0022199 words\u0022},{\u0022date\u0022:\u00222021-07-27\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222021-07-27\u0022,\u0022summary\u0022:\u0022備註：舊版文章，有些內容可能沒有修復 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是被孤立的，像素不能和其他\u0022,\u0022tags\u0022:[\u0022shader\u0022],\u0022title\u0022:\u0022距離場的數學原理以及圖形繪製方法\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/learn\/shader-sdf-animation\/\u0022,\u0022word\u0022:\u0022761 words\u0022},{\u0022date\u0022:\u00222021-07-24\u0022,\u0022feature\u0022:\u0022\/learn\/resources\/unity-beginner\/unityLogo.jpg\u0022,\u0022lastmod\u0022:\u00222021-07-24\u0022,\u0022summary\u0022:\u0022自學 Unity 了兩年多，過程中也累積了不少學習資源，雖然過去有整理過幾次，但都很雜亂反而會讓初學者不知道怎麼起步，所以這次我又重新整理了一系列適合初學者的學習資源，希望們幫上有需要的人。 這篇是給入門者的\\u0026qu\u0022,\u0022tags\u0022:[\u0022resources\u0022,\u0022unity\u0022],\u0022title\u0022:\u0022整理給 Unity 初學者的起步資源\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/learn\/resources\/unity-beginner\/\u0022,\u0022word\u0022:\u00222431 words\u0022},{\u0022date\u0022:\u00222021-06-29\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222022-05-06\u0022,\u0022summary\u0022:\u0022前言 因為不適合台灣的制式教育，於是我在高二時開始了在家自學，持續到現在已經三年了，雖然出了點意外導致還沒讀大學，但學習並不會因此而中斷~ 剛好，自己的網站在幾個月前完成了，就藉此機會分享自己對於學習這件\u0022,\u0022tags\u0022:[\u0022learning\u0022],\u0022title\u0022:\u0022自學了三年，分享自己對學習的看法和感想\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/post\/about-learning\/\u0022,\u0022word\u0022:\u00227681 words\u0022},{\u0022date\u0022:\u00222021-05-18\u0022,\u0022feature\u0022:\u0022\/devlog\/drop-throw-dungeon\/featured.jpg\u0022,\u0022lastmod\u0022:\u00222021-05-18\u0022,\u0022summary\u0022:\u0022第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ? 再來是年初時也離我非學的期中報告蠻接近的，但\u0022,\u0022tags\u0022:[\u0022devlog\u0022],\u0022title\u0022:\u0022我的第一個專案 - 投擲地牢\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/devlog\/drop-throw-dungeon\/\u0022,\u0022word\u0022:\u00223935 words\u0022},{\u0022date\u0022:\u00222021-05-11\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222021-05-11\u0022,\u0022summary\u0022:\u0022\u0022,\u0022tags\u0022:[\u0022website\u0022,\u0022devlog\u0022],\u0022title\u0022:\u0022建立人生的第一個網站\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/devlog\/build-the-fistsite\/\u0022,\u0022word\u0022:\u00223234 words\u0022}]"));
+    const datas = shuffle(JSON.parse("[{\u0022date\u0022:\u00222022-04-08\u0022,\u0022feature\u0022:\u0022\/common\/gears.gif\u0022,\u0022lastmod\u0022:\u00222022-04-08\u0022,\u0022summary\u0022:\u0022\\u003cp\\u003e測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試\\u003c\/p\\u003e\u0022,\u0022tags\u0022:[\u0022test\u0022,\u0022shader\u0022],\u0022title\u0022:\u0022重新施工中~~~~\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/post\/content-test\/\u0022,\u0022word\u0022:\u0022199 words\u0022},{\u0022date\u0022:\u00222021-07-27\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222021-07-27\u0022,\u0022summary\u0022:\u0022備註：舊版文章，有些內容可能沒有修復 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是被孤立的，像素不能和其他\u0022,\u0022tags\u0022:[\u0022shader\u0022],\u0022title\u0022:\u0022距離場的數學原理以及圖形繪製方法\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/learn\/shader-sdf-animation\/\u0022,\u0022word\u0022:\u0022761 words\u0022},{\u0022date\u0022:\u00222021-07-24\u0022,\u0022feature\u0022:\u0022\/learn\/resources\/unity-beginner\/unityLogo.jpg\u0022,\u0022lastmod\u0022:\u00222021-07-24\u0022,\u0022summary\u0022:\u0022自學 Unity 了兩年多，過程中也累積了不少學習資源，雖然過去有整理過幾次，但都很雜亂反而會讓初學者不知道怎麼起步，所以這次我又重新整理了一系列適合初學者的學習資源，希望們幫上有需要的人。 這篇是給入門者的\\u0026qu\u0022,\u0022tags\u0022:[\u0022resources\u0022,\u0022unity\u0022],\u0022title\u0022:\u0022整理給 Unity 初學者的起步資源\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/learn\/resources\/unity-beginner\/\u0022,\u0022word\u0022:\u00222431 words\u0022},{\u0022date\u0022:\u00222021-06-29\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222022-05-06\u0022,\u0022summary\u0022:\u0022前言 因為不適合台灣的制式教育，於是我在高二時開始了在家自學，持續到現在已經三年了，雖然出了點意外導致還沒讀大學，但學習並不會因此而中斷~ 剛好，自己的網站在幾個月前完成了，就藉此機會分享自己對於學習這件\u0022,\u0022tags\u0022:[\u0022learning\u0022],\u0022title\u0022:\u0022自學了三年，分享自己對學習的看法和感想\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/post\/about-learning\/\u0022,\u0022word\u0022:\u00227681 words\u0022},{\u0022date\u0022:\u00222021-05-18\u0022,\u0022feature\u0022:\u0022\/devlog\/drop-throw-dungeon\/featured.jpg\u0022,\u0022lastmod\u0022:\u00222021-05-18\u0022,\u0022summary\u0022:\u0022第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ? 再來是年初時也離我非學的期中報告蠻接近的，但\u0022,\u0022tags\u0022:[\u0022devlog\u0022],\u0022title\u0022:\u0022我的第一個專案 - 投擲地牢\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/devlog\/drop-throw-dungeon\/\u0022,\u0022word\u0022:\u00223935 words\u0022},{\u0022date\u0022:\u00222021-05-11\u0022,\u0022feature\u0022:null,\u0022lastmod\u0022:\u00222021-05-11\u0022,\u0022summary\u0022:\u0022\u0022,\u0022tags\u0022:[\u0022website\u0022,\u0022devlog\u0022],\u0022title\u0022:\u0022建立人生的第一個網站\u0022,\u0022url\u0022:\u0022https:\/\/angus945.github.io\/devlog\/build-the-fistsite\/\u0022,\u0022word\u0022:\u00223234 words\u0022}]"));
 
     const count = "5";
     

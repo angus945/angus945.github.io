@@ -358,7 +358,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;6100 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;6160 words
 </span>
 
 
@@ -644,10 +644,10 @@ SomeFunction(int index) { }
 
 
 
-https://github.com/angus945/angus945.github.io/tree/main/learn/shader/compute-shader/
 
-
-
+<a href="https://github.com/angus945/angus945.github.io/tree/main/learn/shader/compute-shader/examples" target="_blank">
+    如果想直接觀看完整腳本也可以點我
+</a>
 
 <h3 id="回顧腳本-">回顧腳本 +</h3>
 <p>首先，回顧一次預設的計算著色器結構，分析一下這個著色器做了哪些事，以及要傳遞什麼資料，和要怎麼使用這個腳本。</p>
@@ -916,17 +916,15 @@ resultBuffer.GetData(result);
 
 
 <p>參考資料 <a href="http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/" target="_blank">GPU Ray Tracing in Unity</a></p>
-<h2 id="感謝閱讀">感謝閱讀</h2>
-<p>計算著色器學習筆記，在知道了 GPU Instance 和 GPU Culling ，我也接觸到計算著色器這項工具了，正式踏入 GPU 並行的世界。但查了不少資料感覺都不夠直觀，或是一口氣跳到太深的內容（像是直接教 RayTracing 的文章）。</p>
-<p>於是在花幾個月實做和研究各項些東西後，嘗試用自己的理解重新解釋一次計算著色器，這篇筆記就是我整理出關於計算著色器的幾項重點。</p>
-<p>摸到 Command Buffer</p>
-<h3 id="參考資料--">參考資料 -</h3>
-<p><a href="https://docs.microsoft.com/zh-tw/windows/win32/direct3dhlsl/sm5-attributes-numthreads" target="_blank">https://docs.microsoft.com/zh-tw/windows/win32/direct3dhlsl/sm5-attributes-numthreads</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/368307575" target="_blank">https://zhuanlan.zhihu.com/p/368307575</a>
-<a href="https://zhuanlan.zhihu.com/p/376801370" target="_blank">https://zhuanlan.zhihu.com/p/376801370</a></p>
-<p><a href="https://youtu.be/9RHGLZLUuwc" target="_blank">https://youtu.be/9RHGLZLUuwc</a></p>
-<p><a href="https://www.youtube.com/watch?v=BrZ4pWwkpto" target="_blank">https://www.youtube.com/watch?v=BrZ4pWwkpto</a></p>
-<!-- TODO 範例完整腳本 -->
+<h2 id="感謝閱讀-">感謝閱讀 +</h2>
+<p>在知道了 GPU Instance 和 GPU Culling ，我也接觸到計算著色器這項工具了，正式踏入 GPU 並行的世界。但查了不少資料感覺都不夠直觀，不然就是一口氣跳到太深的內容（像是直接教 RayTracing 的文章）。</p>
+<p>於是在花幾個月實做和研究各項些東西後，嘗試用自己的理解重新解釋一次計算著色器，這篇筆記就是我整理出關於計算著色器的幾項重點，在這裡分享給各位，如果有任何建議都歡迎提出。</p>
+<h3 id="參考資料-">參考資料 +</h3>
+<p><a href="https://docs.microsoft.com/zh-tw/windows/win32/direct3dhlsl/sm5-attributes-numthreads" target="_blank">numthreads</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/368307575" target="_blank">Unity中ComputeShader的基础介绍与使用</a></p>
+<p><a href="https://youtu.be/9RHGLZLUuwc" target="_blank">Coding Adventure: Compute Shaders</a></p>
+<p><a href="https://www.youtube.com/watch?v=BrZ4pWwkpto" target="_blank">Getting Started with Compute Shaders in Unity</a></p>
+
     </div>
 </article>
 
@@ -1062,9 +1060,9 @@ resultBuffer.GetData(result);
         <li><a href="#更多例子-">更多例子 +</a></li>
       </ul>
     </li>
-    <li><a href="#感謝閱讀">感謝閱讀</a>
+    <li><a href="#感謝閱讀-">感謝閱讀 +</a>
       <ul>
-        <li><a href="#參考資料--">參考資料 -</a></li>
+        <li><a href="#參考資料-">參考資料 +</a></li>
       </ul>
     </li>
   </ul>
