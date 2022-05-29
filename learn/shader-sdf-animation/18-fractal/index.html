@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>十八章 分形繪製 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="AngusChan&#39;s website" />
+
+
+
+<meta property="og:title" content="十八章 分形繪製" />
+<meta name="twitter:title" content="十八章 分形繪製" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/learn/shader-sdf-animation/18-fractal/" /><meta property="og:description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾賓斯基三角形 Sierpinski triangle 為例進行解說。 謝爾賓斯基三角形 首先解說一下他" />
+<meta name="twitter:description" content="標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾賓斯基三角形 Sierpinski triangle 為例進行解說。 謝爾賓斯基三角形 首先解說一下他" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-07-28T10:20:32+08:00" /><meta property="article:modified_time" content="2021-07-28T10:20:32+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'G-LTVT6WYDT4';
+    window.ga_api = '';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.5cd8349e5c843c09e5079c4325ad56f5ab1b21d818fccb06382eb77dd40f1b99.css" integrity="sha256-XNg0nlyEPAnlB5xDJa1W9asbIdgY/MsGOC63fdQPG5k=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.54a276cdb630bc8fd5752d641e77a5834b7d3d2b7284f5506104257a71ad81c1.css" integrity="sha256-VKJ2zbYwvI/VdS1kHnelg0t9PStyhPVQYQQlenGtgcE=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+        var datas = JSON.parse(input.dataset.inputs);
+
+        for(var i = 0; i < fields.length; i ++)
+        {
+            setInput(sandbox, fields[i], datas[i]);
+        }
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+<script type="text/javascript">
+    var seed = Math.random();
+    var frag_codes = ("#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\n\r\n#ifdef BUFFER_0\r\n\r\nvec4 readBuffer(sampler2D buffer, vec2 coord)\r\n{\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    return texture2D(buffer, uv, 0.0);\r\n}\r\n\r\nvoid main() \r\n{\r\n    float width = (u_resolution.x);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n    vec2 mouse = u_mouse.xy \/ width;\r\n\r\n    float value = readBuffer(u_buffer0, gl_FragCoord.xy).a;\r\n    float circle = 1. - ceil(length(uv - mouse) - .05);\r\n\r\n    value = value * 0.95;\r\n    value = max(value, circle);\r\n\r\n    value = clamp(value, 0.0, 1.0);\r\n    gl_FragColor = vec4(value);\r\n}\r\n\r\n#else\r\n\r\nvoid main() {\r\n    vec2 uv = gl_FragCoord.xy \/ u_resolution.xy;\r\n    vec4 color = texture2D(u_buffer0, uv, 0.0);\r\n\r\n    gl_FragColor = color;\r\n}\r\n\r\n#endif\u003cslice-identifier\u003e#ifdef GL_ES\r\nprecision mediump float;\r\n#endif\r\n\r\nuniform vec2 u_resolution;\r\nuniform vec2 u_mouse;\r\nuniform float u_time;\r\n\r\nuniform float u_seed;\r\n\r\nuniform sampler2D u_buffer0;\r\n\r\nfloat random(vec2 st)\r\n{\r\n    return fract(sin(dot(st.xy, vec2(12.9898, u_seed))) * 43758.5453123);\r\n}\r\nvoid main()\r\n{\r\n    float width = min(u_resolution.x, u_resolution.y);\r\n    vec2 uv = gl_FragCoord.xy \/ width;\r\n\r\n    vec2 cell = fract(uv * 10.0);\r\n    vec2 coord = floor(uv * 10.0);\r\n\r\n    float value = random(coord.xy);\r\n    gl_FragColor = vec4(value, value, value, 1);\r\n    \/\/ gl_FragColor = vec4(cell, 0, 1);\r\n    \/\/ gl_FragColor = vec4(coord \/ 10.0, 0, 1);\r\n}\r\n\u003cslice-identifier\u003e").split("\u003cslice-identifier\u003e");
+    var frag_shader_code = randomFragment();
+  
+    function randomFragment()
+    {
+        var max = frag_codes.length - 1;
+        var rndIndex = Math.floor(Math.random() * max);
+        var rndFragment = frag_codes[rndIndex];
+    
+        return rndFragment;
+    }
+    
+    var canvas = document.createElement("canvas");
+    canvas.classList.add("shader-background");
+    
+    function updateSize()
+    {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    function updatePosition()
+    {
+        canvas.style.top = 0;
+    }
+    
+    window.addEventListener('load', function () 
+    {
+        var sandbox = new GlslCanvas(canvas);
+        
+        sandbox.load(frag_shader_code);
+        sandbox.setUniform("u_seed", seed);
+        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+        
+        updateSize();
+        updatePosition();
+    });
+    
+    window.onresize = function()
+    {
+        updateSize();
+        updatePosition();
+    }
+
+    
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">subTitle</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/learn/shader-sdf-animation/18-fractal/">十八章 分形繪製</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-07-28
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;1574 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+
+        <p>標準化空間，大小為 10</p>
+<h2 id="分形">分形</h2>
+<p>距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾賓斯基三角形 Sierpinski triangle 為例進行解說。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/preview.gif" alt="image display error, please report: [/learn/shader/sdf-animation/preview.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="謝爾賓斯基三角形">謝爾賓斯基三角形</h3>
+<p>首先解說一下他的結構，首先從一個三角形開始，並在正中間挖空四分之一大小的反三角形，讓將原本的結構分成三等份的小三角形。並接著對小三角形再次執行相同動作，當進行無限次迭代後就能夠獲得謝爾賓斯基三角形。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/introduction_0.gif" alt="image display error, please report: [/learn/shader/sdf-animation/introduction_0.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>雖然說是挖空，但我們其實可以反向用 &ldquo;組合&rdquo; 的方式來理解謝爾賓斯基三角形。我們先使用三個小三角形組成一層的解謝爾賓斯基三角形，在用這層組出第二層、接著第三層最終迭代無限次。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/introduction_1.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/introduction_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>從組合的方式理解做起來就簡單多了，我們只要不斷繪製三角形距離場就能夠組合出解謝爾賓斯基三角形。</p>
+<p>雖然繪製一大堆三角形來組合能達到效果，但是在距離場的世界中我們有更方便的手段可以使用 - 鏡射，使用鏡射將三角形複製三份組成第一層，並再次對整體鏡射出第二層、第三層。</p>
+<p>進行數次迭代後最終只需要繪製一次三角形距離場就能夠形成謝爾賓斯基三角形 !</p>
+<h3 id="三角形">三角形</h3>
+<p>首先回到基本的三角形開始，我們可以使用先前的正多邊形距離場達到目的，繪製一個邊數為三的正三角形，把半徑定在最上方以便使用。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">fixed4 sierpinskiTriangle(float2 uv)
+{
+    float radius = 2;
+
+    return SDF_Regular(uv, radius, 3);
+}
+</code></pre>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float distance = sierpinskiTriangle(uv);
+
+return AntiAliasingColor(distance);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/triangle_0.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/triangle_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>接著我們要進行鏡射來將三角形複製成三分，至於要沿著哪條軸鏡射呢 ?</p>
+<p>假設初始圖形在左上方的話，首先可以沿著水平軸鏡射出下方的三角形，接著是沿著一個 60 度角的軸線鏡射出正右方的三角形，這裡提供一張示意圖幫助你們理解。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/triangle_1.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/triangle_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>將鏡像操作添加至 uv 上，不同角度的鏡射軸我們可以透過旋轉函數達到，但要注意鏡射法線的方向，所以實際上是要旋轉 -60 度。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">uv = mirror(uv, 0, float2(0, 1));
+uv = mirror(uv, 0, rotate(float2(0, 1), -60));
+
+return SDF_Regular(uv, radius, 3);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/triangle_0.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/triangle_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>嗯，怎麼還是一樣 ? 這是因為鏡射平面的中心和形狀同樣在空間中心，導致鏡射後看起來也一一樣。為了能夠正確鏡射出另外兩個三角形，我們必須添加偏移讓兩個頂點切在投影軸上。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/triangle_2.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/triangle_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>首先是 y 軸的偏移，很好理解就是形狀邊長的一半，我們可以直接透過繪製圖形時的半徑用特殊三角形邊長比 1 : sqrt(3) : 2 求出。</p>
+<p>至於 x 軸偏移就是形狀的內切圓半徑，我們可以直接將原本的半徑除以二取得。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float y = radius / 2 * sqrt(3);
+float x = -radius / 2;
+float2 offset = float2(x, y);
+
+uv = mirror(uv, 0, float2(0, 1));
+uv = mirror(uv, 0, rotate(float2(0, 1), -60));
+uv = translate(uv, offset);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/fractal_0.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/fractal_0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>成功，我們現在透過鏡射複製出了另外兩個三角形，有了第一層的爾賓斯基三角形後，我們只需要再使用相同的做法複製數次就能夠繪製出分形結構了，透過迴圈執行多次鏡射。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">for(int i = 0; i &lt; 5; i ++)
+{
+    uv = mirror(uv, 0, float2(0, 1));
+    uv = mirror(uv, 0, rotate(float2(0, 1), -60));
+    uv = translate(uv, offset);
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/fractal_1.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/fractal_1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>嗯&hellip;又是哪裡有問題 ? 造成這種狀況的原因是，每當我們進行一層的鏡射後三角形的大小也大了一號，所以再次鏡射時的鏡射軸沒有正確切在頂點上。</p>
+<p>要修復這點只需要在鏡射前先將三角形縮小就好，如此一來組合出的三角形就會和先前的一樣大。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">for(int i = 0; i &lt; _Anim * 5; i ++)
+{
+    uv = scale(uv, 0.5);
+
+    uv = mirror(uv, 0, float2(0, 1));
+    uv = mirror(uv, 0, rotate(float2(0, 1), -60));
+    uv = translate(uv, offset);
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/fractal_2.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/fractal_2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>大功告成 ! 我們可以將它旋轉 90 度並把半徑和迭代數量調大，好好觀賞這美麗的圖案。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">uv = rotate(uv, 90);
+
+//for(){ }
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/fractal_3.jpg" alt="image display error, please report: [/learn/shader/sdf-animation/fractal_3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="放大再放大">放大再放大</h3>
+<p>我們是透過數次的迭代組合來繪製出分形的，所以當畫面不段放大時最終還是會出現破綻，那麼要如何做出看似無限放大的效果呢 ?</p>
+<p>最簡單的方法就是不斷重複，透過不斷重複播放特定範圍內的放大畫面視覺上就像是不斷地放大，只要透過對時間取餘就能達成不斷重複的效果。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float time = _Time.y * 3;
+
+uv = scale(uv, lerp(1, 2, frac(time)));
+
+uv = rotate(uv, 90);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/anim_0.gif" alt="image display error, please report: [/learn/shader/sdf-animation/anim_0.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>重複放大的效果有了，但由於是從正中心開始放大的所以讓圖形看起來像不斷抽搐，我們可以將圖形向下移一點讓頂點在正中心上，可以避免畫面的抽動</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">uv = scale(uv, lerp(1, 2, frac(time)));
+uv = translate(uv, float2(0, -radius));
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/anim_1.gif" alt="image display error, please report: [/learn/shader/sdf-animation/anim_1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>縮放正常了，但是因為頂點在正中心所以導致圖形只顯示了一半，我們讓縮放中心往上移一些就能顯示出更大的圖形了</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">uv = translate(uv, float2(0, radius * 0.5));
+uv = scale(uv, lerp(1, 2, frac(time)));
+uv = translate(uv, float2(0, -radius));
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/anim_2.gif" alt="image display error, please report: [/learn/shader/sdf-animation/anim_2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>完成了無限循環的放大動畫，最後可以將距離場空間縮小一點讓分形佔據更大位置</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float2 uv = spaceNormalize(i.uv, 5);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/sdf-animation/anim_3.gif" alt="image display error, please report: [/learn/shader/sdf-animation/anim_3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>大功告成 ! 恭喜各位完成了謝爾賓斯基三角形 ~</p>
+
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#分形">分形</a>
+      <ul>
+        <li><a href="#謝爾賓斯基三角形">謝爾賓斯基三角形</a></li>
+        <li><a href="#三角形">三角形</a></li>
+        <li><a href="#放大再放大">放大再放大</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

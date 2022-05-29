@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ComputeShader on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/computeshader/</link>
+    <description>Recent content in ComputeShader on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 14 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/computeshader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【筆記】入門重點，計算著色器</title>
+      <link>https://angus945.github.io/draft/compute-shader/</link>
+      <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/draft/compute-shader/</guid>
+      <description>概括 + 計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，目的在透過 GPU 的大量核心進行平行運算，以獲得效能。正式開始前先稍微帶過計算著色器的兩大難點： 並行運算 與 資料傳遞 並行運算 + 首</description>
+    </item>
+    
+  </channel>
+</rss>

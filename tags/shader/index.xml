@@ -16,5 +16,14 @@
       <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>距離場的數學原理以及圖形繪製方法</title>
+      <link>https://angus945.github.io/learn/shader-sdf-animation/</link>
+      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/shader-sdf-animation/</guid>
+      <description>備註：舊版文章，有些內容可能沒有修復 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是被孤立的，像素不能和其他</description>
+    </item>
+    
   </channel>
 </rss>

@@ -1,0 +1,11 @@
+﻿#pragma kernel AddValueKernel
+
+int _Addition;
+
+RWStructuredBuffer<int> valuesBuffer;
+
+[numthreads(10, 1, 1)]
+void AddValueKernel (uint3 id : SV_DispatchThreadID)
+{
+    valuesBuffer[id.x] = valuesBuffer[id.x] + _Addition;
+}

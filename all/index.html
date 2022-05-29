@@ -82,7 +82,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/content-style.f7f979510a7bc05869213079d893c73427c5b7586aa1611927345d0b27b29111.css" integrity="sha256-9/l5UQp7wFhpITB52JPHNCfFt1hqoWEZJzRdCyeykRE=">
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
 
 
 
@@ -98,7 +98,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/shader-container.719cb331710118852454a0ece9cbe2f547b6e927f809264f15d4d192ba341820.css" integrity="sha256-cZyzMXEBGIUkVKDs6cvi9Ue26Sf4CSZPFdTRkro0GCA=">
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.54a276cdb630bc8fd5752d641e77a5834b7d3d2b7284f5506104257a71ad81c1.css" integrity="sha256-VKJ2zbYwvI/VdS1kHnelg0t9PStyhPVQYQQlenGtgcE=">
 
 
 
@@ -358,6 +358,38 @@
 
 
 <div class="post">
+    <img class="feature-image" src="">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/draft/compute-shader/">【筆記】入門重點，計算著色器</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2022-05-14
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;6100 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/unity">Unity</a>&nbsp;<a href="/tags/computeshader">ComputeShader</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> 概括 + 計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，目的在透過 GPU 的大量核心進行平行運算，以獲得效能。正式開始前先稍微帶過計算著色器的兩大難點： 並行運算 與 資料傳遞 並行運算 + 首 </div>
+    </div>
+    <a href="https://angus945.github.io/draft/compute-shader/"> (...ReadMore) </a>
+</div>
+
+
+
+<div class="post">
     <img class="feature-image" src="/common/gears.gif">
     <h2 class="post-item post-title">
         <a href="https://angus945.github.io/post/content-test/">重新施工中~~~~</a>
@@ -372,7 +404,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;189 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;199 words
 </span>
 
 
@@ -385,6 +417,102 @@
         <div> <p>測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試</p> </div>
     </div>
     <a href="https://angus945.github.io/post/content-test/"> (...ReadMore) </a>
+</div>
+
+
+
+<div class="post">
+    <img class="feature-image" src="">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/learn/shader-sdf-animation/">距離場的數學原理以及圖形繪製方法</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-07-27
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;761 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/shader">shader</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> 備註：舊版文章，有些內容可能沒有修復 序章 為了能支撐住畫面渲染的效能消耗，GPU 中通常會有多個核心，用來同時間平行運算數個像素的顏色。也因為並行的關係，正常情況下每個像素的運算是被孤立的，像素不能和其他 </div>
+    </div>
+    <a href="https://angus945.github.io/learn/shader-sdf-animation/"> (...ReadMore) </a>
+</div>
+
+
+
+<div class="post">
+    <img class="feature-image" src="">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/learn/unity/multiple-scene-pass-message/">運用多場景機制進行資料傳遞</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-07-25
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2854 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;No tag</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某些物件怎麼辦 ? Unity 當然知道這點，為此在他們的 Object 中有一項函式，我 </div>
+    </div>
+    <a href="https://angus945.github.io/learn/unity/multiple-scene-pass-message/"> (...ReadMore) </a>
+</div>
+
+
+
+<div class="post">
+    <img class="feature-image" src="/learn/resources/unity-beginner/unityLogo.jpg">
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/learn/resources/unity-beginner/">整理給 Unity 初學者的起步資源</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-07-24
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2431 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/resources">resources</a>&nbsp;<a href="/tags/unity">unity</a>&nbsp;</span>
+
+    </div>
+    <div class="post-item post-summary markdown-body" style="display: flex">
+        <div> 自學 Unity 了兩年多，過程中也累積了不少學習資源，雖然過去有整理過幾次，但都很雜亂反而會讓初學者不知道怎麼起步，所以這次我又重新整理了一系列適合初學者的學習資源，希望們幫上有需要的人。 這篇是給入門者的&qu </div>
+    </div>
+    <a href="https://angus945.github.io/learn/resources/unity-beginner/"> (...ReadMore) </a>
 </div>
 
 
@@ -575,6 +703,10 @@
         <div>
             
             <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
                 <a href="/tags/devlog/">devlog</a>
             </span>
             
@@ -583,11 +715,19 @@
             </span>
             
             <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
                 <a href="/tags/shader/">shader</a>
             </span>
             
             <span>
                 <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
             </span>
             
             <span>
@@ -667,6 +807,10 @@
         <div>
             
             <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
                 <a href="/tags/devlog/">devlog</a>
             </span>
             
@@ -675,11 +819,19 @@
             </span>
             
             <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
                 <a href="/tags/shader/">shader</a>
             </span>
             
             <span>
                 <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
             </span>
             
             <span>

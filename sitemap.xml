@@ -2,14 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://angus945.github.io/</loc>
+    <lastmod>2022-05-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/tags/computeshader/</loc>
+    <lastmod>2022-05-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/draft/</loc>
+    <lastmod>2022-05-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/tags/unity/</loc>
+    <lastmod>2022-05-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/draft/compute-shader/</loc>
+    <lastmod>2022-05-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://angus945.github.io/all/</loc>
     <lastmod>2022-04-14T20:08:25+08:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/new/</loc>
     <lastmod>2022-04-14T20:08:25+08:00</lastmod>
-  </url><url>
-    <loc>https://angus945.github.io/</loc>
-    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/about/</loc>
     <lastmod>2022-04-09T16:44:40+08:00</lastmod>
@@ -27,10 +39,73 @@
     <lastmod>2022-04-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/</loc>
-    <lastmod>2022-04-06T21:56:38+08:00</lastmod>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/learn/test/</loc>
-    <lastmod>2022-04-06T21:56:38+08:00</lastmod>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/20-epilogue/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/11-animatedmethod/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/17-furthercoloring/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/13-animatedeasing/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/19-finialexample/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/12-animatedexample/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/15-antialiasing/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/18-fractal/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/16-furtherdrawing/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/14-animatedtimeline/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/7-combination/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/3-colored/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/9-furthershapes/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/5-moreshapes/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/8-spacemanipulation/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/6-transformation/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/10-combinationexample/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/4-distanceline/</loc>
+    <lastmod>2021-07-28T10:20:32+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/</loc>
+    <lastmod>2021-07-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</loc>
+    <lastmod>2021-07-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/tags/resources/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/resources/unity-beginner/</loc>
+    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/tags/learning/</loc>
     <lastmod>2022-05-06T00:00:00+00:00</lastmod>
@@ -52,6 +127,15 @@
   </url><url>
     <loc>https://angus945.github.io/devlog/build-the-fistsite/</loc>
     <lastmod>2021-05-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/2-distance/</loc>
+    <lastmod>2021-04-28T14:52:15+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/1-preliminary/</loc>
+    <lastmod>2021-04-27T21:34:48+08:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/learn/shader-sdf-animation/0-setup/</loc>
+    <lastmod>2021-04-28T14:50:17+08:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/old-notes/unity-coding/extension-and-operator/</loc>
     <lastmod>2021-02-13T00:00:00+00:00</lastmod>

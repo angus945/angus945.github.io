@@ -1,0 +1,22 @@
+﻿#pragma kernel FilteKernel
+
+int _ElementCount;
+float2 _RangeMin, _RangeMax;
+
+RWStructuredBuffer<float2> sourceBuffer;
+AppendStructuredBuffer<float2> resultBuffer;
+
+[numthreads(10, 1, 1)]
+void FilteKernel (uint3 id : SV_DispatchThreadID)
+{
+    if(id.x >= _ElementCount) return;
+    
+    float2 position = sourceBuffer[id.x];
+
+    if(position.x < _RangeMin.x) return;
+    if(position.y < _RangeMin.y) return;
+    if(position.x > _RangeMax.x) return;
+    if(position.y > _RangeMax.y) return;
+
+    resultBuffer.Append(position);
+}
