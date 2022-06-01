@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【筆記】入門重點，計算著色器 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="AngusChan&#39;s website" />
+
+
+<meta name="keywords" content="Unity, ComputeShader" />
+
+
+<meta property="og:title" content="【筆記】入門重點，計算著色器" />
+<meta name="twitter:title" content="【筆記】入門重點，計算著色器" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/draft/compute-shader-basis/" /><meta property="og:description" content="
+概括 &#43;-
+計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，意圖利用 GPU 的大量計算核心的優勢，透過高效的平行運算方式解決問題。這篇文章是我在研究這項技術一段時間後，總結出的各項初學重點，在這裡分享給各位。" />
+<meta name="twitter:description" content="
+概括 &#43;-
+計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，意圖利用 GPU 的大量計算核心的優勢，透過高效的平行運算方式解決問題。這篇文章是我在研究這項技術一段時間後，總結出的各項初學重點，在這裡分享給各位。" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2022-05-14T00:00:00+00:00" /><meta property="article:modified_time" content="2022-05-14T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+<script>
+    window.ga_tid = 'G-LTVT6WYDT4';
+    window.ga_api = '';
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.915161822b6cfc6da80cf9d7f6ae8b68c37fb31b618c2b20498c085794c794fa.css" integrity="sha256-kVFhgits/G2oDPnX9q6LaMN/sxthjCsgSYwIV5THlPo=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.54a276cdb630bc8fd5752d641e77a5834b7d3d2b7284f5506104257a71ad81c1.css" integrity="sha256-VKJ2zbYwvI/VdS1kHnelg0t9PStyhPVQYQQlenGtgcE=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+        var datas = JSON.parse(input.dataset.inputs);
+
+        for(var i = 0; i < fields.length; i ++)
+        {
+            setInput(sandbox, fields[i], datas[i]);
+        }
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+    
+
+
+
+<script type="text/javascript">
+    var seed = Math.random();
+    var frag_codes = ("").split("\u003cslice-identifier\u003e");
+    var frag_shader_code = randomFragment();
+  
+    function randomFragment()
+    {
+        var max = frag_codes.length - 1;
+        var rndIndex = Math.floor(Math.random() * max);
+        var rndFragment = frag_codes[rndIndex];
+    
+        return rndFragment;
+    }
+    
+    var canvas = document.createElement("canvas");
+    canvas.classList.add("shader-background");
+    
+    function updateSize()
+    {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+    }
+    function updatePosition()
+    {
+        canvas.style.top = 0;
+    }
+    
+    window.addEventListener('load', function () 
+    {
+        var sandbox = new GlslCanvas(canvas);
+        
+        sandbox.load(frag_shader_code);
+        sandbox.setUniform("u_seed", seed);
+        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+        
+        updateSize();
+        updatePosition();
+    });
+    
+    window.onresize = function()
+    {
+        updateSize();
+        updatePosition();
+    }
+
+    
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">subTitle</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/draft/compute-shader-basis/">【筆記】入門重點，計算著色器</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2022-05-14
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;7853 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/unity">Unity</a>&nbsp;<a href="/tags/computeshader">ComputeShader</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+
+        <!-- TODO Colors -->
+<h2 id="概括--">概括 +-</h2>
+<p>計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，意圖利用 GPU 的大量計算核心的優勢，透過高效的平行運算方式解決問題。這篇文章是我在研究這項技術一段時間後，總結出的各項初學重點，在這裡分享給各位。</p>
+<p>這篇文章中一共用到兩種程式語言，由 CPU 運作的 C# (CSharp)，以及由 GPU 運作的 HLSL (High Level Shader Language)，由於兩者的編寫差異，閱讀程式碼時請注意標題。範例使用的環境為 Unity 引擎，雖然文章的主要內容基本上是通用的，但實做時還請注意環境差異。</p>
+<p>那麼，正式開始前請先讓我解釋一下計算著色器的兩大重點：</p>
+<h3 id="並行運算--">並行運算 +-</h3>
+<p>首先，假設現在我們想重複執行某項任務 10 次，在常規的 CPU 語言中會透過迴圈執行，根據給定的條件（如計數器）重複執行任務，以現在的例子便是根據執行次數 <code>i</code>，由開始 0 直到行完第 9 次後結束。並且由於 CPU 語言是線性執行的，因此只有在當前的迴圈內容被完整執行完畢後，才會進入下一次的迴圈。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">for(int i = 0; i &lt; 10; i ++)
+{
+    SomeFunction(i);
+}
+SomeFunction(int index) 
+{ 
+    //DoSomething
+}
+</code></pre>
+<p>但是在著色器這種 GPU 語言中，函式則會交由十個獨立的執行緒 (thread) 進行運算，讓 GPU 的大量核心以平行的方式完成任務，執行時並無順序之分（亂序）。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(10, 1, 1)]
+void SomeFunction (uint3 id : SV_DispatchThreadID)
+{
+    //DoSomething
+}
+</code></pre>
+<p>這裡用一張簡單的示意圖展示運作差異。注意，這只是表示兩者「運作方式的差異」，與實際運行時的處理效率無關。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/learn/shader/compute-shader/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/shader/compute-shader/cpu-vs-gpu.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>不過，在計算著色器中，運作差異並不是真正的難點，如果有編寫材質著色器經驗的話，應該已經很熟悉平行運算這件事了。與材質著色器不同的點在於，計算著色器是獨立於渲染管線之外的系統，所以它也沒有 vertices shader 或 fragment shader 這種渲染管線提供的「框架」來提示使用者該做些什麼。</p>
+<p>所以編寫計算著色器的真正的難點是，在少了明確的目標指引以後，我們只能靠自己判斷<h>有什麼問題是能透過並行解決的</h>，以及<h>該怎麼透過並行解決問題</h>。初次接觸並行運算容易遇到的瓶頸，便是因為不熟悉這種截然不同的問題拆分方法而導致的。</p>
+<h3 id="資料傳遞--">資料傳遞 +-</h3>
+<p>計算著色器的第二項難點：資料傳遞。</p>
+<p>在常規的渲染著色器中，引擎管線會幫使用者處理完資料傳遞等問題。但在計算著色器中，使用者擁有更大的權力能指揮 GPU 幫助我們達成各種任務，因此相應的責任也產生了，我們必須接手一些原本會由渲染管線完成的工作 - 資料傳遞。</p>
+<p>CPU 與 GPU 運作時使用的儲存空間不同，因此想執行任何的操作前都必須先將資料傳遞給 GPU 才行。由於資料是在兩種不同環境中進行傳遞，資料從哪裡來、資料到哪裡去，該傳遞什麼資料以及該怎麼傳遞資料都是實做時需要面對的問題。</p>
+<p>再加上著色器本身的除錯難度，使用者難以辨識究竟是資料傳遞出錯還是著色器計算有誤。對於初次接觸計算著色器，還不熟悉除錯方法的新手來說也是一大瓶頸。</p>
+<h2 id="腳本結構--">腳本結構 +-</h2>
+<p>以下是 Unity 中的預設 Compute Shader 腳本，這個章節就來逐步解析他的結構。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D&lt;float4&gt; Result;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+
+    Result[id.xy] = float4(id.x &amp; id.y, (id.x &amp; 15)/15.0, (id.y &amp; 15)/15.0, 0.0);
+}
+</code></pre>
+<h3 id="計算核心--">計算核心 +-</h3>
+<p>就和名稱一樣，計算核心 (Kernel) 是計算著色器中的核心區塊，當執行計算著色器時，其中的程式便會透過並行的方式運行。</p>
+<p>透過 <code>#pragma kernel ___</code> 關鍵字宣告計算核心，就和 vert 和 frag 編寫時一樣，核心的名稱可以自由定義，但一定要有一個對應的函式實做才能運行。一個計算著色器也可以根據需求定義複數個核心。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">#pragma kernel MyComputeKernelA
+#pragma kernel MyComputeKernelB
+#pragma kernel MyComputeKernelC
+
+void MyComputeKernelA (uint3 id : SV_DispatchThreadID) 
+{ 
+    // TODO: insert actual code here!
+}
+void MyComputeKernelB (uint3 id : SV_DispatchThreadID) { }
+void MyComputeKernelC (uint3 id : SV_DispatchThreadID) { }
+</code></pre>
+<h3 id="多執行緒--">多執行緒 +-</h3>
+<p>定義和實做了計算核心之後，接著便需要指定需要的「執行數量」。並行是透過將工作分配給多個執行緒達成的，因此除了定義計算核心外，還需要透過 <code>[numthreads(x, y, z)]</code> 分配這個核心需要的執行緒數量 &ldquo;num&rdquo; &ldquo;threads&rdquo;。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(10, 1, 1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+}
+</code></pre>
+<p>三個欄位分別代表維度軸 <code>xyz</code>，計算著色器運作時便會透過 <code>SV_DispatchThreadID</code> 將當前的執行緒 ID 傳入計算函式中。轉換成 CPU 語言中的迴圈看起來應該會更直觀。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Vector3 numthreads = new Vector3(10, 1, 1);
+void Threads()
+{
+    for(int x = 0; x &lt; numthreads.x; x ++)
+    {
+        for(int y = 0; y &lt; numthreads.y; y ++)
+        {
+            for(int z = 0; z &lt; numthreads.y; z ++)
+            {
+                CSMain(new Vector3(x, y, z));
+            }
+        }
+    }
+}
+void CSMain(Vector3 threadID) 
+{ 
+    // TODO: insert actual code here!
+}
+</code></pre>
+<p>但請注意！這只是比喻，計算著色器中不會真的像迴圈那樣跑，而是以並行的方式亂序執行，別忘了最一開始的示意圖。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/learn/shader/compute-shader/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/shader/compute-shader/cpu-vs-gpu.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>至於為什麼會執行緒的數量需要三個維度軸呢？Microsoft 官方文檔是這樣說的：<a href="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads" target="_blank">numthreads</a></p>
+<blockquote>
+<p>For example, if a compute shader is doing 4x4 matrix addition then numthreads could be set to numthreads(4,4,1) and the indexing in the individual threads would automatically match the matrix entries. The compute shader could also declare a thread group with the same number of threads (16) using numthreads(16,1,1), however it would then have to calculate the current matrix entry based on the current thread number.</p>
+</blockquote>
+<p>簡單來說就是為了「方便」，視你要處理的資料結構而定，多的維度軸可以幫使用者省去轉換工作，讓 ID 與資料欄位直接對應。與 CPU 語言中，要遍歷具有座標性質的資料時（如二維陣列），透過兩層迴圈對應維度的 x, y 軸會更加輕鬆同理。</p>
+<p>當然並行時也同理，假如我現在要處理的是圖片資料，透過兩個維度軸直接對應至像素位置上，會比透過長寬換算來的方便，這就是為什麼計算著色器也允許分配多個軸向的執行緒數量。</p>
+<h3 id="執行緒組--">執行緒組 +-</h3>
+<p>由於計算著色器的運行時機是由使用者掌控的，因此在定義完計算核心與執行序數量後，還是需要手動呼叫 <code>ComputeShader.Dispatch</code>來「運行」計算著色器。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">public void Dispatch(int kernelIndex, int threadGroupsX, int threadGroupsY, int threadGroupsZ); 
+</code></pre>
+<p><c> 註：CPU 與 GPU 的運作通常是異步的，因此「通常情況下」計算著色器並不是在使用者調用 Dispatch 的當下就會執行，而是有自己的運行時機在。 </c></p>
+<p><c> 註2：我猜測這也是為什麼函式會叫做 Dispatch，而非更直白的 Execute，但我還沒找到「直接」證實這一點的官方文檔，如果我的猜測或描述有誤的話還請各位指正。參考資料會補充在文末。 </c></p>
+<p><code>Dispath</code> 函式一共接受四個參數輸入，第一個 <code>kernelIndex</code> 代表的是這次 Dispath 要使用的計算核心，如果著色器中有定義複數的核心，便可由這裡進行選擇。可以使用 <code>FindKernel</code> 函式，透過名稱尋找對應的計算核心。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">int knrnelIndex = compute.FindKernel(&quot;MyComputeKernel&quot;);
+
+compute.Dispatch(knrnelIndex, 1, 1, 1);
+</code></pre>
+<p>至於後面三個參數 <code>threadGroupsX,Y,Z</code>，代表的是這次運行著色器要分配的「執行緒組」有多少個 &ldquo;thread&rdquo; &ldquo;Groups&rdquo;（下面簡稱 &ldquo;組&rdquo;）。上個部份提到的 <code>numthread</code> 分配的是一個組裡面要有多少執行緒，而 <code>threadGroups</code> 則會指定一共使用多少組來運行。</p>
+<p>因此，當計算著色器運行時，最終會執行的次數（也是分配的執行緒數量）會有 threadGroups * numthreads 次。同樣，替換 CPU 語言中的迴圈看起來會更直觀。但也再次提醒這只是比喻，而且組和組之間也會並行，並非上一個組完成才會進入下一個組。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">void ThreadGroups(int threadGroupsX, int threadGroupsY, int threadGroupsZ)
+{
+    for(int x = 0; x &lt; threadGroupsX; x ++)
+    {
+        for(int y = 0; y &lt; threadGroupsY; y ++)
+        {
+            for(int z = 0; z &lt; threadGroupsZ; z ++)
+            {
+                Threads();
+            }
+        }
+    }
+}
+void Threads() { }
+void CSMain() { }
+</code></pre>
+<p>每個執行緒的 SV_DispatchThreadID 便是當前的組 * 執行緒數量 + 當前的執行緒，不過這些 ID 的計算著色器運行時都會幫我們完成，所以使用者只要分配好需要的數量即可。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 60%;" >
+    <img src="/learn/shader/compute-shader/thread-group-id.jpg" alt="image display error, please report: [/learn/shader/compute-shader/thread-group-id.jpg]">
+    <p style="opacity: 0.5">
+        圖片引用自 microsoft HLSL 文檔，numthreads
+    </p>
+</div>
+
+
+<p>至具體數量該怎麼分配呢？首先從處理資料的維度下手，假設著色器要處理的主要數據為一維的陣列就分配 <code>(n, 1, 1)</code>，若要對圖片的二維像素陣列操作就用 <code>(x, y, 1)</code>，或是要計算三維的體積網格就 <code>(x, y, z)</code>。</p>
+<p>執行緒的具體數量或比例則沒有明確規則，大概抓個介於 10 和資料總數 1% 以下的數值吧。假設陣列長度大約一萬，numthread 就分配為 <code>(100, 1, 1)</code>，若圖片大小 2048 的話就分配 <code>(20, 20, 1)</code>。</p>
+<p>最後，組的數量可以透過資料長度除以執行緒數量得出，畢竟資料的多寡可能根據情況產生差異，透過這種方式可以確保任何情況下都有足夠的組來運行著色器。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.Dispatch(knrnelIndex, 1 + (array.Length / 100), 1, 1);
+compute.Dispatch(knrnelIndex, 1 + (image.width / 20), 1 + (image.height / 20), 1);
+</code></pre>
+<p>在著色器訪問陣列時，不會因為 index out of range 出現錯誤而中斷，所以只需要確保分配的數量足夠即可。（只有少數情況會因為數量過多導致結果錯誤，文章最後的範例會提到解決方法）</p>
+<h3 id="資料訪問--">資料訪問 +-</h3>
+<p>最後，計算著色器中最關鍵的部份，對傳入著色器的資料進行操作，透過並行運算達成任務！如果執行緒的數量分配正確，每個 ThreadID 都會對應到各自的要處理的資料欄位上。</p>
+<p>假如我要將一張圖片重置為黑色，只需要透過執行緒 ID 對應至圖片的每個像素，並將黑色寫入像素即可。由於資料的維度為二維，因此訪問資料欄位時的索引也是二維輸入。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">RWTexture2D&lt;float4&gt; Image;
+
+[numthreads(8, 8, 1)]
+void ClearImage (uint3 id : SV_DispatchThreadID)
+{
+    Image[id.xy] = float4(0, 0, 0, 1);
+}
+</code></pre>
+<p>並且，每個執行緒的資料訪問也不侷限於自己的 ID，視需求也可以讀、寫其他欄位上的資料。例如時常應用在影像處理中的卷積矩陣 (<a href="https://en.wikipedia.org/wiki/Kernel_%28image_processing%29" target="_blank">Kernel Convolution</a>)，就會參考周圍像素的資料來進行計算。下面是方框模糊的範例程式，將像素與周圍八格進行平均。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">RWTexture2D&lt;float4&gt; Image;
+
+[numthreads(8, 8, 1)]
+void BoxBlur (uint3 id : SV_DispatchThreadID)
+{
+    float4 color = 0;
+    for(int x = -1; x &lt;= 1; x ++)
+    {
+        for(int y = -1; y &lt;= 1; y ++)
+        {
+            color += Image[id.xy + float2(x, y)];
+        }
+    }
+    
+    Image[id.xy] = color / 9;
+}
+</code></pre>
+<p>卷積矩陣的簡單範例，分別為無效果、方框模糊與高斯模糊。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/shader/compute-shader/kernel-convolution-operation.jpg" alt="image display error, please report: [/learn/shader/compute-shader/kernel-convolution-operation.jpg]">
+    <p style="opacity: 0.5">
+        圖片引用自 Kernel Convolution Wiki
+    </p>
+</div>
+
+
+<h2 id="資料傳遞---1">資料傳遞 +-</h2>
+<p>資料傳遞，計算著色器的第二項重點。一開始有提到過，CPU 與 GPU 運作時使用的儲存空間不同，因此想執行任何的操作前都必須先將資料傳遞給 GPU 才行，這個章節就來解說如何將資料傳遞給計算著色器使用。</p>
+<h3 id="只讀參數--">只讀參數 +-</h3>
+<p>就和一般的渲染著色器一樣，計算著色器也可以傳入獨立的參數用於計算。且同樣的，這些數值在著色器中是全局共享的，報括不同計算核心、函式，並且只讀，通常用於傳遞屬性類的參數。</p>
+<p>以繪圖系統為例就是畫布大小、筆刷位置、筆刷強度與顏色等等。透過 <code>SetVector</code>, <code>SetFloat</code> 等函式進行傳遞。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.SetVector(&quot;_CanavsSize&quot;, canvasSize);
+compute.SetVector(&quot;_BrushPos&quot;, mousePosition);
+compute.SetFloat(&quot;_Intensity&quot;, intensity);
+compute.SetVector(&quot;_Color&quot;, color);
+</code></pre>
+<p>要使用這些參數的話，在著色器中也需要建立對應的變數接收。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">int2 _CanavsSize;
+float2 _BrushPos;
+float _Intensity;
+float4 _Intensity;
+</code></pre>
+<h3 id="緩衝資料--">緩衝資料 +-</h3>
+<p>與只讀的全域參數不同，由於資料儲存空間的差異以及資料傳遞的成本，若想讓計算著色器對資料內容進行讀寫，或是想傳遞大量的獨立參數供不同執行緒個別使用的話，就必須先對 GPU 的儲存空間進行分配。</p>
+<p>GPU 的資料儲存空間為緩衝區 (Buffer)，在 Unity 中只需要透過 <code>new ComputeBuffer()</code> 即可建立一個新的 GPU 緩衝區，引擎會完成其他的內部作業。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">ComputeBuffer buffer = new ComputeBuffer(count, stride, ComputeBufferType);
+</code></pre>
+<p>計算緩衝區的建構子需要接收三個參數輸入，第一個 <code>count</code> 代表的是緩衝區「最多」需要儲存多少元素，通常就是我們想傳遞的陣列資料的長度。<code>stride</code> 為一個欄位的元素大小，通常就是想傳遞的陣列資料的型別，可以透過 <code>sizeof(type)</code> 取得。</p>
+<p>而最後的 <code>ComputeBufferType</code> 則是緩衝區的類別，可以根據需求使用不同的類型。具體的類型有許多種，不過這裡就先關注最常用的兩種就好：</p>
+<ul>
+<li>
+<p><strong>ComputeBufferType.Structured</strong><br>
+結構緩衝區，通常用於傳遞一般的陣列資料，讓計算著色器讀、寫其中的資料。</p>
+</li>
+<li>
+<p><strong>ComputeBufferType.Append</strong><br>
+容器緩衝區，允許計算著色器對它「添加」元素，通常用於資料過濾。</p>
+</li>
+</ul>
+<p>假設我要將一個長度為 10000 的向量陣列傳入計算著色器，並對裡面的元素進行過濾的話，就會需要兩個緩衝區。緩衝區長度為 10000、元素大小為三個單精度浮點數，緩衝區類型為 Structured 與 Append。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Vector3[] positions = new Vector3[10000];
+
+sourceBuffer = new ComputeBuffer(positions.Length, sizeof(float) * 3, ComputeBufferType.Structured);
+filteBuffer = new ComputeBuffer(positions.Length, sizeof(float) * 3, ComputeBufferType.Append);
+</code></pre>
+<p>在分配完儲存空間後，還需要將欲傳遞的資料透過 <code>SetData</code> 存入緩衝區。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">sourceBuffer.SetData(positions);
+</code></pre>
+<p>最後，只需要將緩衝區指定給計算著色器，就能讓他在運行時使用這些資料了，不過與先前的只讀參數不同，緩衝資料需要指定給一個計算核心。不太需要擔心這個動作的開銷，因為在 <code>SetData</code> 的時候資料傳遞就已經完成了，這裡只是改變計算著色器中對緩衝區空間的指標而已。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.SetBuffer(kernel, &quot;sourceBuffer&quot;, sourceBuffer);
+compute.SetBuffer(kernel, &quot;filteBuffer&quot;, filteBuffer);
+</code></pre>
+<p>計算著色器也需要對應的緩衝區變數接收才能使用這些資料，建立時需要透過 <code>&lt;T&gt;</code> 欄位指定資料型別。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">StructuredBuffer&lt;float3&gt; sourceBuffer;
+AppendStructuredBuffer&lt;float3&gt; filteBuffer;
+</code></pre>
+<p>若想在讓緩衝區一次傳遞複合資料，也可以透過結構包裝多重變數。在 C# 部份也是建立相同的結構進行傳遞。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">struct transform
+{
+    float3 position;
+    float3 rotation;
+    float3 scale;
+};
+
+StructuredBuffer&lt;transform&gt; transforms;
+</code></pre>
+<p>除此之外，結構緩衝區還有一種 <code>RWStructuredBuffer&lt;T&gt;</code>，這種緩衝區會允許計算核心將資料寫入緩衝區，視需求使用。</p>
+<h3 id="貼圖資料--">貼圖資料 +-</h3>
+<p>除了傳遞一維陣列進緩衝區外，計算著色器也能接受圖片資料，將二維的像素陣列傳入計算著色器使用。透過 <code>SetTexture()</code> 函式傳遞圖片至著色器中，和緩衝資料一樣需要指定計算核心。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.SetTexture(kernel, &quot;image&quot;, image);
+</code></pre>
+<p>與所有資料傳遞相同，圖片接收也需要建立對應的變數。建立時需要 <code>&lt;T&gt;</code> 欄位指定圖片的通道數量與精度，<code>float, fixed3, half4</code> 等等。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">Texture2D&lt;fixed4&gt; image;
+</code></pre>
+<p>不過在訪問圖片像素時，與一般著色器的 <code>sampler2D</code> 不同，<code>Texture2D&lt;T&gt;</code> 是透過像素座標直接訪問特定欄位上的資料，而非 <code>Tex2D</code> 的 uv 採樣。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    fixed4 pixel = image[id.xy];
+}
+</code></pre>
+<p><code>Texture2D&lt;T&gt;</code> 為只讀的像素緩衝區，如果要允許寫入像素的話需要用 <code>RWTexture2D&lt;T&gt;</code>。要注意的是讀寫貼圖只能傳入 <code>RenderTexture</code>，原理和建立緩衝區時一樣，建立渲染貼圖時也會做分配空間的工作，才能讓著色器寫入數值。</p>
+<h3 id="釋放空間--">釋放空間 +-</h3>
+<p>最後，由於 GPU 儲存空間是相當珍貴的，所以在不需要緩衝區時也要記得將空間釋放。只要透過 <code>Release</code> 函式執行即可。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">buffer.Release();
+renderTexture.Release();
+</code></pre>
+<h2 id="實作範例--">實作範例 +-</h2>
+<p>最後，回到最一開始的問題，有什麼問題是能透過並行解決的，以及該怎麼透過並行解決問題？在一開始的對比與腳本結構的章節中有看到過，無論是計算核心的編寫方法，還是代換成 C# 中迴圈的形式，他們都表現出了一個共同點：重複執行相似的工作。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">for(int i = 0; i &lt; 10; i ++)
+{
+    SomeFunction(i);
+}
+SomeFunction(int index) { }
+</code></pre>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(10, 1, 1)]
+void SomeFunction (uint3 id : SV_DispatchThreadID)
+{
+    //DoSomething
+}
+</code></pre>
+<p>意思是，如果要解決的問題能夠被拆分為個別獨立並且高度相似的片段，就能透過重複執行的方法完成。如此一來，無論是要透過迴圈線性執行，或是將每個片段分配給獨立的執行緒，以並行的方式解決，都能有效的達成目標。</p>
+<p>最後的章節就透過各種範例，將文中提到的各項重點串起。問題拆分、資料傳遞、解決問題，逐步分析如何使用計算著色器，透過並行的方式達成任務。</p>
+
+
+
+
+
+
+
+
+<a href="https://github.com/angus945/angus945.github.io/tree/main/learn/shader/compute-shader/examples" target="_blank">
+    &gt; 如果想直接觀看完整腳本也可以點我 &lt;
+</a>
+
+<h3 id="回顧腳本--">回顧腳本 +-</h3>
+<p>首先，在開始解決自己的問題前，先來回顧一次預設的計算著色器結構，分析這個著色器做了哪些事，傳遞了什麼資料，以及怎麼使用這個腳本。</p>
+<p>預設著色器宣告了一個計算核心，名稱叫做 CSMain (Compute Shader Main)。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">#pragma kernel CSMain
+</code></pre>
+<p>他只宣告了一個讀寫貼讀緩衝區，精度為 float，通道數量 4 個。代表這個計算著色器要處理的主要資料結構是圖片。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">RWTexture2D&lt;float4&gt; Result;
+</code></pre>
+<p>由於訪問資料的維度軸為二維（圖片、像素資料），因此執行緒數量的格式為 <code>(x, y, 1)</code>。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(8,8,1)]
+</code></pre>
+<p>最後是預設的計算核心，名稱對應一開始宣告的 <code>CSMain</code>。透過多個執行緒，對應到圖片資料 <code>Result</code> 的每個像素上，根據像素座標（也就是 <code>id</code>）進行計算，並將計算結果寫入像素中。（先忽略計算式的原理，那不是這裡的重點）</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+
+    Result[id.xy] = float4(id.x &amp; id.y, (id.x &amp; 15)/15.0, (id.y &amp; 15)/15.0, 0.0);
+}
+</code></pre>
+<p>回到 C# 處，接著來看看如何使用這個預設著色器。首先要尋找著色器中定義的計算核心 <code>CSMain</code>。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">int kernel = compute.FindKernel(&quot;CSMain&quot;);
+</code></pre>
+<p>接著，為了提供讀寫貼圖需要的圖片資料，建立一個 RenderTexture，並傳入計算著色器的 Result 當中。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">resultTex = new RenderTexture(1024, 1024, 0, RenderTextureFormat.Default);
+resultTex.enableRandomWrite = true;
+resultTex.Create();
+
+compute.SetTexture(kernel, &quot;Result&quot;, resultTex);
+</code></pre>
+<p>最後，調用著色器執行指定的計算核心。由於著色器中指定的執行序數量為 8，因此執行時必須將組的數量分配至圖片大小除以 8 才會足夠。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.Dispatch(kernel, 1 + (resultTex.width / 8), 1 + (resultTex.height / 8), 1);
+</code></pre>
+<p>運作結果如下，這是一個能繪製分型的計算著色器。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/compute-shader/example-0.jpg" alt="image display error, please report: [/learn/shader/compute-shader/example-0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="陣列計算--">陣列計算 +-</h3>
+<p>看完了預設的著色器，現在輪到我們應用這些知識嘗試解決自己的問題，透過平行運算對陣列元素進行操作。一步一步來，首先是：</p>
+<p><strong>1. 要解決什麼問題</strong></p>
+<p>陣列中每個元素的數值 + n</p>
+<p><strong>2. 要怎麼傳遞資料</strong></p>
+<p>首先是全域只讀的參處，也就是要增加的數值 n。透過 <code>SetInt()</code> 函式將參數傳入計算著色器。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">int addition;
+
+compute.SetInt(&quot;_Addition&quot;, addition);
+</code></pre>
+<p>接著是實際要透過計算著色器處理的陣列資料，建立一個 ComputeBuffer 分配需要 GPU 儲存空間，將要進行操作的陣列資料存入緩衝區，並指定給計算著色器。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">int[] array;
+
+ComputeBuffer buffer = new ComputeBuffer(array.Length, sizeof(int), ComputeBufferType.Structured);
+buffer.SetData(array);
+
+compute.SetBuffer(kernel, &quot;valuesBuffer&quot;, buffer);
+</code></pre>
+<p><strong>3. 要怎麼解決問題</strong></p>
+<p>將問題拆分為相似的片段，透過重複執行的方式解決問題。在這個例子中便是以多個執行緒分別對應到陣列的所有元素上，並各自執行 + n 的動作。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">int _Addition;
+RWStructuredBuffer&lt;int&gt; valuesBuffer;
+
+void AddValueKernel (uint3 id : SV_DispatchThreadID)
+{
+    buffer[id.x] = buffer[id.x] + _Addition;
+}
+</code></pre>
+<p>由於資料維度為一維陣列，因此執行序數量的格式為 <code>(n, 1, 1)</code>。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(10, 1, 1)]
+</code></pre>
+<p>最後，呼叫計算著色器執行計算，執行緒組的數量為陣列數量除以 10。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.Dispatch(kernel, 1 + (array.Length / 10), 1, 1);
+</code></pre>
+<p><strong>4. 要怎麼使用資料</strong></p>
+<p>運算完畢後，透過 GetData 取得緩衝區資料，用於檢視運行結果。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">int[] result = new int[array.Length];
+
+buffer.GetData(result);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/shader/compute-shader/example-1.jpg" alt="image display error, please report: [/learn/shader/compute-shader/example-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="資料過濾--">資料過濾 +-</h3>
+<p>第二個範例，透過計算著色器進行資料過濾。首先：</p>
+<p><strong>1. 要解決什麼問題</strong></p>
+<p>對陣列的元素進行過濾，找出位於指定範圍中的向量元素。</p>
+<p><strong>2. 要怎麼傳遞資料</strong></p>
+<p>首先是兩個只讀的全域向量，用於作為範圍參考最大與最小值。使用 <code>SetVector()</code> 函式進行傳遞。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Vector2 rangeMin, rangeMax;
+
+compute.SetVector(&quot;_RangeMin&quot;, rangeMin);
+compute.SetVector(&quot;_RangeMax&quot;, rangeMax);
+</code></pre>
+<p>接著是要透過計算著色器處理的資料，由於我們像要對元素進行過濾，因此需要建立兩個計算緩衝區，一個為 <code>StructuredBuffer</code> 用於傳遞原始陣列進著色器，另一個則是用於儲存過濾後元素的 <code>AppendBuffer</code>。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Vector2[] array;
+
+ComputeBuffer sourceBuffer = new ComputeBuffer(array.Length, sizeof(float) * 2, ComputeBufferType.Structured);
+ComputeBuffer resultBuffer = new ComputeBuffer(array.Length, sizeof(float) * 2, ComputeBufferType.Append);
+sourceBuffer.SetData(array);
+
+compute.SetBuffer(kernel, &quot;sourceBuffer&quot;, sourceBuffer);
+compute.SetBuffer(kernel, &quot;resultBuffer&quot;, resultBuffer);
+</code></pre>
+<p>除此之外，使用計算著色器過濾元素時，可能因為執行序數量過多而導致錯誤的元素被添加至結果緩衝區當中，也就是資料傳遞章節中提到的非預期錯誤。為了防止錯誤發生，還需要將實際的陣列長度傳遞給著色器。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.SetInt(&quot;_ElementCount&quot;, array.Length);
+</code></pre>
+<p><strong>3. 要怎麼解決問題</strong></p>
+<p>將問題拆分為相似的片段，在這個範例中便是透過執行緒 ID 對應到各自的元素，並將符合條件的元素加入結果緩衝區中。透過 <code>Append</code> 函式即可將元素存入緩衝區。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">float2 _RangeMin, _RangeMax;
+
+RWStructuredBuffer&lt;float2&gt; sourceBuffer;
+AppendStructuredBuffer&lt;float2&gt; resultBuffer;
+
+void FilteKernel (uint3 id : SV_DispatchThreadID)
+{    
+    float2 element = sourceBuffer[id.x];
+
+    if(element.x &lt; _RangeMin.x) return;
+    if(element.y &lt; _RangeMin.y) return;
+    if(element.x &gt; _RangeMax.x) return;
+    if(element.y &gt; _RangeMax.y) return;
+
+    resultBuffer.Append(element);
+}
+</code></pre>
+<p>為了避免將非預期的元素也存入緩衝區，可以判斷執行緒 ID 是否超出陣列的長度，添加防呆判斷。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">int _ElementCount;
+
+void FilteKernel (uint3 id : SV_DispatchThreadID)
+{    
+    if(id.x &gt;= _ElementCount) return;
+
+    // codes ...
+}
+
+</code></pre>
+<p>執行緒的數量和上個範例相同，因為資料維度為一維陣列，所以執行序數量的格式為 <code>(n, 1, 1)</code>。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(10, 1, 1)]
+</code></pre>
+<p>最後，呼叫著色器執行計算。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">compute.Dispatch(kernel, 1 + (array.Length / 10), 1, 1);
+</code></pre>
+<p><strong>4. 要怎麼使用資料</strong></p>
+<p>運算完成後，透過 GetData 取得緩衝區資料，用於檢視效果。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Vector2[] result = new Vector2[array.Length];
+
+resultBuffer.GetData(result);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/shader/compute-shader/example-2.jpg" alt="image display error, please report: [/learn/shader/compute-shader/example-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>要注意的是緩衝區在建立時，欄位數量是根據「可能的最大值」建立的，即使 AppendBuffer 當中沒有「添加」那麼多元素，他的長度還是會與完整陣列相同。如果想獲得實際存入的元素數量，可以透過 <a href="https://docs.unity3d.com/ScriptReference/ComputeBuffer.CopyCount.html" target="_blank">ComputeBuffer.CopyCount</a> 函式取得。</p>
+<h3 id="更多例子--">更多例子 +-</h3>
+<p>上面用了兩個簡單的例子展示如何編寫自己的計算著色器，不過要注意這並不是「真正」應用計算著色器時會使用的作法。由於 CPU 與 GPU 間的資料傳遞成本高昂以及運行時機等問題，通常不會像範例中透過 GetData 將資料「取回」 C#，而是直接讓渲染管線使用這些資料。</p>
+<p>例如傳入 <a href="https://docs.unity3d.com/ScriptReference/Graphics.DrawMeshInstancedIndirect.html" target="_blank">Graphics.DrawMeshInstancedIndirect</a> 讓 Unity 進行 GPU Instance，或是透過計算著色器將結果繪製到 RenderTexture 中，再利用 ImageEffectShader 渲染到畫面上。可惜的是更實際的範例放進來會讓篇幅太長，所以這裡就先提供一些實際應用的例子，讓有興趣深入的人自行研究。</p>
+<p><strong>Conway&rsquo;s Game of Life</strong><br>
+康威生命遊戲，每個單位格都是一個細胞，以獨立的回合為時間單位，在每個回合中細胞都會根據周圍的環境狀態來決定自己將會存活還是死亡。屬於比較好分辨出如何並行的例子，實做難度低。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/shader/compute-shader/conway%27s-game-of-life.gif" alt="image display error, please report: [/learn/shader/compute-shader/conway&#39;s-game-of-life.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>具體遊戲規則可以參考 <a href="https://zh.wikipedia.org/zh-tw/%E5%BA%B7%E5%A8%81%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F" target="_blank">Wiki</a>。</p>
+<p><strong>GPU Slime Simulations</strong><br>
+透過計算著色器模擬大量的單位，並讓這些單位以簡單的行為互相交互，產生有趣的結果。屬於比較好玩的例子。實做上稍微複雜一點，需要透過多個階段的處裡才能「看到結果」。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/shader/compute-shader/slime-simulations.gif" alt="image display error, please report: [/learn/shader/compute-shader/slime-simulations.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>參考影片 <a href="https://youtu.be/X-iSQQgOd1A" target="_blank">Coding Adventure: Ant and Slime Simulations</a></p>
+<p><strong>GPU Culling</strong><br>
+與 GPU Instance 搭配使用的技術，透過計算著色器進行視錐剃除，過濾出在攝影機視角內的物件，達成更高效的渲染優化。是比較實際而且簡單的例子，需要注意的主要是渲染相關的問題。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/shader/compute-shader/compute-culling.gif" alt="image display error, please report: [/learn/shader/compute-shader/compute-culling.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>更多細節可以參考此篇文章 <a href="https://zhuanlan.zhihu.com/p/376801370" target="_blank">Unity中使用ComputeShader做视锥剔除（View Frustum Culling）</a>。</p>
+<p><strong>GPU Ray Tracing</strong><br>
+將環境、物件與材質等資料傳入計算著色器，直接透過自訂的方法進行渲染，並將結果輸出至畫面上。方法不侷限於光線追蹤，任何以螢幕像素為單位的並行都可以使用（如射線邁進），是比較實際但較高難度的運用。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/learn/shader/compute-shader/ray-tracing.jpg" alt="image display error, please report: [/learn/shader/compute-shader/ray-tracing.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>參考資料 <a href="http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/" target="_blank">GPU Ray Tracing in Unity</a>, <a href="https://youtu.be/Cp5WWtMoeKg" target="_blank">Coding Adventure: Ray Marching</a></p>
+<h2 id="感謝閱讀--">感謝閱讀 +-</h2>
+<p>在知道了 GPU Instance 和 GPU Culling 兩項技術後，我也接觸到計算著色器這項工具，並正式踏入 GPU 並行的世界了。為了學計算著色器我也查了不少資料研究，但總覺的很多內容都不夠直觀，不然就是一口氣跳到太深的內容（像是直接教 RayTracing 的文章），以至於我花了不少時間試錯後才得出一些基礎但相當重要的結論，也就是在概括中提到的兩項重點。</p>
+<p>於是，在花幾個月實做和研究各項東西後，嘗試用自己的理解重新解釋了一次計算著色器，在這裡分享給各位，希望能提供有興趣的人參考方向！</p>
+<p>有任何建議和想法都歡迎提出討論，如果喜歡文章內容的話也請幫我點一下 Like Button :D</p>
+<iframe class="LikeCoin" height="235" src="https://button.like.co/in/embed//button?referrer=https%3a%2f%2fangus945.github.io%2fdraft%2fcompute-shader-basis%2f" width="100%" frameborder=0></iframe>
+
+<p>個人網站留言功能還未製作，如果想要留言的請移駕至<a href="">巴哈的文章留言板</a> Orz</p>
+<h3 id="參考資料--">參考資料 +-</h3>
+<p><a href="https://docs.microsoft.com/zh-tw/windows/win32/direct3dhlsl/sm5-attributes-numthreads" target="_blank">numthreads</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/368307575" target="_blank">Unity中ComputeShader的基础介绍与使用</a></p>
+<p><a href="https://youtu.be/9RHGLZLUuwc" target="_blank">Coding Adventure: Compute Shaders</a></p>
+<p><a href="https://www.youtube.com/watch?v=BrZ4pWwkpto" target="_blank">Getting Started with Compute Shaders in Unity</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/113482286" target="_blank">Unity | 浅谈 Compute Shader</a></p>
+<p><a href="https://docs.unity3d.com/ScriptReference/ComputeBufferType.html" target="_blank">ComputeBufferType</a></p>
+<p><a href="https://forum.unity.com/threads/check-if-a-computeshader-dispatch-command-is-completed-on-gpu-before-doing-second-kernel-dispatch.369631/" target="_blank">Check if a ComputeShader.Dispatch() command is completed on GPU before doing second kernel dispatch</a></p>
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概括--">概括 +-</a>
+      <ul>
+        <li><a href="#並行運算--">並行運算 +-</a></li>
+        <li><a href="#資料傳遞--">資料傳遞 +-</a></li>
+      </ul>
+    </li>
+    <li><a href="#腳本結構--">腳本結構 +-</a>
+      <ul>
+        <li><a href="#計算核心--">計算核心 +-</a></li>
+        <li><a href="#多執行緒--">多執行緒 +-</a></li>
+        <li><a href="#執行緒組--">執行緒組 +-</a></li>
+        <li><a href="#資料訪問--">資料訪問 +-</a></li>
+      </ul>
+    </li>
+    <li><a href="#資料傳遞---1">資料傳遞 +-</a>
+      <ul>
+        <li><a href="#只讀參數--">只讀參數 +-</a></li>
+        <li><a href="#緩衝資料--">緩衝資料 +-</a></li>
+        <li><a href="#貼圖資料--">貼圖資料 +-</a></li>
+        <li><a href="#釋放空間--">釋放空間 +-</a></li>
+      </ul>
+    </li>
+    <li><a href="#實作範例--">實作範例 +-</a>
+      <ul>
+        <li><a href="#回顧腳本--">回顧腳本 +-</a></li>
+        <li><a href="#陣列計算--">陣列計算 +-</a></li>
+        <li><a href="#資料過濾--">資料過濾 +-</a></li>
+        <li><a href="#更多例子--">更多例子 +-</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀--">感謝閱讀 +-</a>
+      <ul>
+        <li><a href="#參考資料--">參考資料 +-</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">ComputeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">Unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

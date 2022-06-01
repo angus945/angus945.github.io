@@ -11,12 +11,12 @@ void FilteKernel (uint3 id : SV_DispatchThreadID)
 {
     if(id.x >= _ElementCount) return;
     
-    float2 position = sourceBuffer[id.x];
+    float2 element = sourceBuffer[id.x];
 
-    if(position.x < _RangeMin.x) return;
-    if(position.y < _RangeMin.y) return;
-    if(position.x > _RangeMax.x) return;
-    if(position.y > _RangeMax.y) return;
+    if(element.x < _RangeMin.x) return;
+    if(element.y < _RangeMin.y) return;
+    if(element.x > _RangeMax.x) return;
+    if(element.y > _RangeMax.y) return;
 
-    resultBuffer.Append(position);
+    resultBuffer.Append(element);
 }

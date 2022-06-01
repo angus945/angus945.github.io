@@ -9,11 +9,13 @@
     <lastBuildDate>Sat, 14 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/draft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【筆記】入門重點，計算著色器</title>
-      <link>https://angus945.github.io/draft/compute-shader/</link>
+      <link>https://angus945.github.io/draft/compute-shader-basis/</link>
       <pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/draft/compute-shader/</guid>
-      <description>概括 + 計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，目的在透過 GPU 的大量核心進行平行運算，以獲得效能。正式開始前先稍微帶過計算著色器的兩大難點： 並行運算 與 資料傳遞 並行運算 + 首</description>
+      <guid>https://angus945.github.io/draft/compute-shader-basis/</guid>
+      <description>&lt;!-- TODO Colors --&gt;
+&lt;h2 id=&#34;概括--&#34;&gt;概括 +-&lt;/h2&gt;
+&lt;p&gt;計算著色器 (Compute Shader) 是一種位於於渲染管線之外，用途也不僅限於著色計算的獨立工具，意圖利用 GPU 的大量計算核心的優勢，透過高效的平行運算方式解決問題。這篇文章是我在研究這項技術一段時間後，總結出的各項初學重點，在這裡分享給各位。&lt;/p&gt;</description>
     </item>
     
   </channel>
