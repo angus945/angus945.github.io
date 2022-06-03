@@ -6,7 +6,17 @@
     <description>Recent content in Learn on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 28 Jul 2021 10:20:32 +0800</lastBuildDate><atom:link href="https://angus945.github.io/learn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/learn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【學習】初學指南，計算著色器</title>
+      <link>https://angus945.github.io/learn/compute-shader/compute-shader-basis/</link>
+      <pubDate>Fri, 03 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/compute-shader/compute-shader-basis/</guid>
+      <description>&lt;h2 id=&#34;概括&#34;&gt;概括&lt;/h2&gt;
+&lt;p&gt;計算著色器 (Compute Shader) 是一種獨立於渲染管線之外，用途也不僅限於著色計算的工具， &lt;h&gt; 意圖利用 GPU 擁有大量核心的優勢，以平行運算的方法解決問題 &lt;/h&gt; 。這篇文章是我在研究一段時間後總結出的各項初學重點，在這裡分享給各位。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>運用多場景機制進行資料傳遞</title>
       <link>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</link>
