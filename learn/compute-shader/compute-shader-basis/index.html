@@ -358,7 +358,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;8603 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;8684 words
 </span>
 
 
@@ -375,6 +375,7 @@
 
         <h2 id="概括">概括</h2>
 <p>計算著色器 (Compute Shader) 是一種獨立於渲染管線之外，用途也不僅限於著色計算的工具，<h>意圖利用 GPU 擁有大量核心的優勢，以平行運算的方法解決問題</h>。這篇文章是我在研究一段時間後總結出的各項初學重點，在這裡分享給各位。</p>
+<p>請注意，因為計算著色器已經屬於進階應用，所以<h>文章將會省略基礎的著色器知識</h>，將重點放在「對圖學與著色器有一定程度理解，但還不知道如何接觸計算著色器」的角度進行編寫。</p>
 <p>本文的內容一共用到兩種程式語言，由 CPU 運作的 C# (CSharp)，以及由 GPU 運作的 HLSL (High Level Shader Language)，閱讀程式時還請注意程式區塊的標題。文章範例使用的環境為 Unity 引擎，雖然著色器相關的內容大致是通用的，但實做時也請注意是否有環境差異的問題在。</p>
 <p>那麼，正式開始前請先讓我介紹一下計算著色器的兩大重點：</p>
 <h3 id="並行運算">並行運算</h3>
@@ -453,7 +454,7 @@ void MyComputeKernelB (uint3 id : SV_DispatchThreadID) { }
 void MyComputeKernelC (uint3 id : SV_DispatchThreadID) { }
 </code></pre>
 <h3 id="多執行緒">多執行緒</h3>
-<p>在定義與實做了計算核心之後，接著便要指定他的<h>「執行續數量」</h>。並行是透過將工作分配給多個執行緒達成的，因此除了定義計算核心外，還需要使用 <code>[numthreads(x, y, z)]</code> 分配這個核心需要的執行緒數量 &ldquo;num&rdquo; &ldquo;threads&rdquo;。</p>
+<p>在定義與實做了計算核心之後，接著便要指定他的<h>「執行緒數量」</h>。並行是透過將工作分配給多個執行緒達成的，因此除了定義計算核心外，還需要使用 <code>[numthreads(x, y, z)]</code> 分配這個核心需要的執行緒數量 &ldquo;num&rdquo; &ldquo;threads&rdquo;。</p>
 <pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-hlsl">[numthreads(10, 1, 1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
