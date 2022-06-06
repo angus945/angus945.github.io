@@ -1,0 +1,8 @@
+.background {
+  position: absolute;
+  z-index: -100;
+  pointer-events: none; }
+
+.image-basis {
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
