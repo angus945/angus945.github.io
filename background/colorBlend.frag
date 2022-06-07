@@ -20,16 +20,13 @@ vec3 ran1To3(float seed)
 void main() 
 {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
-    vec2 mouse = u_mouse / u_resolution;
+    // vec2 mouse = u_mouse / u_resolution;
 
-    float dis = length(mouse - st);
     vec3 colorA = ran1To3(u_seed);
     vec3 colorB = fract(colorA * 31.5 + 784.451);
     vec3 color = mix(colorA, colorB, dot(st, colorA.xy));
-    
-    dis = step(dis, 0.5);
-    
-    vec4 darkColor = vec4(color * 0.1, 0);
+        
+    vec4 darkColor = vec4(color * 0.2, 0.1);
     vec4 lightColor = vec4(color * 0.1, 0.1);
     gl_FragColor = mix(darkColor, lightColor, u_theme);
 }

@@ -95,7 +95,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/background.956551c692dcfe42c4a21295f84add34b3b4b03894cdb55cc385b406865da431.css" integrity="sha256-lWVRxpLc/kLEohKV&#43;ErdNLO0sDiUzbVcw4W0BoZdpDE=">
+<link rel="stylesheet" href="https://angus945.github.io/background.e45ee2a1e38ee766967d88f3acb1f34cda93a539a8c1035ef875678f4fb0014c.css" integrity="sha256-5F7ioeOO52aWfYjzrLHzTNqTpTmowQNe&#43;HVnj0&#43;wAUw=">
 
 
 
@@ -248,19 +248,44 @@
     }
 </script>
 
-
-
-
-
-
-
-
+          
+ 
 
 
 
 
 
     
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
     
     
     
@@ -273,12 +298,10 @@
 
 
 
+<script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
     var seed = Math.random();
-    var backgroundData = randomBackground("[{\u0022code\u0022:\u0022\u0022,\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-A\u0022,\u0022style\u0022:\u0022background image-basis\u0022}]"); 
-    
-    var canvas = createCanvas(backgroundData);
-    var sandbox;
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.2, 0.1);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
     console.log(backgroundData);
     
@@ -286,72 +309,158 @@
     {
         var backgrounds = JSON.parse(datas);
         var index = Math.floor(Math.random() * backgrounds.length);
+
         return backgrounds[index];        
     }
-    function createCanvas(data)
-    {
-        var canvas = document.createElement("canvas");
-        canvas.className = data.style;
 
-        return canvas;
-    }
-    
-    window.addEventListener('load', function () 
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
     {
-        var main = document.getElementsByTagName("main")[0]; 
-        main.appendChild(canvas);
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
 
         var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
         themeButton.addEventListener('click', () => updateTheme(backgroundData));
 
+        setCanvas(backgroundData);
         updateTheme(backgroundData);
-        updateShader(backgroundData);
-        updateCanvas(backgroundData);
-    });
-    window.addEventListener('resize', function () 
-    {
-        updateCanvas(backgroundData);
+        updateSize();
+
+        animate();
     });
 
-
-    function updateShader(data)
+    
+    window.addEventListener('resize', () => 
     {
-        if(data.code == "") return;
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
 
-        sandbox = new GlslCanvas(canvas);
-        sandbox.load(data.code);
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
         
-        sandbox.setUniform("u_seed", seed);
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
     }
     function updateTheme(data)
     {
         var theme = document.body.dataset.theme;
-
+    
         if(theme == "dark")
-        {
+        { 
             canvas.style.opacity = data.dark_opacity;
             canvas.style.backgroundImage = `url("${ data.dark_image }")`
-
-            sandbox?.setUniform("u_theme", 0);
-            
+         
+            uniforms.u_theme.value = 0.0;
         }
-        else
+        else 
         {
             canvas.style.opacity = data.light_opacity;
             canvas.style.backgroundImage = `url("${ data.light_image }")`
             
-            sandbox?.setUniform("u_theme", 1);
-            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
         }
     }
-    function updateCanvas(data)
-    {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
 
-        canvas.style.top = 0;
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
     }
-    
+
+    function animate() 
+    {
+        window.requestAnimationFrame(animate);
+
+        render();
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += clock.getDelta();
+        renderer.render( scene, camera );
+    }
 </script>
 
 
