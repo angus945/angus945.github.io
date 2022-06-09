@@ -1,0 +1,61 @@
+
+
+
+Themes
+https://github.com/dsrkafuu/hugo-theme-fuji/blob/master/README_CN.md
+https://themes.gohugo.io/themes/hugo-theme-fuji/
+https://github.com/s4n7h0/hugo-theme-timeline
+
+WebGL, Shader
+https://github.com/patriciogonzalezvivo/glslCanvas
+https://github.com/patriciogonzalezvivo/glslEditor
+https://thebookofshaders.com/04/
+https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas
+
+https://github.com/actarian/glsl-canvas
+
+Katex
+https://katex.org/docs/supported.html
+
+https://github.com/dsrkafuu/hugo-theme-fuji/blob/master/README_CN.md
+
+Example
+https://github.dsrkafuu.net/hugo-theme-fuji/
+https://lontoone-5070b.web.app/
+http://makedreamvsogre.blogspot.com/
+https://andy-hsieh.site/
+-----------
+
+> 命名規範 (文章、路徑、資源)
+全小寫，透過 - 分隔
+about-me
+about-this-site
+
+-----
+
+
+### 待搬運
+
+[【學習日誌】物件筆刷和地形筆刷](https://home.gamer.com.tw/creationDetail.php?sn=5402986)
+
+[【學習日誌】批量繪製物件與視錐裁剪](https://home.gamer.com.tw/creationDetail.php?sn=5392211)
+
+[【閒聊】不是面試，但比面試更棒](https://home.gamer.com.tw/creationDetail.php?sn=5354800)
+
+[【里程碑】大學面試 - 交大百川學士學位學程 (死去)](https://home.gamer.com.tw/creationDetail.php?sn=5332122)
+
+[【學習日誌】自己寫一個 One last kiss 的風格渲染 10/24](https://home.gamer.com.tw/creationDetail.php?sn=5298650)
+
+[【學習日誌】把物體投影到背景上 8/21](https://home.gamer.com.tw/creationDetail.php?sn=5244818)
+
+https://home.gamer.com.tw/creationDetail.php?sn=5320070
+
+https://home.gamer.com.tw/creationDetail.php?sn=5268314
+
+https://home.gamer.com.tw/creationDetail.php?sn=5292362
+
+https://home.gamer.com.tw/creationDetail.php?sn=5296971
+
+https://home.gamer.com.tw/creationDetail.php?sn=5305804
+
+

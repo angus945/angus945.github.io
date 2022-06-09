@@ -61,12 +61,18 @@
 
 
 
-
 <script>
-    window.ga_tid = 'G-LTVT6WYDT4';
-    window.ga_api = '';
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
 </script>
-<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
 
 
 
@@ -90,7 +96,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/content-tag.915161822b6cfc6da80cf9d7f6ae8b68c37fb31b618c2b20498c085794c794fa.css" integrity="sha256-kVFhgits/G2oDPnX9q6LaMN/sxthjCsgSYwIV5THlPo=">
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
 
 
 
@@ -302,8 +308,9 @@
 
 <script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
+
     var seed = Math.random();
-    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.2, 0.1);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
     console.log(backgroundData);
     
@@ -321,18 +328,20 @@
     var mouse = {x:0, y:0};
 
     $(document).ready(function() 
-    {
+    {        
         createRenderer(backgroundData);
         createCanvas(backgroundData);
 
         var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
         themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
 
         setCanvas(backgroundData);
         updateTheme(backgroundData);
         updateSize();
 
-        animate();
+        updateInitial(backgroundData);
+        update();
     });
 
     
@@ -450,11 +459,25 @@
         uniforms.u_mouse.value.y = mouse.y;
     }
 
-    function animate() 
+    let interval;
+    let delta;
+    function updateInitial(data)
     {
-        window.requestAnimationFrame(animate);
+        interval = 1 / data.fps;
+        delta = interval;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
 
-        render();
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
     }
     function render() 
     {
@@ -572,13 +595,9 @@
 <p>費曼學習法 - 最近開始嘗試的學習方式，也是當今最被推崇的學習方法，即以教為學</p>
 </li>
 </ul>
-<p>
-    <c>
-        
+<p><c>
 其實費曼學習法也算在主動學習的範圍中，但是他完全值得擁有自己的章節，相信你們也會認同的
-
-    </c>
-</p>
+</c></p>
 <p>接下來就讓我說說自己對三種類型的看法和理解吧。</p>
 <h3 id="被動學習">被動學習</h3>
 <p>被動的吸收資訊，學生單純的從教師那裡接受訊息，但<h>無法和教師互動或與和其他同學分享見解</h> ，無法在課堂中扮演更積極的角色。這裡的教師只是一種代稱，為資訊提供者的意思，所以不限於現實課堂中講課的教師，即使是書籍、文章或影片都算教師的範圍。</p>
@@ -719,25 +738,17 @@
 <p>很遺憾的，主動學習需要適合的學習環境，而現階段體制中的這種機會不多。</p>
 <p>即使體制中有這樣的機會，課堂中的<h>強制交流可能不適合所有族群</h> (例如內向者)，對於這類學生們要求短時間融入群體，或者將未成熟的想法分享給所有人，會使他們倍感壓力。如果教師能夠理解並關注這類學生 (但不是 &ldquo;你應該試著融入大家&rdquo; 的那種)，他們才能更活躍的發揮自己的特長。</p>
 <p>以及，你們懂的&hellip;被強制綁定的地雷組員。如果團隊在有合理理由時 (如該專案的參與程度過低) 能夠要求開除組員，或是學生有權利脫離當前的組別跳槽，能夠很大程度的提高學生的參與狀況，同時避免消極的組員拖累團體，以及讓學生理解人力流轉在現實中的恆常性。</p>
-<p>
-    <h>
-        
+<p><c>
 但也可能導致學生間發生政治鬥爭的情況，此時教授的明斷就顯得相當重要了
-
-    </h>
-</p>
+</c></p>
 <p><strong><em>主動學習的學習誤區</em></strong></p>
 <p>有些時候我們只是將問題的解決方法記下來，但仍不夠深入了解背後的原理。是不是有過一直認為自己很了解，直到被人提問才意識到自己沒辦法解釋的經驗? 這就是討論的重要性了</p>
 <p><strong><em>如何做到主動學習</em></strong></p>
 <p>以現有的體制中，除去專題作業外比較少有這種機會，因此最簡單的方法就是<h>重整自己的筆記</h>，無論是被動學習中用來幫助記憶的筆記，或是在課堂中從黑板抄下來的筆記都行。</p>
 <p>不管教授在黑板上講解得多好，也不管你抄下來的筆記多精美，請用 &ldquo;自己的理解方式&rdquo; 再重新寫一次筆記。觀看影片和閱讀文章也是，單純的接收資訊都算在被動學習的範圍，但你只要在接收訊息的過程中進行彙整的動作，就能達成主動學習，因為<h>重整筆記這個動作就是一種將接收的資訊壓縮成知識的過程</h> 。</p>
-<p>
-    <c>
-        
+<p><c>
 重寫只是類比，事實上你可以用任何方式重整筆記，個人是喜歡透過電腦打在文字檔中，或使用筆記工具輔助 (如 notion)
-
-    </c>
-</p>
+</c></p>
 <p>除此之外，這裡也分享一個廣受好評的學習平台 - <a href="https://brilliant.org/" target="_blank">Brilliant</a></p>
 <p>由各領域專家打造出的教學平台，數學、物理、化學和計算機科學都包括在其中。教學會透過有趣的情境來引導學生思考，並使用精美圖形搭配互動式網頁逐步帶學生理解內容。</p>
 
@@ -831,13 +842,9 @@
 </div>
 
 
-<p>
-    <c>
-        
+<p><c>
 如果你覺得 "寫教學" 這個詞太過沉重，也可以把它當成另一種形式的筆記，想像成將現有的知識解釋給小學時的自己就好
-
-    </c>
-</p>
+</c></p>
 <h3 id="三種類型">三種類型</h3>
 <p>三種類型學習的並沒有明確順序和分界，實際上會根據個人需求搭配。</p>
 <p>如果是希望提高應試成績的話，使用被動和主動學習搭配的方式，透過整理筆記加強記憶在短期內應該更有效。但如果你希望真正理解一項知識，以應對未來在現實中所面對的情況，那麼主動學習及費曼技巧是不可少的。</p>
@@ -885,13 +892,9 @@
 <p>雖然上面寫的是書寫困難，但事實上我擁有的是某種記憶缺陷，我無法在短時間內記住文字的細節。周圍的同學能夠在十分鐘內背起十個英文單字，而就算將時間延長到幾個小時，對我來講也是難如登天。</p>
 <p>我能夠聽懂、看懂且正常使用中文寫作或溝通，但就是沒辦法完整記住中文文字的形體，因此沒有提示的書寫對我來說是極度困難的事情。學習期間的字音字形、註釋小考本都被紅圈圈滿，就算使用罰寫將本子填滿後，我仍然無法在記住這一切。</p>
 <p>而最後就像那張診斷書，我被簡單的歸類在學習障礙中，在不合適的教育體制中使用錯誤方法應對。書寫障礙只是表現出的結果而已，而文字也只是能直接反映出問題的影響之一，只有自己能了解這種無力感。</p>
-<p>
-    <c>
-        
+<p><c>
 雖然整斷書說能夠電腦作答，但在整個教育體制下起到的幫助實在是很...雞肋，更何況我也不是真的書寫障礙，就算用電腦也幫不了我背課文。真的要說就是作文考試時能用電腦打比較方便吧，但作文考試本身又很 emm... 算了，後來我寧願不使用這項特權，選擇在考作文的時候迴避自己想不起寫法的一堆字，反正用不用我都寫不出好的 "作文"
-
-    </c>
-</p>
+</c></p>
 <p>對老師和父母來說我只是不願意努力而已，批評和質疑就像一把把的利刃插進心裡，最後我認為自己一無是處，恨自己為什麼做不到對所有人來說輕而易舉的事。</p>
 <p>在看不到人生的道路時，出現的自學這個選項，而我也知道這是最後的機會並下定決心一搏。回過頭去看，真的是相當慶幸自己踏上自學這條路，找到了適合自己的學習方法，並重拾人生目標和自信。</p>
 <p>即使到了現在，要我用紙筆在沒有文字提示的狀態下書寫還是相當困難，但只要有了電腦和鍵盤我也能分享自己的所見。雖然背不起課文，但我能夠在大腦裡構建出一個世界，並透過遊戲的形式展現給世人 :)</p>
@@ -984,6 +987,10 @@
             
             <li>
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
             </li>
             
         </ul>
@@ -1114,6 +1121,10 @@
             
             <li>
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
             </li>
             
         </ul>

@@ -61,12 +61,18 @@
 
 
 
-
 <script>
-    window.ga_tid = 'G-LTVT6WYDT4';
-    window.ga_api = '';
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
 </script>
-<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
 
 
 
@@ -90,7 +96,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/content-tag.915161822b6cfc6da80cf9d7f6ae8b68c37fb31b618c2b20498c085794c794fa.css" integrity="sha256-kVFhgits/G2oDPnX9q6LaMN/sxthjCsgSYwIV5THlPo=">
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
 
 
 
@@ -263,6 +269,7 @@
 
 <script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
+
     var seed = Math.random();
     var backgroundData = randomBackground("[]"); 
 
@@ -282,18 +289,20 @@
     var mouse = {x:0, y:0};
 
     $(document).ready(function() 
-    {
+    {        
         createRenderer(backgroundData);
         createCanvas(backgroundData);
 
         var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
         themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
 
         setCanvas(backgroundData);
         updateTheme(backgroundData);
         updateSize();
 
-        animate();
+        updateInitial(backgroundData);
+        update();
     });
 
     
@@ -411,11 +420,25 @@
         uniforms.u_mouse.value.y = mouse.y;
     }
 
-    function animate() 
+    let interval;
+    let delta;
+    function updateInitial(data)
     {
-        window.requestAnimationFrame(animate);
+        interval = 1 / data.fps;
+        delta = interval;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
 
-        render();
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
     }
     function render() 
     {
@@ -480,7 +503,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;8684 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;8784 words
 </span>
 
 
@@ -680,6 +703,9 @@ void CSMain() { }
 
 <p>至具體數量該怎麼分配呢？首先從<h>處理資料的維度</h>下手，假設著色器要處理的主要數據為一維的陣列就分配 <code>(n, 1, 1)</code>，若要對圖片的二維像素陣列操作就用 <code>(x, y, 1)</code>，或是要計算三維的體積網格就 <code>(x, y, z)</code>。</p>
 <p>執行緒的具體數量或比例則沒有明確規則，大概抓個介於 10 和資料總數 1% 以下的數值吧。假設陣列長度大約一萬，numthread 就分配為 <code>(100, 1, 1)</code>，若圖片大小 2048 的話就分配 <code>(20, 20, 1)</code>。</p>
+<p><r>
+修正：理想的執行緒組數量應該是介於 32 至 1024 之間，並且為 32 的倍數，似乎與 GPU 的硬體結構有關，資料先補充在文末，細節會等我深入了解後再補上。(感謝巴友 美遊ちゃん 指正)
+</r></p>
 <p>最後，組的數量可以透過<h>資料長度除以執行緒數量</h>得出，畢竟資料的多寡可能根據情況產生差異，透過這種方式可以確保<h>在任何情況下都有足夠的執行緒進行計算</h>。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">compute.Dispatch(knrnelIndex, 1 + (array.Length / 100), 1, 1);
@@ -1187,6 +1213,7 @@ resultBuffer.GetData(result);
 <p><a href="https://docs.unity3d.com/ScriptReference/ComputeBufferType.html" target="_blank">ComputeBufferType</a></p>
 <p><a href="https://forum.unity.com/threads/check-if-a-computeshader-dispatch-command-is-completed-on-gpu-before-doing-second-kernel-dispatch.369631/" target="_blank">Check if a ComputeShader.Dispatch() command is completed on GPU before doing second kernel dispatch</a></p>
 <p><a href="https://stackoverflow.com/questions/59349081/hlsl-cg-compute-shader-race-condition" target="_blank">hlsl CG compute shader Race Condition</a></p>
+<p><a href="https://www.cs.cmu.edu/afs/cs/academic/class/15418-s18/www/schedule.html" target="_blank">Parallel Computer Architecture and Programming, Spring 2018: Schedule</a> (感謝巴友 美遊ちゃん 提供)</p>
     </div>
 </article>
 
@@ -1247,6 +1274,10 @@ resultBuffer.GetData(result);
             
             <li>
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
             </li>
             
         </ul>
@@ -1389,6 +1420,10 @@ resultBuffer.GetData(result);
             
             <li>
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
             </li>
             
         </ul>

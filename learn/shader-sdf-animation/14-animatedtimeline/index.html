@@ -59,12 +59,18 @@
 
 
 
-
 <script>
-    window.ga_tid = 'G-LTVT6WYDT4';
-    window.ga_api = '';
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
 </script>
-<script async src="https://cdn.jsdelivr.net/npm/cfga@1.0.3/cfga.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
 
 
 
@@ -88,7 +94,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/content-tag.915161822b6cfc6da80cf9d7f6ae8b68c37fb31b618c2b20498c085794c794fa.css" integrity="sha256-kVFhgits/G2oDPnX9q6LaMN/sxthjCsgSYwIV5THlPo=">
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
 
 
 
@@ -300,8 +306,9 @@
 
 <script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
+
     var seed = Math.random();
-    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.2, 0.1);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
     console.log(backgroundData);
     
@@ -319,18 +326,20 @@
     var mouse = {x:0, y:0};
 
     $(document).ready(function() 
-    {
+    {        
         createRenderer(backgroundData);
         createCanvas(backgroundData);
 
         var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
         themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
 
         setCanvas(backgroundData);
         updateTheme(backgroundData);
         updateSize();
 
-        animate();
+        updateInitial(backgroundData);
+        update();
     });
 
     
@@ -448,11 +457,25 @@
         uniforms.u_mouse.value.y = mouse.y;
     }
 
-    function animate() 
+    let interval;
+    let delta;
+    function updateInitial(data)
     {
-        window.requestAnimationFrame(animate);
+        interval = 1 / data.fps;
+        delta = interval;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
 
-        render();
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
     }
     function render() 
     {
@@ -868,6 +891,10 @@ return distance;
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
             </li>
             
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
+            </li>
+            
         </ul>
     </div>
     
@@ -977,6 +1004,10 @@ return distance;
             
             <li>
                 <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
             </li>
             
         </ul>
