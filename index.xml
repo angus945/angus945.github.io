@@ -9,12 +9,12 @@
     <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【開發日誌】個人網站重建</title>
-      <link>https://angus945.github.io/draft/rebuild-the-website/</link>
+      <link>https://angus945.github.io/devlog/rebuild-the-website/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/draft/rebuild-the-website/</guid>
-      <description>&lt;h2 id=&#34;網站重建--&#34;&gt;網站重建 +-&lt;/h2&gt;
-&lt;p&gt;從初次建構個人網站到現在已經過去一年了，雖然當時對成果還算滿意，但隨著我寫作的過程也逐漸意識各種缺陷，函示調用不易、專案架構混雜等，所以我決定重建一次網站！&lt;/p&gt;</description>
+      <guid>https://angus945.github.io/devlog/rebuild-the-website/</guid>
+      <description>&lt;h2 id=&#34;網站重建&#34;&gt;網站重建&lt;/h2&gt;
+&lt;p&gt;從初次製作個人網站到現在已經一年了，雖然當時對成果還算滿意，但在我寫作的過程中也慢慢發現各種缺陷，函示調用不易、專案架構混雜等等，所以決定重建一次網站！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -523,6 +523,24 @@ public event Action NotInputEvent;&lt;/p&gt;
 NotInputEvent += FunctionA; (void FunctionA() { print(&amp;ldquo;A&amp;rdquo;); })
 NotInputEvent += FunctionB; (void FunctionB() { print(&amp;ldquo;B&amp;rdquo;); })
 NotInputEvent += FunctionC; (void FunctionC() { print(&amp;ldquo;C&amp;rdquo;); })&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://angus945.github.io/draft/work/post-custom-pipleline/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/draft/work/post-custom-pipleline/</guid>
+      <description>擴展預設渲染管線 分離渲染 直接設定 render target 無效 找怎麼把 gpu instance 輸出到特定目標上 camera base rendering 和 target base rendering 了，哭阿我要怎麼只輸出一個圖層到 render texture https://blog.csdn.net/leonwei/article/details/54972653 https://www.reddit.com/r/Unity3D/comments/97t8t3/controlling_camera_rendering_manually_from_code/ 找蠻多時間後發現一個 Command Buffer | Command Buffers allow you to extend Unity’s built-in render pipeline. A Command Buffer holds a list of rendering commands which</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://angus945.github.io/draft/work/post-devlog-terrain/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/draft/work/post-devlog-terrain/</guid>
+      <description>【學習日誌】工具化和地形繪製修正 一樣接續上篇【學習日誌】物件筆刷和地形筆刷 https://home.gamer.com.tw/creationDetail.php?sn=5402986 前兩篇把各種系統的功能完成後，接下來就是把它們變成一套編輯器，讓這些系統能實際作為工具使用 自訂編輯器又是另一個分支了，雖然資</description>
     </item>
     
   </channel>

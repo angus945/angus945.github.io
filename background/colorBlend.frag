@@ -24,9 +24,9 @@ void main()
     randomColor(u_seed, colorA, colorB);
     
     vec3 color = mix(colorA, colorB, dot(st, colorA.xy));
-    color.r += sin(u_time * +5.0) * 0.1;
-    color.g += cos(u_time * -3.0) * 0.2;
-    color.b += sin(u_time * +1.0) * 0.3;
+    color.r += sin(u_time * +5.0 + u_seed * 46.451) * 0.10;
+    color.g += cos(u_time * -3.0 - u_seed * 13.151) * 0.20;
+    color.b += sin(u_time * +1.0 + u_seed * 97.654) * 0.15;
         
     vec4 darkColor = vec4(color * 0.5, 0);
     vec4 lightColor = vec4(color * 0.3, 0.1);

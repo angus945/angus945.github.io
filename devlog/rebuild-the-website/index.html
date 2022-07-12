@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【開發日誌】個人網站重建 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="個人網站的重建過程分享" />
+
+
+<meta name="keywords" content="website, Hugo" />
+
+
+<meta property="og:title" content="【開發日誌】個人網站重建" />
+<meta name="twitter:title" content="【開發日誌】個人網站重建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/rebuild-the-website/" /><meta property="og:description" content="個人網站的重建過程分享" />
+<meta name="twitter:description" content="個人網站的重建過程分享" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2022-07-12T00:00:00+00:00" /><meta property="article:modified_time" content="2022-07-12T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.5,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+    <h2 class="post-item post-title">
+        <a href="https://angus945.github.io/devlog/rebuild-the-website/">【開發日誌】個人網站重建</a>
+    </h2>
+    <div class="post-item post-meta">
+        <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2022-07-12
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;3530 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/website">website</a>&nbsp;<a href="/tags/hugo">Hugo</a>&nbsp;</span>
+
+    </div>
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+
+        <h2 id="網站重建">網站重建</h2>
+<p>從初次製作個人網站到現在已經一年了，雖然當時對成果還算滿意，但在我寫作的過程中也慢慢發現各種缺陷，函示調用不易、專案架構混雜等等，所以決定重建一次網站！</p>
+<h3 id="問題分析-">問題分析 +</h3>
+<p>為了避免重蹈覆轍，重建開始前必須先釐清舊網站的問題才行～</p>
+<p><strong><em>分類模式</em></strong></p>
+<p>我在舊版網站使用的分類模式為：</p>
+<ul>
+<li><strong>日誌 Blog</strong><br>
+我有透過日誌將學習過程進行記錄的習慣，個人網站當然也需要對應的分類。</li>
+<li><strong>筆記 Notes</strong><br>
+寫筆記也是我常用的學習方法，為了與性質較輕鬆的日誌區隔，因此也建立了筆記分類。</li>
+<li><strong>教學 Tutorials</strong><br>
+教學是我建立網站的主要原因之一，為了將新學習方法產生的產物進行保存，所以教學分類也是必要的。</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/rebuild-the-website/old-hierarchy.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/old-hierarchy.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>這個分法沒什麼問題…至少以當時的需求來說沒有，但後來我為了申請百川嘗試寫了性質更為特殊的文章後，分類危機也由此浮現。文章的內容有關「學習」但並不是學習日誌，與「遊戲」相關卻又不屬於遊戲開發的文章，不可能被歸類在教學與筆記當中，但將他視為日誌也不太恰當。</p>
+<p>再來，因為改變學習的方式，我的筆記也開始嘗試將細節解釋清楚，讓他變得更加像一種「教學」，它應該被分類為筆記還是教學？或是學習資源整理的文章，他和學習有關但實際的教學又不是我製作的，該放在教學分類還是日誌分類中？</p>
+<p>所以，這次重建的目的之一就是要配合新的寫作模式<h>尋找更適當的分類方法<h>。</p>
+<p><strong>資源混雜</strong></p>
+<p>除了分類以外，專案內容混亂也是一個原因。初次建立網站時各方面的知識都還不充足，製作時走一步算一步，在我反覆修改下產生的就是難以維護的專案架構。因為真的太亂了，所以比起整理架構還不如重作一次輕鬆 :P</p>
+<h2 id="重新開始">重新開始</h2>
+<p>這次重建一樣會使用現成的資源開發網站，畢竟我不是專攻網頁設計，重建的目的也不是為了學習，與其大費周章從頭雕刻出排版與界面，不如<h>尋找喜歡的模板修改再把自己的專業結合進去</h>，才能有效率的展現技能～</p>
+<p>因此這次也是使用 Hugo 建立網站，重複的部份可以參考舊版網站的<a href="https://angus945.github.io/devlog/build-the-fistsite/">開發日誌</a>，這篇就只把重點放在新的東西上。</p>
+<h3 id="模板選擇">模板選擇</h3>
+<p>雖然我不討厭舊網頁的樣式，但它背景一片死白讓長時間觀看太過吃力，所以這次我找了能夠切換黑白主題的極簡模板 <a href="https://themes.gohugo.io/themes/hugo-theme-fuji/" target="_blank">fuji</a>，讓讀者根據需求自由鈕切換樣式。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/rebuild-the-website/fuji-theme.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/fuji-theme.jpg]">
+    <p style="opacity: 0.5">
+        引用自主題的預覽圖
+    </p>
+</div>
+
+
+<p>為了對切換功能進行擴展我也研究了模板中的原始碼，這似乎<h>與一種能用變數指定數值的層階層式樣式表 &ldquo;scss&rdquo; 有關</h>。具體運作原理我也不清楚，我只有摸到足夠讓我擴展內容的程度而已，總之這是一個蠻理想的模板～</p>
+<pre><span>scss</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-scss">body {
+  background-color: var(--color-bg);
+  color: var(--color-font);
+
+  @include link-1();
+}
+</code></pre>
+<h3 id="文章分類">文章分類</h3>
+<p>Hugo 建立出的網站結構會與資料夾相同，所以只要資料夾命名錯誤就可能引發和之前一樣的分類危機。第一次做的時候剛好處於寫作模式的轉形期才發生規劃與實際需求不符的狀況，所以這次重建的首個任務就是<h>確認好自己的需求為何</h>。</p>
+<ul>
+<li>
+<p><strong>日誌 Devlog</strong><br>
+專案開發與學習日誌，通常是用於紀錄與分享自己的學習過程，省略技術與實做細節並以有趣直白為重。</p>
+</li>
+<li>
+<p><strong>學習 Learn</strong><br>
+主要是有更多實做細節的筆記與教學類文章，加深自己的印象的同時也能回饋陪伴我學習的社群夥伴。除此之外，整理出的學習資源也會分享在這個類別中。比起教學或筆記，學習一詞才是能囊括三者的好命名。</p>
+</li>
+<li>
+<p><strong>文章 Post</strong><br>
+其他個人文章，分享自己對各種事情的經歷與看法，例如自學歷程、學習感想之類的。</p>
+</li>
+</ul>
+<h3 id="資源嵌入">資源嵌入</h3>
+<p>圖文並茂的內容是吸引目光的要點之一，適時插入圖片能有效幫讀者帶入情境，在技術文章中更是幫助讀者理解內容的重要手段。</p>
+<p>舊網站當然也有製作資源嵌入用的函式，它會根據文章網址自動抓取對應位置的資源，使我不必手動指定整個路徑。將所有工作都交給程式雖然輕鬆，但也意味者我失去了這些事的主導權，意思是：<h> 我必須配合程式尋找的路徑，將資源放在「正確」的位置上</h>。</p>
+<p>為了在輕鬆與控制權之間取得平衡，我將新系統設計成只需要手動設置路徑一次，後續調用函式時就會根據設定尋找資源，如此一來就能自由指定擺放資源的位置，同時免除麻煩的輸入工作。</p>
+<pre><span>toml</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-toml">resources: /devlog/rebuild-the-website/
+</code></pre>
+<ul>
+<li>
+<p><strong>圖片嵌入</strong><br>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/rebuild-the-website/resources-image.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/resources-image.jpg]">
+    <p style="opacity: 0.5">
+        可以設定圖片的註解
+    </p>
+</div>
+
+</p>
+</li>
+<li>
+<p><strong>音效嵌入</strong><br>
+
+
+
+
+
+
+
+<audio controls id="audio_resources-audio.mp3">
+    <source src="/devlog/rebuild-the-website/resources-audio.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_resources-audio.mp3");
+    audio.volume = "0.8"
+</script></p>
+</li>
+<li>
+<p><strong>資源嵌入</strong><br>
+
+
+
+
+
+
+
+
+<p>
+    <a href="https://github.com/angus945/angus945.github.io/tree/main/devlog/rebuild-the-website/" target="_blank">
+        可以連接到網頁的儲存庫，用於分享程式原始碼之類的
+    </a>
+</p>
+</p>
+</li>
+</ul>
+<h3 id="內容上色">內容上色</h3>
+<p>除了嵌入圖片以外，我也習慣用文字上色來強調某些內容。雖然 markdown 能夠直接接收 <code>html</code> 與 <code>css</code> 格式，<span style="color:red">但要插入完整標籤還是太麻煩了</span>，會導致文章難以修改。</p>
+<pre><span>markdown</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-markdown">&lt;span style=&quot;color:red&quot;&gt;但要插入完整標籤還是太麻煩了&lt;/span&gt;
+</code></pre>
+<p>後來我研究了更多上色方法才發現 html 其實可以自訂標籤，所以就訂了單字<h> h </h>當做強調重點、單字<c> c </c>當作註解，以及單字  <r> r </r> 作為警告。</p>
+<pre><span>scss</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-scss">h 
+{
+    color: var(--color-highlight);
+}
+
+c
+{
+    color: var(--color-remark);
+}
+
+r
+{
+    color: red;
+}
+</code></pre>
+<p>雖然我還是不希望文章原始檔有標籤語言，但<h>與以前相比已經簡潔許多了</h>。</p>
+<pre><span>markdown</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-markdown">雖然我還是不希望文章原始檔有標籤語言，但 &lt;h&gt; 與以前相比已經簡潔許多了 &lt;/h&gt; 。
+</code></pre>
+<h3 id="著色器嵌入">著色器嵌入</h3>
+<p>除了常規的嵌入與上色以外，這次也新增了一個重要的功能：著色器嵌入。我曾在一個有趣的互動式教學網站 <a href="https://thebookofshaders.com/" target="_blank">The Book of Shaders</a> 上學習過著色器，網站中所有的內容都是實時渲染的，可以<h>即時對讀者的動作產生反應</h>，對初時的我產生很大的幫助。</p>
+<p>網站官方也有公開它們的<a href="https://github.com/patriciogonzalezvivo/glslCanvas" target="_blank">函式庫</a>供人使用，只需要透過 javaScript 引用後就可以方便的嵌入著色器元素並自動渲染，於是我也將它整合進自己的嵌入函式，如此一來就能添加更多有趣的內容了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/rebuild-the-website/resources-shader.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/resources-shader.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<div class="shader-container">
+    <canvas class="glslCanvas" data-fragment="#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform float u_shape;
+uniform float u_colorR;
+uniform float u_colorG;
+uniform float u_colorB;
+uniform vec2 u_position;
+
+#define deg2rad 0.0174532925;
+
+vec2 uvRotate(vec2 uv, float degree)
+{
+    float radian = degree * deg2rad;
+    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));
+    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));
+
+    return ihat &#43; jhat;
+}
+float rect(vec2 uv, vec2 position, float rotate, vec2 size)
+{
+    uv = uv - position;
+    uv = uvRotate(uv, rotate);
+
+    vec2 dist = abs(uv) - size;
+
+    return max(dist.x, dist.y);
+}
+float sdf_cross(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+
+    float scale = 10.0;
+    uv = uv * scale;
+    pos = pos * scale;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(3, 1)));
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(1, 3)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_dimand(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(.5, .5)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_blend(vec2 uv, vec2 pos)
+{
+    float crossSDF = sdf_cross(uv, pos);
+    float dimondSDF = sdf_dimand(uv, pos);
+
+    float t = sin(u_time) * 0.5 &#43; 0.5;
+    float dis = mix(crossSDF, dimondSDF, t);
+    
+    return dis;
+}
+void main() 
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    // vec2 pos = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
+    float dist = 0.0;
+    if(u_shape == 0.0)
+    {
+        dist = sdf_dimand(uv, u_position);        
+    }
+    else if(u_shape == 1.0)
+    {
+        dist = sdf_cross(uv, u_position);
+    }
+    else dist = sdf_blend(uv, u_position);
+
+    vec4 color = vec4(u_colorR, u_colorG, u_colorB, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = u_color;
+}
+
+
+
+
+" width="300" height="300"></canvas>
+</div>
+
+
+
+
+
+<p>比較麻煩的是 Hugo 不會在文件資源改動後即時更新網站，導致預覽起來有點麻煩，所以我只能透過 vscode 的插件 <a href="https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas" target="_blank">glsl-canvas</a> 進行初步除錯。</p>
+<h3 id="互動式內容">互動式內容</h3>
+<p>為了提高內容互動性我也製作了讓讀者修改參數的功能，當網站載入時初始化的腳本會搜索一遍所有內容，並將網頁元素的輸入事件與著色器連接，達成動態修改參數的功能。</p>
+<p><strong>一維浮點 - float silder</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+            
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+            
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+            
+
+
+
+
+
+<div class="shader-container">
+        <canvas class="glslCanvas shader-canvas" data-fragment="#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform float u_shape;
+uniform float u_colorR;
+uniform float u_colorG;
+uniform float u_colorB;
+uniform vec2 u_position;
+
+#define deg2rad 0.0174532925;
+
+vec2 uvRotate(vec2 uv, float degree)
+{
+    float radian = degree * deg2rad;
+    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));
+    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));
+
+    return ihat &#43; jhat;
+}
+float rect(vec2 uv, vec2 position, float rotate, vec2 size)
+{
+    uv = uv - position;
+    uv = uvRotate(uv, rotate);
+
+    vec2 dist = abs(uv) - size;
+
+    return max(dist.x, dist.y);
+}
+float sdf_cross(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+
+    float scale = 10.0;
+    uv = uv * scale;
+    pos = pos * scale;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(3, 1)));
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(1, 3)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_dimand(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(.5, .5)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_blend(vec2 uv, vec2 pos)
+{
+    float crossSDF = sdf_cross(uv, pos);
+    float dimondSDF = sdf_dimand(uv, pos);
+
+    float t = sin(u_time) * 0.5 &#43; 0.5;
+    float dis = mix(crossSDF, dimondSDF, t);
+    
+    return dis;
+}
+void main() 
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    // vec2 pos = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
+    float dist = 0.0;
+    if(u_shape == 0.0)
+    {
+        dist = sdf_dimand(uv, u_position);        
+    }
+    else if(u_shape == 1.0)
+    {
+        dist = sdf_cross(uv, u_position);
+    }
+    else dist = sdf_blend(uv, u_position);
+
+    vec4 color = vec4(u_colorR, u_colorG, u_colorB, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = u_color;
+}
+
+
+
+
+" width="300" height="300"></canvas>
+
+    <div class="shader-input" data-inputs="[{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_colorR&#34;,&#34;type&#34;:&#34;float&#34;},{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_colorG&#34;,&#34;type&#34;:&#34;float&#34;},{&#34;default&#34;:&#34;0.5&#34;,&#34;max&#34;:&#34;1&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_colorB&#34;,&#34;type&#34;:&#34;float&#34;}]">
+        
+        
+        
+        
+            
+
+        <div id="u_colorR" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_colorR </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            <input class="shader-input-silder" type="range" min="0" max="1" value="0.5" step="any" >
+            
+        </div>
+
+        
+        
+        
+            
+
+        <div id="u_colorG" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_colorG </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            <input class="shader-input-silder" type="range" min="0" max="1" value="0.5" step="any" >
+            
+        </div>
+
+        
+        
+        
+            
+
+        <div id="u_colorB" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_colorB </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            <input class="shader-input-silder" type="range" min="0" max="1" value="0.5" step="any" >
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+<p><strong>一維整數 - int silder</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+        
+    
+
+    
+        
+            
+
+
+
+
+
+<div class="shader-container">
+        <canvas class="glslCanvas shader-canvas" data-fragment="#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform float u_shape;
+uniform float u_colorR;
+uniform float u_colorG;
+uniform float u_colorB;
+uniform vec2 u_position;
+
+#define deg2rad 0.0174532925;
+
+vec2 uvRotate(vec2 uv, float degree)
+{
+    float radian = degree * deg2rad;
+    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));
+    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));
+
+    return ihat &#43; jhat;
+}
+float rect(vec2 uv, vec2 position, float rotate, vec2 size)
+{
+    uv = uv - position;
+    uv = uvRotate(uv, rotate);
+
+    vec2 dist = abs(uv) - size;
+
+    return max(dist.x, dist.y);
+}
+float sdf_cross(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+
+    float scale = 10.0;
+    uv = uv * scale;
+    pos = pos * scale;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(3, 1)));
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(1, 3)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_dimand(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(.5, .5)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_blend(vec2 uv, vec2 pos)
+{
+    float crossSDF = sdf_cross(uv, pos);
+    float dimondSDF = sdf_dimand(uv, pos);
+
+    float t = sin(u_time) * 0.5 &#43; 0.5;
+    float dis = mix(crossSDF, dimondSDF, t);
+    
+    return dis;
+}
+void main() 
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    // vec2 pos = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
+    float dist = 0.0;
+    if(u_shape == 0.0)
+    {
+        dist = sdf_dimand(uv, u_position);        
+    }
+    else if(u_shape == 1.0)
+    {
+        dist = sdf_cross(uv, u_position);
+    }
+    else dist = sdf_blend(uv, u_position);
+
+    vec4 color = vec4(u_colorR, u_colorG, u_colorB, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = u_color;
+}
+
+
+
+
+" width="300" height="300"></canvas>
+
+    <div class="shader-input" data-inputs="[{&#34;default&#34;:&#34;0&#34;,&#34;max&#34;:&#34;2&#34;,&#34;min&#34;:&#34;0&#34;,&#34;name&#34;:&#34;u_shape&#34;,&#34;type&#34;:&#34;int&#34;}]">
+        
+        
+        
+        
+            
+
+        <div id="u_shape" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_shape </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            <input class="shader-input-silder" type="range" min="0" max="2" value="0" step="1" >
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+<p><strong>二維浮點 - vector picker</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+    
+    
+    
+        
+        
+        
+        
+
+    
+
+    
+        
+            
+
+
+
+
+
+<div class="shader-container">
+        <canvas class="glslCanvas shader-canvas" data-fragment="#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform float u_shape;
+uniform float u_colorR;
+uniform float u_colorG;
+uniform float u_colorB;
+uniform vec2 u_position;
+
+#define deg2rad 0.0174532925;
+
+vec2 uvRotate(vec2 uv, float degree)
+{
+    float radian = degree * deg2rad;
+    vec2 ihat = uv.x * vec2(cos(radian), sin(radian));
+    vec2 jhat = uv.y * vec2(-sin(radian), cos(radian));
+
+    return ihat &#43; jhat;
+}
+float rect(vec2 uv, vec2 position, float rotate, vec2 size)
+{
+    uv = uv - position;
+    uv = uvRotate(uv, rotate);
+
+    vec2 dist = abs(uv) - size;
+
+    return max(dist.x, dist.y);
+}
+float sdf_cross(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+
+    float scale = 10.0;
+    uv = uv * scale;
+    pos = pos * scale;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(3, 1)));
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(1, 3)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_dimand(vec2 uv, vec2 pos)
+{
+    uv = (uv - 0.5) * 2.0;
+    pos = (pos - 0.5) * 2.0;
+    
+    float dist = 100.0;
+    dist = min(dist, rect(uv, pos, u_time * 50.0, vec2(.5, .5)));
+    dist = ceil(dist);
+
+    return dist;
+}
+float sdf_blend(vec2 uv, vec2 pos)
+{
+    float crossSDF = sdf_cross(uv, pos);
+    float dimondSDF = sdf_dimand(uv, pos);
+
+    float t = sin(u_time) * 0.5 &#43; 0.5;
+    float dis = mix(crossSDF, dimondSDF, t);
+    
+    return dis;
+}
+void main() 
+{
+    vec2 uv = gl_FragCoord.xy / u_resolution.xx;
+    // vec2 pos = u_mouse / u_resolution.xx;
+
+    uv = mix(vec2(-1), vec2(1), uv);
+    // gl_FragColor = vec4(uv, 0.0, 1.0);
+    float dist = 0.0;
+    if(u_shape == 0.0)
+    {
+        dist = sdf_dimand(uv, u_position);        
+    }
+    else if(u_shape == 1.0)
+    {
+        dist = sdf_cross(uv, u_position);
+    }
+    else dist = sdf_blend(uv, u_position);
+
+    vec4 color = vec4(u_colorR, u_colorG, u_colorB, 1);
+    gl_FragColor = mix(vec4(0), color, 1.0 - dist);
+    // gl_FragColor = u_color;
+}
+
+
+
+
+" width="300" height="300"></canvas>
+
+    <div class="shader-input" data-inputs="[{&#34;default&#34;:{&#34;x&#34;:&#34;0&#34;,&#34;y&#34;:&#34;0&#34;},&#34;max&#34;:{&#34;x&#34;:&#34;1&#34;,&#34;y&#34;:&#34;1&#34;},&#34;min&#34;:{&#34;x&#34;:&#34;-1&#34;,&#34;y&#34;:&#34;-1&#34;},&#34;name&#34;:&#34;u_position&#34;,&#34;type&#34;:&#34;vector&#34;}]">
+        
+        
+        
+        
+            
+
+        <div id="u_position" class="shader-input-field"> 
+            <div id="text" style="display:flex; justify-content:space-between">
+                <div id="name"> u_position </div>
+                <div id="value"> value </div>
+            </div>
+
+            
+            
+            <canvas class="shader-input-vector"></canvas>
+            
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+<p>如果讀者在修改參數時能夠即時展現影響，就能更有效的加深印象了～</p>
+
+
+
+
+
+
+
+
+<p>
+    <a href="https://github.com/angus945/angus945.github.io/tree/main/devlog/rebuild-the-website/resources-shader.frag" target="_blank">
+        &gt; 想看這個著色器的原始碼可以點我 &lt;
+    </a>
+</p>
+
+<h3 id="程式框修正">程式框修正</h3>
+<p>說到筆記和教學，範例絕對是不可缺少的部份，雖然模板有提供預設的程式嵌入框，但它沒有標注語言的功能，而我的文章時常混雜一種以上的程式語言，要是沒有提示將難以閱讀。</p>
+<pre><code>default code block
+</code></pre>
+<p>我嘗試過研究 Hugo 的 markdown to html 編譯資料，但太複雜所以放棄了，最後只是透過 Regex 搜索函式直接抓出所有 html 的程式標籤，硬插了 <code>&lt;span&gt;</code> 和 <code>&lt;hr&gt;</code> 上去，粗暴但有效。</p>
+<pre><span>go</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-go">{{ $codeblocks := findRE &quot;&lt;code class=\&quot;language-(.*)\&quot;&gt;(.|\n)*?&lt;/code&gt;&quot; $content }}
+</code></pre>
+<p>Regex 真的是神器，現在我只要編寫文章時有在程式區塊設定語言，網站生成時就會自動添加標題了～</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">void Function()
+{
+    // csharp code block
+}
+</code></pre>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">void fragment()
+{
+    // shader code block
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/rebuild-the-website/code-block.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/code-block.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>如此一來讀者在閱讀時也能輕鬆許多，不用靠額外備註或內容差異去猜語言了。</p>
+<h3 id="推薦清單">推薦清單</h3>
+<p>主頁面是網站的門面，也是留下第一印象的重要方法，由於網站是以學習日誌與技術文章為主軸建立的，所以我決定<h>用「推薦清單」幫助訪客快速了解內容的性質</h>。雖然之前也做過一樣的功能，但當時是透過文章屬性的「重要度」去排序清單，清單會自動尋找重要度最高的文章顯示，達成推薦功能。</p>
+<p>雖然用重要度排序的方法有效，但缺點就是每次都只能顯示固定的內容。而這次我嘗試作了「隨機推薦」的功能，可以透過文章的屬性調整它能否被推薦，網站建置時就會根據屬性過濾出文章並將資料傳遞給 javaScript 使用，只要用隨機抽出資料的方式在網頁載入時改變頁面，就能達成我要的隨機功能了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/rebuild-the-website/recommand-json.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/recommand-json.jpg]">
+    <p style="opacity: 0.5">
+        透過 json 格式傳遞資料就能讓 javaScript 更方便使用
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/rebuild-the-website/recommand-list.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/recommand-list.jpg]">
+    <p style="opacity: 0.5">
+        主頁面的推薦清單
+    </p>
+</div>
+
+
+<h3 id="滾動條修正">滾動條修正</h3>
+<p>因為覺得網頁滾動條不夠美觀，之前為了防止破壞整體美感就將它隱藏了，但後來收到回饋說這會<h>導致閱讀長篇文章的時候難以辨識當前進度，以及無法讓讀者快捲動文章</h>（不是所有人都喜歡用中鍵），所以這次我決定將滾動修成好看的樣式。</p>
+<p>在 chrome 中我使用的是 overlay 的格式，讓滾動條覆蓋在頁面上就不需要醜醜的欄位了，但 firefox 不兼容這種樣式，所以將欄位調細並改變配色讓它更好看。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/rebuild-the-website/website-scrollbar.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/website-scrollbar.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="動態背景">動態背景</h3>
+<p>即使能切換黑白樣式仍無法改變背景太單調的事實，雖然只要放個圖片就能改善&hellip;但我覺得這樣不夠有趣，既然我擁有著色器的知識，何不拿它來做酷酷的動態背景呢！</p>
+<p>背景的著色器我使用 three.js 框架製作，雖然設置起來更加複雜，但也讓我能微調更多細節，包括材質屬性、3D 模型（如果有）以及渲染幀率等等。背景是使用一個覆蓋全畫面的 canvas 繪製的，網頁部份處理起來不算複雜，重點還是取決於著色器的內容。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/rebuild-the-website/background-track.gif" alt="image display error, please report: [/devlog/rebuild-the-website/background-track.gif]">
+    <p style="opacity: 0.5">
+        透過 GPU Buffer 繪製出滑鼠軌跡
+    </p>
+</div>
+
+
+<p>為了能展示更多酷酷的背景，我也將推薦清單的思路應用在背景上，每次進入網站時都會隨機改變背景的樣式與細節。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/rebuild-the-website/background-watercolor.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/background-watercolor.jpg]">
+    <p style="opacity: 0.5">
+        水彩風格的背景，每次重新整理都會有變化歐
+    </p>
+</div>
+
+
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<h3 id="成果對比">成果對比</h3>
+<p>最後再與原本始的樣子做個對比，這次的網站有更多功能、更乾淨的專案架構以及漂亮的動態背景，成就感滿滿。極簡模板的好處就是稍微修飾就很有質感了～</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/rebuild-the-website/compare-light.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/compare-light.jpg]">
+    <p style="opacity: 0.5">
+        亮色主題前後對比
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/rebuild-the-website/compare-dark.jpg" alt="image display error, please report: [/devlog/rebuild-the-website/compare-dark.jpg]">
+    <p style="opacity: 0.5">
+        暗色主題前後對比
+    </p>
+</div>
+
+
+<p>有個好看的網站不只能吸引更多人閱覽，最重要的能提升我充實內容的動力，寫日誌對我來說也是一件重要的事，能在漂亮的網站上分享自己的歷程可是一件令人開心的事 :)</p>
+
+
+<iframe class="LikeCoin" height="235" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2fdevlog%2frebuild-the-website%2f" width="100%" frameborder=0></iframe>
+
+<h3 id="待做清單">待做清單</h3>
+<p>新版網站還沒有留言功能，雖然之前使用過幾個外嵌的留言版，但不是廣告被塞爆就是不支援訪客留言，所以決定先擱著等有空學習後端再自己做吧，敬請期待～</p>
+<!-- https://mail.google.com/mail/u/0/#search/comment/FMfcgzGkZkRcSJXXdJrMVjSMpZxSjxGg -->
+<h3 id="使用資源">使用資源</h3>
+<p>網站主題 - <a href="https://themes.gohugo.io/themes/Hugo-theme-fuji/" target="_blank">fuji</a></p>
+<p>文章著色器嵌入 - <a href="https://github.com/patriciogonzalezvivo/glslCanvas" target="_blank">glslCanvas</a></p>
+<p>背景著色器函式庫 - <a href="https://threejs.org/docs/#manual/en/introduction/Installation" target="_blank">Three.js</a></p>
+<p>VScode 著色器插件 - <a href="https://marketplace.visualstudio.com/items?itemName=circledev.glsl-canvas" target="_blank">glsl-canvas</a></p>
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">computeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">Hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#網站重建">網站重建</a>
+      <ul>
+        <li><a href="#問題分析-">問題分析 +</a></li>
+      </ul>
+    </li>
+    <li><a href="#重新開始">重新開始</a>
+      <ul>
+        <li><a href="#模板選擇">模板選擇</a></li>
+        <li><a href="#文章分類">文章分類</a></li>
+        <li><a href="#資源嵌入">資源嵌入</a></li>
+        <li><a href="#內容上色">內容上色</a></li>
+        <li><a href="#著色器嵌入">著色器嵌入</a></li>
+        <li><a href="#互動式內容">互動式內容</a></li>
+        <li><a href="#程式框修正">程式框修正</a></li>
+        <li><a href="#推薦清單">推薦清單</a></li>
+        <li><a href="#滾動條修正">滾動條修正</a></li>
+        <li><a href="#動態背景">動態背景</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#成果對比">成果對比</a></li>
+        <li><a href="#待做清單">待做清單</a></li>
+        <li><a href="#使用資源">使用資源</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">computeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">Hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
