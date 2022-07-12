@@ -28,7 +28,7 @@
 <meta name="description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
 
 
-<meta name="keywords" content="website, devlog" />
+<meta name="keywords" content="website" />
 
 
 <meta property="og:title" content="建立人生的第一個網站" />
@@ -37,7 +37,7 @@
 <meta property="og:url" content="https://angus945.github.io/devlog/build-the-fistsite/" /><meta property="og:description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
 <meta name="twitter:description" content="從頭學習前端和使用 Hugo 建立網站的過程" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-05-11T00:00:00+00:00" /><meta property="article:modified_time" content="2021-05-11T00:00:00+00:00" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-05-11T00:00:00+00:00" /><meta property="article:modified_time" content="2022-06-24T00:00:00+00:00" />
 
 
 <style>
@@ -103,7 +103,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/background.e45ee2a1e38ee766967d88f3acb1f34cda93a539a8c1035ef875678f4fb0014c.css" integrity="sha256-5F7ioeOO52aWfYjzrLHzTNqTpTmowQNe&#43;HVnj0&#43;wAUw=">
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
 
 
 
@@ -147,12 +147,21 @@
         var sandbox = new GlslCanvas(canvas);
 
         var fields = container.getElementsByClassName("shader-input-field");
-        var datas = JSON.parse(input.dataset.inputs);
 
-        for(var i = 0; i < fields.length; i ++)
-        {
-            setInput(sandbox, fields[i], datas[i]);
-        }
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
     };
     function setInput(sandbox, field, data)
     {
@@ -310,7 +319,7 @@
 <script type="text/javascript">
 
     var seed = Math.random();
-    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:1,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvec3 ran1To3(float seed)\\r\\n{\\r\\n    float x = fract(sin(dot(vec2(seed, 31.12), vec2(12.9898, 78.233))) * 43758.5453);\\r\\n    float y = fract(x * 21.5 \u002b 451.548);\\r\\n    float z = fract((y - x) * (x \u002b y));\\r\\n    return vec3(x, y, z);\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    float dis = length(mouse - st);\\r\\n    vec3 colorA = ran1To3(u_seed);\\r\\n    vec3 colorB = fract(colorA * 31.5 \u002b 784.451);\\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    \\r\\n    dis = step(dis, 0.5);\\r\\n    \\r\\n    vec4 darkColor = vec4(color * 0.1, 0);\\r\\n    vec4 lightColor = vec4(color * 0.1, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0) * 0.1;\\r\\n    color.g \u002b= cos(u_time * -3.0) * 0.2;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0) * 0.3;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.7,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0) * 0.1;\\r\\n    color.g \u002b= cos(u_time * -3.0) * 0.2;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0) * 0.3;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.8,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0) * 0.1;\\r\\n    color.g \u002b= cos(u_time * -3.0) * 0.2;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0) * 0.3;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.5,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
     console.log(backgroundData);
     
@@ -461,10 +470,12 @@
 
     let interval;
     let delta;
+    let speed;
     function updateInitial(data)
     {
         interval = 1 / data.fps;
         delta = interval;
+        speed = data.speed;
     }
     function update() 
     {
@@ -483,8 +494,11 @@
     {
         if(renderer == null) return;
         
-        uniforms.u_time.value += clock.getDelta();
-        renderer.render( scene, camera );
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
     }
 </script>
 
@@ -516,7 +530,7 @@
         <div class="col-12 header">
             <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
             
-            <span class="title-sub">subTitle</span>
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
             
         </div>
     </div>
@@ -539,16 +553,21 @@
 </span>
 
 
+<span>
+    <i class="iconfont icon-sync-circle-sharp"></i> &nbsp;
+    2022-06-24
+</span>
+
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;3234 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2651 words
 </span>
 
 
 
 
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/website">website</a>&nbsp;<a href="/tags/devlog">devlog</a>&nbsp;</span>
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/website">website</a>&nbsp;</span>
 
     </div>
     
@@ -558,19 +577,18 @@
          
 
         <h2 id="為什麼想建立網站">為什麼想建立網站</h2>
-<p>在寫完我的第一篇長篇教學後，想說寫的還蠻不錯的(自肥)所以也想搞個個人網站用來專放教學和筆記，不然平時都只在巴哈上發紀錄文，文章和日誌混在一起有點亂，如果未來想當履歷交什麼的也不方便</p>
-<p>再來是巴哈上的客群主要都中文語系這塊，我也希望能和一些外國的人交流，開拓視野而且多少能和讓英文進步一點</p>
-<p>剛開始找了些可以用來建立部落格的網站或工具 Blogger、wordpress，挑來挑去都不是很理想，所以最後還是決定好好網頁前端自己做，使用 Hugo 搭配 github page 來建立靜態網站</p>
-<p>這是我學程式三年到現在第一次接觸前端，在這之前連 html 都不會，但有了過去兩年多的自學經驗現在從頭學也不是一項難事&hellip;至少以能建立自己的網站為標準不是難事 :P</p>
+<p>在寫完第一篇長篇教學後，我也開始希望有個人網站能專放教學和筆記這種專業向的內容，不然平時都在巴哈上發日誌，專業文章和日常文章混在一起的話未來想當履歷也不方便。</p>
+<p>再來是巴哈上的客群主要都中文語系這塊，如能夠將網站內容翻譯成英文版本的話，也才有機會和更多厲害的人交流~</p>
+<p>因為我沒有任何網頁知識，所以剛開始想透過現有的部落格平台或建立工具開發就好。但是研究了 Blogger 和 WordPress 等資源後發現它們和理想的部落格架構都有些落差，因此最後還是決定學習前端，搭配 Hugo 與 GitHub page 來建立網站。</p>
 <h3 id="參考資料">參考資料</h3>
-<p>我主要參考為 Mike Dane 的 Web Development 系列教學，其餘的就是邊做邊查資料</p>
+<p>由於學習習慣，初學時我通常會以影片資源為主。而這次的主要參考資料為 Youtube 頻道 Mike Dane 的 Web Development 系列教學。</p>
 <p>HTML - <a href="https://www.youtube.com/watch?v=Ny1g1eQHnCI&amp;list=PLLAZ4kZ9dFpMSXUYwxDFOvyxlssug29Fu" target="_blank">HTML - Build a Website | Tutorial</a></p>
 <p>CSS - <a href="https://www.youtube.com/watch?v=WZ2uqGkHoR0&amp;list=PLLAZ4kZ9dFpNO7ScZFr-WTmtcBY3AN1M7" target="_blank">CSS - Style Your Website | Tutorial</a></p>
 <p>Javascript - <a href="https://www.youtube.com/watch?v=_jlPywA4dKs&amp;list=PLLAZ4kZ9dFpPQbcrA-SzALJeFm23tPrAI" target="_blank">Javascript - Programming Language | Tutorial</a></p>
 <p>Hugo - <a href="https://www.youtube.com/watch?v=qtIqKaDlqXo&amp;list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3" target="_blank">Hugo - Static Site Generator | Tutorial</a></p>
 <h3 id="選擇主題">選擇主題</h3>
-<p>Hugo 有不少的社群製作的<a href="https://themes.gohugo.io/" target="_blank">主題</a>能夠使用，導入也很方便，只需要下載後放進 themes 資料夾就好</p>
-<p>花了一些時間找到理想的主題，也就是你們現在看到的這個，版面乾淨簡潔而且內文格式和 Notion 蠻相似的，然後又有畫面自適應功能所以就決定是他了 - <a href="https://themes.gohugo.io/hugo-theme-even/" target="_blank">Even</a></p>
+<p>Hugo 的一大賣點就是它的龐大<a href="https://themes.gohugo.io/" target="_blank">主題庫</a>，裡面收錄了不少網頁模板供人使用，只需要只需要下載後放進專案資料夾就好。畢竟我拿手的也不是設計相關領域，製作網站還是以現有的模板修改更適合。</p>
+<p>自從接觸筆記工具 notion 後，我就很喜歡那種簡潔的筆記風格，因此我也選擇了相似的主題 <a href="https://themes.gohugo.io/hugo-theme-even/" target="_blank">Even</a> 作為網站的初始模板。</p>
 
 
 
@@ -587,13 +605,10 @@
 
 
 <h2 id="修修改改">修修改改</h2>
-<p>決定了主題之後就拿裡面的模板開始修改，主要考量到時間因素而且畢竟我主修也不是網頁，拿現有的模板來修改才是最適合的選項</p>
-<p>雖然這個主題已經有不少功能，但有些地方還是要自己做才能達成目的，把寫好的文章放進去看看，摸一摸主題裡提供的模板之後就可以開始修修改改了</p>
+<p>模板決定後就可以根據需求修改內容了。雖然這個主題本身就攜帶不少功能，但有些客製化的需求還是只有自己知道，我也是為此才特意學習前端的基礎知識。</p>
 <h3 id="教學主頁">教學主頁</h3>
-<p>為了讓不同系列的教學有各自的主頁面，我使用資料夾將相同系列的教學放在一起，使用 _index.md 當主頁面文件</p>
-<p>這個主題中 _index.md 使用的模板是 section，但主題中提供的 section template 只有列出資料夾文件的功能，無法讀取 _index.md 的內容來顯示，所以為了達到教學主頁面的目的我必須修改預設模板</p>
-<p>首先是內容的部分，只需要使用 Hugo 語法的<code>{{ .Content }}</code>就能取得，但模板會一口氣畫出所以有文字內容，這樣子我的子頁面就只能在主頁面的最底部列出了</p>
-<p>但我希望搭配文字內容列出頁面，所以我也將原本模板中的列出功能移至獨立的 shortcode 中，好讓我在 markdown 文件中自由選擇列表放置的位置</p>
+<p>為了讓不同系列的教學有各自頁面，我使用資料夾將相同系列的教學放在一起，透過 Hugo 的列表功能作為教學主頁。</p>
+<p>但由於需求與模板中提供的功能不一致，所以我必須修改模板。預設的列表只能展示在頁面內容底部，為了自由選擇顯示列表的位置，我將模板的功能獨立成一個函式，讓我能在編輯文章時手動插入列表。</p>
 
 
 
@@ -609,10 +624,8 @@
 </div>
 
 
-<h3 id="上一章-下一章">上一章 下一章</h3>
-<p>有了主頁面，接下來就是教學頁面</p>
-<p>基本的頁面使用的是 single template，沒什麼好修改的，但為了讓訪客在閱讀系列教學時更方便，我將教學頁面的底部添加移動到上下章的連結</p>
-<p>因為基本頁面中不會有資料夾其他頁面的資訊，所以我得讓它先取得父層後在取得這個資料夾裏的所有頁面，並且用索引值找出上下章</p>
+<h3 id="上一章下一章">上一章、下一章</h3>
+<p>有了教學頁面後，教學內容的模板也需要稍微修改。為了方便讀者閱讀連續教學，我也在教學頁面的底部添加上下章的連結，用於快速引導。</p>
 
 
 
@@ -628,10 +641,10 @@
 </div>
 
 
-<h3 id="圖片顯示">圖片顯示</h3>
-<p>文章中會附上圖片來搭配閱讀，雖然 Hugo 本身就有提供基本的 shortcode 來方便使用者在文章中放置圖片，但它必須輸入絕對路徑才能找到圖片位置</p>
-<p>由於個人習慣，我的資料夾結構和檔案名稱都比較複雜，所以輸入絕對路徑還是不夠方便，為了省去一長串路徑我也寫了一個 shortcode 來自動找圖片的路徑，透過文檔的路徑來存取在 static 資料家中相同相對路徑的圖片</p>
-<p>這樣一來我只需要輸入圖片的名稱就能顯示圖片了 <code>resources/image displayImage.jpg</code></p>
+<h3 id="圖片嵌入">圖片嵌入</h3>
+<p>圖文並茂的文章才能有效加深讀者印象，因此圖片嵌入是必不可少的功能。雖然 Hugo 本身就有提供基本的函式讓使用者將圖片嵌入文章內容中，但它必須用完整的檔案路徑才能找到圖片。</p>
+<p>由於個人習慣，我會將資料夾與檔案名稱命名的比較完整，若每次都要輸入落落長的路徑還是太不方便了。為了更方便嵌入，我寫了一個自訂函式來使用，他可以自動透過文章的路徑尋找對應位置上的資源，如此一來我就能省略重複的資料夾路徑了。</p>
+<p><code>pathImage displayImage.jpg</code></p>
 
 
 
@@ -648,9 +661,8 @@
 
 
 <h3 id="閱讀更多">閱讀更多</h3>
-<p>網站預計會有幾種類型的文章 - 教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只有單純的列出頁面標題而已</p>
-<p>我想要有大標題、描述和文章預覽圖，所以又再修改了一次 section temaplet (因為也是資料夾頁面)，並使用文章的前題變量來選擇頁面類型</p>
-<p>主題中本來就有提供相關的 css 使用了，所以我直接參考主題網站裏提供的 <a href="https://themes.gohugo.io/theme/hugo-theme-even/" target="_blank">Demo</a> 來做出期望的列表樣式，並且添加覽圖在區塊的右側</p>
+<p>網站預計會有三種類型的文章：教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只列出頁面標題而已。</p>
+<p>我想要像巴哈姆特那樣，有大標題、描述和文章預覽圖，所以也自行修改了列表頁面的模版。參考主題網站裏提供的 <a href="https://themes.gohugo.io/theme/hugo-theme-even/" target="_blank">Demo</a> 修改出期望的列表樣式，並將預覽圖嵌在區塊的右側。</p>
 
 
 
@@ -666,7 +678,7 @@
 </div>
 
 
-<p>然後我也讓顯示標題下面列出標籤用來簡單分類文章</p>
+<p>標題下方也列出了文章的標籤，方便讀者快速理解文章中有哪些內容。</p>
 
 
 
@@ -683,9 +695,8 @@
 
 
 <h3 id="翻頁列表">翻頁列表</h3>
-<p>我使用&quot;閱讀更多&quot;的區塊來列出當前類型的所有文章，但文章多的時候全部列出來會好長一條，所以要限制一次列出的數目方便閱讀</p>
-<p>我透過 Hugo 語法裡陣列的 first 和 last 寫了一個 partials 模板來取得特定範圍間的頁面，使用時只需要輸入起點和數目就好</p>
-<p>使用迴圈將不同範圍中的頁面包進 Html 容器中，再透過 javascript 判斷 URL paramater 的當前的頁面來切換容器顯示</p>
+<p>我使用「閱讀更多」的區塊來列出文章，但一口氣全列出的話會導致列表過長，讓讀者難以尋找文章。</p>
+<p>為了避免問題，我透過 Hugo 的迴圈將列表分次包進 Html 容器中，再透過判斷 URL paramater 來進行頁面切換。</p>
 
 
 
@@ -701,10 +712,9 @@
 </div>
 
 
-<p>這麼做有個問題就是，每次翻頁瀏覽器都會把完整的列表載入一次，再重新設置 display 一部分，不過就先到此為止吧，等文章量大到載入變慢再來找解決方法 :P</p>
-<h3 id="文章標籤">文章標籤</h3>
-<p>Hugo 本身就有很方便的標籤系統，他能夠自動產生符合列出文章的頁面，但因為所我有文章都使用同個標籤系統，所以自動產生的頁面會把所有類型的文章混在一起</p>
-<p>為了防止這點，我在標籤頁面裡加了 tabview 來對列出的文章進行過濾，這是我網站裡花最多時間研究的部份了，因為使用的主題裡完全沒有相似的功能，所以得找 javascript 資料來讀</p>
+<p>後來才發現 Hugo 就有內建分頁系統了，所以我等於做了沒意義的功能…囧</p>
+<h3 id="標籤列表">標籤列表</h3>
+<p>Hugo 本身就有很方便的標籤系統，他能夠自動產生各個標籤的列表頁面，但我希望能將標與類型區分開來，也必須對對應的模板修改才行。</p>
 
 
 
@@ -720,7 +730,7 @@
 </div>
 
 
-<p>最後在使用主題裡的 css 修改出一個適合 tabview 的版本</p>
+<p>這就是模板中完全沒有的功能了，所以花不少額外時間製作，研究 js 腳本和 css 配製後才完成了美觀一點切換列表。</p>
 
 
 
@@ -739,8 +749,7 @@
 <p>參考資料</p>
 <p><a href="https://www.w3schools.com/howto/howto_js_tabs.asp" target="_blank">tabview</a></p>
 <h3 id="移除滾動條">移除滾動條</h3>
-<p>沒什麼特別的原因，因為很醜所以我將滾動條移除了，為了移除他我也花了不少時間，瀏覽器差異讓人很頭痛，修好一個壞一個 ):</p>
-<p>在經過不斷的查詢和修改後，終於整理出了能夠在三大瀏覽器上正常運作的 css 腳本了</p>
+<p>因為真的覺得網頁滾動條很醜，就想辦法隱藏它了。雖然他本身不算複雜，但為了確保在各瀏覽器上都有效也花了點時間。</p>
 <pre><span>CSS</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-CSS">html,body
 {
@@ -754,8 +763,8 @@ body::-webkit-scrollbar
 }
 </code></pre>
 <h3 id="內容導覽">內容導覽</h3>
-<p>把滾動條移除後為了讓讀者能夠知道自己看到哪裡，文章需要在提供內容導覽才行</p>
-<p>雖然這個主題本身就有提供內容導覽的模板，但因為我的修修改改不小心弄壞他了，所以也花不少時間才找出被弄壞的地方</p>
+<p>把移除滾動條後，為了讓讀者能夠知道自己看到哪裡，得再文章中提供內容導覽才行。</p>
+<p>雖然這個主題本身就有提供相關功能，但在我修修改改的過程中也不小心弄壞了，只好花額外的時間去修它 :P</p>
 
 
 
@@ -771,7 +780,7 @@ body::-webkit-scrollbar
 </div>
 
 
-<p>修的時候也注意到主題作者 javascript 裡的計算有些錯誤，在判斷距離的時候少減了一次間隔導致畫面捲動時看起來不順暢，修正後就大功告成了</p>
+<p>過程中也注意到模板裡的腳本計算有些錯誤，在判斷距離的時候少減了一次間隔，導致捲動會在特定位置上跳動，修正後就大功告成了。</p>
 <pre><span>js</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-js">//                              there
 if (scrollTop &lt; minScrollTop - SPACING)
@@ -780,7 +789,7 @@ if (scrollTop &lt; minScrollTop - SPACING)
 } 
 </code></pre>
 <h3 id="關於頁面">關於頁面</h3>
-<p>自我介紹在網站中也是不可或缺的部分，我的關於頁面有兩個部分 - 自我介紹和網站介紹，原本寫在同一個文件中但發現用串列的放介紹不太合適，所以就拿之前的 tabview 過來修出顯示內容的功能</p>
+<p>為了幫助讀者了解自己與網站，自我介紹也是不可或缺的部分。我將介紹分為兩個部分：關於我和關於這個網站，可以透過頁面上方的選項切換要顯示的內容。</p>
 
 
 
@@ -797,7 +806,7 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 <h3 id="語言設置">語言設置</h3>
-<p>多語言 - 這也是我建立網站的主要目的之一，Hugo因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作</p>
+<p>多語言也是我建立網站的主要目的之一，Hugo 因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作。</p>
 
 
 
@@ -813,8 +822,8 @@ if (scrollTop &lt; minScrollTop - SPACING)
 </div>
 
 
-<p>在訪客第一次進入網站主頁面的時候，我使用 javascript 取得訪客時瀏覽器使用的語言重新導向到對應的網頁</p>
-<p>以及做出一個語言選擇器，點擊展開後就可以切換語言，並用 localstorage 來儲存語言設置</p>
+<p>在訪客第一次進入網站主頁面的時候，使用 js 取得瀏覽器使用的語言，並將其引導適當的網頁上。</p>
+<p>為了讓讀者切換語言，我也添加了一個語言選擇器，透過 localstorage 來儲存設置，點擊展開後就可以進行切換，</p>
 
 
 
@@ -831,16 +840,18 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 <h3 id="網站託管">網站託管</h3>
-<p>我使用 github page 來進行網站託管，真的是蠻方便的功能，只需要建立一個 username.github.io 的儲存庫後，將建置的 public 資料夾上傳就好了 :D</p>
+<p>我過去沒有接觸過任何網頁技術，資料庫相關的後端知識也是，因此網站託管的部分也是依靠現有資源達成的。</p>
+<p>我使用 github page 來進行網站託管，只需要建立一個 username.github.io 的儲存庫後，將建置完畢的網站資料夾資料夾後上傳就能完成了，真方便 :D</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/2MsN8gpT6jY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
 <h3 id="留言板">留言板</h3>
-<p>為了不讓網站像只有我一個人自嗨，所以能和其他人交流的首要選項就是添加留言板 !</p>
-<p><del>我使用的是 Disqus 提供的留言板，Hugo 中只需要設置&hellip;</del> NOPE Disqus 會強制塞一個比留言板本身還要大的廣告 ==</p>
-<p>所以我改用 <a href="https://commentbox.io/" target="_blank">CommentBox</a> 當網站的留言版了，它裝起來方便而且版面也乾淨許多，留言時也可以方便的登入</p>
+<p>為了增加交流機會，留言板也是不可或缺的重要功能。</p>
+<p><del>我使用的是 Disqus 提供的留言板，Hugo 中只需要設置&hellip;</del></p>
+<p>捨棄，會強制塞一個比留言板本身還要大的廣告…</p>
+<p>後來我改用 <a href="https://commentbox.io/" target="_blank">CommentBox</a> 當網站的留言版了，它裝起來方便而且版面也乾淨許多，留言時也可以方便的登入。</p>
 
 
 
@@ -857,9 +868,7 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 <h3 id="流量追蹤">流量追蹤</h3>
-<p>為了分析訪客的偏好和類型，我使用 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析</p>
-<p>這個主題裡也有完成流量追蹤的功能，只不過 Google Analytics 更新到第 4 版了，主題裡的功能似乎過舊所以就重新找了資料修正&hellip;雖然我也不確定現在這樣有沒有正確運作</p>
-<p>噢看來他有效，我一直忘記要放進 html 的 <code>&lt;head&gt;&lt;/head&gt;</code> 裡了
+<p>為了分析訪客的閱覽偏好，網站也使用了 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析。</p>
 
 
 
@@ -874,13 +883,13 @@ if (scrollTop &lt; minScrollTop - SPACING)
     </p>
 </div>
 
-</p>
-<p>但是不斷的編輯網頁造成有九成的流量都是我自己，所以要設定流量過濾</p>
+
+<p>但是不斷的編輯造成網頁有九成的流量都是我自己，所以得設定流量過濾，確保蒐集到的資料能正確反映現實。</p>
 <blockquote>
 <p>目前僅顯示通用 Analytics (分析) 資源的篩選器。篩選器無法套用到 Google Analytics (分析) 4 資源。
 Displaying Filters for Universal Analytics Properties only. Filters cannot be applied to Google Analytics 4 Properties.</p>
 </blockquote>
-<p>因為版本問題無法設置過濾，找半天才發現好像是版本的問題，舊版本的過濾器沒辦法用所以要到 &ldquo;資源 &gt; 資料設定 &gt; 資料篩選器&rdquo; 那裏設定才行</p>
+<p>因為版本問題，找半天才發現如何進行過濾設置，新版本需要到 &ldquo;資源 &gt; 資料設定 &gt; 資料篩選器&rdquo; 設定才行。</p>
 
 
 
@@ -896,13 +905,10 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
 </div>
 
 
-<p>總之現在流量追蹤也能正常運作了</p>
-<p>參考資料</p>
 <p><a href="https://support.google.com/analytics/thread/89743745/can-t-create-filter-views-even-though-i-have-all-admin-accesses-in-all-levels?hl=en" target="_blank">Can&rsquo;t create filter views even though I have all ADMIN accesses in all levels </a></p>
 <p><a href="https://support.google.com/analytics/answer/10108813" target="_blank">GA4 Data filters</a></p>
 <h3 id="主頁面">主頁面</h3>
-<p>該有的功能都有了，最後也是最重要的就是 - 主頁面</p>
-<p>但其實網站剛做出來我對主頁面還沒想法，所以就先打招呼之後列出幾個文章給訪客看</p>
+<p>該有的功能都有了，最後也是最重要的就是網站主頁面。因為還沒有經營網站的經驗，我也不確定主畫面該放什麼好，所以就在簡單的打招呼之後列出推薦文章而已 ~</p>
 
 
 
@@ -918,17 +924,15 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
 </div>
 
 
-<p>簡單也有簡單的好 ~</p>
 <h2 id="結語">結語</h2>
-<p>從開始學網頁到現在大概一個月了，說真的也做到有點厭倦了，雖然過程學到不少東西但畢竟興趣不在這，所以見好就收吧 !</p>
-<p>總結來說，我對人生中的第一個網頁相當滿意，和我期望中的網頁幾乎一模一樣 :D</p>
-<p>之後會在這裡更新一些教學、筆記和部落格文章，敬請期待 ~</p>
+<p>從開始學網頁到完工大概一個月了，雖然接觸新知識很有趣，但畢竟我的主要領域不在這，摸到現在也開始膩了，所以見好就收吧 !</p>
+<p>總結來說，我對人生中的第一個網頁相當滿意，和我期望中的網頁幾乎一模一樣，之後會在這裡更新一些教學、筆記和部落格文章，敬請期待~</p>
 <h3 id="翻譯文章">翻譯文章</h3>
 <p>英文版本的文章我是透過 Grammarly 進行輔助翻譯的，但我的英文能力慘不忍睹，希望翻譯的過程能多少讓我進步點 D:</p>
 <p>我在修正文章翻譯時都會保留筆記的，如果可以請能幫我指出翻譯文章的句子和語法的錯誤 Orz</p>
 <h3 id="感謝閱讀">感謝閱讀</h3>
-<p>感謝閱讀到這裡的各位，你們的關注是我持續更新的最大動力 !</p>
-<p>順帶一題，如果是從其他地方點進網站的人可能不清楚，我的主要活動地點在巴哈姆特的<a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank">小屋</a>，那裏幾乎每天都會發日誌，歡迎來蕉流蕉流 ~</p>
+<p>感謝閱讀到這裡的各位！</p>
+<p>順帶一題，如果是從其他地方點進網站的人可能不清楚，我的主要活動地點在巴哈姆特的<a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank">小屋</a>，那裏幾乎每天都會發日誌，歡迎來交流 ~</p>
     </div>
 </article>
 
@@ -1011,6 +1015,10 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             </span>
             
             <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
                 <a href="/tags/learning/">learning</a>
             </span>
             
@@ -1048,11 +1056,11 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
     <li><a href="#修修改改">修修改改</a>
       <ul>
         <li><a href="#教學主頁">教學主頁</a></li>
-        <li><a href="#上一章-下一章">上一章 下一章</a></li>
-        <li><a href="#圖片顯示">圖片顯示</a></li>
+        <li><a href="#上一章下一章">上一章、下一章</a></li>
+        <li><a href="#圖片嵌入">圖片嵌入</a></li>
         <li><a href="#閱讀更多">閱讀更多</a></li>
         <li><a href="#翻頁列表">翻頁列表</a></li>
-        <li><a href="#文章標籤">文章標籤</a></li>
+        <li><a href="#標籤列表">標籤列表</a></li>
         <li><a href="#移除滾動條">移除滾動條</a></li>
         <li><a href="#內容導覽">內容導覽</a></li>
         <li><a href="#關於頁面">關於頁面</a></li>
@@ -1148,6 +1156,10 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             
             <span>
                 <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>

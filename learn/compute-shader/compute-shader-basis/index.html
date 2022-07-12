@@ -103,7 +103,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/background.e45ee2a1e38ee766967d88f3acb1f34cda93a539a8c1035ef875678f4fb0014c.css" integrity="sha256-5F7ioeOO52aWfYjzrLHzTNqTpTmowQNe&#43;HVnj0&#43;wAUw=">
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
 
 
 
@@ -147,12 +147,21 @@
         var sandbox = new GlslCanvas(canvas);
 
         var fields = container.getElementsByClassName("shader-input-field");
-        var datas = JSON.parse(input.dataset.inputs);
 
-        for(var i = 0; i < fields.length; i ++)
-        {
-            setInput(sandbox, fields[i], datas[i]);
-        }
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
     };
     function setInput(sandbox, field, data)
     {
@@ -422,10 +431,12 @@
 
     let interval;
     let delta;
+    let speed;
     function updateInitial(data)
     {
         interval = 1 / data.fps;
         delta = interval;
+        speed = data.speed;
     }
     function update() 
     {
@@ -444,8 +455,11 @@
     {
         if(renderer == null) return;
         
-        uniforms.u_time.value += clock.getDelta();
-        renderer.render( scene, camera );
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
     }
 </script>
 
@@ -477,7 +491,7 @@
         <div class="col-12 header">
             <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
             
-            <span class="title-sub">subTitle</span>
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
             
         </div>
     </div>
@@ -881,9 +895,11 @@ void SomeFunction (uint3 id : SV_DispatchThreadID)
 
 
 
-<a href="https://github.com/angus945/angus945.github.io/tree/main/learn/compute-shader/compute-shader-basis/examples" target="_blank">
-    &gt; 如果想直接觀看完整範例腳本也可以點我 &lt;
-</a>
+<p>
+    <a href="https://github.com/angus945/angus945.github.io/tree/main/learn/compute-shader/compute-shader-basis/examples" target="_blank">
+        &gt; 如果想直接觀看完整範例腳本也可以點我 &lt;
+    </a>
+</p>
 
 <h3 id="回顧腳本">回顧腳本</h3>
 <p>首先，在開始解決自己的問題前，先來回顧一次預設的腳本結構，分析它做了哪些事，傳遞了什麼資料，以及該怎麼使用這個計算著色器。</p>
@@ -1296,6 +1312,10 @@ resultBuffer.GetData(result);
             </span>
             
             <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
                 <a href="/tags/learning/">learning</a>
             </span>
             
@@ -1439,6 +1459,10 @@ resultBuffer.GetData(result);
             
             <span>
                 <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>

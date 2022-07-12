@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【開發日誌】個人網站重建</title>
+      <link>https://angus945.github.io/draft/rebuild-the-website/</link>
+      <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/draft/rebuild-the-website/</guid>
+      <description>&lt;h2 id=&#34;網站重建--&#34;&gt;網站重建 +-&lt;/h2&gt;
+&lt;p&gt;從初次建構個人網站到現在已經過去一年了，雖然當時對成果還算滿意，但隨著我寫作的過程也逐漸意識各種缺陷，函示調用不易、專案架構混雜等，所以我決定重建一次網站！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
