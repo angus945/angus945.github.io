@@ -6,9 +6,27 @@
     <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>【開發日誌】個人網站重建</title>
+      <title>【筆記】條件判斷與變體著色器</title>
+      <link>https://angus945.github.io/learn/shader/condition-and-variant/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/shader/condition-and-variant/</guid>
+      <description>&lt;p&gt;因為專案過程遇到需要開關特效的情況，所以深入研究了一下著色器條件判斷與 Unity 變體著色器的應用，這是我在翻閱資料與試錯後總結出的學習筆記，在這裡分享給各位。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://angus945.github.io/about/</link>
+      <pubDate>Wed, 20 Jul 2022 19:26:08 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>【日誌】個人網站重建</title>
       <link>https://angus945.github.io/devlog/rebuild-the-website/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
@@ -37,168 +55,6 @@
     </item>
     
     <item>
-      <title>二十章 結語</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/20-epilogue/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/20-epilogue/</guid>
-      <description>揮灑創意 恭喜各位，了解距離場背後的數學原理的你們，現在能夠畫出各種精美的圖形和設計細緻的動畫了，請在程式的畫布裡盡情揮灑吧 ! 雖然已經盡可能地提供更多種圖形和操作的範例，但仍然無法涵蓋所有，所以你們得透</description>
-    </item>
-    
-    <item>
-      <title>十一章 動畫方法</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/11-animatedmethod/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/11-animatedmethod/</guid>
-      <description>標準化空間，大小為 10、距離場上色 添加動畫的方法 目前為止，我們使用距離場繪製的圖形都是靜態的，所以下一步就是要讓距離場動起來。 教學這裡將播放動畫的類型歸類成兩種 - 主動以及被動，主動播放指的就是使用者用</description>
-    </item>
-    
-    <item>
-      <title>十七章 進階上色</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/17-furthercoloring/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/17-furthercoloring/</guid>
-      <description>標準化空間，大小為 10 進階上色 目前為止的距離場圖形只有用到兩種顏色，距離場內和距離場外，不過我們還可以使用更多種顏色來繪製距離場圖形。 組合上色 首先我們可以讓不同距離場有各自的顏色，例如紅色的矩形和綠色的</description>
-    </item>
-    
-    <item>
-      <title>十三章 動畫緩動</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/13-animatedeasing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/13-animatedeasing/</guid>
-      <description>標準化空間，大小為 10、距離場上色 緩動動畫 目前為止我們已經能夠播放距離場動畫了，但播放起來種覺得還少什麼 ? 阿，物理慣性 ! 由於整個播放的速度都是線性的，導致動畫看起來相當機械而不自然，為了讓動畫看起來更</description>
-    </item>
-    
-    <item>
-      <title>十九章 最終範例</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/19-finialexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/19-finialexample/</guid>
-      <description>標準化空間，大小為 50 最終範例 最後的最後就讓教學帶著各位從頭實作一次更複雜的距離場動畫吧，我們將一次用到各種教學中使用的計算方法，從組合到空間操作、從動畫到進階著色並畫出精美的齒輪動畫。 設置 首先是腳本設</description>
-    </item>
-    
-    <item>
-      <title>十二章 動畫範例</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/12-animatedexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/12-animatedexample/</guid>
-      <description>標準化空間，大小為 10、距離場上色 動畫範例 上一章教學教了兩種播放動畫的方法，在這章中我們將實際製作幾項不同的動態效果。 旋轉動畫 圓環是個很好舉例的形狀，就讓我們從圓環開始吧。 float distance = SDF_Ring(uv, 8, .2); 首先回到以前的弧</description>
-    </item>
-    
-    <item>
-      <title>十五章 修正鋸齒</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/15-antialiasing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/15-antialiasing/</guid>
-      <description>標準化空間，大小為 10、距離場上色 反鋸齒修正 在繪製圖形的過程中，相信各位都有注意到圖形的邊緣會是塊狀的，在視覺上相當不美觀，所以要想辦法將它修正。當我們把畫面放大時可以很清楚的看到的鋸齒。 簡單解釋一下</description>
-    </item>
-    
-    <item>
-      <title>十八章 分形繪製</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/18-fractal/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/18-fractal/</guid>
-      <description>標準化空間，大小為 10 分形 距離場的空間操作性能夠輕易地繪製出分形，我們可以透過不斷迭代的空間操作將簡單的圖形複製成分形結構。教學這邊就使用謝爾賓斯基三角形 Sierpinski triangle 為例進行解說。 謝爾賓斯基三角形 首先解說一下他</description>
-    </item>
-    
-    <item>
-      <title>十六章 進階繪圖</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/16-furtherdrawing/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/16-furtherdrawing/</guid>
-      <description>標準化空間，大小為 10 進階繪圖 更進階的圖形繪製方法，透過距離場邊緣的過度範圍來作出修改。 光暈 畫出了精美的圖形和富有層次感的動畫之後，我們還能做什麼讓距離場看起來更酷 ? 還用說，當然是添加一個發光效果啊 ! 而</description>
-    </item>
-    
-    <item>
-      <title>十四章 動畫時間</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/14-animatedtimeline/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/14-animatedtimeline/</guid>
-      <description>標準化空間，大小為 10、距離場上色 動畫時間軸 上一章學到了讓動畫更流暢的方法，我們還差最後一步 - 讓動畫的播出更戲劇化 ! 目前為止，所有動畫都在同一時間用相同的速度播出，在動畫的表現上少了層次感，所以我們可</description>
-    </item>
-    
-    <item>
-      <title>第七章 形狀組合</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/7-combination/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/7-combination/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 距離場組合 目前為止我們都只用到一個距離場，為了讓事情更有趣我們可以多加一個距離場? 不，我們能做到的可遠遠不止，教學現在帶你們接觸距離場的第二個特性 - 組合 但首先</description>
-    </item>
-    
-    <item>
-      <title>第三章 距離著色</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/3-colored/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/3-colored/</guid>
-      <description>標準化空間，大小為 10 內外顏色 原本的黑白太單調了，我們可以為它們上不同顏色 ! 建立顏色屬性以及相對應的變數，為了方便區分形狀內外，所以我們用兩種顏色為距離場上色，要用什麼顏色就由你決定吧，記得到屬性面板上</description>
-    </item>
-    
-    <item>
-      <title>第九章 進階形狀</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/9-furthershapes/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/9-furthershapes/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 更多進階形狀 目前為止，扣掉使用組合情況我們也只有三種形狀距離場，但有了進階的空間操作後，我們就能畫出更複雜的形狀了。 扇形 扇形，簡單來說就是將圓形剔除掉多餘的角</description>
-    </item>
-    
-    <item>
-      <title>第五章 更多形狀</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/5-moreshapes/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/5-moreshapes/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 矩形和線段 從開始到現在我們只有畫出圓形，為了讓事情有趣起來我們需要更多形狀。 線段 如果我們想畫出由兩個點連接而成的線段，情況就開始複雜了，要如何計算點到線段的距</description>
-    </item>
-    
-    <item>
-      <title>第八章 空間操作</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/8-spacemanipulation/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/8-spacemanipulation/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環、游標距離場。 更進階的空間操作 除了基本的平移、旋轉和縮放外，距離場空間操作性也讓他只需要增加些微的計算成本，就能夠渲染出更多更複雜的圖像。 鏡像 在基本形狀的矩形</description>
-    </item>
-    
-    <item>
-      <title>第六章 位移旋轉</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/6-transformation/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/6-transformation/</guid>
-      <description>標準化空間，大小為 3 位移、旋轉和縮放 我們將正式接觸距離場的的一個特性 - 空間操作性，在一般的空間轉換當中，我們會使用齊次座標矩陣進行轉換，但在距離場的世界似乎有什麼不太一樣。 為了理解這些基礎的空間操作，</description>
-    </item>
-    
-    <item>
-      <title>第十章 組合範例</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/10-combinationexample/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/10-combinationexample/</guid>
-      <description>標準化空間，大小為 10、距離場上色、距離環 進階形狀範例 教學到目前已經教了各種形狀、空間操作以及組合方法，這章就提供一些進階型狀的範例。 扇形環 先從從簡單的開始，一個扇形的圓環，將扇形剃除圓形。 float SDF_RingSector(float2 uv, float radius,</description>
-    </item>
-    
-    <item>
-      <title>第四章 距離辨識</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/4-distanceline/</link>
-      <pubDate>Wed, 28 Jul 2021 10:20:32 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/4-distanceline/</guid>
-      <description>標準化空間，大小為 10、距離場上色 繪製距離環 我們為距離場的內外繪製上了不同的顏色用於辨識，但除了形狀自身之外，我們也想知道他位置的距離值，以便我們判斷函數計算正不正確。 因此，我們可以每隔一段距離就畫出</description>
-    </item>
-    
-    <item>
       <title>運用多場景機制進行資料傳遞</title>
       <link>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</link>
       <pubDate>Sun, 25 Jul 2021 00:00:00 +0000</pubDate>
@@ -208,7 +64,7 @@
     </item>
     
     <item>
-      <title>整理給 Unity 初學者的起步資源</title>
+      <title>【資源】整理給 Unity 初學者的起步資源</title>
       <link>https://angus945.github.io/learn/resources/unity-beginner/</link>
       <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
       
@@ -217,7 +73,7 @@
     </item>
     
     <item>
-      <title>自學了三年，分享自己對學習的看法和感想</title>
+      <title>【心得】自學了三年，分享自己對學習的看法和感想</title>
       <link>https://angus945.github.io/post/about-learning/</link>
       <pubDate>Tue, 29 Jun 2021 00:00:00 +0000</pubDate>
       
@@ -226,7 +82,7 @@
     </item>
     
     <item>
-      <title>我的第一個專案 - 投擲地牢</title>
+      <title>【日誌】我的第一個專案 - 投擲地牢</title>
       <link>https://angus945.github.io/devlog/drop-throw-dungeon/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
@@ -235,39 +91,13 @@
     </item>
     
     <item>
-      <title>建立人生的第一個網站</title>
+      <title>【日誌】建立人生的第一個網站</title>
       <link>https://angus945.github.io/devlog/build-the-fistsite/</link>
       <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
       
       <guid>https://angus945.github.io/devlog/build-the-fistsite/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>第二章 距離計算</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/2-distance/</link>
-      <pubDate>Wed, 28 Apr 2021 14:52:15 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/2-distance/</guid>
-      <description>標準化空間，大小為 10 距離場的真實意義 一開始我們有提到距離場是能夠描述空間中任意位置對於虛擬形狀最接近表面的距離的函數，聽起來有點繞口，所以直接用實例解說它的意思吧。 距離，向量的長度，如何計算向量的長度</description>
-    </item>
-    
-    <item>
-      <title>第一章 初步理解</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/1-preliminary/</link>
-      <pubDate>Tue, 27 Apr 2021 21:34:48 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/1-preliminary/</guid>
-      <description>標準化空間，大小為 1 對距離場原理的初步理解 在第一次接觸距離場時，可以先理解成一個 &amp;ldquo;判斷空間中任意位置在不在虛擬形狀內&amp;rdquo; 的函數。 我們從一個圓形開始，點和中心的距離如果小於圓的半徑</description>
-    </item>
-    
-    <item>
-      <title>第零章 基本設置</title>
-      <link>https://angus945.github.io/learn/shader-sdf-animation/0-setup/</link>
-      <pubDate>Mon, 26 Apr 2021 14:55:17 +0800</pubDate>
-      
-      <guid>https://angus945.github.io/learn/shader-sdf-animation/0-setup/</guid>
-      <description>前置作業和注意事項 教學開始前的前置作業，後面部分不會在重複，請視情況自己執行 設置資料 環境 Unity 2D 版本 Unity 2019.4.2f1 使用語言 Shaderlab (HLSL、CG)、C# 腳本工具 Visual Studio Code 紀錄工具 Unity Recorder 攝影機比例 1 : 1 初始設置 首先在場景建立一</description>
+      <description>&lt;h2 id=&#34;為什麼想建立網站&#34;&gt;為什麼想建立網站&lt;/h2&gt;
+&lt;p&gt;在寫完第一篇長篇教學後，我也開始希望有個人網站能專放教學和筆記這種專業向的內容，不然平時都在巴哈上發日誌，專業文章和日常文章混在一起的話未來想當履歷也不方便。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -523,24 +353,6 @@ public event Action NotInputEvent;&lt;/p&gt;
 NotInputEvent += FunctionA; (void FunctionA() { print(&amp;ldquo;A&amp;rdquo;); })
 NotInputEvent += FunctionB; (void FunctionB() { print(&amp;ldquo;B&amp;rdquo;); })
 NotInputEvent += FunctionC; (void FunctionC() { print(&amp;ldquo;C&amp;rdquo;); })&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://angus945.github.io/draft/work/post-custom-pipleline/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/draft/work/post-custom-pipleline/</guid>
-      <description>擴展預設渲染管線 分離渲染 直接設定 render target 無效 找怎麼把 gpu instance 輸出到特定目標上 camera base rendering 和 target base rendering 了，哭阿我要怎麼只輸出一個圖層到 render texture https://blog.csdn.net/leonwei/article/details/54972653 https://www.reddit.com/r/Unity3D/comments/97t8t3/controlling_camera_rendering_manually_from_code/ 找蠻多時間後發現一個 Command Buffer | Command Buffers allow you to extend Unity’s built-in render pipeline. A Command Buffer holds a list of rendering commands which</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://angus945.github.io/draft/work/post-devlog-terrain/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/draft/work/post-devlog-terrain/</guid>
-      <description>【學習日誌】工具化和地形繪製修正 一樣接續上篇【學習日誌】物件筆刷和地形筆刷 https://home.gamer.com.tw/creationDetail.php?sn=5402986 前兩篇把各種系統的功能完成後，接下來就是把它們變成一套編輯器，讓這些系統能實際作為工具使用 自訂編輯器又是另一個分支了，雖然資</description>
     </item>
     
   </channel>
