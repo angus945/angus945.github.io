@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【筆記】視覺物件與工具開發 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="AngusChan&#39;s website" />
+
+
+<meta name="keywords" content="unity, customEditor" />
+
+
+<meta property="og:title" content="【筆記】視覺物件與工具開發" />
+<meta name="twitter:title" content="【筆記】視覺物件與工具開發" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/learn/unity/visual-element/" /><meta property="og:description" content="為了提升工具開發的效率，我研究了 Unity 引擎中的另一套介面系統 - UI Toolkit。它的運作方式與 CustomEditor 函式庫截然不同，能夠以「物件」的形式繪製出界面元素，大幅提高整體維護性與效率。這次的筆記內容是關於 Visual Element 的各項基礎。" />
+<meta name="twitter:description" content="為了提升工具開發的效率，我研究了 Unity 引擎中的另一套介面系統 - UI Toolkit。它的運作方式與 CustomEditor 函式庫截然不同，能夠以「物件」的形式繪製出界面元素，大幅提高整體維護性與效率。這次的筆記內容是關於 Visual Element 的各項基礎。" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2022-09-03T00:00:00+00:00" /><meta property="article:modified_time" content="2022-09-03T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.5,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.3,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/learn/unity/visual-element/">【筆記】視覺物件與工具開發</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2022-09-03
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;3523 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/unity">unity</a>&nbsp;<a href="/tags/customeditor">customEditor</a>&nbsp;</span>
+
+        </div>
+    
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+        <p>為了提升工具開發的效率，我研究了 Unity 引擎中的另一套介面系統 - UI Toolkit。它的運作方式與 <code>CustomEditor</code> 函式庫截然不同，能夠以「物件」的形式繪製出界面元素，大幅提高整體維護性與效率。這次的筆記內容是關於 Visual Element 的各項基礎。</p>
+<h2 id="自訂工具">自訂工具</h2>
+<p>開發者使用 Unity 引擎一段時間後可能會遇到「自製工具」的需求，無論是更簡潔的自定義界面，還是集合式的資料編輯器，都能有效的輔助我們開發遊戲。而 Unity 當然也針對需求提供了幾項選擇，筆記的開頭就先帶過兩種工具開發的主要方法。</p>
+<h3 id="即時模式">即時模式</h3>
+<p>說到自定義編輯器，開發者們最先接觸到的通常是命名空間 <code>UnityEditor</code> 底下的 <code>GUI</code> <code>Editor</code> <code>Layout</code> 系列函式，這是由一套用於工具開發的獨立系統，全稱為「即時模式 GUI」 (Immediate Mode GUI System)。</p>
+<p>名稱中的「即時」直接解釋了這套系統的特性，因為他是以<h>「一行命令，一個元素」</h>的模式運行的。假設我希望在編輯視窗中添加按鈕，只需要在 <code>OnGUI()</code> 函式中調用 <code>GUILayout.Button()</code> 即可，當函式被執行時界面就會自動產生對應元素。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">void OnGUI()
+{
+    if(GUILayout.Button(&quot;ClickMe&quot;))
+    {
+        Debug.Log(&quot;Button Clicked&quot;);
+    }
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/learn/unity/visual-element/summary-imgui.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-imgui.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>除了按鈕以外還有各種元素，包括整數輸入、浮點滑桿、文字匡與下拉選單等，都能用一行命令完成，是相當便捷且容易學習的系統。</p>
+<p>而他的缺點也十分明顯，由於這種線性執行命令的模式更傾向於「程序導向」(procedure-oriented) 而非「物件導向」 (object-oriented)，<h>導致使用 IMGUI 開發的工具都相當難維護、重用與擴展。 </h></p>
+<p>除此之外，在 IMGUI 中進行排版更是一大惡夢，若不用自動排版就得親自計算每個元素的 Rect，導致程式碼變得冗長又難讀，嘗試使用 IMGUI 開發過複雜工具的人應該會很有感觸。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Rect buttonRect = new Rect(10, 10, 50, 20);
+if(GUI.Button(buttonRect, &quot;Button&quot;))
+{
+    Debug.Log(&quot;Inspector Button Clicked&quot;);
+}
+
+Rect labelRect = new Rect(60, 10, 50, 10);
+GUI.Label(labelRect, &quot;Label&quot;);
+
+int input = 0;
+Rect inputRect = new Rect(60, 20, 50, 10);
+input = EditorGUI.IntField(inputRect, input);
+</code></pre>
+<p><c>
+註：如果學過網頁前端的話，大概像只靠標籤屬性的絕對位置與長寬雕刻整個界面，不是不行，但沒人會想這樣做。
+</c></p>
+<h3 id="視覺物件">視覺物件</h3>
+<p>為了應對 IMGUI 的各項缺點，Unity 提供了另一套更完善的介面工具 - <a href="https://docs.unity3d.com/Manual/UIElements.html" target="_blank">UI Toolkit</a>。與線性的 IMGUI 不同，UI Toolket 會使用「視覺物件」(Visual Element) 建立出樹狀的界面結構「視覺樹」(Visual Tree)，<h>透過一個個獨立物件的形式構建出整個界面</h>。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/summary-visualtree.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualtree.jpg]">
+    <p style="opacity: 0.5">
+        引用自 Unity 文檔示意圖
+    </p>
+</div>
+
+
+<p>視覺物件的函式在命名空間 <code>UnityEngine.UIElements</code> 與 <code>UnityEditor.UIElements</code> 底下，如果要建立新的元素，只要透過建構函式建立繼承自 <code>VisualElement</code> 的物件，並添加至編輯器的 <code>rootVisualElement</code> 即可。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Label label = new Label(&quot;Label Element&quot;);
+Button button = new Button() { text = &quot;Button Element&quot; };
+
+rootVisualElement.Add(label);
+rootVisualElement.Add(button);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/summary-visualelement.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualelement.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>視覺物件是以「物件」的形式存在的，因此只要添加一次就能自動繪製，直至使用者將其移除。而它的好處也相當明顯，由於<h>物件能將屬性封裝在其中</h>，使其維護性大大提昇。樹狀的結構也能在一定程度上<h>讓子元素繼承屬性</h>，利用「容器」的性質進行排版，省去繁瑣的調整工作。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">VisualElement container = new VisualElement();
+container.style.width = 100;
+container.style.height = 100;
+
+Label label = new Label(&quot;Label Element&quot;);
+
+container.Add(label);
+</code></pre>
+<p>除此之外還能透過繼承、泛型等方法提昇擴展與重用性，比起 IMGUI 更適合開發複合工具。</p>
+<h2 id="建立視窗">建立視窗</h2>
+<p>CustomEditor 已經有相當充足的學習資源了，因此這篇筆記會把重點放在更冷門的視覺物件上，逐步解析各項使用重點。首先，建立一個編輯器視窗，可以透過資料夾右鍵 &gt; Create &gt; UI Toolkit &gt; Editor Window 生成預設的範例界面，或是自行建立腳本後讓類別繼承 <code>EditorWindow</code>。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/create-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/create-window-panel.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window-panel.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：UXML 可以用於進階的界面開發，但超出筆記的範圍所以只在後面帶過。
+</c></p>
+<p>生成完畢後就會有預設的腳本和視窗出現，看起來會像這樣。筆記會從頭講過一次，自行研究後可以刪除預設腳本的內容。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/default-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/default-window.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="添加元素">添加元素</h3>
+<p>由於視覺物件是「物件」，所以需要先實例化才能進行操作。<code>CreateGUI()</code> 函式會在視窗「準備好」的時候調用，是比較適當的元素建立時機，但實際上隨時建立都能達到目的。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">public void CreateGUI()
+{
+    Label label = new Label(&quot;Label Element&quot;);
+}
+</code></pre>
+<p>視覺物件使用名為視覺樹 (Visual Tree) 的層次結構，而 <code>rootVisualElement</code> 指的是<h>結構的最根部</h>，也就是「視窗」本身。元素若想被繪製就得成為視窗的「樹」的一部分，只要透過 <code>Add()</code> 函式加入即可。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">public void CreateGUI()
+{
+    Label label = new Label(&quot;Label Element&quot;);
+
+    rootVisualElement.Add(label);
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/add-label.jpg" alt="image display error, please report: [/learn/unity/visual-element/add-label.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>只要是繼承自 <code>VisualElement</code> 的物件都能用相同的方法建立，包括一般界面的 <code>Label</code>, <code>Button</code>, <code>Image</code>, <code>Toggle</code>，與編輯器界面的 <code>IntegerField</code>, <code>ObjectField</code> 等等。</p>
+<p>除此之外，樹狀結構的特性也允許物件嵌套。可以透過 <code>new VisualElement()</code> 建立空的物件作為容器，讓它包裝多個物件在其中。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">VisualElement container = new VisualElement();
+
+container.Add(new Label());
+container.Add(new Toggle());
+
+rootVisualElement.Add(container);
+</code></pre>
+<p>目前為止的效果與 IMGUI 相同，但這只是最基本的使用方法而已，隨後便為各位講解視覺物件的強大之處。</p>
+<p><h>
+注意：後面的範例將省略 rootVisualElement.Add() 這一步驟，請自行添加。
+</h></P>
+<h3 id="監聽事件">監聽事件</h3>
+<p>事件監聽，或者說「觀察者模式」(Observer Pattern) 是物件導向中最重要的模式之一，它能夠大幅降低程式碼耦合，用單向連接的方式提高維護性。視覺物件當然也有相關功能可以使用，只要調用 <code>RegisterCallback&lt;T&gt;()</code> 函式進行註冊即可。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">Button button = new Button();
+button.RegisterCallback&lt;MouseMoveEvent&gt;((MouseMoveEvent e) =&gt;
+{
+    Debug.Log(e.mousePosition);
+});
+</code></pre>
+<p>任何 <code>EventBase</code> 下的事件類別都能進行監聽，包括 <code>MouseMoveEvent</code>, <code>MouseDownEvent</code> 等常用事件，事件被觸發時便會傳遞相對應的參數。</p>
+<p><c>
+註：用泛型註冊事件的方法我還是第一次看到，有點意思。
+</c></p>
+<p>而具有輸入性質的元素也有對應的監聽方法，可以透過函式 <code>RegisterValueChangedCallback()</code> 進行註冊，當參數發生變動時便會觸發。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">ObjectField objectField = new ObjectField();
+objectField.objectType = typeof(UnityEngine.Object);
+objectField.RegisterValueChangedCallback((ChangeEvent&lt;UnityEngine.Object&gt; e) =&gt;
+{
+    Debug.Log(e.previousValue);
+    Debug.Log(e.newValue);
+});
+</code></pre>
+<p>透過事件監聽就能免去一堆條件判斷，讓程式碼簡潔許多。</p>
+<h3 id="擴展元素">擴展元素</h3>
+<p>如果想設計自己的通用元素，只需要<h>繼承 <code>VisualElement</code> 後進行擴展</h>即可。假設我想要一個帶有按鈕的物件輸入框，只要繼承 <code>ObjectField</code> 並添加生成按鈕的功能就好。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">public class ObjectFieldWidthButton : ObjectField
+{
+    public void AddButton(string text, Action onClick)
+    {
+        Button button = new Button(onClick);
+        button.text = text;
+
+        base.Add(button);
+    }
+}
+</code></pre>
+<p>至於自訂元素的繪製方法也與一般物件相同，需要透過建構函式生成。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">ObjectFieldWidthButton fieldWidthButton = new ObjectFieldWidthButton();
+fieldWidthButton.objectType = typeof(UnityEngine.Object);
+fieldWidthButton.AddButton(&quot;Button A&quot;, () =&gt; Debug.Log(&quot;ButtonA Clicked&quot;));
+fieldWidthButton.AddButton(&quot;Button B&quot;, () =&gt; Debug.Log(&quot;ButtonB Clicked&quot;));
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/field-width-Button.jpg" alt="image display error, please report: [/learn/unity/visual-element/field-width-Button.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="排版樣式">排版樣式</h3>
+<p>排版也是自製工具中重要的一環，好的界面能快速有效的呈現訊息，並對使用者操作做出回饋。UI Toolkit 大致有三種排版方法可以選擇。</p>
+<p><strong><em>程式碼指定</em></strong></p>
+<p>透過程式修改 <code>visualElement.style</code> 中的參數，基本的樣式表屬性 (style sheet) 都能在這邊指定，包括長寬、顏色與對齊方法等。而這些屬性也能一定程度的影響子元素，例如改變 <code>FlexDirection</code> 讓就能讓子原素並排。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">VisualElement container = new VisualElement();
+container.style.flexDirection = FlexDirection.Row;
+
+container.Add(new Label(&quot;Label A&quot;));
+container.Add(new Label(&quot;Label B&quot;));
+container.Add(new Label(&quot;Label C&quot;));
+container.Add(new Label(&quot;Label D&quot;));
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/style-code-flex.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-code-flex.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>程式指定是最簡單的排版方法，但對複雜的版面設計來說相當低效。</p>
+<p><strong><em>樣式表指定</em></strong></p>
+<p>第二種方式是透過 Unity 提供的樣式文件 Unity Style Sheet (USS) 進行編輯，使用上與網頁的階層式樣式表 (CSS) 相似，能夠透過 selector 指定元素或用 class 包裝複數屬性，讓我們修改元素的大小、排列、顏色等樣式。</p>
+<pre><span>css</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-css">Label 
+{
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(68, 138, 255);
+}
+.align-center 
+{
+    -unity-text-align: upper-center;
+}
+//註：範例程式匡沒辦法上色 USS，所以使用 CSS 當標題
+</code></pre>
+<p>只要透過 <code>AssetDatabase</code> 函式載入文件並添加至樣式列表就有效果了，selector 會自動分配屬性參數，也可以透過 <code>AddToClassList()</code> 函式指定 class。載入的樣式表也會往子元素傳遞。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath&lt;StyleSheet&gt;(&quot;Assets/Editor/UIToolkitWindow.uss&quot;);
+rootVisualElement.styleSheets.Add(styleSheet);
+
+Label title = new Label(&quot;Tittle&quot;);
+title.AddToClassList(&quot;align-center&quot;);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/style-sheed.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-sheed.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>透過 USS 文件編輯能更有效的架構與重用屬性，除了彈性大以外也不需要重複編譯程序，大幅提高設計界面的效率。更多細節可以參考官方文檔 <a href="https://docs.unity3d.com/Manual/UIE-USS.html" target="_blank">Style UI with USS</a>。</p>
+<p><strong><em>視覺化排版</em></strong></p>
+<p>最強大的排版工具 - UI Builder。點擊與拖曳即可添加元素、調整版面，所見即所得的工具能顯著提高設計與開發效率，還能透過 UXML (Unity XML, Unity Extensible Markup Language ) 擴展標籤，讓使用者在 UI Builder 中使用自訂義元素。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/style-builder.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-builder.jpg]">
+    <p style="opacity: 0.5">
+        圖片引用自 Unity 教學文檔
+    </p>
+</div>
+
+
+<p>透過 Window &gt; UI Toolkit &gt; UI Builder 可以開啟編輯視窗。2019.4 與 2020 版本需要透過 Packge Manager 導入，而在 2021 版開始之後為內置工具，不需要而外動作即可使用。</p>
+<p>詳細教學請參考官方文檔 <a href="https://docs.unity3d.com/Packages/com.unity.ui.builder@1.0/manual/index.html" target="_blank">Unity UI Builder</a>，他的功能太多放不進筆記，所以就先點到為止。</p>
+<h3 id="搜索元素">搜索元素</h3>
+<p>UI Toolkit 也有提供方便的元素搜索功能 - UQuery，能夠讓使用者透過名子或其他條件，在視覺樹中快速尋找目標元素。透過函式 <code>Query&lt;T&gt;()</code> 即可搜索元素，用泛型輸入指定元素類別。透過搜索的方式就不需要在函式之間傳遞元素，對於將排版和邏輯分離的架構有相當大的幫助。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">UQueryBuilder&lt;Label&gt; labels = rootVisualElement.Query&lt;Label&gt;();
+labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
+</code></pre>
+<h3 id="參考範例">參考範例</h3>
+<p>最後，Unity 還有提供內建的範例模板給我們參考，只需要透過 Window &gt; UI Toolkit &gt; Semples 就能找到所有元素的列表與範例程式。如果你不知道自己需要什麼，或是不知道元素怎麼使用的時候就可以翻翻看。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/ui-toolkit-sample-b.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-b.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/ui-toolkit-sample-a.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-a.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="經驗總結">經驗總結</h2>
+<p>第一次製作複合編輯器是在專案《山鴉行動》中，當時為了方便編輯裝備的效果，我製作出一套系統能快速修改觸發條件、效果冷卻和特效之類的內容。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/operation-raven-equip-editor.jpg" alt="image display error, please report: [/learn/unity/visual-element/operation-raven-equip-editor.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>雖然這套系統的功能還算完善，但建立在 IMGUI 框架下的程式碼還是相當難維護，在這之後我嘗試開發的許多工具也有相同的困擾。還好現在注意到 UI Toolkit 這套系統了，能夠以物件的方式繪製界面真的是很方便的事，相見恨晚阿。</p>
+<h3 id="對比差異">對比差異</h3>
+<p>雖然以現在的需求來看 UI Toolkit 是更好的系統，但也不代表 IMGUI 一無是處，畢竟他們本然就是根據不同需求開發的。所以最後再做個簡單對比，列出 IMGUI 與 UI Toolkit 的優缺點與適用情況。</p>
+<p><strong>IMGUI</strong></p>
+<ul>
+<li>容易學習，<h>適合入門 Custom Editor </h></li>
+<li>簡單快速，一行一個元素，但難以開發複合功能的編輯工具</li>
+<li>適合用在簡單的自定義資料結構上，可以參考 <a href="https://youtu.be/uZmWgQ7cLNI" target="_blank">Optional Variables - Unity Tips</a></li>
+</ul>
+<p><strong>Visual Element</strong></p>
+<ul>
+<li>排版難易度低，圖形界面與樣式表能顯著降低設計難度</li>
+<li>易於擴展與維護，但系統複雜度略高，需要一點時間學習</li>
+<li>適合開發更複雜的編輯器，<h>建議對自製工具有更高要求的人使用 </h></li>
+</ul>
+<p>官方也有各種 UI 系統的對比文檔 <a href="https://docs.unity3d.com/Manual/UI-system-compare.html" target="_blank">Comparison of UI systems in Unity</a>，當中包括了使用對象的建議，可以根據內容評斷自己適合何者。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/learn/unity/visual-element/roles-and-skill-sets.jpg" alt="image display error, please report: [/learn/unity/visual-element/roles-and-skill-sets.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>總之，希望這篇筆記能幫各位更了解 UI Toolkit 的各項重點，感謝各位的閱讀。</p>
+
+
+<iframe class="LikeCoin" height="190" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2flearn%2funity%2fvisual-element%2f" width="100%" frameborder=0></iframe>
+
+<h3 id="參考資料">參考資料</h3>
+<p><a href="https://docs.unity3d.com/2021.3/Documentation/Manual/GUIScriptingGuide.html" target="_blank">Immediate Mode GUI (IMGUI)</a></p>
+<p><a href="https://docs.unity3d.com/Manual/UIE-VisualTree.html" target="_blank">The Visual Tree</a></p>
+<p><a href="https://youtu.be/EfEAr0meBho" target="_blank">Unity UI Elements - The Basics</a></p>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.ui@1.0/api/UnityEngine.UIElements.html" target="_blank">UnityEngine.UIElements</a></p>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.ui@1.0/api/UnityEditor.UIElements.html" target="_blank">UnityEditor.UIElements</a></p>
+<p><a href="https://docs.unity3d.com/Manual/UIE-USS.html" target="_blank">Style UI with USS</a></p>
+<p><a href="https://www.youtube.com/watch?v=c3sSyoiekz4" target="_blank">Unity Style Sheets - The Basics</a></p>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.ui.builder@1.0/manual/index.html" target="_blank">UI Builder</a></p>
+<p><a href="https://docs.unity3d.com/Manual/UIE-UQuery.html" target="_blank">UQuery</a></p>
+<p><a href="https://youtu.be/uZmWgQ7cLNI" target="_blank">Optional Variables - Unity Tips 2020.1</a></p>
+<p><a href="https://docs.unity3d.com/Manual/UI-system-compare.html" target="_blank">Comparison of UI systems in Unity</a></p>
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">computeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/customeditor/">customEditor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">Hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#自訂工具">自訂工具</a>
+      <ul>
+        <li><a href="#即時模式">即時模式</a></li>
+        <li><a href="#視覺物件">視覺物件</a></li>
+      </ul>
+    </li>
+    <li><a href="#建立視窗">建立視窗</a>
+      <ul>
+        <li><a href="#添加元素">添加元素</a></li>
+        <li><a href="#監聽事件">監聽事件</a></li>
+        <li><a href="#擴展元素">擴展元素</a></li>
+        <li><a href="#排版樣式">排版樣式</a></li>
+        <li><a href="#搜索元素">搜索元素</a></li>
+        <li><a href="#參考範例">參考範例</a></li>
+      </ul>
+    </li>
+    <li><a href="#經驗總結">經驗總結</a>
+      <ul>
+        <li><a href="#對比差異">對比差異</a></li>
+        <li><a href="#參考資料">參考資料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+            <li>
+                <a href="/search/">Search</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>巴哈姆特</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/computeshader/">computeShader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/customeditor/">customEditor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">Hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2022
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
