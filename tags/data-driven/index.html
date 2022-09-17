@@ -19,25 +19,23 @@
 <link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<title>【日誌】建立人生的第一個網站 - AngusChan&#39;s Devlog</title>
+<title>data-driven - AngusChan&#39;s Devlog</title>
 
 
 <meta name="author" content="AngusChan" />
 
 
-<meta name="description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
+<meta name="description" content="AngusChan&#39;s website" />
 
 
-<meta name="keywords" content="website" />
+<link rel="alternate" type="application/rss+xml" href="https://angus945.github.io/tags/data-driven/index.xml" title="AngusChan's Devlog" />
 
-
-<meta property="og:title" content="【日誌】建立人生的第一個網站" />
-<meta name="twitter:title" content="【日誌】建立人生的第一個網站" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://angus945.github.io/devlog/build-the-fistsite/" /><meta property="og:description" content="從頭學習前端和使用 Hugo 建立網站的過程" />
-<meta name="twitter:description" content="從頭學習前端和使用 Hugo 建立網站的過程" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta property="og:title" content="data-driven" />
+<meta name="twitter:title" content="data-driven" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://angus945.github.io/tags/data-driven/" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-05-11T00:00:00+00:00" /><meta property="article:modified_time" content="2022-06-24T00:00:00+00:00" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="og:updated_time" content="2022-09-17T00:00:00+00:00" />
 
 
 <style>
@@ -541,412 +539,39 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-<article>
-    
-        <h2 class="post-item post-title">
-            <a href="https://angus945.github.io/devlog/build-the-fistsite/">【日誌】建立人生的第一個網站</a>
-        </h2>
-    
-    
-        <div class="post-item post-meta">
-            <span>
+
+<div class="page-info">
+  <span>Posts with the tag data-driven: </span>
+</div>
+
+
+
+<div class="post">
+  <h2 class="post-item post-title">
+    <a href="https://angus945.github.io/devlog/unity/text-processing/">【日誌】資料驅動 - 多語言文本生成</a>
+  </h2>
+  <div class="post-item post-meta">
+    <span>
     <i class="iconfont icon-today-sharp"></i> &nbsp;
-    2021-05-11
+    2022-09-17
 </span>
 
-
-<span>
-    <i class="iconfont icon-sync-circle-sharp"></i> &nbsp;
-    2022-06-24
-</span>
 
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2651 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;959 words
 </span>
 
 
 
 
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/website">website</a>&nbsp;</span>
-
-        </div>
-    
-    
-    <div class="post-content markdown-body">
-        
-         
-         
-        <h2 id="為什麼想建立網站">為什麼想建立網站</h2>
-<p>在寫完第一篇長篇教學後，我也開始希望有個人網站能專放教學和筆記這種專業向的內容，不然平時都在巴哈上發日誌，專業文章和日常文章混在一起的話未來想當履歷也不方便。</p>
-<p>再來是巴哈上的客群主要都中文語系這塊，如能夠將網站內容翻譯成英文版本的話，也才有機會和更多厲害的人交流~</p>
-<p>因為我沒有任何網頁知識，所以剛開始想透過現有的部落格平台或建立工具開發就好。但是研究了 Blogger 和 WordPress 等資源後發現它們和理想的部落格架構都有些落差，因此最後還是決定學習前端，搭配 Hugo 與 GitHub page 來建立網站。</p>
-<h3 id="參考資料">參考資料</h3>
-<p>由於學習習慣，初學時我通常會以影片資源為主。而這次的主要參考資料為 Youtube 頻道 Mike Dane 的 Web Development 系列教學。</p>
-<p>HTML - <a href="https://www.youtube.com/watch?v=Ny1g1eQHnCI&amp;list=PLLAZ4kZ9dFpMSXUYwxDFOvyxlssug29Fu" target="_blank">HTML - Build a Website | Tutorial</a></p>
-<p>CSS - <a href="https://www.youtube.com/watch?v=WZ2uqGkHoR0&amp;list=PLLAZ4kZ9dFpNO7ScZFr-WTmtcBY3AN1M7" target="_blank">CSS - Style Your Website | Tutorial</a></p>
-<p>Javascript - <a href="https://www.youtube.com/watch?v=_jlPywA4dKs&amp;list=PLLAZ4kZ9dFpPQbcrA-SzALJeFm23tPrAI" target="_blank">Javascript - Programming Language | Tutorial</a></p>
-<p>Hugo - <a href="https://www.youtube.com/watch?v=qtIqKaDlqXo&amp;list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3" target="_blank">Hugo - Static Site Generator | Tutorial</a></p>
-<h3 id="選擇主題">選擇主題</h3>
-<p>Hugo 的一大賣點就是它的龐大<a href="https://themes.gohugo.io/" target="_blank">主題庫</a>，裡面收錄了不少網頁模板供人使用，只需要只需要下載後放進專案資料夾就好。畢竟我拿手的也不是設計相關領域，製作網站還是以現有的模板修改更適合。</p>
-<p>自從接觸筆記工具 notion 後，我就很喜歡那種簡潔的筆記風格，因此我也選擇了相似的主題 <a href="https://themes.gohugo.io/hugo-theme-even/" target="_blank">Even</a> 作為網站的初始模板。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/theme.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/theme.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h2 id="修修改改">修修改改</h2>
-<p>模板決定後就可以根據需求修改內容了。雖然這個主題本身就攜帶不少功能，但有些客製化的需求還是只有自己知道，我也是為此才特意學習前端的基礎知識。</p>
-<h3 id="教學主頁">教學主頁</h3>
-<p>為了讓不同系列的教學有各自頁面，我使用資料夾將相同系列的教學放在一起，透過 Hugo 的列表功能作為教學主頁。</p>
-<p>但由於需求與模板中提供的功能不一致，所以我必須修改模板。預設的列表只能展示在頁面內容底部，為了自由選擇顯示列表的位置，我將模板的功能獨立成一個函式，讓我能在編輯文章時手動插入列表。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/listoutPages.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/listoutPages.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="上一章下一章">上一章、下一章</h3>
-<p>有了教學頁面後，教學內容的模板也需要稍微修改。為了方便讀者閱讀連續教學，我也在教學頁面的底部添加上下章的連結，用於快速引導。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/nextPage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/nextPage.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="圖片嵌入">圖片嵌入</h3>
-<p>圖文並茂的文章才能有效加深讀者印象，因此圖片嵌入是必不可少的功能。雖然 Hugo 本身就有提供基本的函式讓使用者將圖片嵌入文章內容中，但它必須用完整的檔案路徑才能找到圖片。</p>
-<p>由於個人習慣，我會將資料夾與檔案名稱命名的比較完整，若每次都要輸入落落長的路徑還是太不方便了。為了更方便嵌入，我寫了一個自訂函式來使用，他可以自動透過文章的路徑尋找對應位置上的資源，如此一來我就能省略重複的資料夾路徑了。</p>
-<p><code>pathImage displayImage.jpg</code></p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/displayImage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/displayImage.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="閱讀更多">閱讀更多</h3>
-<p>網站預計會有三種類型的文章：教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只列出頁面標題而已。</p>
-<p>我想要像巴哈姆特那樣，有大標題、描述和文章預覽圖，所以也自行修改了列表頁面的模版。參考主題網站裏提供的 <a href="https://themes.gohugo.io/theme/hugo-theme-even/" target="_blank">Demo</a> 修改出期望的列表樣式，並將預覽圖嵌在區塊的右側。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/readmore.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/readmore.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>標題下方也列出了文章的標籤，方便讀者快速理解文章中有哪些內容。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tags.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tags.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="翻頁列表">翻頁列表</h3>
-<p>我使用「閱讀更多」的區塊來列出文章，但一口氣全列出的話會導致列表過長，讓讀者難以尋找文章。</p>
-<p>為了避免問題，我透過 Hugo 的迴圈將列表分次包進 Html 容器中，再透過判斷 URL paramater 來進行頁面切換。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/turnpageList.gif" alt="image display error, please report: [/devlog/build-the-fistsite/turnpageList.gif]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>後來才發現 Hugo 就有內建分頁系統了，所以我等於做了沒意義的功能…囧</p>
-<h3 id="標籤列表">標籤列表</h3>
-<p>Hugo 本身就有很方便的標籤系統，他能夠自動產生各個標籤的列表頁面，但我希望能將標與類型區分開來，也必須對對應的模板修改才行。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tagTabview1.gif" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview1.gif]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>這就是模板中完全沒有的功能了，所以花不少額外時間製作，研究 js 腳本和 css 配製後才完成了美觀一點切換列表。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tagTabview2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview2.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>參考資料</p>
-<p><a href="https://www.w3schools.com/howto/howto_js_tabs.asp" target="_blank">tabview</a></p>
-<h3 id="移除滾動條">移除滾動條</h3>
-<p>因為真的覺得網頁滾動條很醜，就想辦法隱藏它了。雖然他本身不算複雜，但為了確保在各瀏覽器上都有效也花了點時間。</p>
-<pre><span>CSS</span><hr style='margin-top:5px; margin-bottom:0px'>
-<code class="language-CSS">html,body
-{
-    overflow: auto;
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
-}
-body::-webkit-scrollbar
-{
-    display: none;
-}
-</code></pre>
-<h3 id="內容導覽">內容導覽</h3>
-<p>把移除滾動條後，為了讓讀者能夠知道自己看到哪裡，得再文章中提供內容導覽才行。</p>
-<p>雖然這個主題本身就有提供相關功能，但在我修修改改的過程中也不小心弄壞了，只好花額外的時間去修它 :P</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tableOfContent.png" alt="image display error, please report: [/devlog/build-the-fistsite/tableOfContent.png]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>過程中也注意到模板裡的腳本計算有些錯誤，在判斷距離的時候少減了一次間隔，導致捲動會在特定位置上跳動，修正後就大功告成了。</p>
-<pre><span>js</span><hr style='margin-top:5px; margin-bottom:0px'>
-<code class="language-js">//                              there
-if (scrollTop &lt; minScrollTop - SPACING)
-{
-  $toc.css(tocState.start);
-} 
-</code></pre>
-<h3 id="關於頁面">關於頁面</h3>
-<p>為了幫助讀者了解自己與網站，自我介紹也是不可或缺的部分。我將介紹分為兩個部分：關於我和關於這個網站，可以透過頁面上方的選項切換要顯示的內容。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/about.gif" alt="image display error, please report: [/devlog/build-the-fistsite/about.gif]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="語言設置">語言設置</h3>
-<p>多語言也是我建立網站的主要目的之一，Hugo 因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/languages1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages1.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>在訪客第一次進入網站主頁面的時候，使用 js 取得瀏覽器使用的語言，並將其引導適當的網頁上。</p>
-<p>為了讓讀者切換語言，我也添加了一個語言選擇器，透過 localstorage 來儲存設置，點擊展開後就可以進行切換，</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/languages2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages2.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="網站託管">網站託管</h3>
-<p>我過去沒有接觸過任何網頁技術，資料庫相關的後端知識也是，因此網站託管的部分也是依靠現有資源達成的。</p>
-<p>我使用 github page 來進行網站託管，只需要建立一個 username.github.io 的儲存庫後，將建置完畢的網站資料夾資料夾後上傳就能完成了，真方便 :D</p>
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/2MsN8gpT6jY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
-
-<h3 id="留言板">留言板</h3>
-<p>為了增加交流機會，留言板也是不可或缺的重要功能。</p>
-<p><del>我使用的是 Disqus 提供的留言板，Hugo 中只需要設置&hellip;</del></p>
-<p>捨棄，會強制塞一個比留言板本身還要大的廣告…</p>
-<p>後來我改用 <a href="https://commentbox.io/" target="_blank">CommentBox</a> 當網站的留言版了，它裝起來方便而且版面也乾淨許多，留言時也可以方便的登入。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/comment.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/comment.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h3 id="流量追蹤">流量追蹤</h3>
-<p>為了分析訪客的閱覽偏好，網站也使用了 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/googleAnaltics.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/googleAnaltics.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p>但是不斷的編輯造成網頁有九成的流量都是我自己，所以得設定流量過濾，確保蒐集到的資料能正確反映現實。</p>
-<blockquote>
-<p>目前僅顯示通用 Analytics (分析) 資源的篩選器。篩選器無法套用到 Google Analytics (分析) 4 資源。
-Displaying Filters for Universal Analytics Properties only. Filters cannot be applied to Google Analytics 4 Properties.</p>
-</blockquote>
-<p>因為版本問題，找半天才發現如何進行過濾設置，新版本需要到 &ldquo;資源 &gt; 資料設定 &gt; 資料篩選器&rdquo; 設定才行。</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/analtics_filte1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/analtics_filte1.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<p><a href="https://support.google.com/analytics/thread/89743745/can-t-create-filter-views-even-though-i-have-all-admin-accesses-in-all-levels?hl=en" target="_blank">Can&rsquo;t create filter views even though I have all ADMIN accesses in all levels </a></p>
-<p><a href="https://support.google.com/analytics/answer/10108813" target="_blank">GA4 Data filters</a></p>
-<h3 id="主頁面">主頁面</h3>
-<p>該有的功能都有了，最後也是最重要的就是網站主頁面。因為還沒有經營網站的經驗，我也不確定主畫面該放什麼好，所以就在簡單的打招呼之後列出推薦文章而已 ~</p>
-
-
-
-
-
-
-
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/home.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/home.jpg]">
-    <p style="opacity: 0.5">
-        
-    </p>
-</div>
-
-
-<h2 id="結語">結語</h2>
-<p>從開始學網頁到完工大概一個月了，雖然接觸新知識很有趣，但畢竟我的主要領域不在這，摸到現在也開始膩了，所以見好就收吧 !</p>
-<p>總結來說，我對人生中的第一個網頁相當滿意，和我期望中的網頁幾乎一模一樣，之後會在這裡更新一些教學、筆記和部落格文章，敬請期待~</p>
-<h3 id="翻譯文章">翻譯文章</h3>
-<p>英文版本的文章我是透過 Grammarly 進行輔助翻譯的，但我的英文能力慘不忍睹，希望翻譯的過程能多少讓我進步點 D:</p>
-<p>我在修正文章翻譯時都會保留筆記的，如果可以請能幫我指出翻譯文章的句子和語法的錯誤 Orz</p>
-<h3 id="感謝閱讀">感謝閱讀</h3>
-<p>感謝閱讀到這裡的各位！</p>
-<p>順帶一題，如果是從其他地方點進網站的人可能不清楚，我的主要活動地點在巴哈姆特的<a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank">小屋</a>，那裏幾乎每天都會發日誌，歡迎來交流 ~</p>
-    </div>
-</article>
-
-
-<div class="license markdown-body">
-    <blockquote>
-        <p>
-            Unless otherwise noted, the content of this site is licensed under  
-            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
-            .
-        </p>
-    </blockquote>
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/unity">unity</a>&nbsp;<a href="/tags/data-driven">data-driven</a>&nbsp;</span>
+
+  </div>
+  <div class="post-item post-summary markdown-body">
+    <p>分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表資料並解析、生成多語言文件。</p>
+  </div>
 </div>
 
 
@@ -1009,11 +634,15 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
         <div>
             
             <span>
-                <a href="/tags/computeshader/">computeShader</a>
+                <a href="/tags/compute-shader/">compute-shader</a>
             </span>
             
             <span>
-                <a href="/tags/customeditor/">customEditor</a>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
             </span>
             
             <span>
@@ -1021,7 +650,7 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             </span>
             
             <span>
-                <a href="/tags/hugo/">Hugo</a>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>
@@ -1050,41 +679,9 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             
         </div>
     </div>
-    <div class="sidebar-item sidebar-toc">
-        <h3>Table of Contents</h3><nav id="TableOfContents">
-  <ul>
-    <li><a href="#為什麼想建立網站">為什麼想建立網站</a>
-      <ul>
-        <li><a href="#參考資料">參考資料</a></li>
-        <li><a href="#選擇主題">選擇主題</a></li>
-      </ul>
-    </li>
-    <li><a href="#修修改改">修修改改</a>
-      <ul>
-        <li><a href="#教學主頁">教學主頁</a></li>
-        <li><a href="#上一章下一章">上一章、下一章</a></li>
-        <li><a href="#圖片嵌入">圖片嵌入</a></li>
-        <li><a href="#閱讀更多">閱讀更多</a></li>
-        <li><a href="#翻頁列表">翻頁列表</a></li>
-        <li><a href="#標籤列表">標籤列表</a></li>
-        <li><a href="#移除滾動條">移除滾動條</a></li>
-        <li><a href="#內容導覽">內容導覽</a></li>
-        <li><a href="#關於頁面">關於頁面</a></li>
-        <li><a href="#語言設置">語言設置</a></li>
-        <li><a href="#網站託管">網站託管</a></li>
-        <li><a href="#留言板">留言板</a></li>
-        <li><a href="#流量追蹤">流量追蹤</a></li>
-        <li><a href="#主頁面">主頁面</a></li>
-      </ul>
-    </li>
-    <li><a href="#結語">結語</a>
-      <ul>
-        <li><a href="#翻譯文章">翻譯文章</a></li>
-        <li><a href="#感謝閱讀">感謝閱讀</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
+    
+    
+    
 </aside>
 
         </div>
@@ -1157,11 +754,15 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
         <div>
             
             <span>
-                <a href="/tags/computeshader/">computeShader</a>
+                <a href="/tags/compute-shader/">compute-shader</a>
             </span>
             
             <span>
-                <a href="/tags/customeditor/">customEditor</a>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
             </span>
             
             <span>
@@ -1169,7 +770,7 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             </span>
             
             <span>
-                <a href="/tags/hugo/">Hugo</a>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>

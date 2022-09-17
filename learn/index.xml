@@ -36,15 +36,6 @@
     </item>
     
     <item>
-      <title>運用多場景機制進行資料傳遞</title>
-      <link>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</link>
-      <pubDate>Sun, 25 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</guid>
-      <description>DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某些物件怎麼辦 ? Unity 當然知道這點，為此在他們的 Object 中有一項函式，我</description>
-    </item>
-    
-    <item>
       <title>【資源】整理給 Unity 初學者的起步資源</title>
       <link>https://angus945.github.io/learn/resources/unity-beginner/</link>
       <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo on AngusChan&#39;s Devlog</title>
+    <title>hugo on AngusChan&#39;s Devlog</title>
     <link>https://angus945.github.io/tags/hugo/</link>
-    <description>Recent content in Hugo on AngusChan&#39;s Devlog</description>
+    <description>Recent content in hugo on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【日誌】個人網站重建</title>
-      <link>https://angus945.github.io/devlog/rebuild-the-website/</link>
+      <link>https://angus945.github.io/devlog/web/rebuild-the-website/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/devlog/rebuild-the-website/</guid>
+      <guid>https://angus945.github.io/devlog/web/rebuild-the-website/</guid>
       <description>&lt;h2 id=&#34;網站重建&#34;&gt;網站重建&lt;/h2&gt;
 &lt;p&gt;從初次製作個人網站到現在已經一年了，雖然當時對成果還算滿意，但在我寫作的過程中也慢慢發現各種缺陷，函示調用不易、專案架構混雜等等，所以決定重建一次網站！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】建立人生的第一個網站</title>
+      <link>https://angus945.github.io/devlog/web/build-the-fistsite/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/web/build-the-fistsite/</guid>
+      <description>&lt;h2 id=&#34;為什麼想建立網站&#34;&gt;為什麼想建立網站&lt;/h2&gt;
+&lt;p&gt;在寫完第一篇長篇教學後，我也開始希望有個人網站能專放教學和筆記這種專業向的內容，不然平時都在巴哈上發日誌，專業文章和日常文章混在一起的話未來想當履歷也不方便。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -19,23 +19,25 @@
 <link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<title>computeShader - AngusChan&#39;s Devlog</title>
+<title>【日誌】資料驅動 - 多語言文本生成 - AngusChan&#39;s Devlog</title>
 
 
 <meta name="author" content="AngusChan" />
 
 
-<meta name="description" content="AngusChan&#39;s website" />
+<meta name="description" content="分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表內容並解析、生成多語言文件" />
 
 
-<link rel="alternate" type="application/rss+xml" href="https://angus945.github.io/tags/computeshader/index.xml" title="AngusChan's Devlog" />
+<meta name="keywords" content="unity, data-driven" />
 
-<meta property="og:title" content="computeShader" />
-<meta name="twitter:title" content="computeShader" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://angus945.github.io/tags/computeshader/" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+
+<meta property="og:title" content="【日誌】資料驅動 - 多語言文本生成" />
+<meta name="twitter:title" content="【日誌】資料驅動 - 多語言文本生成" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/unity/text-processing/" /><meta property="og:description" content="分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表內容並解析、生成多語言文件" />
+<meta name="twitter:description" content="分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表內容並解析、生成多語言文件" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="og:updated_time" content="2022-06-03T00:00:00+00:00" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2022-09-17T00:00:00+00:00" /><meta property="article:modified_time" content="2022-09-17T00:00:00+00:00" />
 
 
 <style>
@@ -539,40 +541,230 @@
             
             <div class="col-12 col-md-9 float-left content">
                 
-
-<div class="page-info">
-  <span>Posts with the tag computeShader: </span>
-</div>
-
-
-
-<div class="post">
-  <h2 class="post-item post-title">
-    <a href="https://angus945.github.io/learn/compute-shader/compute-shader-basis/">【筆記】初學指南，計算著色器</a>
-  </h2>
-  <div class="post-item post-meta">
-    <span>
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/unity/text-processing/">【日誌】資料驅動 - 多語言文本生成</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
     <i class="iconfont icon-today-sharp"></i> &nbsp;
-    2022-06-03
+    2022-09-17
 </span>
 
 
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;8784 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;959 words
 </span>
 
 
 
 
-<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/computeshader">computeShader</a>&nbsp;</span>
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/unity">unity</a>&nbsp;<a href="/tags/data-driven">data-driven</a>&nbsp;</span>
 
-  </div>
-  <div class="post-item post-summary markdown-body">
-    <h2 id="概括">概括</h2>
-<p>計算著色器 (Compute Shader) 是一種獨立於渲染管線之外，用途也不僅限於著色計算的工具， <h> 意圖利用 GPU 擁有大量核心的優勢，以平行運算的方法解決問題 </h> 。這篇文章是我在研究一段時間後總結出的各項初學重點，在這裡分享給各位。</p>
-  </div>
+        </div>
+    
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+        <p>分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表資料並解析、生成多語言文件。</p>
+<h2 id="需求判斷">需求判斷</h2>
+<p>為了讓山鴉專案的文本管理更有效率，我又研究了新的資料處理系統。山鴉的多語言文件是寫在 Google 試算表上的，雖然能直接導出 xlsx 使用，但我覺得這樣不夠方便，所以找了一些自訂輸出方法的資料參考。</p>
+<p>本篇文章不是筆記所以將省略實做細節，有興趣深入的人可以參考文章底部的資料。</p>
+<h3 id="外掛系統">外掛系統</h3>
+<p>我查了不少檔案轉換的資料，幾乎所有內容都將我指引到 Google Apps Script (GAS) 這套外掛系統。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/apps-script.jpg" alt="image display error, please report: [/devlog/unity/text-processing/apps-script.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>這是一套能<h>編寫腳本並在 Google Sheet 上運行</h>的系統，讓使用者透過程式讀取、寫入表格資料或添加工具列功能，更重要的是 GAS 還能<h>將函式接口發佈到網路上，讓 Unity 腳本調用</h>。</p>
+<p>總之，在了解基本內容之後就試寫了一套打包表格資料的腳本，能夠建立 key-value table 的 Json 陣列資料（不過沒有換行，這是為了文章刻意改的）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/standard-json.jpg" alt="image display error, please report: [/devlog/unity/text-processing/standard-json.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="下載文件">下載文件</h3>
+<p>我很愛拿 ScriptableObject 製作輔助工具，因為它存在於資料夾的特性相當方便。我將它製作成資料下載的接口使用，只要建立物件、輸入 Excel ID、分頁索引與檔案寫入的位置，就能直接從 Unity 將 GoogleSheet 的資料下載至本地。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/gas-access-token.jpg" alt="image display error, please report: [/devlog/unity/text-processing/gas-access-token.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>如此一來，在企劃修改文本後我只要按個按鈕就能就能同步本地文件了。</p>
+<p><c>
+註：因為資料下載是非同步的，所以得由 Ienumerator 函式執行，我使用了 EditorCoroutines 插件讓它能在編輯器中運行。
+</c></p>
+<h2 id="系統重構">系統重構</h2>
+<p>資料下載的功能完成了，但我不希望所有語言的內容擠在同一份文件裏，所以想將它們分割進各自的資料夾中存放。為了增加維護與重用性，我將它重構成一套更通用的資料處理系統，把原本的資料下載與寫入拆成多個步驟完成。</p>
+<p><c>
+註：因為分別存放的方法比較適合讓玩家擴充內容（開發模組），這也是我研究資料驅動的目的之一。
+</c></p>
+<h3 id="系統框架">系統框架</h3>
+<p>透過抽象類別建立接口框架，輸入資料並在處理完畢後傳出回調，<h>將複雜的處理過程交由一個個「節點」完成</h>。</p>
+<pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-cs">public abstract class TextProcessNode : ScriptableObject
+{
+    public abstract IEnumerator ProcessingRoutine(ProcessingData[] input, Action&lt;ProcessingData[]&gt; onFinishedCallback);
+}
+</code></pre>
+<h3 id="資料下載">資料下載</h3>
+<p>下載節點，一個使用 GAS 下載資料並傳出的節點，不會對其進行任何加工。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/node-gas-access.jpg" alt="image display error, please report: [/devlog/unity/text-processing/node-gas-access.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="文本解析">文本解析</h3>
+<p>解析節點，將傳入的表格分割出標題與內容，並輸出不同語言的獨立字表。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/node-localization.jpg" alt="image display error, please report: [/devlog/unity/text-processing/node-localization.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="文本生成">文本生成</h3>
+<p>生成節點，將輸入的資料使用 IO 寫入資料夾。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/node-file-write.jpg" alt="image display error, please report: [/devlog/unity/text-processing/node-file-write.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="組合節點">組合節點</h3>
+<p>只要將以上三個節點組合，就能自動生成與更新多語言文件了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/process-list.jpg" alt="image display error, please report: [/devlog/unity/text-processing/process-list.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/unity/text-processing/localization-files.jpg" alt="image display error, please report: [/devlog/unity/text-processing/localization-files.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<p>就醬，只是一個簡單的學習日誌，這套系統的用途應該很廣泛，只要改變幾個節點就能自動處裡不同類型的資料了。</p>
+
+
+
+
+
+
+
+
+<p>
+    <a href="https://github.com/angus945/angus945.github.io/tree/main/devlog/unity/text-processing/source-codes" target="_blank">
+        想看的原始碼可以點我
+    </a>
+</p>
+
+
+
+<iframe class="LikeCoin" height="190" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2fdevlog%2funity%2ftext-processing%2f" width="100%" frameborder=0></iframe>
+
+<h3 id="參考資料">參考資料</h3>
+<p><a href="https://developers.google.com/apps-script" target="_blank">Google Apps Script</a></p>
+<p><a href="https://thenewstack.io/how-to-convert-google-spreadsheet-to-json-formatted-text/" target="_blank">How to Convert a Google Spreadsheet to JSON-Formatted Text</a></p>
+<p><a href="https://www.youtube.com/watch?v=SfRXsiuzbCI" target="_blank">【阿空】用Google試算表建立資料庫！？</a></p>
+<p><a href="https://docs.unity3d.com/Packages/com.unity.editorcoroutines@0.0/api/Unity.EditorCoroutines.Editor.EditorCoroutineUtility.html" target="_blank">Unity.EditorCoroutines.Editor</a></p>
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+            .
+        </p>
+    </blockquote>
 </div>
 
 
@@ -635,11 +827,15 @@
         <div>
             
             <span>
-                <a href="/tags/computeshader/">computeShader</a>
+                <a href="/tags/compute-shader/">compute-shader</a>
             </span>
             
             <span>
-                <a href="/tags/customeditor/">customEditor</a>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
             </span>
             
             <span>
@@ -647,7 +843,7 @@
             </span>
             
             <span>
-                <a href="/tags/hugo/">Hugo</a>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>
@@ -676,9 +872,31 @@
             
         </div>
     </div>
-    
-    
-    
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#需求判斷">需求判斷</a>
+      <ul>
+        <li><a href="#外掛系統">外掛系統</a></li>
+        <li><a href="#下載文件">下載文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#系統重構">系統重構</a>
+      <ul>
+        <li><a href="#系統框架">系統框架</a></li>
+        <li><a href="#資料下載">資料下載</a></li>
+        <li><a href="#文本解析">文本解析</a></li>
+        <li><a href="#文本生成">文本生成</a></li>
+        <li><a href="#組合節點">組合節點</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#參考資料">參考資料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 </aside>
 
         </div>
@@ -751,11 +969,15 @@
         <div>
             
             <span>
-                <a href="/tags/computeshader/">computeShader</a>
+                <a href="/tags/compute-shader/">compute-shader</a>
             </span>
             
             <span>
-                <a href="/tags/customeditor/">customEditor</a>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
             </span>
             
             <span>
@@ -763,7 +985,7 @@
             </span>
             
             <span>
-                <a href="/tags/hugo/">Hugo</a>
+                <a href="/tags/hugo/">hugo</a>
             </span>
             
             <span>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data-driven on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/data-driven/</link>
+    <description>Recent content in data-driven on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/data-driven/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】資料驅動 - 多語言文本生成</title>
+      <link>https://angus945.github.io/devlog/unity/text-processing/</link>
+      <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/unity/text-processing/</guid>
+      <description>&lt;p&gt;分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表資料並解析、生成多語言文件。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>computeShader on AngusChan&#39;s Devlog</title>
-    <link>https://angus945.github.io/tags/computeshader/</link>
-    <description>Recent content in computeShader on AngusChan&#39;s Devlog</description>
+    <title>compute-shader on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/compute-shader/</link>
+    <description>Recent content in compute-shader on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 03 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/computeshader/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/compute-shader/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【筆記】初學指南，計算著色器</title>
       <link>https://angus945.github.io/learn/compute-shader/compute-shader-basis/</link>

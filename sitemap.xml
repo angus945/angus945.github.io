@@ -3,15 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://angus945.github.io/</loc>
-    <lastmod>2022-09-03T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/tags/customeditor/</loc>
+    <loc>https://angus945.github.io/tags/data-driven/</loc>
+    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/devlog/</loc>
+    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/tags/unity/</loc>
+    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/devlog/unity/text-processing/</loc>
+    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://angus945.github.io/tags/custom-editor/</loc>
     <lastmod>2022-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/</loc>
-    <lastmod>2022-09-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://angus945.github.io/tags/unity/</loc>
     <lastmod>2022-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/unity/visual-element/</loc>
@@ -26,19 +35,16 @@
     <loc>https://angus945.github.io/about/</loc>
     <lastmod>2022-07-20T19:26:08+08:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/devlog/</loc>
-    <lastmod>2022-07-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://angus945.github.io/tags/hugo/</loc>
     <lastmod>2022-07-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/tags/website/</loc>
     <lastmod>2022-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/devlog/rebuild-the-website/</loc>
+    <loc>https://angus945.github.io/devlog/web/rebuild-the-website/</loc>
     <lastmod>2022-07-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/tags/computeshader/</loc>
+    <loc>https://angus945.github.io/tags/compute-shader/</loc>
     <lastmod>2022-06-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/compute-shader/compute-shader-basis/</loc>
@@ -56,9 +62,6 @@
     <loc>https://angus945.github.io/post/content-test/</loc>
     <lastmod>2022-04-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</loc>
-    <lastmod>2021-07-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://angus945.github.io/tags/resources/</loc>
     <lastmod>2021-07-24T00:00:00+00:00</lastmod>
   </url><url>
@@ -74,10 +77,10 @@
     <loc>https://angus945.github.io/tags/devlog/</loc>
     <lastmod>2021-05-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/devlog/drop-throw-dungeon/</loc>
+    <loc>https://angus945.github.io/devlog/project/drop-throw-dungeon/</loc>
     <lastmod>2021-05-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://angus945.github.io/devlog/build-the-fistsite/</loc>
+    <loc>https://angus945.github.io/devlog/web/build-the-fistsite/</loc>
     <lastmod>2022-06-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://angus945.github.io/learn/old-notes/unity-coding/extension-and-operator/</loc>

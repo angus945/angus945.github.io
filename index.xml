@@ -6,7 +6,16 @@
     <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 03 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】資料驅動 - 多語言文本生成</title>
+      <link>https://angus945.github.io/devlog/unity/text-processing/</link>
+      <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/unity/text-processing/</guid>
+      <description>&lt;p&gt;分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表資料並解析、生成多語言文件。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>【筆記】視覺物件與工具開發</title>
       <link>https://angus945.github.io/learn/unity/visual-element/</link>
@@ -36,10 +45,10 @@
     
     <item>
       <title>【日誌】個人網站重建</title>
-      <link>https://angus945.github.io/devlog/rebuild-the-website/</link>
+      <link>https://angus945.github.io/devlog/web/rebuild-the-website/</link>
       <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/devlog/rebuild-the-website/</guid>
+      <guid>https://angus945.github.io/devlog/web/rebuild-the-website/</guid>
       <description>&lt;h2 id=&#34;網站重建&#34;&gt;網站重建&lt;/h2&gt;
 &lt;p&gt;從初次製作個人網站到現在已經一年了，雖然當時對成果還算滿意，但在我寫作的過程中也慢慢發現各種缺陷，函示調用不易、專案架構混雜等等，所以決定重建一次網站！&lt;/p&gt;</description>
     </item>
@@ -64,15 +73,6 @@
     </item>
     
     <item>
-      <title>運用多場景機制進行資料傳遞</title>
-      <link>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</link>
-      <pubDate>Sun, 25 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/learn/unity/multiple-scene-pass-message/</guid>
-      <description>DontDestroyOnLoad 的運作原理與多場景的運用 前言 DontDestroy 眾所皆知，Unity 在轉場時為了節省記憶體空間，會將舊場景中的所有物件銷毀並釋放掉，但如果我想在轉場時保留某些物件怎麼辦 ? Unity 當然知道這點，為此在他們的 Object 中有一項函式，我</description>
-    </item>
-    
-    <item>
       <title>【資源】整理給 Unity 初學者的起步資源</title>
       <link>https://angus945.github.io/learn/resources/unity-beginner/</link>
       <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
@@ -92,19 +92,19 @@
     
     <item>
       <title>【日誌】我的第一個專案 - 投擲地牢</title>
-      <link>https://angus945.github.io/devlog/drop-throw-dungeon/</link>
+      <link>https://angus945.github.io/devlog/project/drop-throw-dungeon/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/devlog/drop-throw-dungeon/</guid>
+      <guid>https://angus945.github.io/devlog/project/drop-throw-dungeon/</guid>
       <description>第一個完成的專案 在 2019 年初時，我完成了人生中第一個遊戲專案 - 投擲地牢 當時會開始這專案的原因是腦中突然出現了很有趣的想法 - 如果遊戲中所有武器都只能用丟的會怎樣 ? 再來是年初時也離我非學的期中報告蠻接近的，但</description>
     </item>
     
     <item>
       <title>【日誌】建立人生的第一個網站</title>
-      <link>https://angus945.github.io/devlog/build-the-fistsite/</link>
+      <link>https://angus945.github.io/devlog/web/build-the-fistsite/</link>
       <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/devlog/build-the-fistsite/</guid>
+      <guid>https://angus945.github.io/devlog/web/build-the-fistsite/</guid>
       <description>&lt;h2 id=&#34;為什麼想建立網站&#34;&gt;為什麼想建立網站&lt;/h2&gt;
 &lt;p&gt;在寫完第一篇長篇教學後，我也開始希望有個人網站能專放教學和筆記這種專業向的內容，不然平時都在巴哈上發日誌，專業文章和日常文章混在一起的話未來想當履歷也不方便。&lt;/p&gt;</description>
     </item>
