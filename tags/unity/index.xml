@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【筆記】如何讓遊戲支援模組開發</title>
-      <link>https://angus945.github.io/learn/programming/how-to-make-modification-games/</link>
+      <link>https://angus945.github.io/learn/game-development/how-to-make-modification-games/</link>
       <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/learn/programming/how-to-make-modification-games/</guid>
+      <guid>https://angus945.github.io/learn/game-development/how-to-make-modification-games/</guid>
       <description>&lt;p&gt;前年讀設計模式就接觸到「資料驅動」這項遊戲程式的重要知識，總算讓我排出時間好好研究了。本篇筆記的課題「遊戲模組」就是他應用之一，這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。&lt;/p&gt;</description>
     </item>
     
