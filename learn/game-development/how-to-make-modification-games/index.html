@@ -565,7 +565,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 4325 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 4314 字
 </span>
 
 
@@ -584,7 +584,7 @@
         
 
         <p>前年讀設計模式就接觸到「資料驅動」這項遊戲程式的重要知識，總算讓我排出時間好好研究了。本篇筆記的課題「遊戲模組」就是他應用之一，這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。</p>
-<h2 id="資料驅動-">資料驅動 ++</h2>
+<h2 id="資料驅動">資料驅動</h2>
 <p>相信在遊戲領域的各位已經相當熟悉「模組」一詞了，還是直接進入正題吧，首先：</p>
 <p><strong>資料驅動 Data Driven 是什麼？</strong></p>
 <p>簡單來說，這是一種<h>透過「輕量的資料結構」來描述「複雜行為與邏輯」的程式設計手法</h>，透過預先規範好的格式，將字串與整數映射到對應行為的實做上，而非用程式將設計寫死，目的在於升修改彈性與降低設計門檻。</p>
@@ -592,7 +592,7 @@
 <c>
 註：不要和資料導向 (Data Oriented Design) 搞混了，查資料時可能會同時出現，但兩者沒有直接關係。
 </c>
-<h3 id="資料讀取-">資料讀取 ++</h3>
+<h3 id="資料讀取">資料讀取</h3>
 <p>通常在遊戲做完並輸出後，當中<h>使用的資源都會被引擎打包加密</h>，這也代表內容在此時被「固定」了，無法透過常規的手段修改。因此，模組運作的第一個前提就是：開發者必須提供方法&hellip;或更直白的說<h>「一個資料夾位置」，讓玩家能自由改動其中的資料。 </h></p>
 <p>以 Unity 為例，我們可以透過 <code>StreamingAssets</code> 達成效果，這是一個不會在輸出後被加密的資料夾，只要遊戲運行時透過 <code>System.IO</code> 手動讀取檔案，就能使用玩家們添加的更多「遊戲內容」。</p>
 
@@ -614,7 +614,7 @@
 <c>
 註：Steam 模組的預設資料夾在 C:\Program Files (x86)\Steam\steamapps\workshop\content\gameID，我實做時就從中找了不少參考研究，有興趣可以多去挖寶。
 </c>
-<h3 id="格式定義-">格式定義 ++</h3>
+<h3 id="格式定義">格式定義</h3>
 <p>有了第一項前提也不代表隨便扔的資料都能運作，我們<h>必須為模組規範好要使用的「定義檔」的格式長怎樣才行</h>。假設我們想定義一隻怪物，首先要思考他的屬性有哪些，可能包括文字資訊、行為參數與視覺的呈現方法等。</p>
 <p>根據需求設計出一套能包含所有必備資料的「模板」，使用能兼具修改性與易讀性的「文字文件」作為資料格式，以 txt 檔為例：</p>
 <pre><span>template.txt</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -656,7 +656,7 @@ Sound: sounds/errrrr.mp3
     &quot;Sound&quot;: &quot;sounds/errrrr.mp3&quot;
 }
 </code></pre>
-<h3 id="擴展行為-">擴展行為 ++</h3>
+<h3 id="擴展行為">擴展行為</h3>
 <p>雖然有前兩者就能達成模組效果，但修改範圍仍被限制在我們提供的模板中，如果希望玩家能創造更多令人驚豔的內容，就得<h>提供他們自行「擴展」行為與邏輯的手段</h>。但如此程度的擴展就很難不接觸「程式」了，所以了遊戲的核心程式以外，我們也得<h>讀取並運行由玩家編寫的程式碼。 </h></p>
 <pre><span>smartZombie.json</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-json.smartZombie">&quot;Define&quot;: 
@@ -686,7 +686,7 @@ end
 <p>當然也可以讓玩家自訂行為的觸發時機，讓擴展性再次提升，但無論如何都<h>需要由開發者提供一個載入與調用外部程式的接口，才能運行這些內容。 </h></p>
 <p>程式擴展也有許多現成資源可用，例如直譯的 Lua 語言與編譯的 .dll 檔，當然也可以手刻一個虛擬機去跑自製語言&hellip;如果你想的話。</p>
 <p>總結以上幾點，排除反編譯等特殊手法以後，遊戲能否允許模組將取決於開發者的意願以及能力。接下來就進入實做環節，提供各位在 Unity 中實現效果的範例參考。</p>
-<h2 id="實作範例-">實作範例 ++</h2>
+<h2 id="實作範例">實作範例</h2>
 <p>範例使用的環境為 Unity，不過邏輯都是通用的，可以自行轉換至適合的環境與工具中。文章會對使用到的關鍵要素進行解釋，但不會過多深入單一工具的用法與原理，請有興趣的人在自行研究。</p>
 <ul>
 <li>
@@ -700,7 +700,7 @@ end
 </li>
 </ul>
 <p>範例使用的美術資源為 <a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">0x72_DungeonTilesetII_v</a></p>
-<h3 id="定義實體-">定義實體 ++</h3>
+<h3 id="定義實體">定義實體</h3>
 <p>首先我們要定義一個遊戲實體，它可以是怪物、道具或場景物件，但這邊先以通用物件做範例，它的屬性有辨識 ID、外觀圖像與要使用的行為腳本。</p>
 <p>建立一個類別並宣告對應變數，為了使用 <code>XMLSerializer</code> 解析資料，我們必須給類別和變數添加序列化標籤 <code>[System.Serializable]</code> 與 XML 的元素標籤 <code>[XmlType]</code> <code>[XmlAttribute]</code> <code>[XmlElement]</code>。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -763,7 +763,7 @@ dataXML.LoadXml(dataText);
 <code class="language-cs">public List&lt;EntityDefine&gt; defines;
 
 XmlNode root = dataXML.DocumentElement;
-for (int i = 0; i &lt; root.ChildNodes.Count; i++)
+for (int i = 0; i &lt; root.ChildNodes.Count; i)
 {
     XmlNode node = root.ChildNodes[i];
     Debug.Log(node.Name);
@@ -787,7 +787,7 @@ for (int i = 0; i &lt; root.ChildNodes.Count; i++)
 </div>
 
 
-<h3 id="載入資源-">載入資源 ++</h3>
+<h3 id="載入資源">載入資源</h3>
 <p>現在已經能讀取實體的定義資料了，但實例化前還得找出他要使用的資源才行，也就是實體的圖片與行為腳本。除了定義格式以外，我們也<h>需要「規定」遊戲資源的存放位置，要求玩家遵守某些資源擺放與命名規則</h>，這樣除了能更方便的載入資料，也能有效保持模組檔案整潔。</p>
 <p>將圖片放置的位置限定在 StreamingAssets 的 Sprites 資料夾中，並透過 <code>Directory.GetFiles()</code> 取得其下所有檔案的路徑。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -814,7 +814,7 @@ string[] files = Directory.GetFiles(directoryPath);
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public Dictionary&lt;string, Texture&gt; textures;
 
-for (int i = 0; i &lt; files.Length; i++)
+for (int i = 0; i &lt; files.Length; i)
 {
     string path = files[i];
 
@@ -836,7 +836,7 @@ for (int i = 0; i &lt; files.Length; i++)
 <code class="language-cs">string directoryPath = $&quot;{Application.streamingAssetsPath}\\Scripts&quot;;
 string[] files = Directory.GetFiles(directoryPath);
 
-for (int i = 0; i &lt; files.Length; i++)
+for (int i = 0; i &lt; files.Length; i)
 {
     string path = files[i];
     if (path.EndsWith(&quot;.lua&quot;))
@@ -858,7 +858,7 @@ for (int i = 0; i &lt; files.Length; i++)
 	print(&quot;hello from script a&quot;);
 end
 </code></pre>
-<h3 id="實例物件-">實例物件 ++</h3>
+<h3 id="實例物件">實例物件</h3>
 <p>現在解析與載入的工作都完成，終於能生成遊戲實體了。建立一個類別，它代表了實體在遊戲場景中的實例化物件，會儲存部份資料並將外在樣貌顯示出來。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public class GameEntity : MonoBehaviour
@@ -913,7 +913,7 @@ end
 }
 
 </code></pre>
-<h3 id="難題思考-">難題思考 ++</h3>
+<h3 id="難題思考">難題思考</h3>
 <p>大功告成！</p>
 <p>現在遊戲在建置後仍能從 StreamingAssets 添加與修改遊戲內容，也達成遊戲模組的最基本效果了。</p>
 
@@ -1004,7 +1004,7 @@ end
 <p>最後也是最重要的問題：你究竟想做什麼</p>
 <p>讓遊戲支援模組開發的目的為何？是希望玩家能分享創作，促進社群交流？還是想讓他們給遊戲添加更多道具、角色，提升內容豐富度？又或者你想打造一個像 Rimworld 與 Minecraft 這種趨近瘋狂，能對整個遊戲機制進行修改沙盒世界？</p>
 <p>無論如何最後都得回到需求上，實做前必須謹慎思考你的目標，並評估你願意付出多少成本完成這項偉大工作。</p>
-<h2 id="感謝閱讀-">感謝閱讀 ++</h2>
+<h2 id="感謝閱讀">感謝閱讀</h2>
 <p>雖然這篇筆記的重點是模組開發，但當中的知識不會被用法侷限，即使不讓玩家改動內容，資料驅動也是相當重要的開發技能，它除了讓企劃人員能更方便的改動設計，也是發布後擴充 DLC 與進行熱更新的好方法。</p>
 <p>幾個月前就該完成的筆記，拖到現在不好意思了，入學讀書真的是很花時間的事。總之，希望這次的內容也能讓各位有所啟發，感謝閱讀 :D</p>
 
@@ -1025,7 +1025,7 @@ end
 
 <iframe class="LikeCoin" height="190" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2flearn%2fgame-development%2fhow-to-make-modification-games%2f" width="100%" frameborder=0></iframe>
 
-<h3 id="學習資料-">學習資料 ++</h3>
+<h3 id="學習資料">學習資料</h3>
 <p><a href="http://gameprogrammingpatterns.com/prototype.html" target="_blank">Game Programming Patterns - Prototype</a></p>
 <p><a href="http://gameprogrammingpatterns.com/type-object.html" target="_blank">Game Programming Patterns - Type Object</a></p>
 <p><a href="http://gameprogrammingpatterns.com/bytecode.html" target="_blank">Game Programming Patterns - Bytecode</a></p>
@@ -1174,24 +1174,24 @@ end
     <div class="sidebar-item sidebar-toc">
         <h3>目錄</h3><nav id="TableOfContents">
   <ul>
-    <li><a href="#資料驅動-">資料驅動 ++</a>
+    <li><a href="#資料驅動">資料驅動</a>
       <ul>
-        <li><a href="#資料讀取-">資料讀取 ++</a></li>
-        <li><a href="#格式定義-">格式定義 ++</a></li>
-        <li><a href="#擴展行為-">擴展行為 ++</a></li>
+        <li><a href="#資料讀取">資料讀取</a></li>
+        <li><a href="#格式定義">格式定義</a></li>
+        <li><a href="#擴展行為">擴展行為</a></li>
       </ul>
     </li>
-    <li><a href="#實作範例-">實作範例 ++</a>
+    <li><a href="#實作範例">實作範例</a>
       <ul>
-        <li><a href="#定義實體-">定義實體 ++</a></li>
-        <li><a href="#載入資源-">載入資源 ++</a></li>
-        <li><a href="#實例物件-">實例物件 ++</a></li>
-        <li><a href="#難題思考-">難題思考 ++</a></li>
+        <li><a href="#定義實體">定義實體</a></li>
+        <li><a href="#載入資源">載入資源</a></li>
+        <li><a href="#實例物件">實例物件</a></li>
+        <li><a href="#難題思考">難題思考</a></li>
       </ul>
     </li>
-    <li><a href="#感謝閱讀-">感謝閱讀 ++</a>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
       <ul>
-        <li><a href="#學習資料-">學習資料 ++</a></li>
+        <li><a href="#學習資料">學習資料</a></li>
       </ul>
     </li>
   </ul>
