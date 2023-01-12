@@ -5,8 +5,17 @@
     <link>https://angus945.github.io/</link>
     <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-hant</language>
+    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【筆記】如何讓遊戲支援模組開發</title>
+      <link>https://angus945.github.io/learn/programming/how-to-make-modification-games/</link>
+      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/programming/how-to-make-modification-games/</guid>
+      <description>&lt;p&gt;前年讀設計模式就接觸到「資料驅動」這項遊戲程式的重要知識，總算讓我排出時間好好研究了。本篇筆記的課題「遊戲模組」就是他應用之一，這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>【日誌】資料驅動 - 多語言文本生成</title>
       <link>https://angus945.github.io/devlog/unity/text-processing/</link>
@@ -40,7 +49,7 @@
       <pubDate>Wed, 20 Jul 2022 19:26:08 +0800</pubDate>
       
       <guid>https://angus945.github.io/about/</guid>
-      <description></description>
+      <description>關於樂小呈 HIHI 我是一位遊戲開發者，學習遊戲開發五年，擅長的工具為 Unity Engine 與 C#，夢想是成為技術美術，正努力學習電腦圖學、著色器技術和一拖拉庫技美要會的東西 :D 聯絡信箱 angus9456@gmail.com 技能樹 - GamePlay Programming (C#, Lua) - Tool Development (Custom Editor, UI Toolkit) - Shader Programming (ShaderLab, HLSL,</description>
     </item>
     
     <item>
@@ -65,10 +74,10 @@
     
     <item>
       <title>重新施工中~~~~</title>
-      <link>https://angus945.github.io/post/content-test/</link>
+      <link>https://angus945.github.io/testing/</link>
       <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://angus945.github.io/post/content-test/</guid>
+      <guid>https://angus945.github.io/testing/</guid>
       <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;</description>
     </item>
     

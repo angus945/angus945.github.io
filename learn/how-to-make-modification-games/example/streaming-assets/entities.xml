@@ -1,0 +1,22 @@
+<Entities>
+    <Entity id="demon">
+        <Sprite>demon.png</Sprite>
+        <Script>scriptA.lua</Script>
+    </Entity>
+    <Entity id="knight">
+        <Sprite>knight.png</Sprite>
+        <Script>scriptB.lua</Script>
+    </Entity>
+    <Entity id="skelet">
+        <Sprite>skelet.png</Sprite>
+        <Script>scriptA.lua</Script>
+    </Entity>
+    <Entity id="wizzard">
+        <Sprite>wizzard.png</Sprite>
+        <Script>scriptA.lua</Script>
+    </Entity>
+    <Entity id="zombie">
+        <Sprite>zombie.png</Sprite>
+        <Script>scriptB.lua</Script>
+    </Entity>
+</Entities>

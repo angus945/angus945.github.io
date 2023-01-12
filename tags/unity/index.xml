@@ -5,8 +5,17 @@
     <link>https://angus945.github.io/tags/unity/</link>
     <description>Recent content in unity on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-hant</language>
+    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【筆記】如何讓遊戲支援模組開發</title>
+      <link>https://angus945.github.io/learn/programming/how-to-make-modification-games/</link>
+      <pubDate>Thu, 12 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/programming/how-to-make-modification-games/</guid>
+      <description>&lt;p&gt;前年讀設計模式就接觸到「資料驅動」這項遊戲程式的重要知識，總算讓我排出時間好好研究了。本篇筆記的課題「遊戲模組」就是他應用之一，這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>【日誌】資料驅動 - 多語言文本生成</title>
       <link>https://angus945.github.io/devlog/unity/text-processing/</link>
