@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【日誌】批量繪製物件與視錐裁剪 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="AngusChan&#39;s website" />
+
+
+<meta name="keywords" content="shader, compute-shader" />
+
+
+<meta property="og:title" content="【日誌】批量繪製物件與視錐裁剪" />
+<meta name="twitter:title" content="【日誌】批量繪製物件與視錐裁剪" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/technical/gpu-viewport-culling/" /><meta property="og:description" content="
+工作的部分開始需要著色器知識了，主要是地圖場景相關的東西，而我的任務就是想辦法在引擎裡達成美術要求。我們遊戲的地圖邏輯是網格狀的，意思是玩家只能在地圖的棋盤格上移動。既然如此，實現地圖視覺的作法大致有兩種。" />
+<meta name="twitter:description" content="
+工作的部分開始需要著色器知識了，主要是地圖場景相關的東西，而我的任務就是想辦法在引擎裡達成美術要求。我們遊戲的地圖邏輯是網格狀的，意思是玩家只能在地圖的棋盤格上移動。既然如此，實現地圖視覺的作法大致有兩種。" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2022-02-19T00:00:00+00:00" /><meta property="article:modified_time" content="2023-02-07T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.10aa15f4241089dc3b2fafbf5364076fd1d398c3d7a16ed0da812b985311f701.css" integrity="sha256-EKoV9CQQidw7L6&#43;/U2QHb9HTmMPXoW7Q2oErmFMR9wE=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/technical/gpu-viewport-culling/">【日誌】批量繪製物件與視錐裁剪</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2022-02-19
+</span>
+
+
+<span>
+    <i class="iconfont icon-sync-circle-sharp"></i> &nbsp;
+    2023-02-07
+</span>
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 3228 字
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/shader">shader</a>&nbsp;<a href="/tags/compute-shader">compute-shader</a>&nbsp;</span>
+
+        </div>
+    
+    
+    <div class="post-content markdown-body">
+        
+        
+         
+         
+        
+
+        <!-- https://home.gamer.com.tw/creationDetail.php?sn=5392211 -->
+<p>工作的部分開始需要著色器知識了，主要是地圖場景相關的東西，而我的任務就是想辦法在引擎裡達成美術要求。我們遊戲的地圖邏輯是網格狀的，意思是玩家只能在地圖的棋盤格上移動。既然如此，實現地圖視覺的作法大致有兩種。</p>
+<ol>
+<li>
+<p>透過 Tile map 繪製地圖，經濟實惠但缺乏精美度，會感受到明顯的棋盤格。</p>
+</li>
+<li>
+<p>透過擺放樹木、草、石頭等元素建構出整張地圖，工作量高但精美度也會顯著提升，通常複雜的地圖設計都會用這種方式搭建，無論 3D 或 2D。</p>
+</li>
+</ol>
+<p>討論過後，為了達成更高的精美度，我們決定使用第二種方式搭建場景。雖然說要手工搭建場景，但也不可能真的一棵棵草去用手種，所以我的工作就是想辦法減低這種繁瑣作業的工作量。</p>
+<h2 id="成果展示">成果展示</h2>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/gpu-viewport-culling/result-1.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/result-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>而多虧了上個月去拜訪了那位技美前輩，學到不少東西，所以很快就想到 GPU Instance 這項技術了。這篇的內容就是這周嘗試實現技術的學習過程。學藝不精，如果內容有誤或有任何建議再麻煩各位指出。</p>
+<h3 id="gpu-instance">GPU Instance</h3>
+<p>任何的遊戲物件，如果要讓顯示在你的螢幕上，都得要先經過渲染管線 (rendering pipleline) 渲染。將各種物件資料 CPU 傳遞到 GPU 上，並進行系列的座標轉換與著色計算。</p>
+<p>假設我們要渲染一個物件，大致需要傳遞三項資訊：模型資料（這個物體的形狀長怎樣）、材質資料（這個物體起來怎樣）與矩陣資料（這個物體的線性轉換）。而在電腦的世界中，模形是透過數個三角面建構而成的，也因此在三者之中最大的資料量也是來自模型。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/gpu-instance-1.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/gpu-instance-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>假設這裡有「一個」四邊形的面，它就有四組頂點座標，與建構表面的六個索引值。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/gpu-instance-2.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/gpu-instance-2.jpg]">
+    <p style="opacity: 0.5">
+        圖片來自 MESH GENERATION in Unity - Basics
+    </p>
+</div>
+
+
+<p>而一個完整的 3D 模型可能有百至萬個三角面，可想而知這也會是一個不小的資料量。與之相比，要描述一個物體在空間中的的位移、旋轉與縮放，只需要 4x4 的齊次座標矩陣即可。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/gpu-instance-3.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/gpu-instance-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>所以光是傳遞一個模型的所有頂點資料，其成本就足夠我們傳遞超過數千個物體的線性轉換狀態。再加上 CPU 和 GPU 之間的資料傳遞成本偏高，如果每畫一棵樹就重新傳遞整個頂點資料太浪費了。</p>
+<p>於是一種優化方式 &ldquo;GPU Instance&rdquo; 便出現了，它的核心概念在於重複使用頂點與材質資料，只透過不同的矩陣資料來複製出一堆物件。簡單來說就是，只傳一次頂點和材質，然後傳一大堆矩陣來畫出一堆物體。</p>
+<p>在 Unity 裡面達成 GPU Instance 有兩種作法，第一是透過 Material 的設定控制，只要把材質選項打勾勾引擎就會幫你完成了。簡單，但操作性低。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/gpu-instance-4.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/gpu-instance-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>第二是透過 C# Unity 的 Grpahics API 手動調用繪製功能。也不算複雜，只需要傳遞上面說到的三項資訊而已。</p>
+<p>Graphics.DrawMeshInstanced();
+請看，一口氣繪製一千個物件</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/gpu-instance-5.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/gpu-instance-5.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>（更高也不是問題，但是 DrawMeshInstanced 的單次傳遞上限為 1023，我懶的拆陣列了 :P）</p>
+<p>實做上這裡得稍微修改材質 Shader，但我先省略了，詳見文檔。</p>
+<p><a href="https://docs.unity3d.com/2021.2/Documentation/Manual/gpu-instancing-shader.html" target="_blank">Creating shaders that support GPU instancing</a></p>
+<h3 id="視錐裁剪">視錐裁剪</h3>
+<p>雖然免除了傳遞頂點資料的成本，但 GPU Instance 有個問題就是它一次就得畫出「太多」東西了，包括那些根本不會被玩家看到的物件。這些物件在管線中還是得做著色計算，顯然花費計算成本在根本不會被看到的物件是很浪費的。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/viewport-culling-1.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/viewport-culling-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>為了優化這點，通常在進行著色計算之前都會先檢查物件是不是在視線範圍中，也就是所謂的「視錐裁剪」。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/viewport-culling-2.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/viewport-culling-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>通常情況下，剔除作業可能會在 CPU 中執行，透過一些如四叉、八叉樹的結構去排序物件，優化剔除效率。但當物件量大到一個程度後，即使透過資料結構優化可能也不夠，於是目光又回到了 GPU 上。</p>
+<p>Compute Shader 是一種獨立於渲染管線的特殊著色器，需要使用 C# 調用執行，用於並行處裡某些任務。而在這裡這裡他的任務就是要透過並行的威力，一口氣完成所有物體的裁剪判斷。</p>
+<p>裁剪判斷就是透過一個粗略表示物件大小的矩形 (bounding box) 來檢測頂點是否再視錐範圍裡，如果所有頂點都在視錐之外就代表這個物件不可能被看到，要將其剔除。至於實際的判斷嘛&hellip;因為我們遊戲是純 2D 的，所以只需要使用兩個向量表示物件範圍，兩個向量表示視錐範圍就好 :P</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/viewport-culling-3.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/viewport-culling-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>成果圖，可以看到現在只有視線範圍中的物件會出現。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/viewport-culling-4.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/viewport-culling-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>同樣這裡省略了很多實做內容，詳見參考資料，補充在最下方。</p>
+<p>還好專案是 2D 的，所以實做起來輕鬆很多？</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 60%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/viewport-culling-5.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/viewport-culling-5.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="繪製順序">繪製順序</h3>
+<p>2D 還是會有 2D 的問題，嘗試接手引擎部份工作就代表許多任務也落到自己手上了。這裡的任務主要是透明度與深度排序的問題，常規的 Sprite Shader 寫法在這裡不管用</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-1.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>如果有寫過 Unity Sprite Shader 的人應該知道，為了讓 2D 物件正確渲染，通常是必須把物件的深度寫入 (ZWrite) 關閉的。說實話我之前就很納悶為什麼關閉之後 2D 的 z 軸深度還是有效的，剛好這次遇到就深入研究了一下。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-2.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>我用 Frame Debugger 細看後才發現是 Unity 會偷偷幫我們排序好渲染順序，讓不同物件根據深度由好幾個 DrawCall 去繪製。難怪 Sprite Sahder 能夠被正確繪製&hellip;真的是學越深才越了解遊戲引擎是多偉大的發明。</p>
+<p>現在我能理解前輩告訴我的「制定和管理渲染流程」是什麼意思了</p>
+<p>這也是為什麼我把 GPU Instance Shader 的 ZWrite 關閉後會發生這種閃爍現象。沒有深度資訊的話代表晚畫內容的一定會覆蓋先前的東西，而且 GPU Instance 讓所有物件都在同個 DrawCall 中繪製。由於 GPU 的（並行）繪製物件是是亂序的，最晚畫的物件每次的都不同，就會產生了這種隨機的閃爍。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-1.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>如果將深度寫入開啟的話，但又會遇到另一個問題是 2D 平面沒有深度。意思是，雖然繪製時有深度寫入，但這些物件實際上還是沒有正確的深度資訊。</p>
+<p>這裡的「正確」指的是高度，以我們遊戲的視角來說 y 軸越高代表物件在越遠處，要是沒有深度可能就會導致後面的樹把前的樹蓋住（還有閃爍會保持）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 40%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-3.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>修正這點的話，基本上就是把從物件添加一個隨著 y 軸上升增加的 z 軸斜率，這樣渲染時就會有正確的深度資訊了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 40%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-4.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>粗暴但有效，而且也能和其他場景物件產生正確的前後關係。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 40%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-order-5.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-order-5.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>說真的這也是我現在能想到比較實際的作法了，如果不這樣就得真的和 unity 一樣搞多個 Draw Call 去排序。那基本上也等於要親自管理整個地圖場景的渲染了，不太實際</p>
+<h3 id="透明度問題">透明度問題</h3>
+<p>另一個 2D 會遇到的問題就是透明度。2D 物件通常是由單張圖片構成的，透過圖片的透明度來表示出實際輪廓。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-transparent-1.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-transparent-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>但由於 Draw Call 中亂序執行，以及 FrameBuffer 還沒有色彩資訊的問題，導致 Alpha Blend 沒辦法正確運作，讓閃爍再次發生。</p>
+<p>文檔裡面也有說到了 GPU Instance 不支援透明著色
+Note that after culling and sorting the combined instances, Unity does not further cull individual instances by the view frustum or baked occluders. It also does not sort individual instances for transparency or depth efficiency.</p>
+<p>所以為了防止圖片的透明區快被畫出來，只能透過 clip 函式直接將透明位置的像素處裡掉，關閉 Blend 。雖然有效，但是想讓圖片有半透明效果就無法ㄌ&hellip;</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">clip(alpha - 0.01)
+</code></pre>
+<p>其實我有嘗試過多 DrawCall 的作法啦，只要確保每次繪製的時候沒有物件重疊就好。雖然深度和透明混和效果是理想的，但要建一大堆  ComputeBuffer  有點可怕。我也還不清楚 Compute Shader 的一些細節，所以不敢實際使用這種方法，怕有什麼後遺症</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-transparent-2.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-transparent-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="閃爍問題">閃爍問題</h3>
+<p>ComputeShader 導致的閃爍
+製作過程中遇到的奇怪問題，只要資料經過 ComputeShader 以後，渲染物件時就會不時發生奇怪的閃爍。這個問題卡了我快一週，也不是深度或透明度的問題。為了檢查是不是剔除判斷錯誤我也先關了，但還是會發生。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/problem-glitting-1.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/problem-glitting-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>後來才發現是 ComputeShader 的物件數量判斷沒擋好</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">if(id.x &gt; instanceCount) return;
+</code></pre>
+<p>我忘了反寫數量判斷的時候 &lt; 要變 &gt;=</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">if(id.x &gt;= instanceCount) return;
+</code></pre>
+<p>因為這個錯誤，導致輸入進管線的矩陣資料數量也出錯，才發生這種閃爍。</p>
+<p>哭阿找超久的，單看描述可能像是我卡一個很蠢的問題卡很久（雖然真的是很蠢的問題），但 Compute Shader 真的超難 debug 的。它同時跨了兩種個設備和語言，而且兩者的運作原理也天差地遠。</p>
+<p>出錯的時候問題可能在 C# 程式本身沒寫好、C# 資料傳遞沒寫好、Shader 資料接收沒寫好，或是 Shader 程式本身沒寫好。翻遍資料傳遞的部份也地方找不出原因，結果問題出在 Shader 程式本身 D:</p>
+<h3 id="分佈繪製">分佈繪製</h3>
+<p>雖然我讓 GPU Instance 生出了一大堆物件，但場景中不會真的需要那麼多，總不能讓道路上也長滿雜草吧？因此也需要有個手段來控制繪製物件的範圍。這裡的作法就是使用 Visible Map，透過一張灰階的 Texture 來表示物件的分佈狀態，如此一來在繪製地圖時也能更方便修改。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/density-map-1.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/density-map-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>至於黑到白之間的過度就是物件的稀疏度</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/gpu-viewport-culling/density-map-2.jpg" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/density-map-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>難度不高，基本上就是把物件的世界座標映射到 0~1 的 UV Space 就好，簡單的矩陣計算。</p>
+<p>唯一遇到的問題就是 Compute Shader 讀取 texture 時是透過像素座標讀的，而非一般 Tex2D 是透過 uv 座標採樣的。所以還要把 uv 還得乘上圖片解析度，那時也是找半天找不出 bug。</p>
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<p>就醬，這陣子又累積的不少資料，找時間會再整理一下 shader 資源那篇文</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/gpu-viewport-culling/result-2.gif" alt="image display error, please report: [/devlog/technical/gpu-viewport-culling/result-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="參考資料">參考資料</h3>
+<p><a href="https://docs.unity3d.com/2021.2/Documentation/Manual/gpu-instancing-shader.html" target="_blank">Creating shaders that support GPU instancing</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/368307575" target="_blank">Unity中ComputeShader的基础介绍与使用</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/376801370" target="_blank">Unity中使用ComputeShader做视锥剔除（View Frustum Culling）</a></p>
+
+        
+
+        
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            尊重著作權，轉載規則請見  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+             。
+        </p>
+    </blockquote>
+</div>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目錄</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#成果展示">成果展示</a>
+      <ul>
+        <li><a href="#gpu-instance">GPU Instance</a></li>
+        <li><a href="#視錐裁剪">視錐裁剪</a></li>
+        <li><a href="#繪製順序">繪製順序</a></li>
+        <li><a href="#透明度問題">透明度問題</a></li>
+        <li><a href="#閃爍問題">閃爍問題</a></li>
+        <li><a href="#分佈繪製">分佈繪製</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#參考資料">參考資料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2023
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 構建而成
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【日誌】自己寫一個 One last kiss 的風格渲染 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="嘗試實現了漂亮的 One last kiss 濾鏡渲染" />
+
+
+<meta name="keywords" content="shader, post-processing" />
+
+
+<meta property="og:title" content="【日誌】自己寫一個 One last kiss 的風格渲染" />
+<meta name="twitter:title" content="【日誌】自己寫一個 One last kiss 的風格渲染" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/technical/onelastkiss-filter-effect/" /><meta property="og:description" content="嘗試實現了漂亮的 One last kiss 濾鏡渲染" />
+<meta name="twitter:description" content="嘗試實現了漂亮的 One last kiss 濾鏡渲染" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-10-24T00:00:00+00:00" /><meta property="article:modified_time" content="2023-02-07T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.10aa15f4241089dc3b2fafbf5364076fd1d398c3d7a16ed0da812b985311f701.css" integrity="sha256-EKoV9CQQidw7L6&#43;/U2QHb9HTmMPXoW7Q2oErmFMR9wE=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.70a067ca3f4691aacc9aa54f2e5d29881b468ced4d615cb1436e840ec7dbee67.css" integrity="sha256-cKBnyj9GkarMmqVPLl0piBtGjO1NYVyxQ26EDsfb7mc=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/technical/onelastkiss-filter-effect/">【日誌】自己寫一個 One last kiss 的風格渲染</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-10-24
+</span>
+
+
+<span>
+    <i class="iconfont icon-sync-circle-sharp"></i> &nbsp;
+    2023-02-07
+</span>
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 1796 字
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/shader">shader</a>&nbsp;<a href="/tags/post-processing">post-processing</a>&nbsp;</span>
+
+        </div>
+    
+    
+    <div class="post-content markdown-body">
+        
+        
+         
+         
+        
+
+        <!-- https://home.gamer.com.tw/creationDetail.php?sn=5298650 -->
+<p>之前在網路上看到一篇用 Photoshop 製作 One last kiss 專輯濾鏡的教學文章，感覺很有趣所以研究了一下原理，還在 Unity 中實現了相似的渲染效果。</p>
+<h2 id="成果展示">成果展示</h2>
+<p>照慣例先上成果～</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/XZxL1sCshnk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<p>我用了兩種方式來實現這個效果，「邊緣檢測」與「線稿提取」。</p>
+<p><strong>邊緣檢測</strong></p>
+<p>研究後處理 Shader 時看到比較多的方法，用卷積矩陣做判斷，透過周圍像素的顏色、深度、方向差距來判斷物體邊緣。</p>
+<p><strong>線稿提取</strong></p>
+<p>在參考資料中看到的，透過清除色調和色塊膨脹的方式提取出線條，主要花時間在理解原理上，程式碼與前者相比也簡短許多。</p>
+<p>原本只打算做邊緣檢測的，因為我以為線稿提取只有賽路路的畫風會有效，但事實上任何圖像都行，還好最後沒有放棄，得到了新的技巧和更漂亮的結果。</p>
+<p>不廢話，來解說原理和算法吧～</p>
+<h3 id="邊緣檢測">邊緣檢測</h3>
+<p>去年就研究過邊緣檢測的算法了，但那時還沒完全懂，剛好趁機會再重新理清原理。透過一個 3x3 的九宮格卷積矩陣 (Kernel Convolution) 進行計算，每個格子都有各自的權重，強度根據要計算的目標做調整。</p>
+<p>邊緣檢測的 Kernel 叫做索伯算子 (Sobel operator)，水平的檢測長這樣，垂直的就是轉 90 度。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-1.jpg" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>把原始圖片輸入進去，當兩側顏色差距過大，一正一負下就會出現像是輪廓一樣的結果。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">float colorSobel(float2 uv)
+{
+    float x = 0;
+    float y = 0;
+    float2 texelSize = _MainTex_TexelSize;
+
+    x += tex2D(_MainTex, uv + float2(-texelSize.x, -texelSize.y)) * -1;
+    x += tex2D(_MainTex, uv + float2(-texelSize.x, 			  0)) * -2;
+    x += tex2D(_MainTex, uv + float2(-texelSize.x,  texelSize.y)) * -1;
+
+    x += tex2D(_MainTex, uv + float2( texelSize.x, -texelSize.y)) *  1;
+    x += tex2D(_MainTex, uv + float2( texelSize.x, 			  0)) *  2;
+    x += tex2D(_MainTex, uv + float2( texelSize.x,  texelSize.y)) *  1;
+
+    y += tex2D(_MainTex, uv + float2(-texelSize.x, -texelSize.y)) * -1;
+    y += tex2D(_MainTex, uv + float2(			0, -texelSize.y)) * -2;
+    y += tex2D(_MainTex, uv + float2( texelSize.x, -texelSize.y)) * -1;
+
+    y += tex2D(_MainTex, uv + float2(-texelSize.x,  texelSize.y)) *  1;
+    y += tex2D(_MainTex, uv + float2(			0,  texelSize.y)) *  2;
+    y += tex2D(_MainTex, uv + float2( texelSize.x,  texelSize.y)) *  1;
+
+    return sqrt(x * x + y * y);
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-2.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>單純色差產生的邊緣還不夠，有些相同顏色的交界會無法顯示，所以我也用 Depth Buffer 的深度差和 Normal Buffer 法線方向差距檢測邊緣。</p>
+<p>深度差就是相鄰像素的深度相減，基本上會產生生度差距就代表一定是物體邊緣。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-3.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>方向差距就是和相鄰的像素法線做內積投影的結果數值。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-4.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>因為各自算法的結果有些差異，所以最後要再把三種數值乘上權重，並用 Pow 把多餘的噪點線條抹除，完成混和的邊緣檢測。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-5.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-5.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>到這裡就完成線條的部份了，接下來就是上色部份，One Last Kiss 還有一個漂亮的漸層效果。</p>
+<p>為了簡單我只用兩種顏色的插值而已，基本上就是把畫面 uv 當插值參考，如果要旋轉的話，弄出一個旋轉角度的向量，把 UV 投影上去就行了，拿投影結果當插值權重。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">fixed4 gradualColor(float2 uv)
+{                
+    float radian = _angle * deg2rad;
+    float2 projLine = float2(cos(radian), sin(radian));      
+    float2 pos = (uv - 0.5) * 2;   
+    float value = abs(dot(projLine, pos));
+            
+    fixed4 gradual = lerp(_colorStart, _colorEnd, value);
+    return gradual;
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/colored-1.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/colored-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>接著就把漸層顏色混上線條，剩下部份填上背景顏色。不過單純拿白色當背景有點刺眼，所以我去素材庫找了一張紙質的 Texture 當作背景，也提昇一點畫面質感。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">fixed4 oneLastKiss_edgeDetect(float2 uv)
+{
+    fixed4 gradual = gradualColor(uv);
+    float edge = edgeValue(uv);
+    fixed4 backGround = tex2D(_backGruondTex, uv);
+    fixed4 edgeColor = lerp(backGround, gradual, edge);
+
+    fixed4 linearDepth = Linear01Depth(tex2D(_CameraDepthTexture, uv).r);
+    float depthAttenuation = pow(linearDepth, _attenuation);
+    return lerp(edgeColor, backGround, depthAttenuation);
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/edge-detect-result.jpg" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/edge-detect-result.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>邊緣檢測的成果</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/u0FhDMMlR7Y" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<h3 id="線稿提取">線稿提取</h3>
+<p>依照參考資料中的作法提取出現條，這個名子是查詢資料時發現的，所以就沿用吧 :D</p>
+<p>首先是去除飽和度和負片效果。去飽和，就是把畫面轉成灰階的意思，可以直接 RGB 值相加除三，至於負片就是 1 - RGB。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">float colorValue(float2 uv)
+{
+    fixed4 col = tex2D(_MainTex, uv);
+    float grayscale = (col.r + col.g + col.b) / 3;
+    float negative = 1 - grayscale;
+    return negative;
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-1.jpg" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-2.jpg" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>參考教學中有這一步驟，但因為計算方法有些不同，在這裡沒有效我就跳過了。</p>
+<p>花最多時間研究的步驟，這個濾鏡的效果是取周圍像素中的最小數值，會產生類似塗抹的效果，並讓色塊稍微膨脹。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-3.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>然後！下一步是重點，處理過程就是從這步驟取出線條的。因為 PS 濾鏡效果會自動運算的關係，所以我花了一點時間思考過程中發生的事。</p>
+<p>由於濾鏡本身的過濾算法，加上最小值的膨脹效果，如果用把膨脹後的結果減去原始圖樣，就會剩下多餘膨脹出來的部份，取得線條。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-4.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>但因為兩個值還是很接近，所以減出來的線條強度會很弱，要再另外乘上增強強度。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-5.gif" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-5.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>然後就是上色！</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/onelastkiss-filter-effect/line-capture-result.jpg" alt="image display error, please report: [/devlog/technical/onelastkiss-filter-effect/line-capture-result.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>成果如下</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/XZxL1sCshnk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<p>沒有 PhotoShop 怎麼辦？自己寫一個畫面處理重現就好了 :P</p>
+<p>最終結果我覺得比起一開始的邊緣檢測，線稿提取大勝，不只程式短很多，效果也更勝一籌。
+邊緣檢測的線條太粗了，而且過程中產生的噪點線條很難看，用 pow 稀釋掉結果又讓線條感覺太銳利。</p>
+<p>但線稿提取就沒這問題，透過色塊膨脹的方法取得線條，再用乘的增強強度，造點在遠處還產生意料之外的效果，不需要多修正。老實說我做到最後才想通原理，最小值那裡查不少資料才搞懂，之前完全沒想到能用這種方始提取線條，學到了學到了。</p>
+<p>就醬，能量又回復了不少，感謝偉大的計算機圖形學</p>
+<p>原始檔我上傳到這裡，對內容有興趣或想自己在編輯器裡走走都可以載來玩，然後我把 FPS Controller 寫的好一點了，不然上次那個手感真的有夠糟www</p>
+<p><a href="https://github.com/angus945/One-last-kiss-style-Rendering" target="_blank">https://github.com/angus945/One-last-kiss-style-Rendering</a></p>
+<h3 id="參考資料">參考資料</h3>
+<p><a href="https://forum.gamer.com.tw/C.php?bsn=60076&amp;snA=6552964" target="_blank">【密技】教你做出香香的 One last kiss 專輯風濾鏡</a></p>
+<p><a href="https://www.youtube.com/watch?v=C_zFhWdM4ic" target="_blank">How Blurs &amp; Filters Work - Computerphile</a></p>
+<p><a href="https://www.youtube.com/watch?v=uihBwtPIBxM" target="_blank">Finding the Edges (Sobel Operator) - Computerphile</a></p>
+<h3 id="補充資料">補充資料</h3>
+<p><a href="https://forum.gamer.com.tw/C.php?bsn=60602&amp;snA=3980&amp;to=2" target="_blank">關於去飽和以及加亮顏色</a></p>
+<p><a href="https://home.gamer.com.tw/artwork.php?sn=5300986" target="_blank">【教學】Unity HDRP 使用 Volume 自定義 Post Process 以及多 Pass 實現方法</a></p>
+
+        
+
+        
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            尊重著作權，轉載規則請見  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+             。
+        </p>
+    </blockquote>
+</div>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目錄</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#成果展示">成果展示</a>
+      <ul>
+        <li><a href="#邊緣檢測">邊緣檢測</a></li>
+        <li><a href="#線稿提取">線稿提取</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#參考資料">參考資料</a></li>
+        <li><a href="#補充資料">補充資料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2023
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 構建而成
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
