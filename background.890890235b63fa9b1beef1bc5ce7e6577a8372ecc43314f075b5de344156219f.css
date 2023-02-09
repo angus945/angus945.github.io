@@ -1,0 +1,16 @@
+.background {
+  width: 100%;
+  position: fixed;
+  z-index: -100;
+  pointer-events: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden; }
+
+.image-basis {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; }
