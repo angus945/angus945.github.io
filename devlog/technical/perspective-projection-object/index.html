@@ -34,7 +34,9 @@
 <meta property="og:title" content="【日誌】把物體投影到背景上" />
 <meta name="twitter:title" content="【日誌】把物體投影到背景上" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://angus945.github.io/devlog/technical/perspective-projection-object/" /><meta property="og:description" content="嘗試研究和實現了《超閾限空間 Superliminal》中神奇的透視操作" />
+<meta property="og:url" content="https://angus945.github.io/devlog/technical/perspective-projection-object/" />
+
+<meta property="og:description" content="嘗試研究和實現了《超閾限空間 Superliminal》中神奇的透視操作" />
 <meta name="twitter:description" content="嘗試研究和實現了《超閾限空間 Superliminal》中神奇的透視操作" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2021-08-22T00:00:00+00:00" /><meta property="article:modified_time" content="2023-02-07T00:00:00+00:00" />
@@ -103,7 +105,7 @@
 
 
 
-<link rel="stylesheet" href="https://angus945.github.io/social-share.10aa15f4241089dc3b2fafbf5364076fd1d398c3d7a16ed0da812b985311f701.css" integrity="sha256-EKoV9CQQidw7L6&#43;/U2QHb9HTmMPXoW7Q2oErmFMR9wE=">
+<link rel="stylesheet" href="https://angus945.github.io/social-share.9daed2e13b3db92eae3c87870601c2c751120af1c1e607981712ad155b3c15bd.css" integrity="sha256-na7S4Ts9uS6uPIeHBgHCx1ESCvHB5geYFxKtFVs8Fb0=">
 
 
 
@@ -871,6 +873,54 @@ float2 projUV = (projected.xy / projected.w) * 0.5 + 0.5;
 <p><a href="https://gamedev.stackexchange.com/questions/166757/how-can-i-transform-a-world-space-point-to-a-cameras-screen-coordinate" target="_blank">How can I transform a world space point to a camera&rsquo;s screen coordinate?</a></p>
 
         
+  
+  
+  
+
+  <hr>
+  <section class="social-share">
+    <ul class="share-icons">
+      <li>
+        <img src="https://img.icons8.com/ios-glyphs/30/null/share--v1.png" width="35" height="35"/>
+      </li>
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fperspective-projection-object%2f&amp;text=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e6%8a%8a%e7%89%a9%e9%ab%94%e6%8a%95%e5%bd%b1%e5%88%b0%e8%83%8c%e6%99%af%e4%b8%8a" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+          
+<img src="https://img.icons8.com/color/48/null/twitter--v1.png" width="35" height="35"/>
+          <p>Twitter</p>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fperspective-projection-object%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="share-btn facebook">
+          <img src="https://img.icons8.com/fluency/48/null/facebook-new.png" width="35" height="35"/>
+          <p>Facebook</p>
+          </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fperspective-projection-object%2f&amp;source=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fperspective-projection-object%2f&amp;title=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e6%8a%8a%e7%89%a9%e9%ab%94%e6%8a%95%e5%bd%b1%e5%88%b0%e8%83%8c%e6%99%af%e4%b8%8a&amp;summary=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e6%8a%8a%e7%89%a9%e9%ab%94%e6%8a%95%e5%bd%b1%e5%88%b0%e8%83%8c%e6%99%af%e4%b8%8a" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="share-btn linkedin">
+          <img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" width="35" height="35"/>
+            <p>LinkedIn</p>
+          </a>
+      </li>
+
+      
+      
+
+      
+      <li>
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e6%8a%8a%e7%89%a9%e9%ab%94%e6%8a%95%e5%bd%b1%e5%88%b0%e8%83%8c%e6%99%af%e4%b8%8a.&amp;body=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e6%8a%8a%e7%89%a9%e9%ab%94%e6%8a%95%e5%bd%b1%e5%88%b0%e8%83%8c%e6%99%af%e4%b8%8a%2c%20by%20AngusChan%27s%20Devlog%0a%e5%98%97%e8%a9%a6%e7%a0%94%e7%a9%b6%e5%92%8c%e5%af%a6%e7%8f%be%e4%ba%86%e3%80%8a%e8%b6%85%e9%96%be%e9%99%90%e7%a9%ba%e9%96%93%20Superliminal%e3%80%8b%e4%b8%ad%e7%a5%9e%e5%a5%87%e7%9a%84%e9%80%8f%e8%a6%96%e6%93%8d%e4%bd%9c%0a%0ahttps%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fperspective-projection-object%2f%0a" target="_blank" class="share-btn email">
+          <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
+          <p>Email</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
 
         
     </div>
