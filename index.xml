@@ -6,7 +6,25 @@
     <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hant</language>
-    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】根據地形生成場景植被</title>
+      <link>https://angus945.github.io/devlog/technical/surface-scatter-2/</link>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/surface-scatter-2/</guid>
+      <description>&lt;p&gt;本篇內容是&lt;a href=&#34;https://angus945.github.io/devlog/technical/surface-scatter-1/&#34;&gt;【日誌】沿著表面隨機生成&lt;/a&gt;的後續，我添加更多實用的生成屬性，能更據地形生成不同的植被。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】在模型表面隨機散佈物體</title>
+      <link>https://angus945.github.io/devlog/technical/surface-scatter-1/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/surface-scatter-1/</guid>
+      <description>&lt;p&gt;之前就對 Stylize 3D 渲染感興趣了，鋪於地面的清脆毛毯，隨風搖曳的蓬鬆樹葉，光待在賞心悅目的世界裡就是種幸福。總之，這次我製作了沿著物體表面生成大量物件的工具，說不定能在未來的某時派上用場。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>【筆記】如何讓遊戲支援模組開發</title>
       <link>https://angus945.github.io/learn/game-development/how-to-make-modification-games/</link>
@@ -49,7 +67,7 @@
       <pubDate>Wed, 20 Jul 2022 19:26:08 +0800</pubDate>
       
       <guid>https://angus945.github.io/about/</guid>
-      <description>關於樂小呈 HIHI 我是一位遊戲開發者，學習遊戲開發五年，擅長的工具為 Unity Engine 與 C#，夢想是成為遊戲程式、技術美術或圖形工程師？雖然自己也還不清楚，但既然方向是正確的，何不多走一段路再決定要到哪去 :D 聯絡信箱 angus9456@gmail.com 技能</description>
+      <description>關於小呈 (Angus) 嗨！我是一位遊戲開發者，學習遊戲開發五年，目前 21 歲。擅長的工具為 Unity Engine 與 C#，夢想是當遊戲開發者，成為遊戲程式、技術美術或圖形工程師？雖然自己也還不清楚，但既然方向是正確的，我想多走一些路再決</description>
     </item>
     
     <item>

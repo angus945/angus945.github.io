@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【日誌】在模型表面隨機散佈物體 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="我製作了沿著物體表面生成大量物件的工具，說不定在未來的某時會派上用場" />
+
+
+<meta name="keywords" content="cpmpute-shader, procedure-generation" />
+
+
+<meta property="og:title" content="【日誌】在模型表面隨機散佈物體" />
+<meta name="twitter:title" content="【日誌】在模型表面隨機散佈物體" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/technical/surface-scatter-1/" />
+
+<meta property="og:description" content="我製作了沿著物體表面生成大量物件的工具，說不定在未來的某時會派上用場" />
+<meta name="twitter:description" content="我製作了沿著物體表面生成大量物件的工具，說不定在未來的某時會派上用場" /><meta property="og:image" content="https://angus945.github.io/devlog/technical/surface-scatter-1/result-1.gif" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/devlog/technical/surface-scatter-1/result-1.gif" /><meta property="article:published_time" content="2023-03-02T00:00:00+00:00" /><meta property="article:modified_time" content="2023-03-02T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.9daed2e13b3db92eae3c87870601c2c751120af1c1e607981712ad155b3c15bd.css" integrity="sha256-na7S4Ts9uS6uPIeHBgHCx1ESCvHB5geYFxKtFVs8Fb0=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.85f26e98f67c0d63b7931521fd4cd0bd43948cf81e0fec42e9d083b7edc6d401.css" integrity="sha256-hfJumPZ8DWO3kxUh/UzQvUOUjPgeD&#43;xC6dCDt&#43;3G1AE=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight + 100;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/technical/surface-scatter-1/">【日誌】在模型表面隨機散佈物體</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2023-03-02
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 2279 字
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/cpmpute-shader">cpmpute-shader</a>&nbsp;<a href="/tags/procedure-generation">procedure-generation</a>&nbsp;</span>
+
+        </div>
+    
+    
+    <div class="post-content markdown-body">
+        
+        
+         
+         
+        
+
+        <p>之前就對 Stylize 3D 渲染感興趣了，鋪於地面的清脆毛毯，隨風搖曳的蓬鬆樹葉，光待在賞心悅目的世界裡就是種幸福。總之，這次我製作了沿著物體表面生成大量物件的工具，說不定能在未來的某時派上用場。</p>
+<h2 id="起因">起因</h2>
+<p>之前看到一部 3D Pixel Rendering 的影片，透過特別的方式渲染漂亮的像素場景，每個角度看來都像精緻的圖畫，也是我最想要追求的目標之一。當中樹葉與草地就是透過 GPU Instance 生成的，沿著地面與樹木生成植被，再使用像素著色器渲染風格化場景。</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/ERA7-I5nPAU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<p>除此之外，為了擴展技美的技能樹，我也接觸了程序建模軟體 Houdini，一個使用理性進行美術設計的神奇工具。當中有個實用的節點稱作 Scatter，它可以沿著輸入模型的表面隨機生成 PointCloud，讓使用者進一步生成其他物件，相當方便。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/houdini.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/houdini.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>受此啟發，我也想研究背後的數學原理，並嘗試在 Unity 中實作相似功能。</p>
+<h3 id="成果展示">成果展示</h3>
+<p>首先，先展示成果吧！我找了一個樹木的模型當基底，沿著樹葉的部份生成大量方塊，看起來就像由色塊點綴而成的圖畫。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/surface-scatter-1/result-1.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/result-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="技術研究">技術研究</h2>
+<p>想不到看似簡單的功能會隱藏那麼多的難題，接下來請讓我解釋其中的各種原理。</p>
+<h3 id="模型採樣">模型採樣</h3>
+<p>既然是沿著表面生成，取得模型資料就是我們的第一步。3D 模型是由許多的三角面組合而成，而每個面都會有三個頂點，電腦則透過「頂點」與「索引」的陣列儲存整個模型。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/technical/surface-scatter-1/mesh.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/mesh.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>在 Unity 裡可以透過 <code>Mesh.vertices</code> 與 <code>Mesh.triangles</code> 取得我們要的資料。每三個 <code>triangles</code> 為構成面的一組索引，只要其映射到 <code>vertices</code> 資料就能建構一個三角面，遍歷所有索引就能重建出整個模型。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">void ForeachFace()
+{
+    Vector3[] vertices = surface.vertices;
+    int[] triangles = surface.triangles;
+
+    for (int i = 0; i &lt; triangles.Length; i += 3)
+    {
+        Vector3 pointA = vertices[triangles[i + 0]];
+        Vector3 pointB = vertices[triangles[i + 1]];
+        Vector3 pointC = vertices[triangles[i + 2]];
+
+        DrawTriangle(pointA, pointB, pointC);
+    }
+}
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/mesh-wireframe.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/mesh-wireframe.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="表面取點">表面取點</h3>
+<p>取得模型的資料後，只要在每個面上進行隨機生成就能達成 Scatter 的效果了。在三角形上採樣最簡單方式就是雙重插值，將隨機作為權重就能產生隨機的位置了。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">Vector3 rndBottom = Vector3.Lerp(pointA, pointB, UnityEngine.Random.value);
+Vector3 rndPoint = Vector3.Lerp(rndBottom, pointC, UnityEngine.Random.value);
+
+scatterPoints.Add(rndPoint);
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/triangle-random.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/triangle-random.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>只要散佈大量的點，就能得到類似全息圖的樣子了&hellip;大功告成？</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/scatted-1.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/scatted-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>不，這還只是開始而已。</p>
+<h3 id="機率修正">機率修正</h3>
+<p>從上面的方塊可以看出角落的聚集了更多點，這是機率不平均導致的，因為二次插值時朝頂點的一邊會有較高的密度，視覺化會更好理解原因。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/triangle-probability.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/triangle-probability.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>我沒找到能在三角型裡「直接」產生機率平均的隨機算法，但是平行四邊形就不同了，它能很好的達成平均隨機，因此我把四邊形視作兩個三角形計算，轉換思路。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/rectangle.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/rectangle.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>先在四邊形上隨機生成，再把超出範圍的點重新映射回三角形，如此一來就能得到平均的散佈算法了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/rectangle-remapping.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/rectangle-remapping.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>檢查插值的權重，當水平與垂直相加大於一時，就代表位置超出三角型的邊界，只要反轉權重就能讓它回到正確範圍中了。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float abRnd = UnityEngine.Random.value;
+float acRnd = UnityEngine.Random.value;
+
+if (abRnd + acRnd &gt; 1)
+{
+    abRnd = (1 - abRnd);
+    acRnd = (1 - acRnd);
+}
+
+Vector3 abShift = Vector3.Lerp(Vector3.zero, b - a, abRnd);
+Vector3 acShift = Vector3.Lerp(Vector3.zero, c - a, acRnd);
+return a + abShift + acShift;
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/rectangle-probability.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/rectangle-probability.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="數量修正">數量修正</h3>
+<p>起初我指定生成的「數量」來控制每面進行隨機的次數，但它產生的效果並不理想，因為模型面數會直接影響生成總數，且定值會導致過大或過小的面看起來也更稀疏、擁擠。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/technical/surface-scatter-1/instance-count.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/instance-count.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>為維持結果穩定，我將輸入的參數從「數量」改變為「密度」，讓算法根據每面的「面積」決定生成數量。原本我用一堆計算求出高再換算面積，後來發現能用外積函式推導出結果，花了一點時間消化原理，感謝朋友題點。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/triangle-area.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/triangle-area.jpg]">
+    <p style="opacity: 0.5">
+        引用自 The vector product
+    </p>
+</div>
+
+
+<p>在線性代數的世界中，我們能<h>透過行列得出單位面積在線性變換後產生的「變化量」</h>，將兩軸建立出的矩形減去縮減空間，就能得出實際面積，看 3B1B 的示意圖應該很好理解了。因此只要將三角型的兩邊作為向量輸入，就能求出平行四邊形面積。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/determinant.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/determinant.jpg]">
+    <p style="opacity: 0.5">
+        擷取自 3B1B 的 Essence of linear algebra 系列
+    </p>
+</div>
+
+
+<p>而在三維空間裡，可以透過外積 <code>corss</code> 達成目標，將兩個向量輸入函數會獲得垂直於兩向量的法線，這個法線長度同時也代表了平行四邊型的面積。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/corss.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/corss.jpg]">
+    <p style="opacity: 0.5">
+        擷取自 3B1B 的 Essence of linear algebra 系列
+    </p>
+</div>
+
+
+<p><c>
+註：外積的部份我也還在還在消化，這裡略過計算原理的解釋，先知道結果就好。
+</c></p>
+<p>因此，三角形面積就能透過外積長度除二取得，相當快速。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">Vector3 cross = Vector3.Cross(pointB - pointA, pointC - pointA);
+float area = length(cross) / 2;
+</code></pre>
+<p>回到數量計算，只要將面積乘上生成的密度數值，就能確保整體密度維持平均，大面積的區域會生成更多點，而小區塊則會減少生成數量。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">float density;
+int amount = area * density;
+
+for(int i = 0; i &lt; amount; i++) { }
+</code></pre>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/instance-density.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/instance-density.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="重疊修正">重疊修正</h3>
+<p>完全隨機的結果可能發生重疊，這在生成大型物體時可不是理想現象，所以我把生成方式改成真正的平均分佈，將索引平均映射到矩形範圍中，產生整齊的結果。</p>
+<pre><span>csharp</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-csharp">for(int i = 0; i &lt; amount; i++)
+{
+    x = i % width
+    y = i / width
+}
+</code></pre>
+<p>因為機率修正的改動，平均映射又會產生位置重疊的問題，我嘗試只生成一半再重新映射填滿三角形&hellip;但還是可能發生重疊問題，可以看到接縫處的樣子並不理想。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/tidy-remap.jpg" alt="image display error, please report: [/devlog/technical/surface-scatter-1/tidy-remap.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>最後決定直接在整個矩形範圍生成，捨棄一半的資料，雖然導致後續並行運算的效能對折，但至少結果是理想的。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/tidy.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/tidy.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：生成結果傾斜的是因為我沒捨棄計算時的小數點資料，捨去的誤差又會導致某些結果重疊，不清楚具體原因。
+</c></b>
+<h3 id="並行生成">並行生成</h3>
+<p>最後一步，為了達成超大量的物件生成（和渲染），我重寫了並行版本的算法，透過計算著色器運行。內容與 C# 大致相同，只是資料的儲存與傳遞有些改變，需要透過 <code>ComputeBuffer</code> 將模型資料傳入 GPU 才能計算，而生成的結果也會留在 GPU Buffer 裡。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">StructuredBuffer&lt;int&gt; trianglesBuffer;
+StructuredBuffer&lt;float3&gt; verticesBuffer;
+AppendStructuredBuffer&lt;float3&gt; scatterBuffer;
+</code></pre>
+<p>並行是以面為單位進行的，也更貼合實際情況會使用的複雜表面。這裡就不解釋細節了，有興趣的人可以參考以前的筆記<a href="https://angus945.github.io/learn/compute-shader/compute-shader-basis/">【筆記】初學指南，計算著色器</a>。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">[numthreads(64, 1, 1)]
+void ScatterKernel (uint3 id : SV_DispatchThreadID)
+{
+    if(id.x &gt;= _FaceCount) return;
+   
+    int index = id.x * 3;
+    float3 vertA = scatterBuffer[trianglesBuffer[index + 0]];
+    float3 vertB = scatterBuffer[trianglesBuffer[index + 1]];
+    float3 vertC = scatterBuffer[trianglesBuffer[index + 2]];
+
+    float area = length(cross(vertB - vertA, vertC - vertA)) / 2;
+    
+    int count = area * _Density;
+    for(int i = 0; i &lt; count; i++)
+    {
+        //...
+    }
+}
+</code></pre>
+<p>透過偉大的圖學力量，每幀生成十萬個點都不是問題。一直閃是因為 seed 也不斷改變。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/technical/surface-scatter-1/compute-istance.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/compute-istance.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<h3 id="結果渲染">結果渲染</h3>
+<p>將生成結果傳入渲染管線，再加上光照計算就有繪畫風的樹葉了。研究的第一階段到此為止，接下來就是朝實際應用思考，後續請見<a href="https://angus945.github.io/devlog/technical/surface-scatter-2/">【日誌】自動場景植被生成</a>。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/technical/surface-scatter-1/result-2.gif" alt="image display error, please report: [/devlog/technical/surface-scatter-1/result-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>喜歡文章請幫我按讚和分享歐 :D</p>
+
+
+<iframe class="LikeCoin" height="190" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f" width="100%" frameborder=0></iframe>
+
+<h3 id="參考資料">參考資料</h3>
+<p><a href="https://blogs.sas.com/content/iml/2020/10/19/random-points-in-triangle.html" target="_blank">Generate random points in a triangle</a></p>
+<p><a href="https://www.maths.usyd.edu.au/u/MOW/vectors/vectors-11/v-11-7.html" target="_blank">Vector products and the area of a triangle</a></p>
+<p><a href="https://www.youtube.com/watch?v=Ip3X9LOh2dk&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=6" target="_blank">Determinant | Essence of linear algebra</a></p>
+<p><a href="https://www.youtube.com/watch?v=eu6i7WJeinw&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab&amp;index=10" target="_blank">Cross prducts | Essence of linear algebra</a></p>
+<p><a href="https://www.youtube.com/watch?v=BaM7OCEm3G0" target="_blank">Cross prducts as transformations | Essence of linear algebra</a></p>
+
+        
+  
+  
+  
+
+  <hr>
+  <section class="social-share">
+    <ul class="share-icons">
+      <li>
+        <img src="https://img.icons8.com/ios-glyphs/30/null/share--v1.png" width="35" height="35"/>
+      </li>
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f&amp;text=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e5%9c%a8%e6%a8%a1%e5%9e%8b%e8%a1%a8%e9%9d%a2%e9%9a%a8%e6%a9%9f%e6%95%a3%e4%bd%88%e7%89%a9%e9%ab%94" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+          
+<img src="https://img.icons8.com/color/48/null/twitter--v1.png" width="35" height="35"/>
+          <p>Twitter</p>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="share-btn facebook">
+          <img src="https://img.icons8.com/fluency/48/null/facebook-new.png" width="35" height="35"/>
+          <p>Facebook</p>
+          </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f&amp;source=https%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f&amp;title=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e5%9c%a8%e6%a8%a1%e5%9e%8b%e8%a1%a8%e9%9d%a2%e9%9a%a8%e6%a9%9f%e6%95%a3%e4%bd%88%e7%89%a9%e9%ab%94&amp;summary=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e5%9c%a8%e6%a8%a1%e5%9e%8b%e8%a1%a8%e9%9d%a2%e9%9a%a8%e6%a9%9f%e6%95%a3%e4%bd%88%e7%89%a9%e9%ab%94" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="share-btn linkedin">
+          <img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" width="35" height="35"/>
+            <p>LinkedIn</p>
+          </a>
+      </li>
+
+      
+      
+
+      
+      <li>
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e5%9c%a8%e6%a8%a1%e5%9e%8b%e8%a1%a8%e9%9d%a2%e9%9a%a8%e6%a9%9f%e6%95%a3%e4%bd%88%e7%89%a9%e9%ab%94.&amp;body=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e5%9c%a8%e6%a8%a1%e5%9e%8b%e8%a1%a8%e9%9d%a2%e9%9a%a8%e6%a9%9f%e6%95%a3%e4%bd%88%e7%89%a9%e9%ab%94%2c%20by%20AngusChan%27s%20Devlog%0a%e6%88%91%e8%a3%bd%e4%bd%9c%e4%ba%86%e6%b2%bf%e8%91%97%e7%89%a9%e9%ab%94%e8%a1%a8%e9%9d%a2%e7%94%9f%e6%88%90%e5%a4%a7%e9%87%8f%e7%89%a9%e4%bb%b6%e7%9a%84%e5%b7%a5%e5%85%b7%ef%bc%8c%e8%aa%aa%e4%b8%8d%e5%ae%9a%e5%9c%a8%e6%9c%aa%e4%be%86%e7%9a%84%e6%9f%90%e6%99%82%e6%9c%83%e6%b4%be%e4%b8%8a%e7%94%a8%e5%a0%b4%0a%0ahttps%3a%2f%2fangus945.github.io%2fdevlog%2ftechnical%2fsurface-scatter-1%2f%0a" target="_blank" class="share-btn email">
+          <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
+          <p>Email</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+
+        
+    </div>
+</article>
+
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            尊重著作權，轉載規則請見  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+             。
+        </p>
+    </blockquote>
+</div>
+
+
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cpmpute-shader/">cpmpute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/procedure-generation/">procedure-generation</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目錄</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#起因">起因</a>
+      <ul>
+        <li><a href="#成果展示">成果展示</a></li>
+      </ul>
+    </li>
+    <li><a href="#技術研究">技術研究</a>
+      <ul>
+        <li><a href="#模型採樣">模型採樣</a></li>
+        <li><a href="#表面取點">表面取點</a></li>
+        <li><a href="#機率修正">機率修正</a></li>
+        <li><a href="#數量修正">數量修正</a></li>
+        <li><a href="#重疊修正">重疊修正</a></li>
+        <li><a href="#並行生成">並行生成</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#結果渲染">結果渲染</a></li>
+        <li><a href="#參考資料">參考資料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        <div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/post/">Post</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/cpmpute-shader/">cpmpute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/procedure-generation/">procedure-generation</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2023
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angus945.github.io">Source code</a> 
+                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 構建而成
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

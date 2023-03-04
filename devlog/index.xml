@@ -6,7 +6,25 @@
     <description>Recent content in Devlog on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hant</language>
-    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】根據地形生成場景植被</title>
+      <link>https://angus945.github.io/devlog/technical/surface-scatter-2/</link>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/surface-scatter-2/</guid>
+      <description>&lt;p&gt;本篇內容是&lt;a href=&#34;https://angus945.github.io/devlog/technical/surface-scatter-1/&#34;&gt;【日誌】沿著表面隨機生成&lt;/a&gt;的後續，我添加更多實用的生成屬性，能更據地形生成不同的植被。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】在模型表面隨機散佈物體</title>
+      <link>https://angus945.github.io/devlog/technical/surface-scatter-1/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/surface-scatter-1/</guid>
+      <description>&lt;p&gt;之前就對 Stylize 3D 渲染感興趣了，鋪於地面的清脆毛毯，隨風搖曳的蓬鬆樹葉，光待在賞心悅目的世界裡就是種幸福。總之，這次我製作了沿著物體表面生成大量物件的工具，說不定能在未來的某時派上用場。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>【日誌】資料驅動 - 多語言文本生成</title>
       <link>https://angus945.github.io/devlog/unity/text-processing/</link>
