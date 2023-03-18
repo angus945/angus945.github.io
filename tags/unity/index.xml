@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unity on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/unity/</link>
+    <description>Recent content in unity on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hant</language>
+    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/unity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】資料驅動 - 多語言文本生成</title>
+      <link>https://angus945.github.io/devlog/unity/text-processing/</link>
+      <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/unity/text-processing/</guid>
+      <description>&lt;p&gt;分享一下自己做的資料處理系統，能從 Unity 一鍵下載 Google 試算表資料並解析、生成多語言文件。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【筆記】視覺物件與工具開發</title>
+      <link>https://angus945.github.io/learn/unity/visual-element/</link>
+      <pubDate>Sat, 03 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/unity/visual-element/</guid>
+      <description>&lt;p&gt;為了提升工具開發的效率，我研究了 Unity 引擎中的另一套介面系統 - UI Toolkit。它的運作方式與 &lt;code&gt;CustomEditor&lt;/code&gt; 函式庫截然不同，能夠以「物件」的形式繪製出界面元素，大幅提高整體維護性與效率。這次的筆記內容是關於 Visual Element 的各項基礎。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【筆記】條件判斷與變體著色器</title>
+      <link>https://angus945.github.io/learn/shader/condition-and-variant/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/shader/condition-and-variant/</guid>
+      <description>&lt;p&gt;因為專案過程遇到需要開關特效的情況，所以深入研究了一下著色器條件判斷與 Unity 變體著色器的應用，這是我在翻閱資料與試錯後總結出的學習筆記，在這裡分享給各位。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【資源】整理給 Unity 初學者的起步資源</title>
+      <link>https://angus945.github.io/learn/resources/unity-beginner/</link>
+      <pubDate>Sat, 24 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/resources/unity-beginner/</guid>
+      <description>自學 Unity 了兩年多，過程中也累積了不少學習資源，雖然過去有整理過幾次，但都很雜亂反而會讓初學者不知道怎麼起步，所以這次我又重新整理了一系列適合初學者的學習資源，希望們幫上有需要的人。 這篇是給入門者的&amp;qu</description>
+    </item>
+    
+  </channel>
+</rss>

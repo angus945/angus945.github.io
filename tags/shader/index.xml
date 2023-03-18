@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shader on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/shader/</link>
+    <description>Recent content in shader on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hant</language>
+    <lastBuildDate>Sat, 30 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/shader/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【筆記】條件判斷與變體著色器</title>
+      <link>https://angus945.github.io/learn/shader/condition-and-variant/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/learn/shader/condition-and-variant/</guid>
+      <description>&lt;p&gt;因為專案過程遇到需要開關特效的情況，所以深入研究了一下著色器條件判斷與 Unity 變體著色器的應用，這是我在翻閱資料與試錯後總結出的學習筆記，在這裡分享給各位。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>重新施工中~~~~</title>
+      <link>https://angus945.github.io/testing/</link>
+      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/testing/</guid>
+      <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】物件筆刷和地形筆刷</title>
+      <link>https://angus945.github.io/devlog/technical/gpu-object-painting/</link>
+      <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/gpu-object-painting/</guid>
+      <description>&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=5402986 --&gt;
+&lt;p&gt;這次花了比較多時間處理渲染和其他問題，隔了兩周，接續上篇&lt;a href=&#34;https://angus945.github.io/devlog/technical/gpu-viewport-culling/&#34;&gt;【學習日誌】批量繪製物件與視錐裁剪&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】批量繪製物件與視錐裁剪</title>
+      <link>https://angus945.github.io/devlog/technical/gpu-viewport-culling/</link>
+      <pubDate>Sat, 19 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/gpu-viewport-culling/</guid>
+      <description>&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=5392211 --&gt;
+&lt;p&gt;工作的部分開始需要著色器知識了，主要是地圖場景相關的東西，而我的任務就是想辦法在引擎裡達成美術要求。我們遊戲的地圖邏輯是網格狀的，意思是玩家只能在地圖的棋盤格上移動。既然如此，實現地圖視覺的作法大致有兩種。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】自己寫一個 One last kiss 的風格渲染</title>
+      <link>https://angus945.github.io/devlog/technical/onelastkiss-filter-effect/</link>
+      <pubDate>Sun, 24 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/onelastkiss-filter-effect/</guid>
+      <description>&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=5298650 --&gt;
+&lt;p&gt;之前在網路上看到一篇用 Photoshop 製作 One last kiss 專輯濾鏡的教學文章，感覺很有趣所以研究了一下原理，還在 Unity 中實現了相似的渲染效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>【日誌】把物體投影到背景上</title>
+      <link>https://angus945.github.io/devlog/technical/perspective-projection-object/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/technical/perspective-projection-object/</guid>
+      <description>&lt;!-- https://home.gamer.com.tw/creationDetail.php?sn=5244818 --&gt;
+&lt;p&gt;之前就一直好奇《超閾限空間 Superliminal》中神奇的透視操作是怎搞實現的，但不是放大和縮小，而是可以用透視把物體投影進背景的神奇效果。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
