@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>trip on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/trip/</link>
+    <description>Recent content in trip on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hant</language>
+    <lastBuildDate>Sun, 26 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/trip/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【遊記】第一次獨自旅遊，我的環島之旅</title>
+      <link>https://angus945.github.io/article/around-the-island/</link>
+      <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/article/around-the-island/</guid>
+      <description>&lt;!-- &amp;nbsp; --&gt;
+&lt;!-- [text]({{ ref &#34;relpath&#34; }})。 --&gt;
+&lt;p&gt;環島遊記篇幅過長，因此將內容拆分成多篇，以日為單位分割。完整系列一共九篇內容，向各位分享我第一次獨自旅遊的經歷，我的環島之旅。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
