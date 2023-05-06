@@ -1,145 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/prepare/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day1/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day2/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day3/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day4/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day5/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day6/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/day7/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/</loc>
-    <lastmod>2023-03-26T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/around-the-island/end/</loc>
-    <lastmod>2023-03-17T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/surface-scatter-2/</loc>
-    <lastmod>2023-03-03T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/surface-scatter-1/</loc>
-    <lastmod>2023-03-02T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/learn/game-development/how-to-make-modification-games/</loc>
-    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/unity/text-processing/</loc>
-    <lastmod>2022-09-17T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/learn/unity/visual-element/</loc>
-    <lastmod>2022-09-03T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/learn/shader/condition-and-variant/</loc>
-    <lastmod>2022-07-30T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/about/</loc>
-    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/web/rebuild-the-website/</loc>
-    <lastmod>2022-07-12T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/learn/compute-shader/compute-shader-basis/</loc>
-    <lastmod>2022-06-03T00:00:00+00:00</lastmod>
-  </url>
-     
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/gpu-object-painting/</loc>
-    <lastmod>2023-02-07T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/gpu-viewport-culling/</loc>
-    <lastmod>2023-02-07T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/onelastkiss-filter-effect/</loc>
-    <lastmod>2023-02-07T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/technical/perspective-projection-object/</loc>
-    <lastmod>2023-02-07T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/learn/resources/unity-beginner/</loc>
-    <lastmod>2021-07-24T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/article/about-learning/</loc>
-    <lastmod>2022-05-06T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/project/drop-throw-dungeon/</loc>
-    <lastmod>2021-05-18T00:00:00+00:00</lastmod>
-  </url>
-   
-  <url>
-    <loc>https://angus945.github.io/devlog/web/build-the-fistsite/</loc>
-    <lastmod>2022-06-24T00:00:00+00:00</lastmod>
-  </url>
-                                  
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>https://angus945.github.io/zh-hant/sitemap.xml</loc>
+    
+      <lastmod>2023-03-26T00:00:00+00:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>https://angus945.github.io/en/sitemap.xml</loc>
+    
+      <lastmod>2022-07-20T19:26:08+08:00</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>https://angus945.github.io/jp/sitemap.xml</loc>
+    
+      <lastmod>2022-04-14T19:50:13+08:00</lastmod>
+    
+  </sitemap>
+  
+</sitemapindex>
