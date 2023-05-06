@@ -7,7 +7,7 @@
     <lastmod>2022-07-20T19:26:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-hant"
+                hreflang="zh-tw"
                 href="https://angus945.github.io/about/"
                 />
     <xhtml:link
@@ -22,13 +22,13 @@
     <lastmod>2022-07-20T19:26:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-hant"
+                hreflang="zh-tw"
                 href="https://angus945.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="jp"
-                href="https://angus945.github.io/jp/"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -42,8 +42,13 @@
     <lastmod>2022-04-08T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-hant"
+                hreflang="zh-tw"
                 href="https://angus945.github.io/tags/shader/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/tags/shader/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -57,8 +62,13 @@
     <lastmod>2022-04-08T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-hant"
+                hreflang="zh-tw"
                 href="https://angus945.github.io/tags/test/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/tags/test/"
                 />
     <xhtml:link
                 rel="alternate"

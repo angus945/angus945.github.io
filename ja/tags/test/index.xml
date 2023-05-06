@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/ja/tags/test/</link>
+    <description>Recent content in test on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Fri, 08 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/ja/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JA 重新施工中~~~~</title>
+      <link>https://angus945.github.io/ja/testing/</link>
+      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/ja/testing/</guid>
+      <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;
+&lt;!-- https://app.clockify.me/tracker --&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
