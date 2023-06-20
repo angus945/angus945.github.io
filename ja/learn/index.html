@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html lang="ja">
 
 <head>
     
@@ -19,7 +19,7 @@
 <link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<title>AngusChan&#39;s Devlog - Stay Hungry, Stay Foolish</title>
+<title>學習 - AngusChan&#39;s Devlog</title>
 
 
 <meta name="author" content="AngusChan" />
@@ -28,16 +28,16 @@
 <meta name="description" content="AngusChan&#39;s website" />
 
 
-<link rel="alternate" type="application/rss+xml" href="https://angus945.github.io/jp/index.xml" title="AngusChan's Devlog" />
+<link rel="alternate" type="application/rss+xml" href="https://angus945.github.io/ja/learn/index.xml" title="AngusChan's Devlog" />
 
-<meta property="og:title" content="AngusChan&#39;s Devlog" />
-<meta name="twitter:title" content="AngusChan&#39;s Devlog" />
+<meta property="og:title" content="學習" />
+<meta name="twitter:title" content="學習" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://angus945.github.io/jp/" />
+<meta property="og:url" content="https://angus945.github.io/ja/learn/" />
 
 <meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="og:updated_time" content="2022-04-14T19:50:13+08:00" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="og:updated_time" content="2020-01-01T00:00:00+00:00" />
 
 
 <style>
@@ -547,131 +547,49 @@
         <div class="container-lg clearfix">
             
             <div class="col-12 col-md-9 float-left content">
-                <div class="post-content markdown-body">
+                
+
+
+
+<article>
     
-    <p>Japanese 歡迎來到樂小呈的學習部落格，這裡有開發日誌、學習筆記以及一些個人文章，未來將持續豐富更多內容！</p>
-<p>F5 會改變背景歐 :D</p>
-<h2 id="推薦閱讀">推薦閱讀</h2>
- 
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-    const datas = JSON.parse("[]");
-
-    const count = "0";
+  
+      
     
-    $(document).ready(function() 
-    {
-        let pointers = random(datas.length, count);
+    <div class="post-content markdown-body">
         
-        for(var i = 0; i < count; i ++)
-        {
-            var data = datas[pointers[i]];
+         
+         
+        <!-- Welcome to the Learn category. There are technical notes that include more details and explanations. Let's learn together. -->
+<p>学習カテゴリーへようこそ。そこには詳細な解説を含んだ技術ノートがあります。一緒に学びましょう。</p>
+<!-- 勉強
+ようこそ
+技術ノート -->
+<!-- 学習カテゴリーへようこそ	がくしゅうかてごりーへようこそ	歡迎來到學習分類 -->
+<!-- そこには	そこには	在那裡 -->
+<!-- 詳細な解説を含んだ	しょうさいなかいせつをふくんだ	包含詳細解說 -->
+<!-- 技術ノートがあります	ぎじゅつのーとがあります	技術筆記存在 -->
+<!-- 一緒に学びましょう	いっしょにまなびましょう	一起來學習 -->
 
-            var board = document.getElementById("list-" + i);
-            
-            var title = board.getElementsByClassName("post-title")[0];
-            var date = board.getElementsByClassName("icon-today-sharp")[0];
-            var lastmod = board.getElementsByClassName("icon-sync-circle-sharp")[0];
-            var word = board.getElementsByClassName("icon-file-tray-sharp")[0];
-            var tags = board.getElementsByClassName("icon-pricetags-sharp")[0];
-            var summary = board.getElementsByClassName("post-summary")[0];
-            var feature = board.getElementsByClassName("feature-image")[0];
-            var readmore = board.getElementsByClassName("post-readmore")[0];
+    </div>
+</article>
 
-            title.innerHTML = `<a href="${ data.url }">  ${ data.title } </a>`;
-            date.innerHTML = `&nbsp; ${ data.date }`;
-            if(data.lastmod == data.date) 
-            {
-                lastmod.parentNode.style.display = "none";
-            }
-            else lastmod.innerHTML = `&nbsp; ${ data.lastmod }`;
-            word.innerHTML = `&nbsp; ${ data.word }`;
-            for(var tag = 0; tag < data.tags.length; tag ++)
-            {
-                tags.innerHTML += `<a href="/tags/${ data.tags[tag] }"> ${ data.tags[tag] } </a>`;
-            }
-            summary.innerHTML = `<div> ${ data.summary } </div> `;
-            feature.src = (data.feature) ? data.feature : "" ;
-            readmore.href = data.url;
-        }
-    });
 
-    function shuffle(array) 
-    {
-        let currentIndex = array.length,  randomIndex;
-      
-        // While there remain elements to shuffle.
-        while (currentIndex != 0) {
-      
-          // Pick a remaining element.
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-      
-          // And swap it with the current element.
-          [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-      
-        return array;
-    }
-    
-    function random(range, count)
-    {
-        let pointers = Array.from({length: range}, (item, index) => index);
 
-        pointers = shuffle(pointers);
-        pointers = pointers.slice(0, count);
-        pointers = pointers.sort();
-
-        return pointers;
-    }
-    
-</script>
 
                 
 
                 
 
-<hr>
 
-<script src="https://giscus.app/client.js"
-        data-repo="angus945/angusChan-website-comment"
-        data-repo-id="R_kgDOJfatog"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOJfatos4CWS6f"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="jp"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
                 
 
 <div class="license markdown-body">
     <blockquote>
         <p>
-            尊重著作權，轉載規則請見  
+            特定のセクションを除いて、このサイトは  
             <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
-             。
+             の下に提供されています。
         </p>
     </blockquote>
 </div>
@@ -681,39 +599,39 @@
             <aside class="col-12 col-md-3 float-left sidebar">
     
     <div class="sidebar-item sidebar-pages">
-        <h3>頁面</h3>
+        <h3>ページ</h3>
         <ul>
 
             
             <li>
-                <a href="/jp/">Home</a>
+                <a href="/ja/">Home</a>
             </li>
             
             <li>
-                <a href="/jp/all/">All</a>
+                <a href="/ja/all/">All</a>
             </li>
             
             <li>
-                <a href="/jp/devlog/">Devlog</a>
+                <a href="/ja/devlog/">Devlog</a>
             </li>
             
             <li>
-                <a href="/jp/learn/">Learn</a>
+                <a href="/ja/learn/">Learn</a>
             </li>
             
             <li>
-                <a href="/jp/article/">Article</a>
+                <a href="/ja/article/">Article</a>
             </li>
             
             <li>
-                <a href="/jp/about">About</a>
+                <a href="/ja/about">About</a>
             </li>
             
         </ul>
     </div>
     
     <div class="sidebar-item sidebar-links">
-        <h3>連結</h3>
+        <h3>リンク</h3>
         <ul>
             
             <li>
@@ -736,8 +654,16 @@
     </div>
     
     <div class="sidebar-item sidebar-tags">
-        <h3>標籤</h3>
+        <h3>タグ</h3>
         <div>
+            
+            <span>
+                <a href="/ja/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/ja/tags/test/">test</a>
+            </span>
             
         </div>
     </div>
@@ -763,38 +689,38 @@
   <div class="sidebar-wrapper">
     
     <div class="sidebar-item sidebar-pages">
-        <h3>頁面</h3>
+        <h3>ページ</h3>
         <ul>
             
             <li>
-                <a href="/jp/">Home</a>
+                <a href="/ja/">Home</a>
             </li>
             
             <li>
-                <a href="/jp/all/">All</a>
+                <a href="/ja/all/">All</a>
             </li>
             
             <li>
-                <a href="/jp/devlog/">Devlog</a>
+                <a href="/ja/devlog/">Devlog</a>
             </li>
             
             <li>
-                <a href="/jp/learn/">Learn</a>
+                <a href="/ja/learn/">Learn</a>
             </li>
             
             <li>
-                <a href="/jp/article/">Article</a>
+                <a href="/ja/article/">Article</a>
             </li>
             
             <li>
-                <a href="/jp/about">About</a>
+                <a href="/ja/about">About</a>
             </li>
             
         </ul>
     </div>
     
     <div class="sidebar-item sidebar-links">
-        <h3>連結</h3>
+        <h3>リンク</h3>
         <ul>
             
             <li>
@@ -817,8 +743,16 @@
     </div>
     
     <div class="sidebar-item sidebar-tags">
-        <h3>標籤</h3>
+        <h3>タグ</h3>
         <div>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
             
         </div>
     </div>
@@ -835,9 +769,9 @@
             <span>&copy; 2021-2023
                 <a href="https://angus945.github.io/">AngusChan</a>
                  | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
-                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
                    target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
-                                                    target="_blank">Hugo</a> 構建而成
+                                                    target="_blank">Hugo</a> 
             </span>
         </div>
     </div>

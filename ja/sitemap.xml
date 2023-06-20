@@ -3,8 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
    
   <url>
+    <loc>https://angus945.github.io/ja/about/</loc>
+    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/about/"
+                />
+  </url>
+   
+  <url>
     <loc>https://angus945.github.io/ja/</loc>
-    <lastmod>2022-04-14T19:50:13+08:00</lastmod>
+    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
@@ -21,7 +41,7 @@
                 href="https://angus945.github.io/ja/"
                 />
   </url>
-    
+     
   <url>
     <loc>https://angus945.github.io/ja/tags/shader/</loc>
     <lastmod>2022-04-08T00:00:00+00:00</lastmod>
@@ -61,5 +81,5 @@
                 href="https://angus945.github.io/ja/tags/test/"
                 />
   </url>
-  
+     
 </urlset>

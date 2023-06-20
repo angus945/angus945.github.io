@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>AngusChan&#39;s Devlog</title>
-    <link>https://angus945.github.io/en/</link>
-    <description>Recent content on AngusChan&#39;s Devlog</description>
+    <title>devlog on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/en/tags/devlog/</link>
+    <description>Recent content in devlog on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Wed, 20 Jul 2022 19:26:08 +0800</lastBuildDate><atom:link href="https://angus945.github.io/en/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>EN 重新施工中~~~~</title>
-      <link>https://angus945.github.io/en/testing/</link>
-      <pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://angus945.github.io/en/testing/</guid>
-      <description>&lt;p&gt;測試各種新玩具，主要是網頁的 Shader 嵌入，還有互動內容測試&lt;/p&gt;
-&lt;!-- https://app.clockify.me/tracker --&gt;</description>
-    </item>
-    
+    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/en/tags/devlog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【Devlog】My First Project - Drop Throw Dungeon</title>
       <link>https://angus945.github.io/en/devlog/project/drop-throw-dungeon/</link>

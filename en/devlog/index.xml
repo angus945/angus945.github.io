@@ -7,5 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/en/devlog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【Devlog】My First Project - Drop Throw Dungeon</title>
+      <link>https://angus945.github.io/en/devlog/project/drop-throw-dungeon/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/en/devlog/project/drop-throw-dungeon/</guid>
+      <description>&lt;h2 id=&#34;the-first-finished-project&#34;&gt;The First &amp;ldquo;Finished&amp;rdquo; Project&lt;/h2&gt;
+&lt;p&gt;At the beginning of 2019, I completed my first project: Drop Throw Dungeon.&lt;/p&gt;
+&lt;!-- In begun of 2019, I finished my first project: Drop Throw Dungeon. --&gt;
+&lt;!-- In begun of 2019 &gt; At the beginning of 2019 --&gt;
+&lt;p&gt;The project started with a strange question that popped into my mind: What if all weapons could only used by &amp;ldquo;Throwing&amp;rdquo;?&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

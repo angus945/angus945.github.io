@@ -12,6 +12,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/about/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="en"
                 href="https://angus945.github.io/en/about/"
                 />
@@ -19,7 +24,7 @@
    
   <url>
     <loc>https://angus945.github.io/en/</loc>
-    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
+    <lastmod>2023-06-18T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
@@ -74,6 +79,36 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://angus945.github.io/en/tags/test/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/tags/devlog/</loc>
+    <lastmod>2023-06-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/tags/devlog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/tags/devlog/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/devlog/project/drop-throw-dungeon/</loc>
+    <lastmod>2023-06-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/devlog/project/drop-throw-dungeon/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/devlog/project/drop-throw-dungeon/"
                 />
   </url>
      

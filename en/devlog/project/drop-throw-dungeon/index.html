@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【Devlog】My First Project - Drop Throw Dungeon - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="TODO 人生中第一個完成的遊戲專案，開發過程及心得" />
+
+
+<meta name="keywords" content="devlog" />
+
+
+<meta property="og:title" content="【Devlog】My First Project - Drop Throw Dungeon" />
+<meta name="twitter:title" content="【Devlog】My First Project - Drop Throw Dungeon" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/en/devlog/project/drop-throw-dungeon/" />
+
+<meta property="og:description" content="TODO 人生中第一個完成的遊戲專案，開發過程及心得" />
+<meta name="twitter:description" content="TODO 人生中第一個完成的遊戲專案，開發過程及心得" /><meta property="og:image" content="https://angus945.github.io/devlog/drop-throw-dungeon/featured.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/devlog/drop-throw-dungeon/featured.jpg" /><meta property="article:published_time" content="2021-05-18T00:00:00+00:00" /><meta property="article:modified_time" content="2023-06-18T00:00:00+00:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.942723de90946d27c102e4e23009a70dd1380025a21f650fad0a6113042cf7f6.css" integrity="sha256-lCcj3pCUbSfBAuTiMAmnDdE4ACWiH2UPrQphEwQs9/Y=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.85f26e98f67c0d63b7931521fd4cd0bd43948cf81e0fec42e9d083b7edc6d401.css" integrity="sha256-hfJumPZ8DWO3kxUh/UzQvUOUjPgeD&#43;xC6dCDt&#43;3G1AE=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight + 100;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/en/devlog/project/drop-throw-dungeon/">【Devlog】My First Project - Drop Throw Dungeon</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2021-05-18
+</span>
+
+
+<span>
+    <i class="iconfont icon-sync-circle-sharp"></i> &nbsp;
+    2023-06-18
+</span>
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2347 words
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/devlog">devlog</a>&nbsp;</span>
+
+        </div>
+    
+       
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+        <h2 id="the-first-finished-project">The First &ldquo;Finished&rdquo; Project</h2>
+<p>At the beginning of 2019, I completed my first project: Drop Throw Dungeon.</p>
+<!-- In begun of 2019, I finished my first project: Drop Throw Dungeon. -->
+<!-- In begun of 2019 > At the beginning of 2019 -->
+<p>The project started with a strange question that popped into my mind: What if all weapons could only used by &ldquo;Throwing&rdquo;?</p>
+<!-- cause of i start the project is by one strange question flow up in mind, What if...All the weapon can use by "Throw"? -->
+<!-- cause of... > because, the reason for -->
+<!-- flow up in mind > come to mind, popped into my mind -->
+<p>Furthermore, my non-school-based experimental education (self-learning) evaluation period was approaching, and i hadn&rsquo;t entirely finished any of my previous projects. While i had created many learning projects and interesting game ideas, they always came to a halt once the main game system was done.</p>
+<!-- secondly, my self learning evaluation near, and i have no project are totally "Finish", Although I have a lot of project for learning and interesting game idea are created, but they are all stop when the main system of game is done. -->
+<!-- my self learning evaluation near > as my non-school-based experimental education (self-learning) evaluation period was approaching -->
+<!-- they are all stop when the... > they all stop, they all stopped -->
+<!-- Furthermore 此外 -->
+<!-- evaluation 評鑑 -->
+<!-- period 時期 -->
+<!-- approaching 接近 -->
+<!-- halt 停 -->
+<p>So, I decided to embark on a new project, aiming for a truly finished game. I took on this challenge as part of my evaluation, to explore this unique idea, and, of course, for the fun of it.</p>
+<!-- so, i want to make a game as really finish, i started this new project, for my evaluation, for this strange idea, for self challenge, and of crouse, for fun. -->
+<!-- for my evaluation > as part of my evaluation -->
+<!-- decided 決定 -->
+<!-- embark 登船、開始 -->
+<!-- took on this... 接受了... -->
+<p>The article was written many years ago, based on my memories and old devlog content. I have tried to provide as much detail as possible. I hope you enjoy it.</p>
+<!-- provide 題供 -->
+<!-- many years ago, the article is write down by my memory and old devlog content, and i tried to show more detail as passable, hope you enjoy.  -->
+<h3 id="item-and-inventory">Item and Inventory</h3>
+<p>Before starting this project, I developed a simple item and inventory system for research purposes. It was a highly generic system based on my abilities at that time.</p>
+<p>All i needed to do was create item prefab and set up their IDs and properties. The functions such as placing, dropping, and throwing items were already included in the system.</p>
+<!-- before this project, I made a simple item and inventory system for researching, is vary generic system (as ability at that time), i only need create item prefab and setup the id and properties, all the other Function like place, drop and throw are already included. -->
+<!-- is vary generic system > is a vary generic system, highly generic system -->
+<!-- as ability at that time > base on my abilities as that time -->
+<!-- i only need to > i only needed to (subject-verb agreement?)-->
+<!-- are already included > were already included -->
+<!-- purposes 目的 -->
+<!-- abilities 能力 -->
+<!-- such as 例如 -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/inventory.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/inventory.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>So, the main part of the game system is already completed!</p>
+<!-- so the main part of game system i have already done! -->
+<h2 id="drop-throw-dungeon-">Drop Throw Dungeon !</h2>
+<p>In this action-packed game, the core gameplay revolves around the act of throwing. Players can unleash the true power of the sword by throwing it at enemies, while the wand&rsquo;s magical spells can only be cast when thrown !</p>
+<!-- the main idea of game is "Throwing", Sword can only damage enemy when you throwing it, and wand can only cast spell base by you throwing out. -->
+<!-- base by you throwing out > based on your throwing action, activated when thrown -->
+<!-- action-packed 動感十足的 -->
+<!-- the ... revolves around the ...圍繞著... -->
+<!-- act 動作 -->
+<!-- unleash 發揮 -->
+<h3 id="aimthrow-">Aim&hellip;Throw !</h3>
+<p>To interact with the game world, player can pick up items by pressing the space key and throw them using the left mouse button.</p>
+<!-- Player can pick up item by pressing space key, and use left mouse button to throw. first time i write code, i add the scale and offset the camera, to increase player view. but after a few tests, i realize it is hard to aiming and cause some dizziness, so i removed effect.  -->
+<!-- several 一些 -->
+<!-- experimented 實驗過 -->
+<!-- provide 提供 -->
+<!-- evident 明顯 -->
+<!-- approach 方法 -->
+<!-- discomfort 不適 -->
+<!-- Initially 最初 -->
+<!-- enhance 提高 -->
+<!-- discomfort 不適 -->
+<!-- indicate 表明、展示 -->
+<!-- To address a ... 為了解決一個... -->
+<!-- implemented 實施 -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_throw.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_throw.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>In the initial version of my code, I experimented with camera scaling and offset to provide a better player view. However, after several tests, it became evident that this approach made aiming challenging and caused discomfort. Therefore, I decided to remove this effect.</p>
+<p>To aid players in aiming, a dotted lines is displayed when they hold down the mouse button, indicating the trajectory and target of the throw. I also incorporated a scrolling animation by gradually changing the material properties over time.</p>
+<!-- aid 幫助 -->
+<!-- trajectory 彈道 -->
+<!-- gradually 逐步的 -->
+<!-- Each time player holding mouse button, the dotted line display to tell player where you aiming. I change material properties by time to make scrolling animation. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_aiming.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_aiming.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>In the game engine, a common issue arises where objects move to fast and pass through obstacles due to physics simulation. To address this, I implemented a simple solution using &ldquo;RayCast&rdquo;. This technique allow the game to detect if an object blocks the path, ensuring that the movement is appropriately stopped.</p>
+<!-- In game engine, some time object move to fast well flying through the obstacle, is a common bug cause by physics simulate. A simple wave to fix it is use "RayCast", check whether the object block the path and stop movement. -->
+<!-- arises 出現 -->
+<!-- A due to... B  A 由於...B -->
+<!-- implemented 實施 -->
+<!-- ensuring 確保 -->
+<!-- appropriately 適當的 -->
+<!-- well flying through the obstacle > while flying through obstacles, when flying through obstacles. -->
+<!-- A simple wave > One simple wave, A simple solution to fix it -->
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/drop-throw-dungeon/player_raycast.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_raycast.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="more-items">More Items</h3>
+<p>I have added a variety of different type of items to enhance the game&rsquo;s content. To preserve an air of mystery, I kindly request that some details of the items be kept hidden.</p>
+<!-- variety 種類, variety of different type -->
+<!-- enhance 提高, enhance the game's content -->
+<!-- preserve 保存, preserve an air of mystery -->
+<!-- air of mystery 神秘的氣息, preserve an air of mystery -->
+<!-- kept 保留, kept hidden-->
+<!-- I add a many different type of item to enrich the content. please allow me hide some detail of the items, for reserve some mystery :P -->
+<ul>
+<li>Basic Weapons: These are the foundation of throwing items and deal damage when they hit enemies. Each weapon type has its own Lethality and Durability ratings.</li>
+</ul>
+<!-- foundation 基礎的, the foundation of throwing items -->
+<!-- ratings 等級, Lethality and Durability ratings -->
+<!-- basis weapon - basic of throwing item, hit enemy well caused damage. each type of weapon all have respective Lethality and Durability. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_basis.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_basis.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Consumable Weapons: Smaller versions of weapons with lower durability, but they can be stacked and continuously thrown.</li>
+</ul>
+<!-- consume weapon - a smaller version of weapon, have lower durability, but it can overlap more them one and continuously throwing. -->
+<!-- overlap more them one > overlap more than one, overlap multiple times. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_throwing.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_throwing.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Wands: Rare item that, when thrown, unleash magical spells.</li>
+</ul>
+<!-- unleash 發揮, unleash magical spells -->
+<!-- wand - a rare item, throwing well cast magical spell. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicWand.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicWand.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Magical Swords: Three types of special swords that can only be purchased from merchants.</li>
+</ul>
+<!-- magical sword - three type of special sword, you can only buy from merchant. -->
+<!-- buy from merchant > purchase from a merchant -->
+<!-- purchase 購買, purchased from merchants -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicSword.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicSword.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Potions: Single-use potions that, when thrown, leave a lasting effect on ground or cast the magical missile.</li>
+</ul>
+<!-- lasting 持久 -->
+<!-- potion - a single use potion, throwing well leave maintain effect on ground.  -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_potions.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_potions.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Bombs: Inflict damage to all targets within range, including the player.</li>
+</ul>
+<!-- Inflict 造成, Inflict damage -->
+<!-- bomb - damage to all target in range, include player. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_bombs.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_bombs.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Money: The currency used in the dungeon. It can be use to purchase items form merchants and, of crouse, thrown!</li>
+</ul>
+<!-- money - a currency of dungeon. you can use for buy some item from merchant, and...of crouse throwing! -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_money.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_money.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>Hearts: Item used for player healing. When hit, the amount of healing depends on the number of stacked hearts.</li>
+</ul>
+<!-- heart - item for player healing. if that hit, you can heal depends on overlapping amount. -->
+<!-- if that hit > if it is hit, upon begin hit. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_healHeart.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_healHeart.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Each item has a different probability of dropping, and they serve different purposes. Players need to carefully consider which items are most important at any given time.</p>
+<!-- serve 服務, serve different purposes -->
+<!-- purposes 目的、用途, serve different purposes -->
+<!-- each type of item have different probability to drop, and their suitable use are different, player need to think which item is important currently. -->
+<!-- suitable use are different > suitable uses are different -->
+<p>It&rsquo;s worth nothing that all items can only be used by throwing. This means that once a player attacks an enemy, they lose the weapon in the process and must either retrieve it of find another one.</p>
+<!-- worth noting 值得注意, It's worth nothing that -->
+<!-- either 要嘛, must either retrieve it of find another one-->
+<!-- retrieve 取回, must either retrieve it of find another one-->
+<!-- And item can only use by "Throw", this mean once player attacked enemy, you lost the weapon at the same time. so player need to try pick than back or find next one.  -->
+<h3 id="enemy">Enemy</h3>
+<p>Currently, the player is alone in the game world. To enhance the gameplay experience, we need to introduce some enemies for the player to interact with.</p>
+<!-- enhance 提高, To enhance the gameplay experience -->
+<!-- introduce 介紹, we need to introduce some enemies -->
+<!-- Currently, Only player exist in game world Alone, So We need add some "Enemy" interact with it. -->
+<!-- Currently, Only player exist in game world Alone > Currently, the player is alone in the game world  -->
+<!-- So We need add some "Enemy" interact with it. > So we need to add some enemies to interact with the player -->
+<p>Tracing: Enemies exhibit bacis behavior by attempting to get close to the player.</p>
+<!-- exhibit 展示 -->
+<!-- Tracing: Basis enemy behavior, Try get close to player. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_tracing.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_tracing.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Attack: When the player is within range, enemies will pause briefly and then dash towards the player&rsquo;s direction. During the attack, enemies change color to red as a warning for the player to move away; otherwise, they sill take damage.</p>
+<!-- briefly 簡要的, enemies will pause briefly -->
+<!-- towards 向, dash towards the player's direction -->
+<!-- Attack: If player in range, Enemy well wait a moment and dashing by player direction. During attack, Enemy changing color as red to warning player leave current position, otherwise you well take damage. -->
+<!-- Enemy well > Enemy will -->
+<!-- changing color as red > change color to red -->
+<!-- you well > you will -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_attack.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Drops: Upon defeating an enemy, it will randomly drop an item base on its enemy type. These enemy drops serve as the primary source of items for the player to obtain.</p>
+<!-- Upon 之時, Upon defeating an enemy -->
+<!-- primary 基本的, primary source of items -->
+<!-- Drop: Once enemy get kill it well randomly drop item, Depends on enemy type. Enemy dripping is the main item source player obtain. -->
+<!-- Once enemy get kill > once an enemy is killed -->
+<!-- Enemy dripping is the main item source player obtain > enemy drops are the main source of item for the player -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_treasure.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_treasure.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="more-enemy">More Enemy!</h3>
+<p>I have also added more enemies with different behaviors to increase the game&rsquo;s challenge.</p>
+<p>Shooter: A ranged enemy that maintains a safe distance form the player and casts projectiles. If the player gets too close, they will try to run away. Shooters have lower health and serve as interference for the player, supporting melee enemies.</p>
+<!-- maintains 維持 > maintains a safe distance -->
+<!-- interference 干擾 > serve as interference for the player -->
+<!-- I also added more enemy with differently behavior, increase game's challenge.   -->
+<!-- I also added... > I have also added... -->
+<!-- Shooter: A rang enemy, keep safely distance and cast projectile to player, once player get close they will try run away. Shooter have lower health, serve for interference player and support the melee enemies. -->
+<!-- A rang enemy > A ranged enemy -->
+<!-- keep safely distance > maintain a safe distance -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_shooter.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_shooter.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Artillery: Slime enemies that squirt toxic fields to the player&rsquo;s location, causing continuous damage if the player remain in the field. Slimes are sturdy but move slowly, effectively limiting the player&rsquo;s movement.</p>
+<!-- remains 遺跡、留在, if the player remain in the field -->
+<!-- Artillery: A slime can squirt toxical field to player location, cause continuous damage if player stay in toxical field. Slime is sturdy but move slow, it can effectively limit player movement. -->
+<!-- if player stay in toxical field > if the player says... -->
+<!-- Slime is sturdy but move slow > Slime are sturdy but move slowly -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_slime.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_slime.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Summoner: Stationary enemies located at the map boundary that frequently spawn smaller enemies to attack the player. Summoners do not have direct attacks but can overwhelm the map with enemies.</p>
+<!-- Stationary 文具、靜止的, Stationary enemies located at the map boundary -->
+<!-- direct 手段, Summoners do not have direct attacks -->
+<!-- overwhelm 壓倒, overwhelm the map with enemies -->
+<!-- Summoner: stay on map boundary and frequently spawn smaller enemy to attack player. Summoner have no attack means, but underestimate the it well let map fill with enemy. -->
+<!-- but underestimate the it well > underestimate it can... -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_summoner.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_summoner.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Little: Smaller enemies spawned by the Summoner. They have fast speed and low health, force the player to move quickly and consume their items.</p>
+<!-- Little: only spawn by Summoner, have fastest speed and lowest health. Little will force player run quickly and and consume their items. -->
+<!-- force player > force the player -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_little.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_little.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Supply Enemy: Special enemies with item icons on their heads. Killing them will drop health and money items.</p>
+<!-- Supply Enemy: special enemy with item icon on head, kill them will drop health and money item. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_supply.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_supply.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>These different enemy types add more challenge to the game. Melee enemies post a higher danger, while ranged enemies are annoying. The Summoner can spawn an endless number of Littles, creating a continuous enemy assault that the player must deal with. Players need to adjust their strategy and tactics over time to survive in this chaotic dungeon.</p>
+<!-- annoying 煩人, while ranged enemies are annoying -->
+<!-- adjust 調整, Players need to adjust their strategy -->
+<!-- tactics 策略, adjust their strategy and tactics  -->
+<!-- strategy > Plan, strategy is the action plan that takes you where you want to go -->
+<!-- tactics > Action, are the individual steps and actions that will get you there -->
+<!-- chaotic 混亂的, survive in this chaotic dungeon -->
+<!-- these enemy can make game have more challenge, Melee have higher danger but Ranger is annoying, or the Summoner that spawn too much Little let enemy attack endless i should kill first? -->
+<!-- can make game have more challenge > make game more challenge -->
+<!-- Melee have higher danger > Melee enemies post a higher danger -->
+<!-- Summoner that spawn too much Little let enemy attack endless > Summoners that spawn too many Littles create an endless enemy assault -->
+<!-- each type of enemy have difference threaten, player need change strategy by time to survive in this chaotic dungeon. -->
+<!-- player need change strategy by time > change their strategy over time -->
+<h3 id="world">World</h3>
+<p>I utilized the Unity Tilemap system to create the game world.</p>
+<!-- I use Unity Tile map system to create game world. -->
+<!-- I use Unity Tile map system > I utilize the unity tilemap system -->
+<!-- utilized 利用, Utilize the unity tilemap system -->
+<p>Map: The map serves as a simple gamer area, with enemy spawn points located on the sides and bottom.</p>
+<!-- Map: A simple game area, side and bottom is enemy spawn point. -->
+<!-- A simple game area, The map is a simple game area -->
+<!-- side and bottom is enemy spawn point > the sides and bottom serve as enemy spawn point -->
+<!-- serve 服務、作用, serve as enemy spawn point  -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Traps: Spike traps are strategically placed to damage any creatures attempting to pass through them. Of course, include player :P</p>
+<!-- Trop: Spike trop will damage all creature try go though. -->
+<!--  Spike trop will damage all creature try go though > Spike traps are placed to damage any to pass though -->
+<!-- strategically 戰略上, Spike traps are strategically placed -->
+<!-- attempting 嘗試,  -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_trap.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_trap.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Clearing: At the start of each wave, some items are cleared from the map. This is done to prevent an excessive number of items cluttering the map, as there are more dropping items than the player needs at once.</p>
+<!-- prevent 防止,  -->
+<!-- excessive 過多的, -->
+<!-- cluttering 雜亂無章, -->
+<!-- prevent an excessive number of items cluttering the map -->
+<!-- Clear: Map clear some item on wave start, because dropping item is more than player needed, prevent to much item on map one time.  -->
+<!-- Map clear some item on wave start > at the start of each wave, some item are cleared from the map -->
+<!-- because dropping item is more than player needed > since there are more dropping items than the player needs. -->
+<!-- prevent to much item on map one time > to prevent too many items on the map at once. -->
+<!-- since 自從、因為, since there are more dropping items -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_clear.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_clear.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Chest: Chest are provided for players to store their items, although their usefulness is limited. I have set a restriction on map clearing, allowing only low-level items to be removed.</p>
+<!-- provided 提供, provided for players to store their items  -->
+<!-- restriction 限制, I have set a restriction on map clearing -->
+<!-- Chest: Use for player save item, but not vary useful, i limit map clearing only remove low level item. -->
+<!-- Use for player save item, used for players to store items -->
+<!-- i limit map clearing only remove low level item > i limit the map clearing to only remove low-level items. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_chest.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_chest.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Merchants: Merchants are positioned on the top side of the map. Players can drop money to them and choose items to purchase. The merchants refresh their merchandise every wave.</p>
+<!-- Merchants: Merchants stay in top side of map, player drop money to him and pick item can purchase. Merchants refresh merchandise every wave. -->
+<!-- player drop money to him > player can drop money to them -->
+<!-- pick item can purchase > it could be pick items than can be purchased. -->
+<!-- Merchants refresh merchandise every wave. > the merchants refresh their merchandise every wave -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_shop.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_shop.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="game-loop">Game Loop</h3>
+<p>The game follows an endless playing mode, continuing until the player dies. This simple mechanic is suitable for the prototype.</p>
+<!-- suitable 適合, suitable for the prototype -->
+<!-- The game is using endless playing mode, game continued until player die. is a simple mechanic suitable for prototype. -->
+<p>Title: A simple layout welcomes players into the dungeon.</p>
+<!-- Title: Simple layout ot welcome player into this dungeon. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_title.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_title.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Transition: A transition screen displays player and pumpkin animation during transitions.</p>
+<!-- Transition: Transition screen with player and pumpkin animation. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_translate.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_translate.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Pause: During gameplay, players can press the ESC key to pause the game. They can open the tutorial by clicking a button in toe top-right corner.</p>
+<!-- Pause: during gameplay, player can press esc key to pause game and open tutorial by click button on right up. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_pause.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_pause.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Waves: Enemies spawn in waves, with the first six serving as tutorial waves to introduce each enemy type. After defeating all enemies in wave, a reward item spawn in the center of map. Picking up the reward items start the next wave.</p>
+<!-- Waves: enemies are spawning by wave, the first six are tutorial wave, introduce each type of enemy. once player defeat all enemies on wave, map center will spawn reward item, pick them can start next wave. -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rrv-nQufUzQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Although the games is in endless mode, the difficulty curve is steep. Initially, the number of enemies their maximum activity increase to keep the player excited.</p>
+<!-- Although game are endless mode, but my difficult curve is vary steep, enemy amount and maximum activity enemy are increase first, to keep player excite. -->
+<h3 id="sound-effect">Sound Effect</h3>
+<p>The SFX used in game are CC0 assets, with modifications to made frequency and pitch using Audacity to mach the game&rsquo;s style. Here are some examples.</p>
+<!-- the SFX is use CC0 assets, modified frequency and pitch use Audacity, to mach game style. let me exhibit some. -->
+<!-- game style > game's style -->
+<!-- let me exhibit some > let me provide some examples -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/audio.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/audio.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>Throwing: A wind slicing sound accompanies the object flying quickly.</p>
+<!-- Throwing: wind slice with object flying quick. -->
+<!-- accompanies 伴隨,  -->
+
+
+
+
+
+
+
+<audio controls id="audio_audio_throw.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_throw.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_throw.mp3");
+    audio.volume = "0.8"
+</script>
+<p>Dropping: A popup effect is used for added fun.</p>
+<!-- Dropping: use popup effect for fun XD -->
+
+
+
+
+
+
+
+<audio controls id="audio_audio_dropItem.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_dropItem.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_dropItem.mp3");
+    audio.volume = "0.8"
+</script>
+<p>Purchase: An iconic sound from a cashier.</p>
+<!-- Purchase: iconic sound from cashier. -->
+
+
+
+
+
+
+
+<audio controls id="audio_audio_cashRegister.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_cashRegister.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_cashRegister.mp3");
+    audio.volume = "0.8"
+</script>
+<p>Item Broken: A sound resembling something made of metal breaking.</p>
+<!-- Item Broken: something made by metal as broken. -->
+<!-- Resembling 像, -->
+
+
+
+
+
+
+
+<audio controls id="audio_feedback_itemBroken.mp3">
+    <source src="/devlog/drop-throw-dungeon/feedback_itemBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_feedback_itemBroken.mp3");
+    audio.volume = "0.5"
+</script>
+<p>Metal Item Hitting: A sound with metal hitting something.</p>
+<!-- Metical Item Hitting: with metal hitting something.  -->
+
+
+
+
+
+
+
+<audio controls id="audio_audio_metalHit.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_metalHit.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_metalHit.mp3");
+    audio.volume = "0.8"
+</script>
+<p>Potion Throwing: A sound like glass smashing.</p>
+<!-- Potion throwing: sound like glass smashing. -->
+
+
+
+
+
+
+
+<audio controls id="audio_audio_glassBroken.mp3">
+    <source src="/devlog/drop-throw-dungeon/audio_glassBroken.mp3">
+    Your browser does not support the audio tag.
+</audio> 
+
+<script>
+    var audio = document.getElementById("audio_audio_glassBroken.mp3");
+    audio.volume = "0.8"
+</script>
+<p>To reduce the feeling of repetition, i randomly change the volume and pitch each time a sound is played in the game. This technique creates a more nature and varied listing experience.</p>
+<!-- varied 多變 -->
+<!-- I also randomly change pitch and volume every time sound play in game, is common technique to reduce repetition felling, make sound effect listen more nature. -->
+<h3 id="back-ground-music">Back Ground Music</h3>
+<p>I used Bosca Ceoil create 8-bit gameplay BGM. Since i had no prior knowledge of music arrangement, i looked for Brackeys&rsquo;s tutorial to learn how to create music for games.</p>
+<!-- prior 事先的 -->
+<!-- I used Bosca Ceoil To create 8-bit gameplay BGM. I don't have any arranger knowledge before, so i looking Brackeys's tutorial and learn how to make music for game.  -->
+<!-- so i looking > so i looked, so i searched for -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>I created three simple melodies and added playing condition to combines them in the game, aiming for an additional felling. Each melody thread dynamically displayed base from different game states. The beat thread plays during the title screen and game pause, while the other two thread switch during waves and rest time.</p>
+<!-- i created three simple melody, and add playing condition to combine in game for addition feeling, three thread display dynamic by different game state. the beat thread playing on title and game pause, other two thread switch by during wave and rest time.  -->
+<!-- addition feeling > additional felling -->
+<!-- three thread display dynamic > three thread that dynamically display -->
+<!-- switch by during wave > switch during wave -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/e6j6wsMgWWk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>To achieve this style, i synchronize the timing of the music.</p>
+<!-- i synchronize music delay to achieve this style. -->
+<!-- i synchronize music delay > i synchronize the music's timing -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm_tracks.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm_tracks.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="gameplay-feedback">Gameplay Feedback</h3>
+<p>Many enemies interact with player, and sheer amount of activity on the screen can make the game appear chaotic, potentially cause the player to missing important information. To address this, i focused on improving feedback without breaking the immersion of the game.</p>
+<!-- appear 出現 -->
+<!-- potentially 潛在的 -->
+<!-- improving 改善 -->
+<!-- Many enemy interactive with player, every thing on screen make game look chaotic, player may lost some important information during gameplay. Without breaking immersion of game and clearly sanding messages to player, i added more effect increase feedback. -->
+<p>For enemy attack, i added particle effect to indicate their intentions before dashing towards the player.</p>
+<!-- Enemy Attack: I added particle effect during enemy attack, and leave trail before enemy dashed. -->
+<!-- indicate 表明 -->
+<!-- intentions 意圖 -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_attack.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>When the player is damaged, i incorporated slow motion and camera shake to create a heightened sense of impact. The blowout particle effect and a dull sound were also added to intensify the feeling of being attacked.</p>
+<!-- Player Damaged: I add a slow motion and camera shake to remind player is be damaged, blowout particle and dull sound make attack fell more shock. -->
+<!-- incorporated 合併 -->
+<!-- heightened 加高 -->
+<!-- impact 影響 -->
+<!-- intensify 強化 -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_hurt.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_hurt.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>To enhance feedback when items are hit, i implemented particle effects emitted by enemies. When an item breaks, particle fly out accompanied breaking sound, further emphasizing the fore of impact.</p>
+<!-- implemented 實施 -->
+<!-- emitted 發出 -->
+<!-- accompanied 伴隨 -->
+<!-- emphasizing 強調 -->
+<!-- Item Hitting: enemy squirt lot of particle on hitting, once item broken, breaking particle fly out and play broken sound to add more felling of force. -->
+<!-- add more felling of force > to enhance the sense of force -->
+<!-- sense 感覺, the sense of force -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_itemborken.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_itemborken.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>There are many more details in the game. If you&rsquo;re interested in experiencing it, please download and have fun playing!</p>
+<!-- There have more detail in game, if you are interested of this game, please download and have fun :D -->
+<h2 id="thanks-for-reading">Thanks For Reading</h2>
+<p>Thank for taking the time to explore this devlog.</p>
+<!-- thank you for taking the time to explore this devlog. -->
+<p>This project took me a month to complete. and as my first project, it give me a great sense of accomplishment. The game has been released on Itch.io for free, and i hope you find it interesting to play. Feel free to leave your comment below.</p>
+<!-- took 拿, took me a month -->
+<!-- sense of accomplishment 成就感 -->
+<!-- this project is spend a month to finish, as the first finished project, the result is give me a sense of accomplishment. The game is release on Itch.io for free, hope you feel interesting on play, welcome leave comment below.  -->
+<p>Download link: <a href="https://angus945.itch.io/drop-throw-dungeon" target="_blank">Drop Throw Dungeon</a></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/rp3Zl8S3GPg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="the-real-idea">The Real Idea</h3>
+<p>In the early stages of the project, I had initially planned to create a dungeon exploration and physical puzzle-solving game. The original design featured items in the game world with interactive effects, such as chain reactions triggered by bombs or the ability to burn wooden items to access new areas. However, due to the complexity of the systems involved, I had to make some adjustments as I lacked the necessary skills to implement them effectively.</p>
+<!-- 涉及 involved -->
+<!-- 調整 adjustments  -->
+<!-- 缺乏 lacked  -->
+<!-- 實施 implement  -->
+<!-- Actually, in the early stage of project, i'm not planning for make a endless playing game with only defense enemies attacks. The real idea is a dungeon exploration and physical puzzle solve game. -->
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/real_interaction.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/real_interaction.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<!-- The origin version of design, item in game world have physical interaction effect, bomb explode cah trigger chain reaction, or wooden items may burning let player open some area. But the system is too complex, i don't have enough skill to accomplish. -->
+<p>As a result, i decided to focus on the core gameplay mechanic of &ldquo;Throwing&rdquo; and expanded upon it to create an endless defense game with entertaining mechanics.</p>
+<!-- 決定 decided  -->
+<!-- 有趣的 entertaining  -->
+<!-- So i changed the target, remove some system that to difficult, only leave the core gameplay "Throwing" and expand simple gameplay, as the result, i created endless enemies defense game with funny mechanism. -->
+<p>Now that my game development skills have improved, perhaps it&rsquo;s time to plan new feature for this game and attempt to bring them to life?</p>
+<!-- 改善 improved -->
+<!-- 也許 perhaps  -->
+<!-- 試圖 attempt  -->
+<!-- Now my game develop skill is better than before, maybe is time to planning the new feature of this game and try to make it? -->
+<h3 id="acknowledgement">Acknowledgement</h3>
+<p>The pixel art use in game is provided by <a href="https://itch.io/profile/0x72" target="_blank">0x72</a>.</p>
+<p><a href="https://0x72.itch.io/16x16-dungeon-tileset" target="_blank">16x16 Dungeon Tileset</a></p>
+<p><a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">dungeontileset-ii</a></p>
+
+        
+        
+    </div>
+</article>
+
+
+
+
+                
+  
+  
+  
+
+  <hr>
+  <section class="social-share">
+    <ul class="share-icons">
+      <li>
+        <img src="https://img.icons8.com/ios-glyphs/30/null/share--v1.png" width="35" height="35"/>
+      </li>
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?&amp;url=https%3a%2f%2fangus945.github.io%2fen%2fdevlog%2fproject%2fdrop-throw-dungeon%2f&amp;text=%e3%80%90Devlog%e3%80%91My%20First%20Project%20-%20Drop%20Throw%20Dungeon" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+          
+<img src="https://img.icons8.com/color/48/null/twitter--v1.png" width="35" height="35"/>
+          <p>Twitter</p>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fangus945.github.io%2fen%2fdevlog%2fproject%2fdrop-throw-dungeon%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="share-btn facebook">
+          <img src="https://img.icons8.com/fluency/48/null/facebook-new.png" width="35" height="35"/>
+          <p>Facebook</p>
+          </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fangus945.github.io%2fen%2fdevlog%2fproject%2fdrop-throw-dungeon%2f&amp;source=https%3a%2f%2fangus945.github.io%2fen%2fdevlog%2fproject%2fdrop-throw-dungeon%2f&amp;title=%e3%80%90Devlog%e3%80%91My%20First%20Project%20-%20Drop%20Throw%20Dungeon&amp;summary=%e3%80%90Devlog%e3%80%91My%20First%20Project%20-%20Drop%20Throw%20Dungeon" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="share-btn linkedin">
+          <img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" width="35" height="35"/>
+            <p>LinkedIn</p>
+          </a>
+      </li>
+
+      
+      
+
+      
+      <li>
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90Devlog%e3%80%91My%20First%20Project%20-%20Drop%20Throw%20Dungeon.&amp;body=%e3%80%90Devlog%e3%80%91My%20First%20Project%20-%20Drop%20Throw%20Dungeon%2c%20by%20AngusChan%27s%20Devlog%0aTODO%20%e4%ba%ba%e7%94%9f%e4%b8%ad%e7%ac%ac%e4%b8%80%e5%80%8b%e5%ae%8c%e6%88%90%e7%9a%84%e9%81%8a%e6%88%b2%e5%b0%88%e6%a1%88%ef%bc%8c%e9%96%8b%e7%99%bc%e9%81%8e%e7%a8%8b%e5%8f%8a%e5%bf%83%e5%be%97%0a%0ahttps%3a%2f%2fangus945.github.io%2fen%2fdevlog%2fproject%2fdrop-throw-dungeon%2f%0a" target="_blank" class="share-btn email">
+          <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
+          <p>Email</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+
+                
+
+        
+
+        
+                
+        
+
+        <hr>
+        <script src="https://giscus.app/client.js"
+                data-repo="angus945/angusChan-website-comment"
+                data-repo-id="R_kgDOJfatog"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOJfatos4CWS6f"
+                data-mapping="title"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+
+
+                
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            Unless otherwise noted, the content of this site is licensed under  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+            .
+        </p>
+    </blockquote>
+</div>
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+
+            
+            <li>
+                <a href="/en/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/en/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/en/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/en/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/en/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/en/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                <a href="/en/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/en/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/en/tags/test/">test</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>Table of Contents</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-first-finished-project">The First &ldquo;Finished&rdquo; Project</a>
+      <ul>
+        <li><a href="#item-and-inventory">Item and Inventory</a></li>
+      </ul>
+    </li>
+    <li><a href="#drop-throw-dungeon-">Drop Throw Dungeon !</a>
+      <ul>
+        <li><a href="#aimthrow-">Aim&hellip;Throw !</a></li>
+        <li><a href="#more-items">More Items</a></li>
+        <li><a href="#enemy">Enemy</a></li>
+        <li><a href="#more-enemy">More Enemy!</a></li>
+        <li><a href="#world">World</a></li>
+        <li><a href="#game-loop">Game Loop</a></li>
+        <li><a href="#sound-effect">Sound Effect</a></li>
+        <li><a href="#back-ground-music">Back Ground Music</a></li>
+        <li><a href="#gameplay-feedback">Gameplay Feedback</a></li>
+      </ul>
+    </li>
+    <li><a href="#thanks-for-reading">Thanks For Reading</a>
+      <ul>
+        <li><a href="#the-real-idea">The Real Idea</a></li>
+        <li><a href="#acknowledgement">Acknowledgement</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        
+<div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>Pages</h3>
+        <ul>
+            
+            <li>
+                <a href="/en/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/en/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/en/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/en/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/en/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/en/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>Links</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>Tags</h3>
+        <div>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2023
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
+                | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>
