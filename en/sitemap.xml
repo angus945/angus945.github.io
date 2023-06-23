@@ -3,26 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
    
   <url>
-    <loc>https://angus945.github.io/en/about/</loc>
-    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://angus945.github.io/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://angus945.github.io/ja/about/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://angus945.github.io/en/about/"
-                />
-  </url>
-   
-  <url>
     <loc>https://angus945.github.io/en/</loc>
     <lastmod>2023-06-18T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -39,6 +19,101 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://angus945.github.io/en/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/tags/data-driven/</loc>
+    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/tags/data-driven/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/tags/data-driven/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/tags/game-develop/</loc>
+    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/tags/game-develop/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/tags/game-develop/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/tags/modification/</loc>
+    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/tags/modification/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/tags/modification/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/tags/programming/</loc>
+    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/tags/programming/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/tags/programming/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/learn/game-development/how-to-make-modification-games/</loc>
+    <lastmod>2023-01-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/learn/game-development/how-to-make-modification-games/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/learn/game-development/how-to-make-modification-games/"
+                />
+  </url>
+   
+  <url>
+    <loc>https://angus945.github.io/en/about/</loc>
+    <lastmod>2022-07-20T19:26:08+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://angus945.github.io/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://angus945.github.io/ja/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://angus945.github.io/en/about/"
                 />
   </url>
      
