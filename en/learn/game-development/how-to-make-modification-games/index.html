@@ -25,7 +25,7 @@
 <meta name="author" content="AngusChan" />
 
 
-<meta name="description" content="這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。" />
+<meta name="description" content="Explain how modification-games work, and create a prototype use Unity." />
 
 
 <meta name="keywords" content="game-develop, programming, data-driven, modification" />
@@ -36,8 +36,8 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://angus945.github.io/en/learn/game-development/how-to-make-modification-games/" />
 
-<meta property="og:description" content="這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。" />
-<meta name="twitter:description" content="這次將解釋遊戲模組的運作原理，以及如何在 Unity 中使用 IO、XML 與 Lua 進行實做。" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta property="og:description" content="Explain how modification-games work, and create a prototype use Unity." />
+<meta name="twitter:description" content="Explain how modification-games work, and create a prototype use Unity." /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2023-01-12T00:00:00+00:00" /><meta property="article:modified_time" content="2023-01-12T00:00:00+00:00" />
 
@@ -327,7 +327,7 @@
 
 <script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
-
+    
     var seed = Math.random();
     var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
@@ -382,7 +382,7 @@
         clock = new THREE.Clock();
         camera.position.z = 1;
 
-        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var geometry = new THREE.PlaneGeometry( 2, 2 );
         var material = createMaterial(uniforms, data.vert, data.frag);
         var mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
@@ -538,7 +538,7 @@
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            <a class="title-main" href="/en">AngusChan&#39;s Devlog</a>
             
             <span class="title-sub">Stay Hungry, Stay Foolish</span>
             
@@ -569,7 +569,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;4134 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2444 words
 </span>
 
 
@@ -600,7 +600,6 @@
 <!-- every time i play game that modifiable, i curious the principle behind game's, i follow the question and i learned "Data-Driven" technic, an important programming knowledge in game develop. after sone research, i write this technical note to expand basic of modification theory, and developed the modifiable prototype in Unity, use IO, XML and Lua to accomplish. hope this article can give guys some inspire. -->
 <!-- hope this article can give guys some inspire > hope this article can inspire you -->
 <h2 id="modification">Modification</h2>
-<!-- 相信在遊戲領域的各位已經相當熟悉「模組」一詞了，還是直接進入正題吧，首先： -->
 <h3 id="what-is-data-driven">What is Data-Driven</h3>
 <p>First, let me explain Data-Driven simply. we can define data formats and use integer or string mapping to internal logic, allowing us to achieve complex behavior without hard coding in script.</p>
 <!-- fist, let me explain Data-Driven simple. we can define some data format, and use integer or string mapping to internal logic, use lightweight data Structures to accomplish complex behavior without hard coding in script. -->
@@ -618,8 +617,22 @@ Note: "Data-Driven" has nothing to do with "Data-Oriented". The latter is used f
 <!-- once we used data-driven in game system, we can develop game more effectively, and indirect give players extend game content means. i extraction three core concept in game modification to provide starting point. -->
 <!-- indirect > indirectly -->
 <h3 id="dynamic-loading">Dynamic Loading</h3>
-<p>通常在遊戲做完並輸出後，當中<h>使用的資源都會被引擎打包加密</h>，這也代表內容在此時被「固定」了，無法透過常規的手段修改。因此，模組運作的第一個前提就是：開發者必須提供方法&hellip;或更直白的說<h>「一個資料夾位置」，讓玩家能自由改動其中的資料。 </h></p>
-<p>以 Unity 為例，我們可以透過 <code>StreamingAssets</code> 達成效果，這是一個不會在輸出後被加密的資料夾，只要遊戲運行時透過 <code>System.IO</code> 手動讀取檔案，就能使用玩家們添加的更多「遊戲內容」。</p>
+<p>Once the game is developed, the game engine packs and encrypts assets by default, making it difficult to easily change game content. However, in order to provide players with the means to extend the game, developers need to designate specific location where they can make change or add file.</p>
+<!-- encrypts 加密 -->
+<!-- designate 指定 -->
+<!-- once game are developed, game engine will packed and encryption assets in project as default, after that, we can't change game content easily. in order to give player means to extend, the developer needs give some location allow they changes or add file inside. -->
+<!-- once game are developed > once the game is developed -->
+<!-- encryption assets > encrypt assets -->
+<!-- give player means to extend > give player the means to extend -->
+<!-- give some location > designate specific location -->
+<!-- allow they changes or add file inside > where changes can be made or file can be added -->
+<!-- won't encryption > won't be encrypted  -->
+<!-- load content in runtime > load content at runtime -->
+<!-- refer a lot of mod > referred to many mode -->
+<!-- take unity as an example, we can use `StreamingAssets` to achieve. StreamingAssets is a folder that won't encryption in project build, if we use `System.IO` load content in runtime, players can edit some file and add more content after game release. -->
+<p>Taking Unity as an example, we can utilize the <code>StreamingAssets</code> folder. This folder is not encrypted in the project build. By using <code>System.IO</code> to load content at runtime, players can edit certain files and add more content after the game is released.</p>
+<!-- utilize 利用 -->
+<!-- certain file 某些文件 -->
 
 
 
@@ -635,16 +648,28 @@ Note: "Data-Driven" has nothing to do with "Data-Oriented". The latter is used f
 </div>
 
 
-<p>Steam 強大的工作坊「訂閱」功能也不是什麼神奇的黑魔法，它只是幫你把模組資料「下載」到特定位置上而已，其餘的載入與解析都是遊戲自身要完成的。</p>
+<p>The powerful steam workshop feature is convenient as it provides community content management. However, the game still needs to handle loading and other tasks to make modifications work.</p>
+<!-- convenient 方便的 -->
+<!-- the powerful steam workshop feature are convenient, provided community content management, but game still need load that by self and finish other work to make modification work. -->
 <c>
-註：Steam 模組的預設資料夾在 C:\Program Files (x86)\Steam\steamapps\workshop\content\gameID，我實做時就從中找了不少參考研究，有興趣可以多去挖寶。
+Note: Modes downloaded from Steam are stored in C:\Program Files (x86)\Steam\steamapps\workshop\content\gameID. I referred to many modes during this research.
+<!-- Note: Mod download from steam is stored in C:\Program Files (x86)\Steam\steamapps\workshop\content\gameID, i refer a lot of mod during this research. -->
 </c>
-<h3 id="format-define">Format Define</h3>
-<p>有了第一項前提也不代表隨便扔的資料都能運作，我們<h>必須為模組規範好要使用的「定義檔」的格式長怎樣才行</h>。假設我們想定義一隻怪物，首先要思考他的屬性有哪些，可能包括文字資訊、行為參數與視覺的呈現方法等。</p>
-<p>根據需求設計出一套能包含所有必備資料的「模板」，使用能兼具修改性與易讀性的「文字文件」作為資料格式，以 txt 檔為例：</p>
+<h3 id="define-format">Define Format</h3>
+<p>After implementing dynamic loading, modification don&rsquo;t have any effect on the game unless a specific data format is defined. We can&rsquo;t randomly put something in and hope it works. Developer needs to define a data format that allows the game to analyze the content accurately. For instance, when defining a monster, we must determine its properties, including text content like name, description, behavior logic, and visual presentation.</p>
+<!-- implementing 實施 -->
+<!-- unless 除非 -->
+<!-- accurately 準確 -->
+<!-- visual presentation 視覺呈現 -->
+<!-- after we finished dynamic loading, the modification still don't have any effect. we can't randomly put some thing to it and hope that work, developer needs define some data format for game analyze the content. suppose we want define a monster, first, we need judge now many property they have, include text content like name or describe, behavior logic and visual present, -->
+<!-- judge > determine -->
+<p>Developers can create a template using a lightweight data format such as a .txt file. Based on this format, developers need to program an analysis system that reads the file converts the data into in-game structures like classes or structs.</p>
+<!-- developer can create a template, use lightweight data format to storage data, like .txt file. according to this format, developer needs program some analyze system to read file and convent to in-game data, like `class` or `struct`. -->
+<!-- editing content desired > edit the desired content -->
+<p>Here&rsquo;s an example template:</p>
 <pre><span>template.txt</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-txt.template">Name:
-Descripe:
+Describe:
 
 Health:
 Speed:
@@ -653,25 +678,17 @@ Attack:
 Sprite:
 Sound:
 </code></pre>
-<p>有了模板之後，玩家只要把它修改成自己想要的樣子，再把檔案放入指定的位置就能為遊戲添加一筆新的怪物資料了。</p>
-<pre><span>zombie.txt</span><hr style='margin-top:5px; margin-bottom:0px'>
-<code class="language-txt.zombie">Name: Zombie
-Descripe: Zombie monster !!
-
-Health: 2
-Speed: 3
-Attack: 1
-
-Sprite: sprites/zombie.png
-Sound: sounds/errrrr.mp3
-</code></pre>
-<p>而最後，遊戲要<h>根據我們設定的格式「解析」檔案，將文字檔轉換成遊戲真正使用的物件資料 </h>。格式的複雜度取決於需求，簡單的就像範例那樣修改參數與外觀，而複雜可能允許改變邏輯與行為。</p>
-<p>雖然檔案類型只要 txt 就足夠了，但還是<h>建議用其他更容易閱讀、修改與解析的格式儲存</h>，例如 XML 與 Json。</p>
+<p>Players can duplicate the template, edit desired content, and place it in the designated location mentioned earlier. By following this process, a new monster can be added to the game successfully.</p>
+<!-- mentioned 提及 -->
+<!-- player can duplicate the template and editing content desired, and put into designate location as previous section mentioned, after that, we successful add new monster in game. -->
+<p>Although .txt file can work, i prefer using more readable, modifiable, and analyzable file format like XML or Json to store data. The complexity of the format definition depends on your purpose. You can use a simple format for player modification of parameters or design a more complex format to allow players to create additional logic and behavior.</p>
+<!-- Although txt file can work, but i prefer ust more readable, modifiable, and analyzable file format to store data, like XML or Json. the complexity of format define is depends on your purpose, we can use simply format for player modify parameter, or design complex format to allow player create more logic and behavior. -->
+<p>Here&rsquo;s an example using JSON:</p>
 <pre><span>zombie.json</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-json.zombie">&quot;Define&quot;: 
 {
-    &quot;name&quot;: &quot;Zombie&quot;,
-    &quot;Descripe&quot;: &quot;Zombie monster !!&quot;,
+    &quot;Name&quot;: &quot;Zombie&quot;,
+    &quot;Description&quot;: &quot;Zombie monster !!&quot;,
     
     &quot;Health&quot;: 2,
     &quot;Speed&quot;: 3,
@@ -681,20 +698,18 @@ Sound: sounds/errrrr.mp3
     &quot;Sound&quot;: &quot;sounds/errrrr.mp3&quot;
 }
 </code></pre>
-<h3 id="behavior-expand">Behavior Expand</h3>
-<p>雖然有前兩者就能達成模組效果，但修改範圍仍被限制在我們提供的模板中，如果希望玩家能創造更多令人驚豔的內容，就得<h>提供他們自行「擴展」行為與邏輯的手段</h>。但如此程度的擴展就很難不接觸「程式」了，所以了遊戲的核心程式以外，我們也得<h>讀取並運行由玩家編寫的程式碼。 </h></p>
-<pre><span>smartZombie.json</span><hr style='margin-top:5px; margin-bottom:0px'>
-<code class="language-json.smartZombie">&quot;Define&quot;: 
-{
-    &quot;name&quot;: &quot;Smart Zombie&quot;,
-    &quot;Descripe&quot;: &quot;Zombie monster with AI !!!!&quot;,
-    
-    // other perperity ...
-
-    &quot;Bevavior&quot;: &quot;scripts/monsterAI.lua&quot;,
-}
-</code></pre>
-<p>假設現在允許玩家編寫怪物移動、攻擊與死亡的行為，我們可以像定義格式那樣「規定」有哪些行為是可以修改的，並在運行時的對應時機使用。</p>
+<h3 id="behavior-extend">Behavior Extend</h3>
+<p>After implementing the first two functions, modification are work well, and players can duplicate templates and create their own content. However, their permissions are still limited by the defined framework, making it harder to extend more complex systems. If we want players to be more creative, we should allow them to write script themselves and load and execute them at runtime.</p>
+<!-- permissions 權限 -->
+<!-- after we implemented the first two function, modification is work will, player can duplicate template and create their own content. but they permissions is still limited by defined framework, they are harder to extend more complex system. if we want player be creative, we need let player write script by self, loading dynamic and execute the program at run-time. -->
+<!-- will > well -->
+<!-- they, is > their, are -->
+<!-- be > to be -->
+<!-- function can be override > functions can be overridden -->
+<!-- write script by self > themselves  -->
+<p>For instance, let&rsquo;s say we want players to define enemy movement, attack, and death behavior. We can define witch function can be overridden by the player and load and execute the corresponding script at specific timings.</p>
+<!-- corresponding 相應 -->
+<!-- suppose we want player writing enemy's move, attack and death behavior, we can define witch function can be override by player, load script and run at specific timing. -->
 <pre><span>monsterAI.lua</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-lua.monsterAI">function move()
 	-- move behavior
@@ -708,26 +723,59 @@ function dead()
 	-- dead behavior
 end
 </code></pre>
-<p>當然也可以讓玩家自訂行為的觸發時機，讓擴展性再次提升，但無論如何都<h>需要由開發者提供一個載入與調用外部程式的接口，才能運行這些內容。 </h></p>
-<p>程式擴展也有許多現成資源可用，例如直譯的 Lua 語言與編譯的 .dll 檔，當然也可以手刻一個虛擬機去跑自製語言&hellip;如果你想的話。</p>
-<p>總結以上幾點，排除反編譯等特殊手法以後，遊戲能否允許模組將取決於開發者的意願以及能力。接下來就進入實做環節，提供各位在 Unity 中實現效果的範例參考。</p>
+<p>Of course you can allows players extended behaviors to execute at any time, here just shown example simply. However, to make this work, we need to create a loading and analyzing system, as explained earlier.</p>
+<!-- you can let player customize extended behavior will execute by whenever time. however, we need create a loading and analyzing system to let it work, like explanted earlier. -->
+<!-- by whenever time > at any time -->
+<pre><span>smartZombie.json</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-json.smartZombie">&quot;Define&quot;: 
+{
+    &quot;name&quot;: &quot;Smart Zombie&quot;,
+    &quot;Descripe&quot;: &quot;Zombie monster with AI !!!!&quot;,
+    
+    // other perperity ...
+
+    &quot;Bevavior&quot;: &quot;scripts/monsterAI.lua&quot;,
+}
+</code></pre>
+<p>When it comes to programming extensions, there are various resources available, such as the interpreted language Lua, compiled .dll files, or even creating a new programming language and visual machine if desired.</p>
+<!-- programming extend have some resources can use, like interpreted language lua, .dll a compiled program format, or create new programming by self and create a virtual machine to run if you want. -->
+<!-- programming extend > programming extension -->
+<!-- can be use >  that can be used -->
+<p>In conclusion, game modification depends on the developer&rsquo;s intention and skill, excluding special methods like decompilers. In the next section, we will create a simple prototype in Unity, providing an example to demonstrate the implementation of all three techniques.</p>
+<!-- excluding 排除 -->
+<!-- demonstrate 證明 -->
+<!-- the conclusion of section, exclude special method like decompiler, a game modification is depend by developer intention and skill. in next section, we will create a simple prototype in Unity, provided a example to implement all three technique.  -->
+<!-- To conclusion -->
+<!-- exclude > excluding -->
+<!-- is depend > depends on -->
 <h2 id="prototyping">Prototyping</h2>
-<p>範例使用的環境為 Unity，不過邏輯都是通用的，可以自行轉換至適合的環境與工具中。文章會對使用到的關鍵要素進行解釋，但不會過多深入單一工具的用法與原理，請有興趣的人在自行研究。</p>
+<p>Although we are prototyping in Unity, the theory discussed here is applicable to any platform or engin. You can use any tool or engine of your choice. In the following articles, we will expand on the key elements involved in prototype, without going into excessive detail about specific tools.</p>
+<!-- applicable 適用 -->
+<!-- involved 涉及 -->
+<!-- excessive 過多的 -->
+<!-- Although we prototyping in Unity, but theory are general on any platform, you use any tool or engine as well. In later, article will expend key element during prototyping, but not too detail for specific tool. -->
+<p>During the prototyping process, we will utilize the following:</p>
 <ul>
-<li>
-<p>使用 <a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.io?view=net-7.0" target="_blank">System.IO</a> 讀取 <a href="https://docs.unity3d.com/Manual/StreamingAssets.html" target="_blank">StreamingAssets</a> 達成資料載入</p>
-</li>
-<li>
-<p>使用  <a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.xml?view=net-7.0" target="_blank">System.XML</a> 解析使用 <a href="https://en.wikipedia.org/wiki/XML" target="_blank">XML</a> 儲存的定義檔</p>
-</li>
-<li>
-<p>使用 <a href="https://www.moonsharp.org/" target="_blank">MoonSharp</a> 插件運行 <a href="https://en.wikipedia.org/wiki/Lua_%28programming_language%29" target="_blank">Lua</a> 達成擴展行為</p>
-</li>
+<li>Using <a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.io?view=net-7.0" target="_blank">System.IO</a> to read files in the <a href="https://docs.unity3d.com/Manual/StreamingAssets.html" target="_blank">StreamingAssets</a> folder for dynamic loading.</li>
 </ul>
-<p>範例使用的美術資源為 <a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">0x72_DungeonTilesetII_v</a></p>
+<!-- + Using [System.IO](https://learn.microsoft.com/zh-tw/dotnet/api/system.io?view=net-7.0) read file in [StreamingAssets](https://docs.unity3d.com/Manual/StreamingAssets.html) to implement Dynamic Loading. -->
+<ul>
+<li>Using <a href="https://learn.microsoft.com/zh-tw/dotnet/api/system.xml?view=net-7.0" target="_blank">System.XML</a> analyze definition files written in <a href="https://en.wikipedia.org/wiki/XML" target="_blank">XML</a> for format define.</li>
+</ul>
+<!-- + Using [System.XML](https://learn.microsoft.com/zh-tw/dotnet/api/system.xml?view=net-7.0) analyzing definition file write by [XML](https://en.wikipedia.org/wiki/XML) to implement Format Define. -->
+<ul>
+<li>Incorporating the <a href="https://www.moonsharp.org/" target="_blank">MoonSharp</a> addon to execute Lua scripts for behavior extension.</li>
+</ul>
+<!-- Incorporating  -->
+<!-- + Using [MoonSharp](https://www.moonsharp.org/) addon to running [Lua](https://en.wikipedia.org/wiki/Lua_(programming_language)) script to implement Behavior Extend. -->
+<p>The art assets used in the prototype are CC0 pixel art, downloaded from the source <a href="https://0x72.itch.io/dungeontileset-ii" target="_blank">0x72_DungeonTilesetII_v</a></p>
 <h3 id="entity-define">Entity Define</h3>
-<p>首先我們要定義一個遊戲實體，它可以是怪物、道具或場景物件，但這邊先以通用物件做範例，它的屬性有辨識 ID、外觀圖像與要使用的行為腳本。</p>
-<p>建立一個類別並宣告對應變數，為了使用 <code>XMLSerializer</code> 解析資料，我們必須給類別和變數添加序列化標籤 <code>[System.Serializable]</code> 與 XML 的元素標籤 <code>[XmlType]</code> <code>[XmlAttribute]</code> <code>[XmlElement]</code>。</p>
+<p>First, we need to define a game entity, which can represent various elements such as enemies, items, or scenery objects. In this example, we will use a generic entity to demonstrate the process. The entity definition includes an entity ID, a display sprite, and the behavior script it uses.</p>
+<!-- demonstrate 證明 -->
+<!-- first, we need define a game entity, it can be enemy, item, or scenery object. in this case, we use generic entity as define example, it have entity id, display sprite and behavior script they used. -->
+<p>To define the entity, create a new class and declare variables with the necessary attributes for XML serialization. For example:</p>
+<!-- declare 宣告 -->
+<!-- create a new class and declaration variables, in order to use `XMLSerializer` class need add `[System.Serializable]` and `[XmlType]` attribute, and variable also need `[XmlAttribute]` `[XmlElement]` attribute. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">[System.Serializable][XmlType(&quot;Entity&quot;)]
 public class EntityDefine
@@ -743,7 +791,8 @@ public class EntityDefine
 }
 
 </code></pre>
-<p>建立定義文件，並根據設計的模板填充實體屬性，完成第一個遊戲實體設計。當然要多放幾個或是改變內容都是允許的，但範例就先保持簡單。</p>
+<p>Next, create a new text file and fill it with XML-formatted data based on the defined structure.</p>
+<!-- create new txt file and fill data with xml format we defined. Add more content in file is valid, but let me keep simple in this example. -->
 <pre><span>enemies.xml</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-xml.enemies">&lt;Entities&gt;
     &lt;Entity id=&quot;entityID&quot;&gt;
@@ -752,7 +801,7 @@ public class EntityDefine
     &lt;/Entity&gt;
 &lt;/Entities&gt;
 </code></pre>
-<p>接著，我們需要將定義文件讀取進遊戲才能使用。透過 <code>Application.streamingAssetsPath</code> 取得資料夾位置，並用 IO 將文件內容讀取出來，轉換成 Xml 物件以便後續解析。</p>
+<p>Once the definition file is created, place it in the StreamingAssets folder. Use System.IO to read the content and convert it to an <code>XmlDocument</code> for analyze.</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">string path = $&quot;{Application.streamingAssetsPath}\\entities.xml&quot;;
 
@@ -763,9 +812,10 @@ XmlDocument dataXML = new XmlDocument();
 dataXML.LoadXml(dataText);
 </code></pre>
 <p><r>
-注意：正反斜線的差異可能會造成影響，建議在訪問路徑前先用 replace 統一。
+Note: The use of slash (/) and backslash (\) in the IO paths may cause issues on different platforms, you can use string replacement to fix.
 </r></p>
-<p>因為 XML 不像 Json 有 JsonUtility 可以使用，所以我找了一段泛型序列化函式協助，原理我也不清楚，總之有效 :P</p>
+<p>In Unity&rsquo;s library, XML does not have an equivalent to JsonUtility. Therefore, a generic serialization function can be used:</p>
+<!-- in unity library, xml is not like Json have `JsonUtility` can use, so i use serialize generic function there, not vary shore now it work, but work.  -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public static T ConvertNode&lt;T&gt;(XmlNode node) where T : class
 {
@@ -783,7 +833,8 @@ dataXML.LoadXml(dataText);
     return result;
 }
 </code></pre>
-<p>最後就是遍歷 XML 子節點，找出文件定義的所有 <code>&lt;Entity&gt;</code> 資料，把內容換成物件儲存。</p>
+<p>Finally, to analyze the data, loopthrough the XML nodes and convert the defined entity into instances.</p>
+<!-- in the end of data analyzing, loop through xml node, find defined entity and convert to instance stored. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public List&lt;EntityDefine&gt; defines;
 
@@ -813,8 +864,9 @@ for (int i = 0; i &lt; root.ChildNodes.Count; i)
 
 
 <h3 id="resources-loading">Resources Loading</h3>
-<p>現在已經能讀取實體的定義資料了，但實例化前還得找出他要使用的資源才行，也就是實體的圖片與行為腳本。除了定義格式以外，我們也<h>需要「規定」遊戲資源的存放位置，要求玩家遵守某些資源擺放與命名規則</h>，這樣除了能更方便的載入資料，也能有效保持模組檔案整潔。</p>
-<p>將圖片放置的位置限定在 StreamingAssets 的 Sprites 資料夾中，並透過 <code>Directory.GetFiles()</code> 取得其下所有檔案的路徑。</p>
+<p>Now, the game system can read the definition data in the folder. However after instancing entities, we also need to load the resources used by them, including sprite and behavior script. To make loading easier and keep the folder organized, developers need to specify the location of resources and define naming rules.</p>
+<!-- Now, game system can read the definition data in folder, but after instancing entity, we also need load some resources they used, include sprite and behavior script. in order to make loading easily and keep folder clearly, developer need specify resources location and define the naming rules. -->
+<p>We can create a new folder called &ldquo;Sprites&rdquo; in StreamingAssets and use <code>Directory.GetFiles()</code> to get files in it.</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">string folderName = &quot;Sprites&quot;;
 string directoryPath = $&quot;{Application.streamingAssetsPath}\\{folderName}&quot;;
@@ -835,7 +887,8 @@ string[] files = Directory.GetFiles(directoryPath);
 </div>
 
 
-<p>最後，我們遍歷所有資源的路徑，透過 <code>string.EndsWith()</code> 檢測資料格式正不正確，並用 Unity ImageConversion 將 <code>byte[]</code> 轉換為圖片儲存，以便後續使用。</p>
+<p>Loop through all the resources in the folder and use <code>string.EndsWith()</code> to check if it is an image file. The data read by the IO is in byte array format, so we also need to use <code>ImageConversion</code> to convert the array into a <code>Texture2D</code> for storage.</p>
+<!-- loopthrough all resources in folder, and use `string.EndsWith()` check data is image file. The format that IO read is byte array, so we also need use ImageConversion to convert array to Texture2D store. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public Dictionary&lt;string, Texture&gt; textures;
 
@@ -856,7 +909,8 @@ for (int i = 0; i &lt; files.Length; i)
     }
 }
 </code></pre>
-<p>載入 lua 腳本的方式也相同，尋找資料夾、抓取資料、檢測格式、建立物件並存入資源庫。</p>
+<p>Loading the behavior scripts follows the same process as loading sprites. Define the folder read the files, check the format, and store them in a dictionary.</p>
+<!-- loading the behavior script is the same with sprite, define folder, reading file, check format and store in dictionary. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">string directoryPath = $&quot;{Application.streamingAssetsPath}\\Scripts&quot;;
 string[] files = Directory.GetFiles(directoryPath);
@@ -877,14 +931,16 @@ for (int i = 0; i &lt; files.Length; i)
     }
 }
 </code></pre>
-<p>腳本內容視需求而定，這裡先只用一個 awake 函式，代表會在實體初始化時會被調用。</p>
+<p>The behavior in the Lua script depends on your needs. In this example, we only use the <code>awake</code> function, which is invoked when entity is initialized.</p>
+<!-- the behavior in lua script is depends on your needs, there we only use awake function that invoke on entity initializing. -->
 <pre><span>behavior.lua</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-lua.behavior">function awake()
 	print(&quot;hello from script a&quot;);
 end
 </code></pre>
 <h3 id="instance-object">Instance Object</h3>
-<p>現在解析與載入的工作都完成，終於能生成遊戲實體了。建立一個類別，它代表了實體在遊戲場景中的實例化物件，會儲存部份資料並將外在樣貌顯示出來。</p>
+<p>Finally, all the preconditions are finished, we can generate the entities we have defined into the game world. Create a new C# script representing the agent of the entity. It will be instantiated as a GameObject and store all the data that is needed.</p>
+<!-- Finally, all the precondition are finished, we can generate some entity we defined into game world. Create a new C# script represent the agent of entity, it will Instantiate as GameObject and store all data are needed.  -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public class GameEntity : MonoBehaviour
 {
@@ -900,7 +956,8 @@ end
     }
 }
 </code></pre>
-<p>實例化物件時只要根據定義檔的資料，生成並把使用資源傳入進去即可。這裡透過 moonSharp 的 <code>Globals.Get();</code> 找出 awake 函式，並保存進 DynValue 中進行傳遞。</p>
+<p>To instance a new entity, we load the resources it used and pass them to the agent object. Reading the Lua function is done using the <code>Globals.Get();</code> function in MoonSharp. We find the function named &ldquo;awake&rdquo; and store it in a <code>DynValue</code> to pass it.</p>
+<!-- for instancing new entity, we load the resources it used and passing to the agent object. Reading Lua function is use `Globals.Get();` function in moonSharp, finding `awake` by name and store in `DynValue` can pass it. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">void GenerateEntity(EntityDefine define)
 {
@@ -915,7 +972,8 @@ end
     entity.SetEntity(define.id, sprite, function);
 }
 </code></pre>
-<p>最後，讓實體的物件初始化，調用從 lua 腳本中取得的 awake 函式！搭啦～原本只靠文字描述的實體就出在在場景中了，還帶著自己的圖片與行為。</p>
+<p>At the end of instantiation, we need to invoke the function loaded from the Lua script. Now the unique entity lives in the game world.</p>
+<!-- In the end of Instantiate, we need invoke awake function loaded from lua script. Now the unique entity is living in game world. -->
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
 <code class="language-cs">public class GameEntity : MonoBehaviour
 {
@@ -939,8 +997,8 @@ end
 
 </code></pre>
 <h3 id="advanced-topic">Advanced Topic</h3>
-<p>大功告成！</p>
-<p>現在遊戲在建置後仍能從 StreamingAssets 添加與修改遊戲內容，也達成遊戲模組的最基本效果了。</p>
+<p>Congratulations! Now, the game can modify its content using StreamingAssets after build, completing the basic part of game modification.</p>
+<!-- Congratulation! now, the game can modify content use StreamingAssets after build, the base modification for game are complete.  -->
 
 
 
@@ -957,14 +1015,17 @@ end
 
 
 <p><c>
-註：建置後的資料夾位置在 Build/Project_Data/StreamingAssets
+Note: After build, the folder location will be in Build/Project_Data/StreamingAssets
+<!-- Note: after build, folder location is in Build/Project_Data/StreamingAssets -->
 </c></p>
-<p>核心概念其實不複雜，就像上面拆解的而已，但這樣就真能的「應用」在遊戲上嗎？</p>
-<p>當然不行，因為範例省略了許多應用層面需要考量的問題，也不可能逐個深入解釋。畢竟本篇筆記的目的只是提供深入研究的起點，所以最後就丟幾個研究時遇到的難題給各位思考吧 :P</p>
-<p><strong>層次結構</strong></p>
-<p>這裡是指模組資料的存放規則，我們在範例使用的結構很簡單，只有一個文件 (entities.xml) 與兩個資源資料夾 (Sprite, Script) 而已，但實際應用時可能有各種不同類型的資料要存放。</p>
-<p>要怎麼規範才符合需求呢？是要根據「用途」分類資源，讓地圖、角色、怪物與道具使用的內容各自存放？還是基於「類型」分類資料，將定義文件、圖片資源與腳本獨立管理？</p>
-<p>模組資料夾中的層次結構與命名規範是我們首先要思考的問題。</p>
+<p>The core of game modification is simple, but there is still a long way to go beyond the implementation. This prototype ignore many issues in a real project. I cannot explain everything in a single article. so at the end of this journey, let me share some points for reflection on implementing modification.</p>
+<!-- The core of game modification are simple, but apart from real implement still have distance. this prototype ignore a lot of issus in real project, i can't explain all stuff in single article, so, in the end of journey, let me throw some reflect point in modification implement. -->
+<p><strong>Hierarchy</strong></p>
+<p>In the prototype, we used a simple data structure with only one definition file (entities.xml) and two resources folders  (Sprite, Script). However, in a real project, we may have various files that need to be organized.</p>
+<!-- We use simple data struct in prototype, only one definition file (entities.xml) and two resources folder (Sprite, Script), but in real project we may have various file need organize. -->
+<p>how to be establish a regulated data hierarchy? Should it be based application in the game or different type of files? So, the first question is about the files layout and naming rules.</p>
+<!-- establish 建立 -->
+<!-- How to regulate data hierarchy, by application in game or different type of file? so, the first question is file layout and naming rules. -->
 
 
 
@@ -975,15 +1036,17 @@ end
 <div class="image" style="width: 80%;" >
     <img src="/learn/game-development/how-to-make-modification-games/thinking-folder.jpg" alt="image display error, please report: [/learn/game-development/how-to-make-modification-games/thinking-folder.jpg]">
     <p style="opacity: 0.5">
-        Noita, One Step from Eden 與 Rimworld 的模組資料夾結構
+        Folder Layers in Noita, One Step from Eden and Rimworld
     </p>
 </div>
 
 
-<p><strong>定義格式</strong></p>
-<p>除了大範圍的層次結構，我們也要思考小範圍的資料定義格式，在範例中我們使用 xml 來定義一個實體，雖然裡面只有三項屬性，但實際應用時不會那麼簡單。</p>
-<p>我們可能需要儲存大量的文本、參數、行為、邏輯、視覺與聽覺資料，如何設計更好的資料格式，讓定義文件容易閱讀和修改？或是重用資料以避免大量的重複內容？</p>
-<p>定義文件的規範與格式也是一個要思考的問題。</p>
+<p><strong>Format Define</strong></p>
+<p>As an example, we used XML to define an entity with only three properties. In actual implementation, we may have a log of content to use, such as text, parameters, behaviors, visual assets adn audio data.</p>
+<!-- actual 實際的 -->
+<!-- We use xml define a entity as example, it used only three properties. in implementation, we may have lot of content need use such as text, parameter, behavior, visual and audio data.   -->
+<p>The second is how to define a format that is easy to read, modify, and reuse content to prevent repetition.</p>
+<!-- how to define a format that can easy to read and modify, or reuse content for prevent repetition are the second question. -->
 
 
 
@@ -994,18 +1057,23 @@ end
 <div class="image" style="width: 80%;" >
     <img src="/learn/game-development/how-to-make-modification-games/thinking-define.jpg" alt="image display error, please report: [/learn/game-development/how-to-make-modification-games/thinking-define.jpg]">
     <p style="opacity: 0.5">
-        One Step from Eden 中的各種定義檔、角色、動畫與道具
+        Definition data in One Step from Eden
     </p>
 </div>
 
 
-<p><strong>資料衝突</strong></p>
-<p>範例中我們透過 ID 作為實體的辨識標籤，雖然自己能避免命名衝突，但情況放到不同的模組創作者之間就不同了。該怎麼隔離不同模組的資料？如果希望不同模組之間能相互引用又該怎麼處裡？</p>
-<p>或是更可怕的，不是定義衝突而是運行時的行為與邏輯發生衝突該怎麼辦？</p>
-<p>如果社群為你創作了豐富的模組內容，卻因為大量衝突而無法加入遊戲會相當遺憾，所以模組之間的衝突應對也是製作時要考量的一點。</p>
-<p><strong>開發工具</strong></p>
-<p>「有辦法」開發模組不代表「容易」開發模組，如果想鼓勵玩家創作的話，為他們提供協助是必須的，就像遊戲引擎協助我們開發遊戲一樣。</p>
-<p>檔案管理器、資料檢視器、報錯系統與開發者模式等等，分析引擎是怎麼幫助我們製作遊戲的，並開發輔助玩家創作的工具，減低模組開發時會受到的阻礙。</p>
+<p><strong>Data Conflict</strong></p>
+<p>In the prototype, we loaded modification data and stored it in a dictionary, using string as identifiers. However, if we have multiple content from different mods, how to we isolate the content or allow the mods to interact with each other.</p>
+<!-- In prototype, we load modification data and store in dictionary, use string as identifier. in dictionary, each key can only store one data into it, if we have multiple content in different mod, how to isolate content or let mods interactive with each other? -->
+<p>Furthermore, how do we protect the game from crashing if mods cause runtime errors? It would be unfortunate if the community puts a lot of work on creating abundant mods but the mod loaded game will just easily leads to conflicts for players.</p>
+<!-- It would be unfortunate if the abundance of community-created content easily leads to conflicts for players. -->
+<!-- abundance 豐富的(正面) -->
+<!-- Or the mods caused runtime error, how can we protect game so that it won't crash. if community created abundant content, but conflict easily prevent player is sadly. -->
+<p><strong>Develop Tools</strong></p>
+<p>Allow players to make mods does not mean that mods are easy to create. Apart from the modification system itself, developer need to provide some tools to make the mod creation workflow easier.</p>
+<!-- allow players make mod does not meaning mod are easily to made, out of modification system self, developer needs provided some help to make mod creation workflow easier. -->
+<p>In addition to documentation and tutorials, some development tools are necessary, such as a resources manager, a data browser, a logger, and a developer mode fore players to test mod content.</p>
+<!-- except documentation and tutorial, some develop tools are necessary, such as resource manager, data browser, logger and developer mode for players test mod content. -->
 
 
 
@@ -1016,22 +1084,30 @@ end
 <div class="image" style="width: 80%;" >
     <img src="/learn/game-development/how-to-make-modification-games/thinking-devtool.jpg" alt="image display error, please report: [/learn/game-development/how-to-make-modification-games/thinking-devtool.jpg]">
     <p style="opacity: 0.5">
-        Rimworld 的報錯視窗
+        The logger window in Rimworld
     </p>
 </div>
 
 
-<p><strong>效能優化</strong></p>
-<p>我們製作遊戲時會因為效能考量對使用資源進行限制，但情況放到模組上就沒那麼簡單了，雖然還是能限制資源的規格，但仍無法直接管控模組使用的資源。</p>
-<p>如何管理大量資源，提升模組載入與運行效率？避免記憶體被未用資源佔滿，或是運行時的各種 GC 問題導致效能低落？</p>
-<p>效能也是一個需要考量的地方，除非你的遊戲像 Rimworld 一樣吸引人，不然玩家不會想花十幾分鐘等模組載入的。</p>
-<p><strong>目的為何</strong></p>
-<p>最後也是最重要的問題：你究竟想做什麼</p>
-<p>讓遊戲支援模組開發的目的為何？是希望玩家能分享創作，促進社群交流？還是想讓他們給遊戲添加更多道具、角色，提升內容豐富度？又或者你想打造一個像 Rimworld 與 Minecraft 這種趨近瘋狂，能對整個遊戲機制進行修改沙盒世界？</p>
-<p>無論如何最後都得回到需求上，實做前必須謹慎思考你的目標，並評估你願意付出多少成本完成這項偉大工作。</p>
-<h2 id="感謝閱讀">感謝閱讀</h2>
-<p>雖然這篇筆記的重點是模組開發，但當中的知識不會被用法侷限，即使不讓玩家改動內容，資料驅動也是相當重要的開發技能，它除了讓企劃人員能更方便的改動設計，也是發布後擴充 DLC 與進行熱更新的好方法。</p>
-<p>幾個月前就該完成的筆記，拖到現在不好意思了，入學讀書真的是很花時間的事。總之，希望這次的內容也能讓各位有所啟發，感謝閱讀 :D</p>
+<p><strong>Performance</strong></p>
+<p>In terms of performance, developers sometimes create specification for resources usage in the game. However, with modification, developers cannot manage all community content. Therefore, how to load and run mod content more effectively another point of reflection.</p>
+<!-- terms 條款 -->
+<!-- specification 規格 -->
+<!-- for performance, some time developer will create specification for resources use in game, but with modification, developer can't manage all community content. how to loading and running mod content more effectively, performance are another reflect point. -->
+<p><strong>What is the purpose</strong></p>
+<p>The last and most important question is: What is you purpose? Why do you want to make a game that is moddable? Is it for community interaction, to allow players to share their creative works and increase the replayability of the game? Or are you trying to build a game like Rimworld and Minecraft that allows player to change the entire game rules?</p>
+<!-- the last and the most important question: what is your purpose -->
+<!-- why you want make a game that moddable? for community interactive, let players share some creativity works, increase playable for game, or you are try to build a game like Rimworld and Minecraft that can let players change entire game rules? -->
+<p>Developers need to consider the purpose and how much time and money they are willing to invest in this great endeavor.</p>
+<!-- willing 願意的 -->
+<!-- invest 投資 -->
+<!-- endeavor 努力 -->
+<!-- developer need think the purpose and how much time and money you willing betting in this great job. -->
+<h2 id="thanks-for-reading">Thanks for Reading</h2>
+<p>Although the article is written for modifications, the development theory is commonly used. Even if you don&rsquo;t want players to modify game content, data-driven techniques are still essential for making developer&rsquo;s life easier. It&rsquo;s a good way to publish hot updates for release DLS.</p>
+<!-- Although the article is write for modification, but development theory are common to use. if we don't want let player to modify game content, data driven are still a essential technique that can let developer life easier, is a good way to pulish hot update or release DLC. -->
+<p>If you have any feedback or suggestion, please leave comment below :D</p>
+<!-- if there have some feedback and suggestion, please leave comment below :D  -->
 
 
 
@@ -1042,7 +1118,7 @@ end
 
 <p>
     <a href="https://github.com/angus945/angusChan-website-projectsource/tree/main/learn/game-development/how-to-make-modification-games/example" target="_blank">
-        &gt; 範例中的完整腳本，與範例的模組資料都在這 &lt;
+        &gt; you can find all completed scripts in prototype &lt;
     </a>
 </p>
 
@@ -1050,7 +1126,7 @@ end
 
 <iframe class="LikeCoin" height="190" src="https://button.like.co/in/embed/chanangus/button?referrer=https%3a%2f%2fangus945.github.io%2fen%2flearn%2fgame-development%2fhow-to-make-modification-games%2f" width="100%" frameborder=0></iframe>
 
-<h3 id="學習資料">學習資料</h3>
+<h3 id="research-references">Research References</h3>
 <p><a href="http://gameprogrammingpatterns.com/prototype.html" target="_blank">Game Programming Patterns - Prototype</a></p>
 <p><a href="http://gameprogrammingpatterns.com/type-object.html" target="_blank">Game Programming Patterns - Type Object</a></p>
 <p><a href="http://gameprogrammingpatterns.com/bytecode.html" target="_blank">Game Programming Patterns - Bytecode</a></p>
@@ -1114,7 +1190,7 @@ end
 
       
       <li>
-        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90Note%e3%80%91How%20to%20make%20Modification-Games.&amp;body=%e3%80%90Note%e3%80%91How%20to%20make%20Modification-Games%2c%20by%20AngusChan%27s%20Devlog%0a%e9%80%99%e6%ac%a1%e5%b0%87%e8%a7%a3%e9%87%8b%e9%81%8a%e6%88%b2%e6%a8%a1%e7%b5%84%e7%9a%84%e9%81%8b%e4%bd%9c%e5%8e%9f%e7%90%86%ef%bc%8c%e4%bb%a5%e5%8f%8a%e5%a6%82%e4%bd%95%e5%9c%a8%20Unity%20%e4%b8%ad%e4%bd%bf%e7%94%a8%20IO%e3%80%81XML%20%e8%88%87%20Lua%20%e9%80%b2%e8%a1%8c%e5%af%a6%e5%81%9a%e3%80%82%0a%0ahttps%3a%2f%2fangus945.github.io%2fen%2flearn%2fgame-development%2fhow-to-make-modification-games%2f%0a" target="_blank" class="share-btn email">
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90Note%e3%80%91How%20to%20make%20Modification-Games.&amp;body=%e3%80%90Note%e3%80%91How%20to%20make%20Modification-Games%2c%20by%20AngusChan%27s%20Devlog%0aExplain%20how%20modification-games%20work%2c%20and%20create%20a%20prototype%20use%20Unity.%0a%0ahttps%3a%2f%2fangus945.github.io%2fen%2flearn%2fgame-development%2fhow-to-make-modification-games%2f%0a" target="_blank" class="share-btn email">
           <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
           <p>Email</p>
         </a>
@@ -1124,6 +1200,31 @@ end
 
 
                 
+
+        
+
+        
+                
+        
+
+        <hr>
+        <script src="https://giscus.app/client.js"
+                data-repo="angus945/angusChan-website-comment"
+                data-repo-id="R_kgDOJfatog"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOJfatos4CWS6f"
+                data-mapping="title"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+
 
 
                 
@@ -1238,8 +1339,8 @@ end
       <ul>
         <li><a href="#what-is-data-driven">What is Data-Driven</a></li>
         <li><a href="#dynamic-loading">Dynamic Loading</a></li>
-        <li><a href="#format-define">Format Define</a></li>
-        <li><a href="#behavior-expand">Behavior Expand</a></li>
+        <li><a href="#define-format">Define Format</a></li>
+        <li><a href="#behavior-extend">Behavior Extend</a></li>
       </ul>
     </li>
     <li><a href="#prototyping">Prototyping</a>
@@ -1250,9 +1351,9 @@ end
         <li><a href="#advanced-topic">Advanced Topic</a></li>
       </ul>
     </li>
-    <li><a href="#感謝閱讀">感謝閱讀</a>
+    <li><a href="#thanks-for-reading">Thanks for Reading</a>
       <ul>
-        <li><a href="#學習資料">學習資料</a></li>
+        <li><a href="#research-references">Research References</a></li>
       </ul>
     </li>
   </ul>
@@ -1373,7 +1474,7 @@ end
     <div class="container-lg clearfix">
         <div class="col-12 footer">
             
-            <span>&copy; 2021-2023
+            <span>&copy; 2021-2024
                 <a href="https://angus945.github.io/">AngusChan</a>
                  | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
                 | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"

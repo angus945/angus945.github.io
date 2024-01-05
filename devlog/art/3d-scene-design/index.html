@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【日誌】Unity 城鎮場景製做過程 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="AngusChan&#39;s website" />
+
+
+
+<meta property="og:title" content="【日誌】Unity 城鎮場景製做過程" />
+<meta name="twitter:title" content="【日誌】Unity 城鎮場景製做過程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/art/3d-scene-design/" />
+
+<meta property="og:description" content="從開始接觸 Shader 就對風格化渲染感興趣了，也有學習過相關的技術知識，但因為美術能力不足而從未實行目標，直到半年前的某些機會開始深入美術領域，總算達成自己的里程碑了。" />
+<meta name="twitter:description" content="從開始接觸 Shader 就對風格化渲染感興趣了，也有學習過相關的技術知識，但因為美術能力不足而從未實行目標，直到半年前的某些機會開始深入美術領域，總算達成自己的里程碑了。" /><meta property="og:image" content="https://angus945.github.io/siteImage/head.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/siteImage/head.png" /><meta property="article:published_time" content="2023-12-30T17:21:27+08:00" /><meta property="article:modified_time" content="2023-12-30T17:21:27+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.942723de90946d27c102e4e23009a70dd1380025a21f650fad0a6113042cf7f6.css" integrity="sha256-lCcj3pCUbSfBAuTiMAmnDdE4ACWiH2UPrQphEwQs9/Y=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.85f26e98f67c0d63b7931521fd4cd0bd43948cf81e0fec42e9d083b7edc6d401.css" integrity="sha256-hfJumPZ8DWO3kxUh/UzQvUOUjPgeD&#43;xC6dCDt&#43;3G1AE=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+    
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight + 100;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/art/3d-scene-design/">【日誌】Unity 城鎮場景製做過程</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2023-12-30
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 6252 字
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;無標籤</span>
+
+        </div>
+    
+       
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+        <p>從開始接觸 Shader 就對風格化渲染感興趣了，也有學習過相關的技術知識，但因為美術能力不足而從未實行目標，直到半年前的某些機會開始深入美術領域，總算達成自己的里程碑了。</p>
+<!-- &nbsp; -->
+<!-- [text]({ ref "relpath" })。 -->
+<h2 id="前言-">前言 ++</h2>
+<p>2023 年六月時，我在 Youtube 看到風格化場景的線上課程宣傳，主要教場景美術需要的知識與技能，並在 UE4 中重建各種場景原畫，學生作品都相當吸睛，因此我在經濟與時間的評估下決定購買，並利用暑假期間學習了大多內容。</p>
+<p>除此之外，這學期（二上）也有一門跟 3D 場景有關的選修，期末作業需要交出整個城鎮場景，我就趁這機會<del>抱走班上所有 3D 美術大腿</del>，跟組員做出精美的期末成果。</p>
+<h3 id="成果展示-">成果展示 ++</h3>
+<p>先上成果，風光明媚的城鎮。除了 Skybox 是免費資產以外，其他內容都是我們製作的，包括房屋、佈景、材質貼圖、花草樹木<del>跟牆外的巨人</del>。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-2.png" alt="image display error, please report: [/devlog/art/3d-scene-design/result-2.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="注意事項-">注意事項 ++</h3>
+<p>這篇日誌的成果是在「分組作業」的情況下完成，選修科目《3D 場景設計》中除了我（小呈）以外還有三位隊友（YukiO3O、NatsuNa、水い），內文會替組員的工作註名。</p>
+<p>雖然是學校作業，但製作內容是<u>完全超出課程範圍</u>的，先註明以免產生誤會。我在暑假就進行過兩次個人練習，先前也已自學電腦圖學、著色器與相關數學知識三年半，因此這次作業應該視作過去累積經驗的實施，而非單個學期（四個月）內就達成的快速成果。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/practise.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/practise.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>專案儲存庫放在文末，有興趣的讀者也可以下載原始檔研究。內文會根據閱讀性進行編排，但大致符合現實時間軸，我們的製作流程並不正規，再加上篇幅問題可能省略部分細節，所以分享內容僅供參考歐 :P</p>
+<h2 id="建築製作-">建築製作 ++</h2>
+<p>使用工具與環境：</p>
+<p>Unity 2021.3.8</p>
+<p>Blender, 3DS Max, ZBush</p>
+<p>Substance Designer, Substance Painter</p>
+<p>以下正文！</p>
+<h3 id="尋找參考-">尋找參考 ++</h3>
+<p>我們在第一堂客完成組隊，並在 ArtStation 上找了各種作品參考風格。學校課程的前半是室內場景，但我們提早往分組的期末準備了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/reference.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/reference.jpg]">
+    <p style="opacity: 0.5">
+        剛開始其實找得很零散，這張圖是為了文章才湊出來的
+    </p>
+</div>
+
+
+<h3 id="建築設計-">建築設計 ＋+</h3>
+<p>總之，在有粗略方向後也嘗試設計過外觀&hellip;但這顯然這不是我擅長的，只拉出某些詭異幾何結構。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/building-angus.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/building-angus.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>後續交給組員（Yuki030）重新設計，對方先製作了兩款初版（左上）與合併後的次版（右上），最後再根據參考圖製作出最終版的外觀，主建築與高塔（亮晶晶的兩張）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/building-yuki.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/building-yuki.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：原本還想把室內擺設塞進建築，但考量到實施複雜度先放棄了。
+</c></p>
+<p>另外兩位組員也設計了其他款式的建築、高塔（左 NatsuNa）與風車（右 水い）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/building-pjie-yee.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/building-pjie-yee.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="貼圖製作-">貼圖製作 ++</h3>
+<p>為了節省資源，場景建築會製做成可重用的模組，因此貼圖方式也會受到影響。單體物件可能會先拆 UV 再畫貼圖，但模組物件則要先規劃好貼圖的使用與分配，製作或規劃完才拆，所以這裡也是先製作貼圖。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/art/3d-scene-design/texture-modular.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-modular.jpg]">
+    <p style="opacity: 0.5">
+        Google 3D modular building
+    </p>
+</div>
+
+
+<p><c>
+註：建築設計與貼圖製做是同時進行的，但因為沒用到太複雜的貼圖技術，兩邊實際上是獨立執行工作，但在正規情況下可能會進行過詳細討論與規劃才開始，確表效果與表現一致。
+</c></p>
+<p>我們的背景設定在中世紀歐洲，材質可以參考動畫和現實中的結構，以磚牆為例可能有三層：最內的結構層（磚塊），中間的填充層（水泥）與最外的塗料層（油漆）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/texture-reference.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-reference.jpg]">
+    <p style="opacity: 0.5">
+        Google 羅滕堡照片，他們建築狀況維護的不錯
+    </p>
+</div>
+
+
+<p>貼圖製作由我負責，使用的工具是 Substance Designer 2023（Steam 版），但這是許多大廠都會使用的程序貼圖製作工具，相當方便。基本上就是連連看，運作（數學）原理類似距離場的加減。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/texture-tool.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-tool.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>製作過程就跟寫程式一樣，將目標拆解成基本元素，分析最終效果是怎麼構成的，再一步步組合成貼圖。以磚塊為例，從基本模式（Pattern）開始，添加細節、添加顏色、添加光影、添加輪廓，最後再調整色調、添加筆觸效果。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 30%;" >
+    <img src="/devlog/art/3d-scene-design/texture-progress.gif" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-progress.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>除了磚塊以外還做了木板、石磚、水泥、青苔和屋瓦，都是建築會使用到的 PBR 材質，但透過模糊、預繪光影、加強輪廓與覆蓋筆觸等方式讓貼圖看起來更風格化。貼圖採用四方循環（Tileable），確保任何方向都能無限延伸。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/texture-building.png" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-building.png]">
+    <p style="opacity: 0.5">
+        材質的四張貼圖分別是 Albedo, Normal, Roughness 與 Ambient Occlusion
+    </p>
+</div>
+
+
+<p>放進引擎測試，檢查實際渲染時的色調與大小，解析度為 2m : 512px，教學說這是手遊低標。程序生成的好處就是修改方便，我能直接帶檔案到學校給組員操作，他們只要調調參數就能改變磚塊大小、破損程度、色調飽和或筆觸效果。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/texture-test.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texture-test.jpg]">
+    <p style="opacity: 0.5">
+        飽和度過高的初版磚塊貼圖
+    </p>
+</div>
+
+
+<h3 id="模組拆解-">模組拆解 ++</h3>
+<p>完成貼圖後就是模組化作業，拆解工作也由我進行。合併零碎物件、隱藏外部裝飾、根據原始設計重建簡略版建築，還要將尺寸修正為整數，確保後續組裝時的規格是統一的。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-0.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-0.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>接著把模型拆解成立體拼圖，包括各種尺寸的屋頂、牆面、木條與地基，要確認「每顆頂點」都在正確位置的繁瑣作業，沒對齊的話後續組裝就會產生縫隙，是過程的枯燥惡夢之一。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註１：模組尺寸根據需求訂製，拆分的越小會有更大的彈性與組合工作量，越則相反。但如果模組需要特別的形狀（如弧形）或特殊的貼圖需求（如標誌）就不用過度拆分，盡量讓結構保持完整（如整個屋頂）。
+</c></p>
+<p><c>
+註２：牆體被拆成 2x2, 4x2, 2x3 與 4x3 四種尺寸，但在貼圖比例 2:512 的情況下使用高度為 3 的牆面是錯誤的，餘數會導致垂直組合時貼圖無法連接，正確尺寸應該是 2x4 與 4x4 才對。
+</c></p>
+<p><c>
+註３：當初拆成 2x3 與 4x3 是因為另外兩棟建築的樓層高度為三公尺，我沒多想就照著拆了。實際上應該使用超出高度的牆面，多餘的部分直接插入地底，確保房屋不會在崎嶇地形懸浮。
+</c></p>
+<p>另一項枯燥的惡夢就是拆 UV，一樣要確認「每顆頂點」都在理想位置，否則也會出現貼圖接縫。因為貼圖採樣有循環模式，所以 UV 超出範圍也沒關係。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>拆完（或拆的同時）給物件上材質，如果模組同時有多個部分則透過多重材質達到效果。以使用四種材質的屋頂為例，它使用了外側瓦片、內側木板、封邊木條和磚牆牆面。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-4.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：Blender 多重材質在導出時不是依照顯示順序編排，而是某些超蠢的內部排序。要統一順序可以把每個部分拆開後再合併。
+</c></p>
+<p>木條貼圖是由組員（YukiO3O）雕刻與烘培的，同樣超出課堂範圍，我只有簡單解釋製程和提供筆記而已，剩下都是對方獨自完成的，效果相當不錯。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-woodplank.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-woodplank.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>視需求與做法差異，牆面裝飾可能會直接製作或另外嵌入，我們選後者。窗戶物件都是由組員（NatsuNa）製作的。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/module-window.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-window.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註１：如果嵌入物件會與牆體穿插，則需要另外製做鏤空牆面。
+</c></p>
+<p><c>
+註２：如果沒打算展示室內，窗戶物件也不應該鏤空，需要添加一個平面遮擋，否則開啟的窗戶只會看到牆面。我忘了告訴對方，這部分屬於指令失誤。
+</c></p>
+<p>湊齊所有拼圖後就能組裝了，引擎中的相關工作也由我進行。輸出 FBX、導入 Unity、建立 Prefab、分配材質最後拼起房屋。還寫了簡單的對齊工具，修正 Unity 物件旋轉的誤差問題。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/module-combine.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/module-combine.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：我使用 blender 插件 Batex 批量導出，幸好不用手動一個個做，不然又是新的惡夢了。
+</c></p>
+<h3 id="材質效果-">材質效果 ++</h3>
+<p>雖然已經有完整建築了，但視覺表現還不理想，主要的問題是貼圖的一致與重複性讓建築顯得單調。最簡單的方案是進行混合，將先前製作的覆蓋材質（水泥、青苔）疊加在基礎材質上（磚塊、屋瓦）。</p>
+<p>普遍的混合方式是插值（Lerp），透過權重調整兩種貼圖顯示的比例，但他的問題是缺乏細節，混合效果往往呈片狀（如左圖）。另一種進階技巧是高度混合（Height Lerp），利用高度圖作為閾值，材質只會在權重高於閾值顯示（如中圖，右圖是判斷示意圖）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/texblend-height.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texblend-height.jpg]">
+    <p style="opacity: 0.5">
+        圖片來源為 UE4: Detailed Texture Blending with HeightLerp and Vertex Painting
+    </p>
+</div>
+
+
+<p>高度混合的好處是能提供「巨量」細節，而計算成本也不會高到難以接受，只要多一個 <code>smoothstep()</code> 即可，以下是 HSLS 算式。</p>
+<pre><span>hlsl</span><hr style='margin-top:5px; margin-bottom:0px'>
+<code class="language-hlsl">void HeightLerp_float(float4 a, float4 b, float transition, float height, float fade, out float4 result)
+{
+    float t = smoothstep(height - fade, height + fade, transition);
+
+    result = lerp(a, b, t);
+}
+</code></pre>
+<p>混合權重可以使用世界座標噪聲決定，但這種方法就無法控制其發生時機。另一種方式是使用模型資料中的頂點色（Vertex Color），利用 Shader 讀取並將 RGB 數值作為不同圖層的權重混合。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 70%;" >
+    <img src="/devlog/art/3d-scene-design/texblend-vertexcolor.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texblend-vertexcolor.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>如此一來，就能利用程式修改頂點色，達成手動控制混合的效果。為了實現功能，我也做了自製筆刷工具，可筆刷能隨意調整大小、強度與漸變範圍，還有遮罩功能避免畫到不同材質，主要是編輯器做工繁瑣，沒什麼技術深度，就真的很繁瑣。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/art/3d-scene-design/texblend-blend.gif" alt="image display error, please report: [/devlog/art/3d-scene-design/texblend-blend.gif]">
+    <p style="opacity: 0.5">
+        青苔從屋瓦縫隙生長，而不是直接覆蓋在上面
+    </p>
+</div>
+
+
+<p><c>
+註１：我嘗試過 Polybresh, Probuilder 等同樣有繪製功能的插件，但他們都只能針對單一 Mesh 編輯，效果對於我們的模組建築不理想。
+</c></p>
+<p><c>
+註２：編輯器狀態下修改 MeshFilter 中的 mesh 會造成一些問題，所以我訪問的是 sharedmesh 資料，但為了避免直接修改寫入資料夾中的原始檔，我會再生成一個臨時 Clone，並用 MonoBehaviour 的變數儲存修改後的頂點色。
+</c></p>
+<p><c>
+註３：Polybresh 使用 ScriptableObject 儲存修改後的資料，但我因為不想弄出一堆資料夾物件而使用 MonoBehaviour，而根據製做後的經驗判斷，用 ScriptableObject 應該會更理想。
+</c></p>
+<p><c>
+註４：我的筆刷工具有不少缺陷並且缺乏文檔幫助使用者理解，時間關係我也沒打算處裡這些後續，有需求的話建議自行開發，但還是歡迎勇者取用。
+</c></p>
+<p>最後，為了讓平面模型看起來有更多細節，我也抄了一段視差遮擋（Parallax Occlusion）的程式來用。他會在高度圖上進行射線投射（射線邁進），根據視角檢測會不會發生遮擋，決定實際繪製的像素為何者。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/texblend-parallax.gif" alt="image display error, please report: [/devlog/art/3d-scene-design/texblend-parallax.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>組合後的房屋，但這次多了混合貼圖與視差效果，顯得精緻不少。抱歉了效能但我真的想要那個酷酷的立體效果。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/texblend-result.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/texblend-result.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="地形環境-">地形環境 ++</h3>
+<p>主要地形是使用 Unity 內建工具（Terrain）製作的，也安裝了官方的功能擴展包 <a href="https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808" target="_blank">Terrain Sample Asset Pack</a>，可以在 Package Manager 的 Terrain Tools 中找到下載連結。</p>
+<p>我們使用的功能包括地形筆刷、貼圖筆刷以及樹木、細節繪製功能，Unity 基礎知識這裡就不多贅述。我用 Substance Designer 製作了三種不同的地形材質，草地、沙石地與石磚道路。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 50%;" >
+    <img src="/devlog/art/3d-scene-design/terrain-texture.png" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-texture.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>材質是預設的 URP Terrain Lit，支援 Height-base Blend（Height Lerp）功能，開啟後也能讓材質交界產生更多細節。只要在 Terrain Layer 中設置 Mask Map，並在 Paint Texture 功能中開啟 Enable Height-base Blend 即可。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/art/3d-scene-design/terrain-blend.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-blend.jpg]">
+    <p style="opacity: 0.5">
+        Mask Map 的 RGBA 分別為 Metallic, AmbientOcclusion, Height, Smoothness
+    </p>
+</div>
+
+
+<p>給場景添加一些綠意，蓬蓬樹製作起來不難，只要建出樹幹再放一堆使用 Alpha Clip 的葉片，然後設置葉片的 Normal 方向就好了。比較要注意的是效能問題，但這裡也先不深入優化部分。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/art/3d-scene-design/terrain-tree-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-tree-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>植被屬於大量出現在場景的物件，一棵棵手動種是很不切實際的，場景編輯會用更有效率的方式進行。這裡使用的是 Terrain 內建的 Paint Tree 功能，能直接用筆刷刷出樹木。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/art/3d-scene-design/terrain-tree-2.gif" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-tree-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>花草也用相似方式製作，在共用貼圖上繪製圖像（或雕刻烘培），再建立低模、貼上、渲染。上面是我練習時先做的，下面色彩更鮮豔的是組員（Yuki030）在作業期間製作，也是十分精緻。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/terrain-plant-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-plant-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>草地使用地形內建的 Details Paint 繪製密度圖，但我製做了額外的地形混合效果。簡單來說就是：拍攝一張地形顏色和深度圖，再用距離場混色讓物件底部融入地形，避免不自然的植被交界。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/terrain-grass-blend.gif" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-grass-blend.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：UE4 有內建混合並兼具優化的功能的 RVT（Runtime Virtual Texturing），但我沒在 Unity 找到相關的內建，所以只好自己做，而且這部分教學真的意外的少。
+</c></p>
+<p>除了地表混色之外，我也給草添加了環境漸變，不然整片草原顏色都相同太不自然了。我做了漸變遮罩讓草根據世界座標混色。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/terrain-grass-gradient.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/terrain-grass-gradient.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：其實漸變應該做在地形材質上，這樣能讓地表也有顏色變化，而上面的草也能自動混合。但我還沒弄懂怎麼自訂 Terrain Shader 就先跳過了。
+</c></p>
+<p>最後，給環境放上漂亮的水就完事了，找了 URP 水面教學來參考，也額外拿軌跡粒子做了風。花草刷上、放片池塘、打光後再放棟房屋，風光明媚小場景（期中作業）就完成了。</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/lwmI8o-n_bI" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="城鎮設計-">城鎮設計 ++</h2>
+<p>該有的物件都大致湊齊了，我們也加快腳步製做期末，目標是一個城鎮。</p>
+<h3 id="參考概念-">參考概念 +</h3>
+<p>我們沒有參考的場景原畫，只是先在引擎中畫了簡單地形，餵給 AI 看能不能生出個所以然，咒文詠唱與魔法的跌代由組員（YukiO3O）進行。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/town-concept.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/town-concept.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="區域規劃-">區域規劃 ++</h3>
+<p>圖是有了&hellip;但細節過於抽象也沒派上多少用途，而我購買的課程是根據原畫重建場景，不包括設計場景的部分，所以城鎮規劃初期蠻混亂的。道路看起來像醜醜的麥田圈，背景塞了幾座簡陋的山當邊界阻擋。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/town-design-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/town-design-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p><c>
+註：實際做過才知道原畫師與概念藝術家的重要性，不然之前都以為他們只負責畫酷酷的圖給人看。
+</p></c>
+<p>後面交給組員（YukiO3O）設計，用道路分割出比較有結構性的區域。左邊為山地、中後方是城堡高地、中間的凹陷空地是廣場，道路之間則穿插了居住區。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/town-design-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/town-design-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>然後再交給另一位組員（水い）接手，劃出建築區塊後重新調整房屋擺設，讓整體看起來不那麼凌亂。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/town-design-3.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/town-design-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>最後再交回我與組員（YukiO3O）將佈局修改到最終版本。把高地修的更有層次並擺上房屋，填平中間的凹陷。最後決定放棄城堡，畢竟組員還扛著各科作業跟教授的案子，<del>歡迎來到設計系</del>。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/town-design-4.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/town-design-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="封邊岩石-">封邊岩石 ++</h3>
+<p>用高度圖生成地形是很普遍的做法，但他的缺點是過於平滑與斜坡的著色效果不好，所以在山壁這種會產生劇烈起伏的地方會很難看。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/edge-rock-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/edge-rock-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>這種情況就要用非地形的模型「封邊」，放上預製的石塊或牆面擋住斜坡，讓地形顯得更有稜角。時間關係牆面（右圖）做的有點敷衍，但應該能看出差異。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/edge-rock-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/edge-rock-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>山石的效果不錯，是組員（水い）製做的，我再用簡單的方向混色，讓朝上的部份畫出草地材質。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/edge-rock-3.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/edge-rock-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>來張俯瞰圖，把醜醜山壁跟的斜坡堵上，把不同高度間的階梯補上之後就更有樣子了。背景的山也放了跟石頭相同的材質。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/edge-rock-4.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/edge-rock-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="市集活動-">市集活動 ++</h3>
+<p>我們從規劃開始就預留了廣場空地，最後決定在這裡擺放市集。請組員（NatsuNa）製作了相關物件，箱子、籃子、推車和棚子等，還將水果圖片塞進容器讓物件看起來更多樣。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/market-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/market-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>將物件擺放成市集該有的樣子，城鎮顯得更繁榮了！</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/market-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/market-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="細節佈置-">細節佈置 ++</h3>
+<p>最後的最後就是點綴一些細節，刷上樹木、灌木與花花草草，擺上柵欄、路燈與稻草人等佈景，主要由組員（Yuki030）完成。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/detail-1.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/detail-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/detail-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/detail-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/detail-3.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/detail-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>調整 FOG 讓遠處有點霧茫茫的效果。地圖還有離島，但沒時間擺設就空著了。邊界放了一隻巨人，是組員（水い）製作的 ww</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/detail-4.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/detail-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>河床使用深色的泥土材質，再埋一些石塊就有樣子了，雖然水擋著其實看不太到東西。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/river-2.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/river-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="感謝閱讀-">感謝閱讀 ++</h2>
+<p>完工！！！！！！！！！！！！！</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-1.png" alt="image display error, please report: [/devlog/art/3d-scene-design/result-1.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-2.png" alt="image display error, please report: [/devlog/art/3d-scene-design/result-2.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-3.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/result-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-4.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/result-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-5.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/result-5.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/art/3d-scene-design/result-6.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/result-6.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>我也抓了<a href="https://www.sharpcoderblog.com/blog/unity-3d-fps-controller" target="_blank">第一人稱控制</a>的資源來用，錄一些場景內走動的畫面。</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/LxDYq6CN8YM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/tIzAQ6kwt9g" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="工作總結-">工作總結 ++</h3>
+<p>感謝三位組員的努力，最後來做一下工作總結，截個漂亮的圖讓大家放進作品集。首先是我（小呈）的部分，主要負責技美與引擎相關工作，材質貼圖、著色器、渲染、花草樹木和模組拆解。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/portfolio-angus.png" alt="image display error, please report: [/devlog/art/3d-scene-design/portfolio-angus.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>組員（YukiO3O）負責建築設計，製做大型房屋與配件、主塔、木條貼圖、佈景物件、花草樹木、詠唱概念圖與場景細節編輯。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/portfolio-yuki.png" alt="image display error, please report: [/devlog/art/3d-scene-design/portfolio-yuki.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>組員（NatsuNa）負責建築設計，製做中小型房屋、小塔、窗戶、柵欄與市集物件。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/portfolio-pjie.png" alt="image display error, please report: [/devlog/art/3d-scene-design/portfolio-pjie.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>組員（水い）負責山石製作，完成大小石塊、特殊建築、初步城鎮規劃與超大型巨人。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/portfolio-yee.png" alt="image display error, please report: [/devlog/art/3d-scene-design/portfolio-yee.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="心得感想-">心得感想 ++</h3>
+<p>這裡是專案儲存庫，所有模型、貼圖、著色器與自製工具都在裡面，感興趣的人歡迎下載看看，僅供學術研究歐！</p>
+<p><a href="https://github.com/angus945/3D-Scene-Design-Course" target="_blank">https://github.com/angus945/3D-Scene-Design-Course</a></p>
+<p>雖然有做一些 Shader 來達成自訂效果，但部分物件還是使用 URP 預設的 Lit 材質，其實預設只要貼圖給對，放好 Skybox 與 Post Processing 就有不錯的畫面了。</p>
+<p>可惜的是效能問題尚未解決，實時 FPS 表現不穩定，最大開銷是材質的多層採樣與視差計算，再來是植被渲染之類的，應該能透過 LOD 設置緩解？</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/art/3d-scene-design/result-profiler.jpg" alt="image display error, please report: [/devlog/art/3d-scene-design/result-profiler.jpg]">
+    <p style="opacity: 0.5">
+        其實我也看不懂，只是放進來讓我感覺更專業而已 (X
+    </p>
+</div>
+
+
+<p>而這篇文章也只是「城鎮場景」製做過程，而非「遊戲場景」設計，因為遊戲場景是為機制服務的，但我們的成品並沒有考量任何機制內容，只針對視覺表現做設計。</p>
+<p>由於上面兩項因素，雖然成果看上去很漂亮，但目前仍不具有應用價值。出於時間考量，後續也沒打算進行更多修正，恐怕得等出現真正需求時才會深入。</p>
+<p>大致就醬，從開始場景課題到現在也過了半年，在兩次個人練習後帶著組員完成這項宏大任務，而我研究 Shader 的最初目標總算達成了，走三年半總算摸到了最大的里程碑，成就感滿滿。</p>
+<p>感謝閱讀，這篇日誌是我們場景製作過程的總結，寫完也代表課題暫時告一段落了，有任何想法或疑問歡迎在文章底部或轉載社群留言噢！</p>
+<p>下一個目標是什麼呢～</p>
+<h3 id="資源參考-">資源參考 ++</h3>
+<p>線上課程課官方 Youtube 頻道：<a href="https://www.youtube.com/@modenggame" target="_blank">魔灯Modeng</a></p>
+<p>我買的是他們的課程錄影（無回饋版）：<a href="https://www.artstation.com/marketplace/p/MJq0M/modeng-stylized-scene-creation-in-unreal-engine-v1-0-no-feedback-service" target="_blank">Modeng Stylized Scene Creation In Unreal Engine V1.0 (No Feedback Service)</a></p>
+<p>地形混合：<a href="https://inresin.wordpress.com/2020/04/03/terrain-and-mesh-blending-in-unity/" target="_blank">Terrain and Mesh Blending in Unity</a></p>
+<p>URP 自訂光影：<a href="https://youtu.be/GQyCPaThQnA" target="_blank">Custom Lighting in Unity URP Shader Graph! Ready for Toony Lights</a></p>
+<p>蓬蓬樹：<a href="https://youtu.be/wPBX9kqcHzE" target="_blank"> How to Make a Stylized Tree by using Blender and Unity</a></p>
+<p>視差著色器：<a href="https://www.youtube.com/watch?v=LKhGqKYOmbo" target="_blank">Parallax Mapping in Unity Shader Graph</a></p>
+<p>水面：<a href="https://youtu.be/MHdDUqJHJxM" target="_blank">3D Stylized Water with Refraction and Foam Shader Graph - Unity Tutorial</a></p>
+<p>高度混合：<a href="https://youtu.be/dghCetkArJI" target="_blank">UE4: Detailed Texture Blending with HeightLerp and Vertex Painting</a></p>
+<p>Blender 批量導出：<a href="https://github.com/jayanam/batex" target="_blank">Batex</a></p>
+<p>Skybox：<a href="https://assetstore.unity.com/packages/2d/textures-materials/sky/fantasy-skybox-free-18353" target="_blank">Fantasy Skybox FREE</a></p>
+<p><a href="https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808" target="_blank">Terrain Sample Asset Pack</a></p>
+<p><a href="https://docs.unity3d.com/Manual/class-TerrainLayer.html" target="_blank">Terrain Layers</a></p>
+
+        
+        
+    </div>
+</article>
+
+
+
+
+                
+  
+  
+  
+
+  <hr>
+  <section class="social-share">
+    <ul class="share-icons">
+      <li>
+        <img src="https://img.icons8.com/ios-glyphs/30/null/share--v1.png" width="35" height="35"/>
+      </li>
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2fart%2f3d-scene-design%2f&amp;text=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91Unity%20%e5%9f%8e%e9%8e%ae%e5%a0%b4%e6%99%af%e8%a3%bd%e5%81%9a%e9%81%8e%e7%a8%8b" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+          
+<img src="https://img.icons8.com/color/48/null/twitter--v1.png" width="35" height="35"/>
+          <p>Twitter</p>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fangus945.github.io%2fdevlog%2fart%2f3d-scene-design%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="share-btn facebook">
+          <img src="https://img.icons8.com/fluency/48/null/facebook-new.png" width="35" height="35"/>
+          <p>Facebook</p>
+          </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2fart%2f3d-scene-design%2f&amp;source=https%3a%2f%2fangus945.github.io%2fdevlog%2fart%2f3d-scene-design%2f&amp;title=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91Unity%20%e5%9f%8e%e9%8e%ae%e5%a0%b4%e6%99%af%e8%a3%bd%e5%81%9a%e9%81%8e%e7%a8%8b&amp;summary=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91Unity%20%e5%9f%8e%e9%8e%ae%e5%a0%b4%e6%99%af%e8%a3%bd%e5%81%9a%e9%81%8e%e7%a8%8b" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="share-btn linkedin">
+          <img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" width="35" height="35"/>
+            <p>LinkedIn</p>
+          </a>
+      </li>
+
+      
+      
+
+      
+      <li>
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91Unity%20%e5%9f%8e%e9%8e%ae%e5%a0%b4%e6%99%af%e8%a3%bd%e5%81%9a%e9%81%8e%e7%a8%8b.&amp;body=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91Unity%20%e5%9f%8e%e9%8e%ae%e5%a0%b4%e6%99%af%e8%a3%bd%e5%81%9a%e9%81%8e%e7%a8%8b%2c%20by%20AngusChan%27s%20Devlog%0a%0a%0ahttps%3a%2f%2fangus945.github.io%2fdevlog%2fart%2f3d-scene-design%2f%0a" target="_blank" class="share-btn email">
+          <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
+          <p>Email</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+
+                
+
+        
+
+        
+                
+        
+
+        <hr>
+        <script src="https://giscus.app/client.js"
+                data-repo="angus945/angusChan-website-comment"
+                data-repo-id="R_kgDOJfatog"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOJfatos4CWS6f"
+                data-mapping="title"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="preferred_color_scheme"
+                data-lang="zh-TW"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+
+
+
+                
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            尊重著作權，轉載規則請見  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+             。
+        </p>
+    </blockquote>
+</div>
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/procedure-generation/">procedure-generation</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/trip/">trip</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目錄</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言-">前言 ++</a>
+      <ul>
+        <li><a href="#成果展示-">成果展示 ++</a></li>
+        <li><a href="#注意事項-">注意事項 ++</a></li>
+      </ul>
+    </li>
+    <li><a href="#建築製作-">建築製作 ++</a>
+      <ul>
+        <li><a href="#尋找參考-">尋找參考 ++</a></li>
+        <li><a href="#建築設計-">建築設計 ＋+</a></li>
+        <li><a href="#貼圖製作-">貼圖製作 ++</a></li>
+        <li><a href="#模組拆解-">模組拆解 ++</a></li>
+        <li><a href="#材質效果-">材質效果 ++</a></li>
+        <li><a href="#地形環境-">地形環境 ++</a></li>
+      </ul>
+    </li>
+    <li><a href="#城鎮設計-">城鎮設計 ++</a>
+      <ul>
+        <li><a href="#參考概念-">參考概念 +</a></li>
+        <li><a href="#區域規劃-">區域規劃 ++</a></li>
+        <li><a href="#封邊岩石-">封邊岩石 ++</a></li>
+        <li><a href="#市集活動-">市集活動 ++</a></li>
+        <li><a href="#細節佈置-">細節佈置 ++</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀-">感謝閱讀 ++</a>
+      <ul>
+        <li><a href="#工作總結-">工作總結 ++</a></li>
+        <li><a href="#心得感想-">心得感想 ++</a></li>
+        <li><a href="#資源參考-">資源參考 ++</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        
+<div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2024
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
+                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 構建而成
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

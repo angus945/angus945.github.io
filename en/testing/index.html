@@ -301,7 +301,7 @@
 
 <script src="https://threejs.org/build/three.min.js"></script>
 <script type="text/javascript">
-
+    
     var seed = Math.random();
     var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
 
@@ -356,7 +356,7 @@
         clock = new THREE.Clock();
         camera.position.z = 1;
 
-        var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+        var geometry = new THREE.PlaneGeometry( 2, 2 );
         var material = createMaterial(uniforms, data.vert, data.frag);
         var mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
@@ -512,7 +512,7 @@
     <header>
     <div class="container-lg clearfix">
         <div class="col-12 header">
-            <a class="title-main" href="https://angus945.github.io/">AngusChan&#39;s Devlog</a>
+            <a class="title-main" href="/en">AngusChan&#39;s Devlog</a>
             
             <span class="title-sub">Stay Hungry, Stay Foolish</span>
             
@@ -1463,7 +1463,7 @@ void main()
     <div class="container-lg clearfix">
         <div class="col-12 footer">
             
-            <span>&copy; 2021-2023
+            <span>&copy; 2021-2024
                 <a href="https://angus945.github.io/">AngusChan</a>
                  | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
                 | Powered by <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
