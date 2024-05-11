@@ -6,7 +6,16 @@
     <description>Recent content on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Fri, 05 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 May 2024 09:30:17 +0800</lastBuildDate><atom:link href="https://angus945.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】關卡編輯器</title>
+      <link>https://angus945.github.io/draft/alfietw-level-editor/</link>
+      <pubDate>Mon, 06 May 2024 09:30:17 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/draft/alfietw-level-editor/</guid>
+      <description>這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！ 前言 + 這個專案是二上期末跟《故事編寫》課老師聊到的東西，他認為有輔助軟體能對教學品</description>
+    </item>
+    
     <item>
       <title>【日誌】Unity 城鎮場景製做過程</title>
       <link>https://angus945.github.io/devlog/art/3d-scene-design/</link>
