@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="HandheldFriendly" content="True" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="generator" content="Hugo 0.94.1" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/siteimage/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/siteimage/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/siteimage/favicon-16x16.png">
+<link rel="manifest" href="/siteimage/manifest.json">
+<link rel="mask-icon" href="/siteimage/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<title>【日誌】關卡編輯器 - AngusChan&#39;s Devlog</title>
+
+
+<meta name="author" content="AngusChan" />
+
+
+<meta name="description" content="這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！" />
+
+
+<meta name="keywords" content="data-driven, project" />
+
+
+<meta property="og:title" content="【日誌】關卡編輯器" />
+<meta name="twitter:title" content="【日誌】關卡編輯器" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://angus945.github.io/devlog/project/nightmare-crafter/" />
+
+<meta property="og:description" content="這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！" />
+<meta name="twitter:description" content="這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！" /><meta property="og:image" content="https://angus945.github.io/devlog/nightmare-crafter/featured.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://angus945.github.io/devlog/nightmare-crafter/featured.png" /><meta property="article:published_time" content="2024-05-06T09:30:17+08:00" /><meta property="article:modified_time" content="2024-05-06T09:30:17+08:00" />
+
+
+<style>
+    @media (prefers-color-scheme: dark) {
+        body[data-theme='auto'] img {
+            filter: brightness(60%);
+        }
+    }
+
+    body[data-theme='dark'] img {
+        filter: brightness(60%);
+    }
+</style>
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/assets/css/fuji.min.css" />
+
+
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LTVT6WYDT4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-LTVT6WYDT4');
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/global-scrollbar.5b598faf3be22e0dd92d4c8d17451723ee2e6bb2a7d402d526e30ad977125fdb.css" integrity="sha256-W1mPrzviLg3ZLUyNF0UXI&#43;4ua7Kn1ALVJuMK2XcSX9s=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-style.73e84ce876a003ab9119845f2f03a0c36a0c7160033ab908600bdb089b9025da.css" integrity="sha256-c&#43;hM6HagA6uRGYRfLwOgw2oMcWADOrkIYAvbCJuQJdo=">
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/content-tag.88756549e6e6c3d88b7fe0e9f73df668c448d08d4f0ced88126af94516fdaf7d.css" integrity="sha256-iHVlSebmw9iLf&#43;Dp9z32aMRI0I1PDO2IEmr5RRb9r30=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/social-share.942723de90946d27c102e4e23009a70dd1380025a21f650fad0a6113042cf7f6.css" integrity="sha256-lCcj3pCUbSfBAuTiMAmnDdE4ACWiH2UPrQphEwQs9/Y=">
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/background.85f26e98f67c0d63b7931521fd4cd0bd43948cf81e0fec42e9d083b7edc6d401.css" integrity="sha256-hfJumPZ8DWO3kxUh/UzQvUOUjPgeD&#43;xC6dCDt&#43;3G1AE=">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://angus945.github.io/shader-container.619133730b593e40a34b42fbe400df7189d620002eadf2e4b5ce3e4e8d9b8f1d.css" integrity="sha256-YZEzcwtZPkCjS0L75ADfcYnWIAAurfLktc4&#43;To2bjx0=">
+
+
+
+<script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    
+    window.addEventListener('load', function()
+    {
+        var containers = document.getElementsByClassName("shader-container");
+        
+        for(var i = 0; i < containers.length; i++)
+        {
+            loadShader(containers[i]);
+        }
+    });
+    function loadShader(container)
+    {
+        var input = container.getElementsByClassName("shader-input")[0];
+        
+        if(input == null) return;
+        
+        var canvas = container.getElementsByTagName("canvas")[0];
+        var sandbox = new GlslCanvas(canvas);
+
+        var fields = container.getElementsByClassName("shader-input-field");
+
+        
+        
+            var datas = JSON.parse(input.dataset.inputs);
+
+            for(var i = 0; i < fields.length; i ++)
+            {
+                setInput(sandbox, fields[i], datas[i]);
+            }
+        
+        
+        
+        
+        
+
+    };
+    function setInput(sandbox, field, data)
+    {
+        switch(data.type)
+        {
+            case "int":
+                rangeField(sandbox, field, data, 0);
+                break;
+                
+            case "float":
+                rangeField(sandbox, field, data, 2);
+                break;
+                
+            case "vector":
+                vectorField(sandbox, field, data);
+                break;
+        }
+    }
+    function rangeField(sandbox, field, data, fixed)
+    {
+        var value = field.querySelector("#value");
+        var slider = field.getElementsByTagName("input")[0];
+
+        slider.addEventListener('input', (event) => {
+            var input = parseFloat(slider.value);
+
+            sandbox.setUniform(data.name, input);
+            value.innerHTML = input.toFixed(fixed);
+        });
+
+        value.innerHTML = parseFloat(slider.value).toFixed(fixed);
+        sandbox.setUniform(data.name, parseFloat(slider.value));
+    }
+
+    function vectorField(sandbox, field, data)
+    {            
+        var value = field.querySelector("#value");
+        value.innerHTML = data.default;
+        
+        var picker = field.getElementsByTagName("canvas")[0];
+        picker.width = picker.clientWidth;
+        picker.height = picker.clientHeight;
+        picker.style.display = "none";
+
+        var context = picker.getContext('2d');
+
+        var minX = parseFloat(data.min.x);
+        var maxX = parseFloat(data.max.x);
+        var minY = parseFloat(data.min.y);
+        var maxY = parseFloat(data.max.y);
+
+        var popup = false;
+        var mouseDown = false;
+        
+        value.addEventListener('click', (event) => {
+            popup = !popup;
+            picker.style.display = popup ? "block" : "none";
+        });
+        picker.addEventListener('mousedown', (event) => {
+            mouseDown = true;
+
+            pickPosition(event);
+        });
+        picker.addEventListener('mousemove', (event) => {
+
+            if(!mouseDown) return;
+
+            pickPosition(event);                
+        });
+        picker.addEventListener('mouseup', (event) => {
+            mouseDown = false;
+        });
+                    
+        function pickPosition(event)
+        {
+            var rect = picker.getBoundingClientRect();
+            var clickX = event.pageX - picker.offsetLeft;
+            var clickY = event.clientY - rect.top;
+            
+            var uvX = (clickX) / rect.width;
+            var uvY = 1 - (clickY) / rect.height;
+
+            var x = minX + (maxX - minX) * uvX;
+            var y = minY + (maxY - minY) * uvY;
+
+            drawPoint(picker, context, clickX, clickY, 'red', 5);
+            value.innerHTML = `(${ x.toFixed(2) }, ${ y.toFixed(2) })`;
+            
+            sandbox.setUniform(data.name, x, y);              
+        }
+        function drawPoint(canvas, context, x, y, color, radius) 
+        {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "red"; 
+            
+            context.beginPath();
+            context.arc(x, y, radius, 0, 2 * Math.PI, true);
+            context.fill();
+        }
+    }
+</script>
+
+          
+ 
+
+
+
+
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+    
+    
+    
+        
+        
+    
+    
+    
+
+    
+        
+     
+
+
+
+
+
+<script src="https://threejs.org/build/three.min.js"></script>
+<script type="text/javascript">
+    
+    var seed = Math.random();
+    var backgroundData = randomBackground("[{\u0022dark_image\u0022:\u0022\/background\/watercolor-black.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-white.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-a\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-darkblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-lightblue.jpg\u0022,\u0022light_opacity\u0022:0.25,\u0022name\u0022:\u0022watercolor-b\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022},{\u0022dark_image\u0022:\u0022\/background\/watercolor-deepblue.jpg\u0022,\u0022dark_opacity\u0022:0.2,\u0022fps\u0022:5,\u0022frag\u0022:\u0022#ifdef GL_ES\\r\\nprecision mediump float;\\r\\n#endif\\r\\n\\r\\nuniform vec2 u_resolution;\\r\\nuniform vec2 u_mouse;\\r\\nuniform float u_time;\\r\\n\\r\\nuniform float u_seed;\\r\\nuniform float u_theme;\\r\\n\\r\\nvoid randomColor(float seed, out vec3 colorA, vec3 colorB)\\r\\n{\\r\\n    colorA = fract(vec3(seed * 1.0, seed * 10.0, seed * 100.0));\\r\\n    colorB = fract(vec3(seed * 1000.0, seed * 10000.0, seed * 100000.0));\\r\\n}\\r\\n\\r\\nvoid main() \\r\\n{\\r\\n    vec2 st = gl_FragCoord.xy \/ u_resolution.xy;\\r\\n    \/\/ vec2 mouse = u_mouse \/ u_resolution;\\r\\n\\r\\n    vec3 colorA, colorB;\\r\\n    randomColor(u_seed, colorA, colorB);\\r\\n    \\r\\n    vec3 color = mix(colorA, colorB, dot(st, colorA.xy));\\r\\n    color.r \u002b= sin(u_time * \u002b5.0 \u002b u_seed * 46.451) * 0.10;\\r\\n    color.g \u002b= cos(u_time * -3.0 - u_seed * 13.151) * 0.20;\\r\\n    color.b \u002b= sin(u_time * \u002b1.0 \u002b u_seed * 97.654) * 0.15;\\r\\n        \\r\\n    vec4 darkColor = vec4(color * 0.5, 0);\\r\\n    vec4 lightColor = vec4(color * 0.3, 0.1);\\r\\n    gl_FragColor = mix(darkColor, lightColor, u_theme);\\r\\n}\u0022,\u0022light_image\u0022:\u0022\/background\/watercolor-skyblue.jpg\u0022,\u0022light_opacity\u0022:0.15,\u0022name\u0022:\u0022watercolor-c\u0022,\u0022speed\u0022:0.01,\u0022style\u0022:\u0022background image-basis\u0022,\u0022vert\u0022:\u0022void main() {\\r\\n    gl_Position = vec4( position, 1.0 );\\r\\n}\u0022}]"); 
+
+    console.log(backgroundData);
+    
+    function randomBackground(datas)
+    {
+        var backgrounds = JSON.parse(datas);
+        var index = Math.floor(Math.random() * backgrounds.length);
+
+        return backgrounds[index];        
+    }
+
+    var canvas;
+    var uniforms = createUniform();
+    var camera, scene, renderer, clock;
+    var mouse = {x:0, y:0};
+
+    $(document).ready(function() 
+    {        
+        createRenderer(backgroundData);
+        createCanvas(backgroundData);
+
+        var themeButton = document.getElementsByClassName('btn-toggle-mode')[0];
+        themeButton.addEventListener('click', () => updateTheme(backgroundData));
+        themeButton.addEventListener('click', () => updateInitial(backgroundData));
+
+        setCanvas(backgroundData);
+        updateTheme(backgroundData);
+        updateSize();
+
+        updateInitial(backgroundData);
+        update();
+    });
+
+    
+    window.addEventListener('resize', () => 
+    {
+        updateSize();
+    });
+    window.addEventListener( 'mousemove', (event) =>
+    {
+        updateMouse(event);
+    });
+    
+    function createRenderer(data) 
+    {
+        if(data.vert == "") return;
+
+        camera = new THREE.Camera();
+        scene = new THREE.Scene(); 
+        clock = new THREE.Clock();
+        camera.position.z = 1;
+
+        var geometry = new THREE.PlaneGeometry( 2, 2 );
+        var material = createMaterial(uniforms, data.vert, data.frag);
+        var mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+
+        canvas = renderer.domElement;
+        
+        function createMaterial(uniforms, vert, frag)
+        {
+            return new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: vert,
+                fragmentShader: frag,
+            });
+        }
+    }
+    function createUniform()
+    {
+        return {
+            u_time: { type: "f", value: 1.0 },
+            u_mouse: { type: "v2", value: new THREE.Vector2() },
+            u_resolution: { type: "v2", value: new THREE.Vector2() },
+
+            u_seed: { type: "f", value: seed },
+            u_theme: { type: "f", value: seed },
+        }
+    }
+
+    function createCanvas(data)
+    {
+        if(data.vert != "") return;
+
+        canvas = document.createElement("canvas");
+    }
+
+
+
+    function setCanvas(data)
+    {        
+        var main = document.getElementsByTagName("main")[0]; 
+        main.appendChild(canvas);
+
+        canvas.className = data.style;
+        canvas.style.top = 0;
+    }
+    function updateTheme(data)
+    {
+        var theme = document.body.dataset.theme;
+    
+        if(theme == "dark")
+        { 
+            canvas.style.opacity = data.dark_opacity;
+            canvas.style.backgroundImage = `url("${ data.dark_image }")`
+         
+            uniforms.u_theme.value = 0.0;
+        }
+        else 
+        {
+            canvas.style.opacity = data.light_opacity;
+            canvas.style.backgroundImage = `url("${ data.light_image }")`
+            
+            uniforms.u_theme.value = 1.0;
+        }
+
+        
+    }
+    function updateSize() 
+    {        
+        if(renderer != null)
+        {
+            uniforms.u_resolution.value.x = canvas.width;
+            uniforms.u_resolution.value.y = canvas.height;
+        }
+        else
+        {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight + 100;
+        }
+    }
+    function updateMouse( event )
+    {         
+        if(renderer == null) return;
+        
+        mouse.x = (event.clientX / canvas.clientWidth);
+        mouse.y = 1 - (event.clientY / canvas.clientHeight);
+
+        mouse.x = mouse.x * uniforms.u_resolution.value.x;
+        mouse.y = mouse.y * uniforms.u_resolution.value.y;
+        
+        uniforms.u_mouse.value.x = mouse.x;
+        uniforms.u_mouse.value.y = mouse.y;
+    }
+
+    let interval;
+    let delta;
+    let speed;
+    function updateInitial(data)
+    {
+        interval = 1 / data.fps;
+        delta = interval;
+        speed = data.speed;
+    }
+    function update() 
+    {
+        window.requestAnimationFrame(update);
+
+        delta += clock.getDelta();
+
+        if(delta > interval)
+        {
+            render();
+
+            delta = delta % interval;
+        }
+    }
+    function render() 
+    {
+        if(renderer == null) return;
+        
+        uniforms.u_time.value += delta * speed;
+        renderer.render(scene, camera);
+
+        
+        
+    }
+</script>
+
+
+
+
+</head>
+
+<body
+  data-theme="dark"
+  data-theme-auto='false'
+  >
+    <script data-cfasync="false">
+  
+  var fujiThemeData = localStorage.getItem('fuji_data-theme');
+  
+  if (!fujiThemeData) {
+    localStorage.setItem('fuji_data-theme', 'auto');
+  } else {
+    
+    if (fujiThemeData !== 'auto') {
+      document.body.setAttribute('data-theme', fujiThemeData === 'dark' ? 'dark' : 'light');
+    }
+  }
+</script>
+
+    <header>
+    <div class="container-lg clearfix">
+        <div class="col-12 header">
+            <a class="title-main" href="/">AngusChan&#39;s Devlog</a>
+            
+            <span class="title-sub">Stay Hungry, Stay Foolish</span>
+            
+        </div>
+    </div>
+</header>
+
+    <main style="position: relative;">
+        <div class="container-lg clearfix">
+            
+            <div class="col-12 col-md-9 float-left content">
+                
+
+<article>
+    
+        <h2 class="post-item post-title">
+            <a href="https://angus945.github.io/devlog/project/nightmare-crafter/">【日誌】關卡編輯器</a>
+        </h2>
+    
+    
+        <div class="post-item post-meta">
+            <span>
+    <i class="iconfont icon-today-sharp"></i> &nbsp;
+    2024-05-06
+</span>
+
+
+
+
+<span>
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 4773 字
+</span>
+
+
+
+
+<span><i class="iconfont icon-pricetags-sharp"></i>&nbsp;<a href="/tags/data-driven">data-driven</a>&nbsp;<a href="/tags/project">project</a>&nbsp;</span>
+
+        </div>
+    
+       
+    
+    <div class="post-content markdown-body">
+        
+         
+         
+        <p>這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！</p>
+<h2 id="前言">前言</h2>
+<p>這次專案是二上期末跟《故事編寫》課老師聊到的東西，他認為有輔助軟體能對教學品質產生幫助，透過實作避免學生的知識停留在理論層面。</p>
+<p>主要從關卡設計的角度深入，雖然設計初期會用紙上談兵的方式構思關卡，但無法驗證是一大缺點，他希望有工具能讓學生製做關卡並實際遊玩。</p>
+<p>雖然市面上有許多相似性質的遊戲（如：Super Mario Maker），但考量成本不可能給每個學生配發，也不可能公然用盜版教學，找人開發新的還是最保險。</p>
+<p>所以我就接下了&hellip;但談了交換條件，老師答應幫我處理（課程中寫的）小說的出版事宜 :P</p>
+<p>總之這案子告一段落了，玩家可以製作並遊玩自己的關卡，遊戲畫面如下：</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mTbSNBjook0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<p>這篇是製作過程的紀錄文章，內容與實際時序大致相符，但有針對閱讀流暢性調整過編排。</p>
+<h3 id="成員介紹">成員介紹</h3>
+<p>首先介紹一下成員，我們是南臺科大第 111 學年度的多樂系學生，目前為二年級（二下），專案成員一共有四位：</p>
+<ul>
+<li>小呈 Angus（我）：程式、專案管理</li>
+<li><a href="https://www.instagram.com/kocha_owo/" target="_blank">Kocha</a>：2D 生物設計、動畫、UI</li>
+<li><a href="https://twitter.com/Izumige_21" target="_blank">Izumige</a>：2D 物件設計、動畫</li>
+<li><a href="https://www.instagram.com/xia_zelldert/" target="_blank">XiaZelldert</a>：音樂音效</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/preface-member.png" alt="image display error, please report: [/devlog/nightmare-crafter/preface-member.png]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>雖然大二，但我在入學前就有接觸過五年遊戲開發，所以文中提及的內容可能超出學校的常規進度。開發流程是根據我自身的知識進行的，如果有能改進的部分再麻煩前輩指出。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/preface-meteorite.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/preface-meteorite.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="概念設計">概念設計</h2>
+<p>專案的第一步是概念設計，為確認方向我讓組員進行了幾次概念發想。以下正文。</p>
+<h3 id="情境設定">情境設定</h3>
+<p>首先是情境設定，為了給美術一個起點發想，我們從幾個方案中採用了克蘇魯題材，並設計了有趣的情境：在深海巨型菊石中的城市。</p>
+<p>我們也畫了幾張分鏡圖，左上是我畫的，左下與右側是組員 XiaZelldert 與 Izumige 繪製的…有圖才知道大家理解各異，連菊石的存在方式（活、死、躺著、直立）都沒有共識。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 60%;" >
+    <img src="/devlog/nightmare-crafter/concept.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>組員 XiaZelldert 也針劇情寫過文本，但我跟教授確認需求後就喊停了。必要需求只有以下幾項：</p>
+<ul>
+<li>一個 2D 平台動作關卡編輯器</li>
+<li>在規定的時間內，主角在血量不為零的狀態下，從起點移動到終點為過關</li>
+<li>有可以丟擲拋物線物體攻擊的敵人</li>
+<li>玩家可以蹬牆跳</li>
+<li>教材用，使用者為授與學生</li>
+</ul>
+<h3 id="速寫草圖">速寫草圖</h3>
+<p>雖然砍了劇情文本，但情境設定還是沿用，我要求美術們以此繪製數張草圖，設計遊戲使用的方塊和生物。</p>
+<p>下面是組員 Kocha 設計的草圖。</p>
+<p>todo 更多描述</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/concept-kocha-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-kocha-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>這部分是組員 Izumige 繪製的設計草圖。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/concept-izumige-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-izumige-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>註：專案初期因為需求考量，我有限制美術設計時的精緻度。</p>
+<h3 id="配色嘗試">配色嘗試</h3>
+<p>草圖完成後接著嘗試配色，考量複雜度問題我採用了組員 Kocha 的怪物與 Izumige 的方塊設計，從中選出三個方案並要求他們繪製三種配色變體。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-color-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-color-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>後續進行了數次協調，改變方塊邊框、飽和度與明度等，也透過柏林噪聲提升質感（這什麼魔法？），再從方案中選出最後要採用的一項。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-color-3.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-color-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>給剩餘的草圖上色後就告一段落了，感謝術們耐心陪我討論。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-color-4.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-color-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="介面草圖">介面草圖</h3>
+<p>專案初期需要介面參考，包括主頁面、選單、編輯器與遊玩畫面，我讓組員 XiaZelldert 嘗試繪製了一些草圖，但後來沒有採用。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-ui-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-ui-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>不採用原因是設計和需求有落差，以編輯器為例，他繪製的是彈出式背包介面，類似 Minecraft 或 Terraria，但我們比較需要的是如 Rimworld、Oxygen Not Included 等常駐編輯器介面。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-ui-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-ui-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>所以我後來在 Untiy 做了新的的介面給原型使用，將選單固定在畫面左側與底部。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/concept-ui-3.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/concept-ui-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="程式原型">程式原型</h3>
+<p>在美術們發揮創意的同時程式工作也同步進行著。剛開始
+我想趁機會驗證我對遊戲模組的理解，根據之先前的筆記
+<a href="https://angus945.github.io/learn/game-development/how-to-make-modification-games/" target="_blank">【筆記】如何讓遊戲支援模組開發</a>
+嘗試實作。</p>
+<p>我拿之前做到一半的框架修改， 讓遊戲讀取 StreamingAssets 中的文件建構物件、載入圖片，甚至想用 Lua 將程式碼外部化。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>結果嘛&hellip;</p>
+<p>不能說失敗，只能說是一塌糊塗，原因有三點。</p>
+<p>首先是技術難題，除了基礎架構的知識不充足，我對資料驅動 (Data-Driven) 、Lua (XLua) 等進階技術也還不熟悉，資料載入與行為串接都相當粗糙。</p>
+<p>雖然成功讀取定義檔並生成實體在場景中，還能操控玩家（螃蟹）攻擊怪物，但程式碼的維護跟擴展是個惡夢，硬要繼續恐怕會浪費更多資源。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-2.gif" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>第二是企劃部分，我們製作前沒有進行正式企劃，很多東西是同步和想到才加的，所以程式編寫時也不知道物件需要的
+屬性，血量圖片等都是遇到才補。</p>
+<p>要做那麼複雜的話這些需求都該先預估好才對，但…就算要先企劃，以我目前的能力也做不好那麼詳細的預估。</p>
+<p>最後是需求問題，老師的要求不是能讓玩家修改生物、腳本和圖片的遊戲，而是能製作關卡的編輯器。雖然有學到東西，但從專案管理的角度看則浪費了整個月的工作量，或是賠了整個月的資金（如果有），還好這不是商案…</p>
+<p>但之前工作時也犯過一樣的錯 D:</p>
+<p>最後我就決定止損，把原先的程式全部砍掉，改用最基礎的 Resources 載入、用 Prefab 組合物件，以及用繼承實作不同行為。簡單快速也沒技術深度，但是符合需求的樸實方案。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-3.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>總之花了幾天的時間把原本的功能修復完，玩家能能從列表新建關卡，進入編輯器。</p>
+<p>編輯方式是從左測選擇類別後（圖層），選擇物件（筆刷）後在網格上透過左鍵繪製、右鍵擦除，而畫面右邊會顯示當前物件的描述。編輯完在右上方輸入資料夾和關卡名稱就能保存關卡了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-4.gif" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>回列表就會看到關卡被顯示出來，能用遊玩模式進入。在遊玩模式中玩家抵達終點就算贏，但在這之前如果時間或血量先歸零就輸了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-5.gif" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-5.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>保存的關卡會被存在 StreamingAssets 資料夾，只要打包後就能分享給別人了。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/prototype-6.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/prototype-6.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>程式沒太多好說的，平台控制是拿<a href="https://youtu.be/3sWTzMsmdx8" target="_blank">Ultimate 2D Platformer Controller</a>為基底修改，再加上老師要求的蹬牆跳功能而已。</p>
+<h2 id="量產階段">量產階段</h2>
+<p>完成基礎概念後就進入量產階段了，讓隊伍加大開發腳步。</p>
+<h3 id="生物設計">生物設計</h3>
+<p>遊戲的生物都交給組員 Kocha 繪製，但教授認為要求太低導致組員缺少表現機會，雖然我認為（依專案需求）不需要太精緻的視覺表現，但考量學校隊伍的性質我應該更顧慮組員才對。所以後續要求有提高標準，並採用更嚴格的過濾的方式（六選一）決定採用方案。</p>
+<p>新的怪物要求有四種：基本款怪物、垂直遊蕩的怪物、會朝前方發射子彈的怪物，以及能對周圍一圈造成傷害的怪物。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/nightmare-crafter/production-enemy-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-enemy-1.jpg]">
+    <p style="opacity: 0.5">
+        後面三張也要求補充編號與關鍵字，方便溝通
+    </p>
+</div>
+
+
+<p>提高標準後收到的設計就細緻許多，我再選四隻作為採用方案。</p>
+<ul>
+<li>基本款怪物：採用左上安康魚方案，因為教授偏好並且能達成「丟擲拋物線物體攻擊」的需求。</li>
+<li>垂直遊蕩：採用 No.4 方案，個人偏好與動畫難易度考量。</li>
+<li>一圈傷害：採用 No.4 方案，原因同上。</li>
+<li>發射子彈：採用 No.1 方案，原因同上。</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 100%;" >
+    <img src="/devlog/nightmare-crafter/production-enemy-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-enemy-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>玩家角色也用相同的六選一方法，評估後我決定採用 No.4 的齧齒軟體生物，主要原因也是動畫方便，至於方案 No.2 被我選做另一隻爬行怪物使用。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-player.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-player.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>選定角色後也讓他繪製動態，示意玩家操作時的各種動作。但原先的霰彈槍設計改掉了，教授比較喜歡噴吐攻擊。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-player-action.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-player-action.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>最後就是動畫化，我們採用逐幀圖集（Sprite Sheet）的方式播放動畫，組員 Kocha 因為沒有動畫軟體所以是憑感覺繪製的，沒有草圖、沒有播放也不疊圖，走的是一個直覺流，而且最終效果還不錯 www</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-creatures-anim.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-creatures-anim.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="物件設計">物件設計</h3>
+<p>遊戲的方塊與物件都交給組員 Izumige 設計，我提出十項要求的各三種設計變體：</p>
+<ul>
+<li>方塊：踩到後破碎的方塊、會移動的方塊、會發射東西的方塊、輸送帶方塊、會爆炸的方塊。</li>
+<li>物件：拉桿和門、加分道具、終點、紀錄點、傳送門。</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-item-block.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-item-block.jpg]">
+    <p style="opacity: 0.5">
+        右下怪物門動態是組員 Izumige 自主追加的，教授很喜歡，我也是
+    </p>
+</div>
+
+
+<p>決定採用的方塊有：玻璃（破碎方塊）、水母與海龜（移動平台）、尖齒和雷射眼（發射方塊）、海蛇群（輸送方塊）、沼氣魚（爆炸方塊）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-block.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-block.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>決定採用物件有：三種款式的門、珍珠（加分道具）、神秘卷軸（終點）、水母（檢查點）、怪物門和簡單傳送門（傳送門）。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-item-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-item-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-item-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/production-item-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>最後就是動畫，組員 Izumige 是使用 CSP EX 繪製的。我決定在這裡展示草圖播放的樣子，因為那些輔助的紅線看起來很酷。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-item-anim.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-item-anim.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="介面設計">介面設計</h3>
+<p>最先與玩家接觸的元素是介面，為了整體完整度也得將臨時物件替換為適當素材才行。負責設計的是組員 Kocha，我的要求是玩家血量格、通用面板、倒數計時器和通用按鈕，每個要求需提供六種草圖方案。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/ui-design-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-design-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>我採用的是 No.1 水滴（血量格）、No.2 破碎（通用面板）、No.6 克蘇魯（計時器）與 No.1、2 的符文與石板（按鈕）。除此之外，老師蠻喜歡面板 No.4 怪手，所以也把手加入採用之一，上色輸出成素材。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/ui-design-3.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-design-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="關卡設計">關卡設計</h3>
+<p>組員 XiaZelldert 也進行過紙上關卡設計，主要用於設計參考，部分美術要求就是從關卡草圖中提取的。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/level-design-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/level-design-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>原形完成後則讓他直接製做關卡，用基礎方塊（一般、彈跳、死亡）設計了十關，並進行初步測試。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/nightmare-crafter/level-design-7.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/level-design-7.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="內容實裝">內容實裝</h2>
+<p>美術輸出的同時程式也完成需求的功能了，套上素材後就能讓完整度大幅提升！</p>
+<h3 id="活體生物">活體生物</h3>
+<p>生物，包括玩家與怪物在內的所有生物。玩家能攻擊並殺死怪物，而怪物也會根據行為做出反饋。</p>
+<ul>
+<li>主角：玩家操控的角色，能水平移動、跳躍、攀牆、蹬牆跳和攻擊。</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-player.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-player.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>眼魚：在空中&hellip;水中？水平移動的生物，撞到牆壁後折返</li>
+<li>爬行怪：在地面水平移動的生物，沒路或撞牆時折返</li>
+<li>魷魚：垂直移動的生物，也是撞牆後折返</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-enemy-2.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-enemy-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>蛞蝓：與遺蹟守衛相同，但玩家在前方時會噴吐酸液攻擊</li>
+<li>水螅：原地漂浮，每隔一段時間會釋放脈衝傷害周圍所有生物</li>
+<li>安康魚：最討人厭的怪物，會根據情況靠近、遠離玩家，並丟出頭上的球體攻擊目標</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-enemy-1.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-enemy-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="方塊結構">方塊結構</h3>
+<p>各種方塊的效果和動畫實裝，以及遊戲中可互動的物件。</p>
+<ul>
+<li>果凍：碰到果凍方塊會強制彈射。</li>
+<li>觸手：碰到觸手方塊會受傷並回到存檔點。</li>
+<li>海草方塊：進入海草會造成緩速效果。</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-tile-1.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-tile-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>玻璃：踩到後會破碎，並在一定時間後恢復原狀</li>
+<li>海龜：在固定範圍內水平移動的平台</li>
+<li>水母：在固定範圍垂直平移動的平台</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-tile-2.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-tile-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>海蛇：會緩慢推動在上面的物體</li>
+<li>爆炸魚：碰到後會爆炸，摧毀範圍內的一切</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-tile-3.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-tile-3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>眼球：會定時朝左或上方發射雷射，貫穿所有阻礙與生物</li>
+<li>尖齒：會觀察左方或上方，有生物出現的時候會射出牙齒子彈</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/production-apply-tile-4.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-tile-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>存檔點：可以保存受傷後返回的地點</li>
+<li>三種門：碰到對應拉桿後可以開啟阻礙道路的門，其中一個會在幾秒後關閉</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/nightmare-crafter/production-apply-item-1.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-item-1.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>傳送門：兩兩一對的傳送門，可以讓生物穿越地圖</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/nightmare-crafter/production-apply-item-2.gif" alt="image display error, please report: [/devlog/nightmare-crafter/production-apply-item-2.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="互動介面">互動介面</h3>
+<p>遊戲的操作介面，雖然為了節省工作量重複使用相同素材，但套上美術後整個質感也大幅提升，下面就做個簡單對比。</p>
+<ul>
+<li>主頁面：加上背景、標題和按鈕</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/ui-compare-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-compare-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>關卡選單：除了捲動頁面以外也加了分頁系統，讓列表能根據資料夾過濾關卡，避免混亂</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/ui-compare-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-compare-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>遊玩畫面：加上血量格和倒數計時框，以及結束畫面</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/ui-compare-3.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-compare-3.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<ul>
+<li>網格背景：把主要面板加上背景，選單按鈕加上邊框</li>
+</ul>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/ui-compare-4.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/ui-compare-4.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="遊戲背景">遊戲背景</h3>
+<p>主畫面和選單的背景是組員 Kocha 自主繪製的美術圖，完美適配。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 80%;" >
+    <img src="/devlog/nightmare-crafter/background-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/background-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>原本關卡當中也要製做背景，所以讓組員 Kocha 設計一些物件。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/background-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/background-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>但因為玩家製作的關卡位置不固定，考慮到製做難度就放棄複雜背景了，我改用 Shader 製做漸層與噪聲迷霧，效果其實也不錯。背景渲染是用世界座標計算的，只要放片背景跟著攝影機跑就行。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/background-3.gif" alt="image display error, please report: [/devlog/nightmare-crafter/background-3.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>編輯器背景也是用 Shader 繪製的，根據世界座標繪製網格。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: 90%;" >
+    <img src="/devlog/nightmare-crafter/background-4.gif" alt="image display error, please report: [/devlog/nightmare-crafter/background-4.gif]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h3 id="音樂音效">音樂音效</h3>
+<p>原先計劃沒有音效相關內容，但組員 XiaZelldert 剛好有過鑽研就交給他製作了。我錄了一個片段展示音效，感覺整個遊戲活了起來。</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/hw2jSAfMLao" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+<p>除此之外，遊戲的背景音樂也是他編曲的，這裡也放給各位欣賞。</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/VTMb3PcD28o" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p> </p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/GMnu_rnIPOk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h3 id="測試打磨">測試打磨</h3>
+<p>該有都填充完畢後，就開始做各種測試和打磨了。組員 Kocha 給每個物件都添加了文本，可以在編輯介面中看到，裡面包括了我們的前期設定，歡迎自由探索。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/detail-description.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/detail-description.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>遊玩與編輯介面也將上了簡易教學提示，點擊左上角的問號即可開啟。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/detail-tutorial-1.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/detail-tutorial-1.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>為了展示不同物件的效果，我也做了簡單的教學關卡，製做關卡前建議先玩過。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/detail-tutorial-2.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/detail-tutorial-2.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<p>當然還有無休止的除錯迴圈，圖層錯誤、引用遺失、字體消失、音效錯誤循環、缺少防呆機制之類有的沒的問題。</p>
+
+
+
+
+
+
+
+<div class="image" style="width: ;" >
+    <img src="/devlog/nightmare-crafter/detail-bug.jpg" alt="image display error, please report: [/devlog/nightmare-crafter/detail-bug.jpg]">
+    <p style="opacity: 0.5">
+        
+    </p>
+</div>
+
+
+<h2 id="感謝閱讀">感謝閱讀</h2>
+<h3 id="專案心得">專案心得</h3>
+<p>我們大概花了兩個半月開發，雖然因為時間限制無法讓組員完全發揮，但他們都是相當可靠的夥伴。在苛刻時限完成所有要求的 Kocha、低調的動畫大神 Izumige 與意料之外的音樂玩家 XiaZelldert，沒有他們不可有現在的成果，我對完成的作品相當滿意。</p>
+<p>這次專案我學到最多是專案管理經驗，在畢專前有帶隊經驗是很大的幫助。</p>
+<p>雖然文中展示的過程具有結構性，但實際情況並非如此，這次開發因為時間與個人經驗不足的關係沒有做詳細企劃，排程和發布工作也基本是憑感覺進行，所以發生過不少溝通失誤，最後幾周的趕工尤其嚴重。</p>
+<p>但踩過雷後也知道下次該怎麼做，有什麼事是要避免的了，進一步驅使我接觸更多遊戲企劃和專案管理的知識，如果前輩們有任何建議與推薦的資源再麻煩指出！！</p>
+<p>遊戲發布在 Itch.io 上，歡迎下載試玩：</p>
+<p><a href="https://angus945.itch.io/nightmare-crafter" target="_blank">https://angus945.itch.io/nightmare-crafter</a></p>
+<!-- 我們也有投巴哈姆特 ACG -->
+<h3 id="老師評語">老師評語</h3>
+<p>感謝閱讀，最後放一段指導教授吉老師的評語：</p>
+<p>（老師還沒回我訊息）</p>
+
+
+        
+        
+    </div>
+</article>
+
+
+
+
+                
+  
+  
+  
+
+  <hr>
+  <section class="social-share">
+    <ul class="share-icons">
+      <li>
+        <img src="https://img.icons8.com/ios-glyphs/30/null/share--v1.png" width="35" height="35"/>
+      </li>
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2fproject%2fnightmare-crafter%2f&amp;text=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8" target="_blank" rel="noopener" aria-label="Share on Twitter" class="share-btn twitter">
+          
+<img src="https://img.icons8.com/color/48/null/twitter--v1.png" width="35" height="35"/>
+          <p>Twitter</p>
+        </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fangus945.github.io%2fdevlog%2fproject%2fnightmare-crafter%2f" target="_blank" rel="noopener" aria-label="Share on Facebook" class="share-btn facebook">
+          <img src="https://img.icons8.com/fluency/48/null/facebook-new.png" width="35" height="35"/>
+          <p>Facebook</p>
+          </a>
+      </li>
+
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fangus945.github.io%2fdevlog%2fproject%2fnightmare-crafter%2f&amp;source=https%3a%2f%2fangus945.github.io%2fdevlog%2fproject%2fnightmare-crafter%2f&amp;title=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8&amp;summary=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8" target="_blank" rel="noopener" aria-label="Share on LinkedIn" class="share-btn linkedin">
+          <img src="https://img.icons8.com/color/48/null/linkedin-circled--v1.png" width="35" height="35"/>
+            <p>LinkedIn</p>
+          </a>
+      </li>
+
+      
+      
+
+      
+      <li>
+        <a href="mailto:?subject=AngusChan%27s%20Devlog - %e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8.&amp;body=%e3%80%90%e6%97%a5%e8%aa%8c%e3%80%91%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8%2c%20by%20AngusChan%27s%20Devlog%0a%e9%80%99%e6%ac%a1%e5%88%86%e4%ba%ab%e7%9a%84%e6%98%af%e5%a4%a7%e4%ba%8c%e4%b8%8b%e5%ad%b8%e6%9c%9f%e5%b8%b6%e9%9a%8a%e9%96%8b%e7%99%bc%e7%9a%84%202D%20%e5%b9%b3%e5%8f%b0%e9%97%9c%e5%8d%a1%e7%b7%a8%e8%bc%af%e5%99%a8%e8%a3%bd%e4%bd%9c%e9%81%8e%e7%a8%8b%ef%bc%81%0a%0ahttps%3a%2f%2fangus945.github.io%2fdevlog%2fproject%2fnightmare-crafter%2f%0a" target="_blank" class="share-btn email">
+          <img src="https://img.icons8.com/color/48/null/gmail--v1.png" width="35" height="35"/>
+          <p>Email</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+
+                
+
+
+                
+
+<div class="license markdown-body">
+    <blockquote>
+        <p>
+            尊重著作權，轉載規則請見  
+            <a rel="license" href="https://angus945.github.io/about/" target="_blank">About</a>
+             。
+        </p>
+    </blockquote>
+</div>
+
+
+            </div>
+            <aside class="col-12 col-md-3 float-left sidebar">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                <a href="/tags/compute-shader/">compute-shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/custom-editor/">custom-editor</a>
+            </span>
+            
+            <span>
+                <a href="/tags/data-driven/">data-driven</a>
+            </span>
+            
+            <span>
+                <a href="/tags/devlog/">devlog</a>
+            </span>
+            
+            <span>
+                <a href="/tags/game-develop/">game-develop</a>
+            </span>
+            
+            <span>
+                <a href="/tags/hugo/">hugo</a>
+            </span>
+            
+            <span>
+                <a href="/tags/learning/">learning</a>
+            </span>
+            
+            <span>
+                <a href="/tags/modification/">modification</a>
+            </span>
+            
+            <span>
+                <a href="/tags/post-processing/">post-processing</a>
+            </span>
+            
+            <span>
+                <a href="/tags/procedure-generation/">procedure-generation</a>
+            </span>
+            
+            <span>
+                <a href="/tags/programming/">programming</a>
+            </span>
+            
+            <span>
+                <a href="/tags/project/">project</a>
+            </span>
+            
+            <span>
+                <a href="/tags/resources/">resources</a>
+            </span>
+            
+            <span>
+                <a href="/tags/scene-design/">scene-design</a>
+            </span>
+            
+            <span>
+                <a href="/tags/shader/">shader</a>
+            </span>
+            
+            <span>
+                <a href="/tags/test/">test</a>
+            </span>
+            
+            <span>
+                <a href="/tags/trip/">trip</a>
+            </span>
+            
+            <span>
+                <a href="/tags/unity/">unity</a>
+            </span>
+            
+            <span>
+                <a href="/tags/website/">website</a>
+            </span>
+            
+        </div>
+    </div>
+    <div class="sidebar-item sidebar-toc">
+        <h3>目錄</h3><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a>
+      <ul>
+        <li><a href="#成員介紹">成員介紹</a></li>
+      </ul>
+    </li>
+    <li><a href="#概念設計">概念設計</a>
+      <ul>
+        <li><a href="#情境設定">情境設定</a></li>
+        <li><a href="#速寫草圖">速寫草圖</a></li>
+        <li><a href="#配色嘗試">配色嘗試</a></li>
+        <li><a href="#介面草圖">介面草圖</a></li>
+        <li><a href="#程式原型">程式原型</a></li>
+      </ul>
+    </li>
+    <li><a href="#量產階段">量產階段</a>
+      <ul>
+        <li><a href="#生物設計">生物設計</a></li>
+        <li><a href="#物件設計">物件設計</a></li>
+        <li><a href="#介面設計">介面設計</a></li>
+        <li><a href="#關卡設計">關卡設計</a></li>
+      </ul>
+    </li>
+    <li><a href="#內容實裝">內容實裝</a>
+      <ul>
+        <li><a href="#活體生物">活體生物</a></li>
+        <li><a href="#方塊結構">方塊結構</a></li>
+        <li><a href="#互動介面">互動介面</a></li>
+        <li><a href="#遊戲背景">遊戲背景</a></li>
+        <li><a href="#音樂音效">音樂音效</a></li>
+        <li><a href="#測試打磨">測試打磨</a></li>
+      </ul>
+    </li>
+    <li><a href="#感謝閱讀">感謝閱讀</a>
+      <ul>
+        <li><a href="#專案心得">專案心得</a></li>
+        <li><a href="#老師評語">老師評語</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+</aside>
+
+        </div>
+        
+<div class="btn">
+    <div class="btn-menu" id="btn-menu">
+        <i class="iconfont icon-grid-sharp"></i>
+    </div>
+    <div class="btn-toggle-mode">
+        <i class="iconfont icon-contrast-sharp"></i>
+    </div>
+    <div class="btn-scroll-top">
+        <i class="iconfont icon-chevron-up-circle-sharp"></i>
+    </div>
+</div>
+<aside class="sidebar-mobile" style="display: none;">
+  <div class="sidebar-wrapper">
+    
+    <div class="sidebar-item sidebar-pages">
+        <h3>頁面</h3>
+        <ul>
+            
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <a href="/all/">All</a>
+            </li>
+            
+            <li>
+                <a href="/devlog/">Devlog</a>
+            </li>
+            
+            <li>
+                <a href="/learn/">Learn</a>
+            </li>
+            
+            <li>
+                <a href="/article/">Article</a>
+            </li>
+            
+            <li>
+                <a href="/about">About</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-links">
+        <h3>連結</h3>
+        <ul>
+            
+            <li>
+                <a href="https://github.com/angus945/" target="_blank"><span>GitHub</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.facebook.com/angucChan" target="_blank"><span>Facebook</span></a>
+            </li>
+            
+            <li>
+                <a href="https://twitter.com/angus9456" target="_blank"><span>Twitter</span></a>
+            </li>
+            
+            <li>
+                <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-item sidebar-tags">
+        <h3>標籤</h3>
+        <div>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+            <span>
+                
+            </span>
+            
+        </div>
+    </div>
+    
+    
+  </div>
+</aside>
+    </main>
+
+    <footer>
+    <div class="container-lg clearfix">
+        <div class="col-12 footer">
+            
+            <span>&copy; 2021-2024
+                <a href="https://angus945.github.io/">AngusChan</a>
+                 | <a href="https://github.com/angus945/angusChan-website-projectsource">Source code</a> 
+                | 網站使用 <a href="https://github.com/dsrkafuu/hugo-theme-fuji/"
+                   target="_blank">Fuji-v2</a> &amp; <a href="https://gohugo.io/"
+                                                    target="_blank">Hugo</a> 構建而成
+            </span>
+        </div>
+    </div>
+</footer>
+
+    
+<script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+<script defer src="/assets/js/fuji.min.js"></script>
+
+
+
+</body>
+
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content in data-driven on AngusChan&#39;s Devlog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Thu, 12 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/data-driven/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 May 2024 09:30:17 +0800</lastBuildDate><atom:link href="https://angus945.github.io/tags/data-driven/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【日誌】關卡編輯器</title>
+      <link>https://angus945.github.io/devlog/project/nightmare-crafter/</link>
+      <pubDate>Mon, 06 May 2024 09:30:17 +0800</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/project/nightmare-crafter/</guid>
+      <description>這次分享的是大二下學期帶隊開發的 2D 平台關卡編輯器製作過程！ 前言 這次專案是二上期末跟《故事編寫》課老師聊到的東西，他認為有輔助軟體能對教學品質</description>
+    </item>
+    
     <item>
       <title>【筆記】如何讓遊戲支援模組開發</title>
       <link>https://angus945.github.io/learn/game-development/how-to-make-modification-games/</link>
