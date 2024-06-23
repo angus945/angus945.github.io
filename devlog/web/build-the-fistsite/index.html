@@ -119,6 +119,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -574,7 +580,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 2651 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 5048 字
 </span>
 
 
@@ -610,13 +616,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/theme.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/theme.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/theme.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/theme.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h2 id="修修改改">修修改改</h2>
 <p>模板決定後就可以根據需求修改內容了。雖然這個主題本身就攜帶不少功能，但有些客製化的需求還是只有自己知道，我也是為此才特意學習前端的基礎知識。</p>
@@ -630,13 +706,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/listoutPages.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/listoutPages.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/listoutPages.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/listoutPages.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="上一章下一章">上一章、下一章</h3>
 <p>有了教學頁面後，教學內容的模板也需要稍微修改。為了方便讀者閱讀連續教學，我也在教學頁面的底部添加上下章的連結，用於快速引導。</p>
@@ -647,13 +793,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/nextPage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/nextPage.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/nextPage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/nextPage.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="圖片嵌入">圖片嵌入</h3>
 <p>圖文並茂的文章才能有效加深讀者印象，因此圖片嵌入是必不可少的功能。雖然 Hugo 本身就有提供基本的函式讓使用者將圖片嵌入文章內容中，但它必須用完整的檔案路徑才能找到圖片。</p>
@@ -666,13 +882,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/displayImage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/displayImage.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/displayImage.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/displayImage.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="閱讀更多">閱讀更多</h3>
 <p>網站預計會有三種類型的文章：教學、筆記、部落格，這個主題能夠直接設置頂部的瀏覽菜單，但是點進去後的效果不太理想，它只列出頁面標題而已。</p>
@@ -684,13 +970,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/readmore.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/readmore.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/readmore.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/readmore.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>標題下方也列出了文章的標籤，方便讀者快速理解文章中有哪些內容。</p>
 
@@ -700,13 +1056,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tags.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tags.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tags.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tags.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="翻頁列表">翻頁列表</h3>
 <p>我使用「閱讀更多」的區塊來列出文章，但一口氣全列出的話會導致列表過長，讓讀者難以尋找文章。</p>
@@ -718,13 +1144,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/turnpageList.gif" alt="image display error, please report: [/devlog/build-the-fistsite/turnpageList.gif]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/turnpageList.gif" alt="image display error, please report: [/devlog/build-the-fistsite/turnpageList.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>後來才發現 Hugo 就有內建分頁系統了，所以我等於做了沒意義的功能…囧</p>
 <h3 id="標籤列表">標籤列表</h3>
@@ -736,13 +1232,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tagTabview1.gif" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview1.gif]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tagTabview1.gif" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview1.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>這就是模板中完全沒有的功能了，所以花不少額外時間製作，研究 js 腳本和 css 配製後才完成了美觀一點切換列表。</p>
 
@@ -752,13 +1318,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tagTabview2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tagTabview2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/tagTabview2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>參考資料</p>
 <p><a href="https://www.w3schools.com/howto/howto_js_tabs.asp" target="_blank">tabview</a></p>
@@ -786,13 +1422,83 @@ body::-webkit-scrollbar
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/tableOfContent.png" alt="image display error, please report: [/devlog/build-the-fistsite/tableOfContent.png]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/tableOfContent.png" alt="image display error, please report: [/devlog/build-the-fistsite/tableOfContent.png]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>過程中也注意到模板裡的腳本計算有些錯誤，在判斷距離的時候少減了一次間隔，導致捲動會在特定位置上跳動，修正後就大功告成了。</p>
 <pre><span>js</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -811,13 +1517,83 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/about.gif" alt="image display error, please report: [/devlog/build-the-fistsite/about.gif]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/about.gif" alt="image display error, please report: [/devlog/build-the-fistsite/about.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="語言設置">語言設置</h3>
 <p>多語言也是我建立網站的主要目的之一，Hugo 因為網址和資料夾結構相同的特性，設置多語言不是件難事，只需要將不同語言的文章用不同資料夾分開即可，Hugo 會幫忙完成複雜的工作。</p>
@@ -828,13 +1604,83 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/languages1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/languages1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>在訪客第一次進入網站主頁面的時候，使用 js 取得瀏覽器使用的語言，並將其引導適當的網頁上。</p>
 <p>為了讓讀者切換語言，我也添加了一個語言選擇器，透過 localstorage 來儲存設置，點擊展開後就可以進行切換，</p>
@@ -845,13 +1691,83 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/languages2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/languages2.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/languages2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="網站託管">網站託管</h3>
 <p>我過去沒有接觸過任何網頁技術，資料庫相關的後端知識也是，因此網站託管的部分也是依靠現有資源達成的。</p>
@@ -873,13 +1789,83 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/comment.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/comment.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/comment.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/comment.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="流量追蹤">流量追蹤</h3>
 <p>為了分析訪客的閱覽偏好，網站也使用了 <a href="https://analytics.google.com" target="_blank">Google Analytics</a> 進行流量分析。</p>
@@ -890,13 +1876,83 @@ if (scrollTop &lt; minScrollTop - SPACING)
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/googleAnaltics.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/googleAnaltics.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/googleAnaltics.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/googleAnaltics.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>但是不斷的編輯造成網頁有九成的流量都是我自己，所以得設定流量過濾，確保蒐集到的資料能正確反映現實。</p>
 <blockquote>
@@ -911,13 +1967,83 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/analtics_filte1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/analtics_filte1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/analtics_filte1.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/analtics_filte1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><a href="https://support.google.com/analytics/thread/89743745/can-t-create-filter-views-even-though-i-have-all-admin-accesses-in-all-levels?hl=en" target="_blank">Can&rsquo;t create filter views even though I have all ADMIN accesses in all levels </a></p>
 <p><a href="https://support.google.com/analytics/answer/10108813" target="_blank">GA4 Data filters</a></p>
@@ -930,13 +2056,83 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/devlog/build-the-fistsite/home.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/home.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/devlog/build-the-fistsite/home.jpg" alt="image display error, please report: [/devlog/build-the-fistsite/home.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h2 id="結語">結語</h2>
 <p>從開始學網頁到完工大概一個月了，雖然接觸新知識很有趣，但畢竟我的主要領域不在這，摸到現在也開始膩了，所以見好就收吧 !</p>
@@ -1027,6 +2223,10 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1216,6 +2416,10 @@ Displaying Filters for Universal Analytics Properties only. Filters cannot be ap
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

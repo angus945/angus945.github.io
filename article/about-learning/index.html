@@ -119,6 +119,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -574,7 +580,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 7681 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 9232 字
 </span>
 
 
@@ -637,13 +643,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/factoryModelSchool.jpg" alt="image display error, please report: [/article/about-learning/factoryModelSchool.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/factoryModelSchool.jpg" alt="image display error, please report: [/article/about-learning/factoryModelSchool.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 The Personalization of Education &amp; the Twilight of the Classroom Factory Model
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><strong><em>被動學習有哪些</em></strong></p>
 <p>大多數制式教育中的學習者都處於這種狀態，因為學生通常各自安靜的聽課並抄筆記。雖然偶爾會被點起來回答，但以參與程度來講還是屬於被動學習的範圍。</p>
@@ -661,13 +737,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/schoolisafactory.jpg" alt="image display error, please report: [/article/about-learning/schoolisafactory.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/schoolisafactory.jpg" alt="image display error, please report: [/article/about-learning/schoolisafactory.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         google image, school is a factory
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><strong><em>容易陷入的誤區</em></strong></p>
 <p>熟悉感，重複接收相同訊息容易對其產生熟悉感，讓人產生自己 &ldquo;理解了&rdquo; 的錯覺，但其實自己只是習慣這些資訊而已。是不是有過看了些教學和文章後，覺得好像會了什麼，但真正開始時卻還不知所措的經驗 ?</p>
@@ -685,13 +831,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/article/about-learning/simpleNote.jpg" alt="image display error, please report: [/article/about-learning/simpleNote.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/article/about-learning/simpleNote.jpg" alt="image display error, please report: [/article/about-learning/simpleNote.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         開始學習 unity customeditor 留下的關鍵字筆記，幾個月後就不需要再開啟這個資料夾了
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="主動學習">主動學習</h3>
 <p>以學習者為中心，學生主動參與一些事情，而不只是被動的接收資訊。要求學生做有意義的學習活動，並且讓他們<h>思考自己在做什麼</h>，以此培養出獨立、批判性和創造性的思維。</p>
@@ -703,13 +919,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/activeLearning.jpg" alt="image display error, please report: [/article/about-learning/activeLearning.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/activeLearning.jpg" alt="image display error, please report: [/article/about-learning/activeLearning.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 What is Active Learning? And Why it Matters
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>主動學習的關鍵在於<h>整個教育體制以及家長們的觀念革新</h>，不能夠再指望學生單純的聽課並要求記下一切，相反他們必須將學生帶入學習過程，為學生們創造出一個更可能發生主動學習的環境。</p>
 <blockquote>
@@ -750,13 +1036,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/interation.gif" alt="image display error, please report: [/article/about-learning/interation.gif]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/interation.gif" alt="image display error, please report: [/article/about-learning/interation.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         截自網站 brilliant.org
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>實際上主動學習還有更多成功的案例及方法，但大多都需要體制允許(例如小型講座 mini-lectore 和主動聆聽講座 active-listening lecture)，這裡只是提供幾項能夠獨立達成的例子而已。</p>
 <p><strong><em>主動學習的優點</em></strong></p>
@@ -786,13 +1142,83 @@
 
 
 
-<div class="image" style="width: 50%;" >
-    <img src="/article/about-learning/brilliant.gif" alt="image display error, please report: [/article/about-learning/brilliant.gif]">
+<div class="image image-container" style="width: 50%;" >
+    <img src="/article/about-learning/brilliant.gif" alt="image display error, please report: [/article/about-learning/brilliant.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         引用自 brilliant 宣傳影片
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>想進一步了解的人可以先到網站上挑些喜歡的主題看看，每個課程的第一章都可以免費觀看，如果覺得這種學習方式適合你的話，網站採用會員制(600/月、270/月，綁定一年)，期間能夠無限制觀看。</p>
 
@@ -802,13 +1228,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/article/about-learning/brilliant_courses.jpg" alt="image display error, please report: [/article/about-learning/brilliant_courses.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/article/about-learning/brilliant_courses.jpg" alt="image display error, please report: [/article/about-learning/brilliant_courses.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         網站 brilliant.org 教學類別
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>畢竟經營平台也是有開銷的，考量到教學平台的品質和內容豐富度，這個價格相當划算。這也是我目前看到最適合進行主動學習的平台，在這裡分享給各位。 <a href="https://brilliant.org/" target="_blank">Brilliant</a></p>
 <h3 id="費曼學習法">費曼學習法</h3>
@@ -831,13 +1327,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/FeynmanTechnique.jpg" alt="image display error, please report: [/article/about-learning/FeynmanTechnique.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/FeynmanTechnique.jpg" alt="image display error, please report: [/article/about-learning/FeynmanTechnique.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 How to Learn Anything with the Feynman Technique
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <blockquote>
 <p>溫故而知新，可以為師矣</p>
@@ -862,13 +1428,83 @@
 
 
 
-<div class="image" style="width: 50%;" >
-    <img src="/article/about-learning/schematic.jpg" alt="image display error, please report: [/article/about-learning/schematic.jpg]">
+<div class="image image-container" style="width: 50%;" >
+    <img src="/article/about-learning/schematic.jpg" alt="image display error, please report: [/article/about-learning/schematic.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         自己的教學文章 - 如何在場景之間傳遞資料
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><c>
 如果你覺得 "寫教學" 這個詞太過沉重，也可以把它當成另一種形式的筆記，想像成將現有的知識解釋給小學時的自己就好
@@ -890,13 +1526,83 @@
 
 
 
-<div class="image" style="width:  80%;" >
-    <img src="/article/about-learning/rocket.jpg" alt="image display error, please report: [/article/about-learning/rocket.jpg]">
+<div class="image image-container" style="width:  80%;" >
+    <img src="/article/about-learning/rocket.jpg" alt="image display error, please report: [/article/about-learning/rocket.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片截自素材庫 unsplash.com, SpaceX
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <hr>
 <h2 id="結語">結語</h2>
@@ -909,13 +1615,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/about-learning/LearningDisability.jpg" alt="image display error, please report: [/article/about-learning/LearningDisability.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/about-learning/LearningDisability.jpg" alt="image display error, please report: [/article/about-learning/LearningDisability.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         診斷書，診斷出這段注定悲慘的學習經歷
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>雖然上面寫的是書寫困難，但事實上我擁有的是某種記憶缺陷，我無法在短時間內記住文字的細節。周圍的同學能夠在十分鐘內背起十個英文單字，而就算將時間延長到幾個小時，對我來講也是難如登天。</p>
 <p>我能夠聽懂、看懂且正常使用中文寫作或溝通，但就是沒辦法完整記住中文文字的形體，因此沒有提示的書寫對我來說是極度困難的事情。學習期間的字音字形、註釋小考本都被紅圈圈滿，就算使用罰寫將本子填滿後，我仍然無法在記住這一切。</p>
@@ -1035,6 +1811,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1218,6 +1998,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

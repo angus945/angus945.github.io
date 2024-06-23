@@ -123,6 +123,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -573,7 +579,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 1667 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 4910 字
 </span>
 
 
@@ -603,13 +609,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-0_start.jpg" alt="image display error, please report: [/article/around-the-island/day5-0_start.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-0_start.jpg" alt="image display error, please report: [/article/around-the-island/day5-0_start.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="山佳">山佳</h3>
 <p>搭乘火車一會兒後，在七點抵達了山佳車站。從預覽地圖時就被圍繞山佳站的許多公園所吸引，與其他旅行者不同，我在尋找景點時，是以周圍公園的數量為依據的，真是個怪人。</p>
@@ -620,13 +696,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_shanjia.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_shanjia.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_shanjia.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_shanjia.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>出站後，背著行李，沿著鐵道步行十分鐘，抵達了山佳鐵道地景公園。這裡並不是非常大，稍微拍了造景車廂、壁畫和火車後，就前往地圖上的另一個綠色區塊了。</p>
 
@@ -636,13 +782,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_park-1-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-1-1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_park-1-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-1-1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -651,13 +867,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_park-1-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-1-2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_park-1-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-1-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>往南一小段距離，這裡是鹿角溪公園，在搖椅中休息一會後，便沿著水圳散步，繞到附近的山仔腳公園，遇見了許多在早晨帶寵物出門的居民。</p>
 
@@ -667,13 +953,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_park-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_park-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -682,13 +1038,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_park-3.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-3.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_park-3.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-3.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>此時氣溫降至 16 度，是旅途中最寒冷的時刻，我不由得將身上的風衣緊緊地抓住。從小生活在北部，但在台南讀書半年，好像都忘了北部的溼冷的感覺。步行了一段距離後，麵包提供的能量已經消耗殆盡，因此決定在城市漢堡買一份蔥油餅，作為簡單的補給。</p>
 
@@ -698,13 +1124,83 @@
 
 
 
-<div class="image" style="width: 60%;" >
-    <img src="/article/around-the-island/day5-1_breakfirst.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_breakfirst.jpg]">
+<div class="image image-container" style="width: 60%;" >
+    <img src="/article/around-the-island/day5-1_breakfirst.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_breakfirst.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>往溪邊前進，河濱公園也是相當吸引我的地點。不知不覺，已經一個多小時過去了，從天降下的雨點也逐漸變大，我決定回到車站，繼續今天的旅程。</p>
 
@@ -714,13 +1210,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-1_park-4.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-4.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-1_park-4.jpg" alt="image display error, please report: [/article/around-the-island/day5-1_park-4.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="鶯歌">鶯歌</h3>
 <p>就山佳隔壁的鶯歌站，也是今天主要的停留地點。台鐵每站都有計次收費的行李托運中心，小型物件只要 30 元就能存放整天，相當划算。為了方便行動，我也將行李交給托運中心保管。</p>
@@ -731,13 +1297,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_yingge.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_yingge.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_yingge.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_yingge.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>諄尋導航的指引，先走到了鶯歌陶瓷老街。小時候被家人帶來幾次，但現在與以往的熱鬧景象不同，街道上沒有任何活動跡象，只剩下我獨自一人，在空曠的街道上散步。</p>
 
@@ -747,13 +1383,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_oldstreet-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_oldstreet-1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_oldstreet-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_oldstreet-1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -762,13 +1468,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_oldstreet-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_oldstreet-2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_oldstreet-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_oldstreet-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>穿越整個老街後，也往鶯歌陶瓷博物館前進，我對此處的印象只有小時候的出遊，隨著接近此地，朦朧的回憶也不斷浮現。當時沒有馬上入園，而是先到門前的天橋上，感受高處的寒風，俯視在地面穿梭的車輛。沒有特別理由，就是想上去看看而已 :P</p>
 
@@ -778,13 +1554,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_museumout-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumout-1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_museumout-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumout-1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>入園後，先是走到後方的藝術園區散步，欣賞每個陶瓷造景，閱讀設計理念，了解每個作品背後的故事。比起夏天，我更喜歡在冬季出遊，當大家因為刺骨的寒風躲在室內時，我卻能在空曠的街道上享受寧靜的世界，深呼吸，清涼的空氣使我心情更加平靜。</p>
 
@@ -794,13 +1640,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_museumout-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumout-2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_museumout-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumout-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>欣賞完所有作品，我回到場管入口，向驗票員展示夾在手機皮套中的學生證。一旁的立牌告知參觀的學生們，今天能享有免費的優惠，不期的收穫最令人驚喜。館內展示了許多陶瓷製品，最令人驚嘆的是模擬皮革與布料的藝術創作，質感之細膩，乍看還以為是真實的材質，以假亂真的高超工藝。</p>
 
@@ -810,13 +1726,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_museumin-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-1.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_museumin-1.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -825,13 +1811,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_museumin-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-2.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_museumin-2.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -840,13 +1896,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_museumin-3.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-3.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_museumin-3.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_museumin-3.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>午餐時間接近，腹裡的空蕩感提醒我尋找食物的時間到了。原先，我在地圖中發現管內有餐廳可為遊客提供食物，但尋找後發現它因為疫情暫時歇業了，只好離開博物館，回到老街尋找午飯。最後在老街上的厚道飲食店點了一碗雞腿飯，只要 115 元，配菜蓋滿了白飯，上面放著卡滋外皮的大塊雞腿，讓我十分滿足。</p>
 
@@ -856,13 +1982,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_launch.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_launch.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_launch.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_launch.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>在返回車站之前，我先沿著溪邊的步道，到三鶯之心空間藝術特區觀賞巨大的室外造景。附近還有一個
 類似藝術中心的建築，但接近後才發現外側圍著鷹架與薄暮，不確定是尚未開幕還是即將廢棄。</p>
@@ -873,13 +2069,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-2_park.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_park.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-2_park.jpg" alt="image display error, please report: [/article/around-the-island/day5-2_park.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>時間來到下午一點，返回車站，取回行李，在熟悉的重量感陪伴下前往下一站。</p>
 <h3 id="桃園">桃園</h3>
@@ -891,13 +2157,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-3_taoyuan.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_taoyuan.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-3_taoyuan.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_taoyuan.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>我決定先前往鄰近公園，坐在步道的長椅上歇息，吃著沿途購買的可頌麵包，看著托嬰保母帶著嬉鬧孩子們遊玩，聽著音樂，等待入住時間接近。</p>
 
@@ -907,13 +2243,83 @@
 
 
 
-<div class="image" style="width: 60%;" >
-    <img src="/article/around-the-island/day5-3_desert.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_desert.jpg]">
+<div class="image image-container" style="width: 60%;" >
+    <img src="/article/around-the-island/day5-3_desert.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_desert.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -922,13 +2328,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-3_park.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_park.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-3_park.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_park.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -937,13 +2413,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-3_river.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_river.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-3_river.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_river.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>一個半小時後，我到附近街邊的小吃店，點了一碗餛飩麵與豆乾當晚餐。聽著老闆與熟客聊天，緩慢吃完平淡的一餐後，再拖著沈重的步伐，前往今晚的住宿地點，福昇商旅。</p>
 
@@ -953,13 +2499,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day5-3_dinner.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_dinner.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day5-3_dinner.jpg" alt="image display error, please report: [/article/around-the-island/day5-3_dinner.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>進入大樓電梯時，引人不適的煙味飄散出來，一度擔心得像前幾日那樣在刺鼻氣味中入睡，好在旅店內部空氣清新。一進房，我便扔下行李，倒入床舖，沉沉睡去，以至於連照片都忘了留下，結束短暫的一天。</p>
 <!-- 一個半小時，起來稍微梳洗，全身黏答答的，再學一下日文，八點上床休息，睡到隔天 -->
@@ -1097,6 +2713,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1263,6 +2883,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

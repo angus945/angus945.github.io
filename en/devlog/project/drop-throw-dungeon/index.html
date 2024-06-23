@@ -119,6 +119,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -574,7 +580,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;2347 words
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;7282 words
 </span>
 
 
@@ -634,13 +640,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/inventory.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/inventory.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/inventory.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/inventory.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>So, the main part of the game system is already completed!</p>
 <!-- so the main part of game system i have already done! -->
@@ -674,13 +750,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/player_throw.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_throw.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_throw.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_throw.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>In the initial version of my code, I experimented with camera scaling and offset to provide a better player view. However, after several tests, it became evident that this approach made aiming challenging and caused discomfort. Therefore, I decided to remove this effect.</p>
 <p>To aid players in aiming, a dotted lines is displayed when they hold down the mouse button, indicating the trajectory and target of the throw. I also incorporated a scrolling animation by gradually changing the material properties over time.</p>
@@ -695,13 +841,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/player_aiming.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_aiming.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/player_aiming.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_aiming.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>In the game engine, a common issue arises where objects move to fast and pass through obstacles due to physics simulation. To address this, I implemented a simple solution using &ldquo;RayCast&rdquo;. This technique allow the game to detect if an object blocks the path, ensuring that the movement is appropriately stopped.</p>
 <!-- In game engine, some time object move to fast well flying through the obstacle, is a common bug cause by physics simulate. A simple wave to fix it is use "RayCast", check whether the object block the path and stop movement. -->
@@ -719,13 +935,83 @@
 
 
 
-<div class="image" style="width: 50%;" >
-    <img src="/devlog/drop-throw-dungeon/player_raycast.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_raycast.jpg]">
+<div class="image image-container" style="width: 50%;" >
+    <img src="/devlog/drop-throw-dungeon/player_raycast.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/player_raycast.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="more-items">More Items</h3>
 <p>I have added a variety of different type of items to enhance the game&rsquo;s content. To preserve an air of mystery, I kindly request that some details of the items be kept hidden.</p>
@@ -748,13 +1034,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_basis.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_basis.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_basis.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_basis.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Consumable Weapons: Smaller versions of weapons with lower durability, but they can be stacked and continuously thrown.</li>
@@ -768,13 +1124,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_throwing.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_throwing.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_throwing.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_throwing.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Wands: Rare item that, when thrown, unleash magical spells.</li>
@@ -788,13 +1214,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_magicWand.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicWand.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicWand.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicWand.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Magical Swords: Three types of special swords that can only be purchased from merchants.</li>
@@ -809,13 +1305,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_magicSword.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicSword.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_magicSword.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_magicSword.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Potions: Single-use potions that, when thrown, leave a lasting effect on ground or cast the magical missile.</li>
@@ -829,13 +1395,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_potions.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_potions.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_potions.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_potions.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Bombs: Inflict damage to all targets within range, including the player.</li>
@@ -849,13 +1485,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_bombs.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_bombs.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_bombs.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_bombs.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Money: The currency used in the dungeon. It can be use to purchase items form merchants and, of crouse, thrown!</li>
@@ -868,13 +1574,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_money.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_money.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_money.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_money.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <ul>
 <li>Hearts: Item used for player healing. When hit, the amount of healing depends on the number of stacked hearts.</li>
@@ -888,13 +1664,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/item_healHeart.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_healHeart.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/item_healHeart.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/item_healHeart.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Each item has a different probability of dropping, and they serve different purposes. Players need to carefully consider which items are most important at any given time.</p>
 <!-- serve 服務, serve different purposes -->
@@ -923,13 +1769,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_tracing.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_tracing.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_tracing.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_tracing.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Attack: When the player is within range, enemies will pause briefly and then dash towards the player&rsquo;s direction. During the attack, enemies change color to red as a warning for the player to move away; otherwise, they sill take damage.</p>
 <!-- briefly 簡要的, enemies will pause briefly -->
@@ -945,13 +1861,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_attack.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_attack.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Drops: Upon defeating an enemy, it will randomly drop an item base on its enemy type. These enemy drops serve as the primary source of items for the player to obtain.</p>
 <!-- Upon 之時, Upon defeating an enemy -->
@@ -966,13 +1952,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_treasure.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_treasure.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_treasure.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_treasure.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="more-enemy">More Enemy!</h3>
 <p>I have also added more enemies with different behaviors to increase the game&rsquo;s challenge.</p>
@@ -991,13 +2047,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_shooter.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_shooter.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_shooter.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_shooter.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Artillery: Slime enemies that squirt toxic fields to the player&rsquo;s location, causing continuous damage if the player remain in the field. Slimes are sturdy but move slowly, effectively limiting the player&rsquo;s movement.</p>
 <!-- remains 遺跡、留在, if the player remain in the field -->
@@ -1011,13 +2137,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_slime.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_slime.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_slime.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_slime.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Summoner: Stationary enemies located at the map boundary that frequently spawn smaller enemies to attack the player. Summoners do not have direct attacks but can overwhelm the map with enemies.</p>
 <!-- Stationary 文具、靜止的, Stationary enemies located at the map boundary -->
@@ -1032,13 +2228,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_summoner.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_summoner.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_summoner.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_summoner.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Little: Smaller enemies spawned by the Summoner. They have fast speed and low health, force the player to move quickly and consume their items.</p>
 <!-- Little: only spawn by Summoner, have fastest speed and lowest health. Little will force player run quickly and and consume their items. -->
@@ -1050,13 +2316,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_little.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_little.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_little.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_little.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Supply Enemy: Special enemies with item icons on their heads. Killing them will drop health and money items.</p>
 <!-- Supply Enemy: special enemy with item icon on head, kill them will drop health and money item. -->
@@ -1067,13 +2403,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/enemy_supply.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_supply.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/enemy_supply.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/enemy_supply.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>These different enemy types add more challenge to the game. Melee enemies post a higher danger, while ranged enemies are annoying. The Summoner can spawn an endless number of Littles, creating a continuous enemy assault that the player must deal with. Players need to adjust their strategy and tactics over time to survive in this chaotic dungeon.</p>
 <!-- annoying 煩人, while ranged enemies are annoying -->
@@ -1105,13 +2511,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/map.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Traps: Spike traps are strategically placed to damage any creatures attempting to pass through them. Of course, include player :P</p>
 <!-- Trop: Spike trop will damage all creature try go though. -->
@@ -1125,13 +2601,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/map_trap.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_trap.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_trap.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_trap.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Clearing: At the start of each wave, some items are cleared from the map. This is done to prevent an excessive number of items cluttering the map, as there are more dropping items than the player needs at once.</p>
 <!-- prevent 防止,  -->
@@ -1150,13 +2696,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/map_clear.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_clear.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_clear.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_clear.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Chest: Chest are provided for players to store their items, although their usefulness is limited. I have set a restriction on map clearing, allowing only low-level items to be removed.</p>
 <!-- provided 提供, provided for players to store their items  -->
@@ -1171,13 +2787,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/map_chest.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_chest.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_chest.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_chest.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Merchants: Merchants are positioned on the top side of the map. Players can drop money to them and choose items to purchase. The merchants refresh their merchandise every wave.</p>
 <!-- Merchants: Merchants stay in top side of map, player drop money to him and pick item can purchase. Merchants refresh merchandise every wave. -->
@@ -1191,13 +2877,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/map_shop.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_shop.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/map_shop.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/map_shop.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="game-loop">Game Loop</h3>
 <p>The game follows an endless playing mode, continuing until the player dies. This simple mechanic is suitable for the prototype.</p>
@@ -1212,13 +2968,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/scene_title.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_title.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_title.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_title.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Transition: A transition screen displays player and pumpkin animation during transitions.</p>
 <!-- Transition: Transition screen with player and pumpkin animation. -->
@@ -1229,13 +3055,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/scene_translate.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_translate.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_translate.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_translate.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Pause: During gameplay, players can press the ESC key to pause the game. They can open the tutorial by clicking a button in toe top-right corner.</p>
 <!-- Pause: during gameplay, player can press esc key to pause game and open tutorial by click button on right up. -->
@@ -1246,13 +3142,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/scene_pause.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_pause.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/scene_pause.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/scene_pause.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Waves: Enemies spawn in waves, with the first six serving as tutorial waves to introduce each enemy type. After defeating all enemies in wave, a reward item spawn in the center of map. Picking up the reward items start the next wave.</p>
 <!-- Waves: enemies are spawning by wave, the first six are tutorial wave, introduce each type of enemy. once player defeat all enemies on wave, map center will spawn reward item, pick them can start next wave. -->
@@ -1275,13 +3241,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/audio.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/audio.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/audio.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/audio.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>Throwing: A wind slicing sound accompanies the object flying quickly.</p>
 <!-- Throwing: wind slice with object flying quick. -->
@@ -1408,13 +3444,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/bgm.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>I created three simple melodies and added playing condition to combines them in the game, aiming for an additional felling. Each melody thread dynamically displayed base from different game states. The beat thread plays during the title screen and game pause, while the other two thread switch during waves and rest time.</p>
 <!-- i created three simple melody, and add playing condition to combine in game for addition feeling, three thread display dynamic by different game state. the beat thread playing on title and game pause, other two thread switch by during wave and rest time.  -->
@@ -1436,13 +3542,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/bgm_tracks.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm_tracks.jpg]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/bgm_tracks.jpg" alt="image display error, please report: [/devlog/drop-throw-dungeon/bgm_tracks.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="gameplay-feedback">Gameplay Feedback</h3>
 <p>Many enemies interact with player, and sheer amount of activity on the screen can make the game appear chaotic, potentially cause the player to missing important information. To address this, i focused on improving feedback without breaking the immersion of the game.</p>
@@ -1461,13 +3637,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/feedback_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_attack.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_attack.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_attack.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>When the player is damaged, i incorporated slow motion and camera shake to create a heightened sense of impact. The blowout particle effect and a dull sound were also added to intensify the feeling of being attacked.</p>
 <!-- Player Damaged: I add a slow motion and camera shake to remind player is be damaged, blowout particle and dull sound make attack fell more shock. -->
@@ -1482,13 +3728,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/feedback_hurt.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_hurt.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_hurt.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_hurt.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>To enhance feedback when items are hit, i implemented particle effects emitted by enemies. When an item breaks, particle fly out accompanied breaking sound, further emphasizing the fore of impact.</p>
 <!-- implemented 實施 -->
@@ -1505,13 +3821,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/feedback_itemborken.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_itemborken.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/feedback_itemborken.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/feedback_itemborken.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>There are many more details in the game. If you&rsquo;re interested in experiencing it, please download and have fun playing!</p>
 <!-- There have more detail in game, if you are interested of this game, please download and have fun :D -->
@@ -1542,13 +3928,83 @@
 
 
 
-<div class="image" style="width: 70%;" >
-    <img src="/devlog/drop-throw-dungeon/real_interaction.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/real_interaction.gif]">
+<div class="image image-container" style="width: 70%;" >
+    <img src="/devlog/drop-throw-dungeon/real_interaction.gif" alt="image display error, please report: [/devlog/drop-throw-dungeon/real_interaction.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <!-- The origin version of design, item in game world have physical interaction effect, bomb explode cah trigger chain reaction, or wooden items may burning let player open some area. But the system is too complex, i don't have enough skill to accomplish. -->
 <p>As a result, i decided to focus on the core gameplay mechanic of &ldquo;Throwing&rdquo; and expanded upon it to create an endless defense game with entertaining mechanics.</p>
@@ -1719,6 +4175,10 @@
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
             </li>
             
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
+            </li>
+            
         </ul>
     </div>
     
@@ -1852,6 +4312,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

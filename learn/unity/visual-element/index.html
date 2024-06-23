@@ -119,6 +119,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -569,7 +575,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 3523 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 5638 字
 </span>
 
 
@@ -607,13 +613,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/learn/unity/visual-element/summary-imgui.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-imgui.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/learn/unity/visual-element/summary-imgui.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-imgui.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>除了按鈕以外還有各種元素，包括整數輸入、浮點滑桿、文字匡與下拉選單等，都能用一行命令完成，是相當便捷且容易學習的系統。</p>
 <p>而他的缺點也十分明顯，由於這種線性執行命令的模式更傾向於「程序導向」(procedure-oriented) 而非「物件導向」 (object-oriented)，<h>導致使用 IMGUI 開發的工具都相當難維護、重用與擴展。 </h></p>
@@ -644,13 +720,83 @@ input = EditorGUI.IntField(inputRect, input);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/unity/visual-element/summary-visualtree.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualtree.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/summary-visualtree.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualtree.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         引用自 Unity 文檔示意圖
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>視覺物件的函式在命名空間 <code>UnityEngine.UIElements</code> 與 <code>UnityEditor.UIElements</code> 底下，如果要建立新的元素，只要透過建構函式建立繼承自 <code>VisualElement</code> 的物件，並添加至編輯器的 <code>rootVisualElement</code> 即可。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -667,13 +813,83 @@ rootVisualElement.Add(button);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/summary-visualelement.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualelement.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/summary-visualelement.jpg" alt="image display error, please report: [/learn/unity/visual-element/summary-visualelement.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>視覺物件是以「物件」的形式存在的，因此只要添加一次就能自動繪製，直至使用者將其移除。而它的好處也相當明顯，由於<h>物件能將屬性封裝在其中</h>，使其維護性大大提昇。樹狀的結構也能在一定程度上<h>讓子元素繼承屬性</h>，利用「容器」的性質進行排版，省去繁瑣的調整工作。</p>
 <pre><span>cs</span><hr style='margin-top:5px; margin-bottom:0px'>
@@ -695,13 +911,83 @@ container.Add(label);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/unity/visual-element/create-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/create-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -710,13 +996,83 @@ container.Add(label);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/create-window-panel.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window-panel.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/create-window-panel.jpg" alt="image display error, please report: [/learn/unity/visual-element/create-window-panel.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><c>
 註：UXML 可以用於進階的界面開發，但超出筆記的範圍所以只在後面帶過。
@@ -729,13 +1085,83 @@ container.Add(label);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/default-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/default-window.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/default-window.jpg" alt="image display error, please report: [/learn/unity/visual-element/default-window.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="添加元素">添加元素</h3>
 <p>由於視覺物件是「物件」，所以需要先實例化才能進行操作。<code>CreateGUI()</code> 函式會在視窗「準備好」的時候調用，是比較適當的元素建立時機，但實際上隨時建立都能達到目的。</p>
@@ -761,13 +1187,83 @@ container.Add(label);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/add-label.jpg" alt="image display error, please report: [/learn/unity/visual-element/add-label.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/add-label.jpg" alt="image display error, please report: [/learn/unity/visual-element/add-label.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>只要是繼承自 <code>VisualElement</code> 的物件都能用相同的方法建立，包括一般界面的 <code>Label</code>, <code>Button</code>, <code>Image</code>, <code>Toggle</code>，與編輯器界面的 <code>IntegerField</code>, <code>ObjectField</code> 等等。</p>
 <p>除此之外，樹狀結構的特性也允許物件嵌套。可以透過 <code>new VisualElement()</code> 建立空的物件作為容器，讓它包裝多個物件在其中。</p>
@@ -835,13 +1331,83 @@ fieldWidthButton.AddButton(&quot;Button B&quot;, () =&gt; Debug.Log(&quot;Button
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/field-width-Button.jpg" alt="image display error, please report: [/learn/unity/visual-element/field-width-Button.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/field-width-Button.jpg" alt="image display error, please report: [/learn/unity/visual-element/field-width-Button.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="排版樣式">排版樣式</h3>
 <p>排版也是自製工具中重要的一環，好的界面能快速有效的呈現訊息，並對使用者操作做出回饋。UI Toolkit 大致有三種排版方法可以選擇。</p>
@@ -863,13 +1429,83 @@ container.Add(new Label(&quot;Label D&quot;));
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/style-code-flex.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-code-flex.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/style-code-flex.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-code-flex.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>程式指定是最簡單的排版方法，但對複雜的版面設計來說相當低效。</p>
 <p><strong><em>樣式表指定</em></strong></p>
@@ -902,13 +1538,83 @@ title.AddToClassList(&quot;align-center&quot;);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/style-sheed.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-sheed.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/style-sheed.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-sheed.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>透過 USS 文件編輯能更有效的架構與重用屬性，除了彈性大以外也不需要重複編譯程序，大幅提高設計界面的效率。更多細節可以參考官方文檔 <a href="https://docs.unity3d.com/Manual/UIE-USS.html" target="_blank">Style UI with USS</a>。</p>
 <p><strong><em>視覺化排版</em></strong></p>
@@ -920,13 +1626,83 @@ title.AddToClassList(&quot;align-center&quot;);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/unity/visual-element/style-builder.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-builder.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/unity/visual-element/style-builder.jpg" alt="image display error, please report: [/learn/unity/visual-element/style-builder.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 Unity 教學文檔
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>透過 Window &gt; UI Toolkit &gt; UI Builder 可以開啟編輯視窗。2019.4 與 2020 版本需要透過 Packge Manager 導入，而在 2021 版開始之後為內置工具，不需要而外動作即可使用。</p>
 <p>詳細教學請參考官方文檔 <a href="https://docs.unity3d.com/Packages/com.unity.ui.builder@1.0/manual/index.html" target="_blank">Unity UI Builder</a>，他的功能太多放不進筆記，所以就先點到為止。</p>
@@ -945,13 +1721,83 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/ui-toolkit-sample-b.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-b.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/ui-toolkit-sample-b.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-b.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 
 
@@ -960,13 +1806,83 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/ui-toolkit-sample-a.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-a.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/ui-toolkit-sample-a.jpg" alt="image display error, please report: [/learn/unity/visual-element/ui-toolkit-sample-a.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h2 id="經驗總結">經驗總結</h2>
 <p>第一次製作複合編輯器是在專案《山鴉行動》中，當時為了方便編輯裝備的效果，我製作出一套系統能快速修改觸發條件、效果冷卻和特效之類的內容。</p>
@@ -977,13 +1893,83 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/operation-raven-equip-editor.jpg" alt="image display error, please report: [/learn/unity/visual-element/operation-raven-equip-editor.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/operation-raven-equip-editor.jpg" alt="image display error, please report: [/learn/unity/visual-element/operation-raven-equip-editor.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>雖然這套系統的功能還算完善，但建立在 IMGUI 框架下的程式碼還是相當難維護，在這之後我嘗試開發的許多工具也有相同的困擾。還好現在注意到 UI Toolkit 這套系統了，能夠以物件的方式繪製界面真的是很方便的事，相見恨晚阿。</p>
 <h3 id="對比差異">對比差異</h3>
@@ -1008,13 +1994,83 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/learn/unity/visual-element/roles-and-skill-sets.jpg" alt="image display error, please report: [/learn/unity/visual-element/roles-and-skill-sets.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/learn/unity/visual-element/roles-and-skill-sets.jpg" alt="image display error, please report: [/learn/unity/visual-element/roles-and-skill-sets.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>總之，希望這篇筆記能幫各位更了解 UI Toolkit 的各項重點，感謝各位的閱讀。</p>
 
@@ -1113,6 +2169,10 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1294,6 +2354,10 @@ labels.ForEach(n =&gt; n.text = &quot;query loop&quot;);
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

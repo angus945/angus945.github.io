@@ -1,0 +1,46 @@
+.thumbnail {
+  cursor: pointer; }
+
+/* Popup Container */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center; }
+
+/* Popup Image */
+.popup-content {
+  max-width: 90%;
+  max-height: 90%;
+  margin: hidden;
+  display: block;
+  transition: transform 0.3s ease, left 0.3s ease, top 0.3s ease;
+  position: absolute; }
+
+/* Large Image */
+.popup-content.zoomed {
+  transform: scale(2);
+  /* Adjust this value to control the zoom level */ }
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s; }
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer; }

@@ -119,6 +119,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -569,7 +575,7 @@
 
 
 <span>
-    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 8784 字
+    <i class="iconfont icon-file-tray-sharp"></i>&nbsp;約 10335 字
 </span>
 
 
@@ -618,13 +624,83 @@ void SomeFunction (uint3 id : SV_DispatchThreadID)
 
 
 
-<div class="image" style="width: 90%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif]">
+<div class="image image-container" style="width: 90%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>不過，在計算著色器中，運作差異並不是真正的難點，對有編寫過材質著色器的人來說應該已經很熟悉並行這回事了。計算著色器與材質著色器的真正差異在於，計算著色器是<h>獨立於渲染管線之外的系統</h>，所以它也沒有頂點著色器 (vertices shader) 或片段著色器 (fragment shader) 這種渲染管線提供的「框架」來提示使用者該做些什麼。</p>
 <p>因此計算著色器的真正的難點是，在少了明確的目標指引以後我們只能靠自己判斷<h>有什麼問題是能透過並行解決的</h>，以及<h>該怎麼透過並行解決問題</h>。對初次接觸計算著色器的人來說，就可能因為不熟悉並行的思考方式而停頓。</p>
@@ -703,13 +779,83 @@ void CSMain(Vector3 threadID)
 
 
 
-<div class="image" style="width: 90%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif]">
+<div class="image image-container" style="width: 90%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/cpu-vs-gpu.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>至於為什麼會需要三個維度軸的執行緒的數量呢？Microsoft 官方文檔是這樣說的：<a href="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads" target="_blank">numthreads</a></p>
 <blockquote>
@@ -760,13 +906,83 @@ void CSMain() { }
 
 
 
-<div class="image" style="width: 60%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/thread-group-id.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/thread-group-id.jpg]">
+<div class="image image-container" style="width: 60%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/thread-group-id.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/thread-group-id.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 microsoft HLSL 文檔，numthreads
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>至具體數量該怎麼分配呢？首先從<h>處理資料的維度</h>下手，假設著色器要處理的主要數據為一維的陣列就分配 <code>(n, 1, 1)</code>，若要對圖片的二維像素陣列操作就用 <code>(x, y, 1)</code>，或是要計算三維的體積網格就 <code>(x, y, z)</code>。</p>
 <p>執行緒的具體數量或比例則沒有明確規則，大概抓個介於 10 和資料總數 1% 以下的數值吧。假設陣列長度大約一萬，numthread 就分配為 <code>(100, 1, 1)</code>，若圖片大小 2048 的話就分配 <code>(20, 20, 1)</code>。</p>
@@ -819,13 +1035,83 @@ void BoxBlur (uint3 id : SV_DispatchThreadID)
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/kernel-convolution-operation.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/kernel-convolution-operation.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/kernel-convolution-operation.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/kernel-convolution-operation.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 Kernel Convolution Wiki
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p><c>
 註：當多個執行緒試圖同時讀寫「同個位置上」的資訊時可能會發生數據爭用 (data race) 或競態條件 (race condition) 的情況，但計算著色器似乎能一定程度上預防毀滅性的後果發生，所以不要太過分應該不用擔心？具體狀況我也還沒遇到過，相關參考資料會在文末提供。
@@ -1004,13 +1290,83 @@ compute.SetTexture(kernel, &quot;Result&quot;, resultTex);
 
 
 
-<div class="image" style="width: 50%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/example-0.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-0.jpg]">
+<div class="image image-container" style="width: 50%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/example-0.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-0.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="陣列計算">陣列計算</h3>
 <p>看完了預設的著色器，現在輪到我們應用這些知識嘗試解決自己的問題。一步一步來，首先是：</p>
@@ -1065,13 +1421,83 @@ buffer.GetData(result);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/example-1.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-1.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/example-1.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-1.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="資料過濾">資料過濾</h3>
 <p>第二個範例，透過計算著色器進行資料過濾。首先：</p>
@@ -1154,13 +1580,83 @@ resultBuffer.GetData(result);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/example-2.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-2.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/example-2.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/example-2.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>要注意的是緩衝區在建立時，欄位數量是根據「可能的最大值」建立的，即使 AppendBuffer 當中沒有「添加」那麼多元素，他的<h>長度還是會與完整陣列相同</h>。如果想獲得實際存入的元素數量，可以透過 <a href="https://docs.unity3d.com/ScriptReference/ComputeBuffer.CopyCount.html" target="_blank">ComputeBuffer.CopyCount</a> 函式取得。</p>
 <h3 id="除錯建議">除錯建議</h3>
@@ -1200,13 +1696,83 @@ resultBuffer.GetData(result);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/conway-game-of-life.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/conway-game-of-life.gif]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/conway-game-of-life.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/conway-game-of-life.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         引用自 Conway’s Game of Life Wiki
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>具體遊戲規則可以參考 <a href="https://zh.wikipedia.org/zh-tw/%E5%BA%B7%E5%A8%81%E7%94%9F%E5%91%BD%E6%B8%B8%E6%88%8F" target="_blank">Wiki</a>。</p>
 <p><strong>GPU Slime Simulations</strong><br>
@@ -1218,13 +1784,83 @@ resultBuffer.GetData(result);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/slime-simulations.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/slime-simulations.gif]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/slime-simulations.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/slime-simulations.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         引用自 Coding Adventure: Ant and Slime Simulations
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>參考影片 <a href="https://youtu.be/X-iSQQgOd1A" target="_blank">Coding Adventure: Ant and Slime Simulations</a></p>
 <p><strong>GPU Culling</strong><br>
@@ -1236,13 +1872,83 @@ resultBuffer.GetData(result);
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/compute-culling.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/compute-culling.gif]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/compute-culling.gif" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/compute-culling.gif]" class="thumbnail">
     <p style="opacity: 0.5">
         圖片引用自 Unity中使用ComputeShader做视锥剔除
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>更多細節可以參考此篇文章 <a href="https://zhuanlan.zhihu.com/p/376801370" target="_blank">Unity中使用ComputeShader做视锥剔除（View Frustum Culling）</a>。</p>
 <p><strong>GPU Ray Tracing</strong><br>
@@ -1254,13 +1960,83 @@ resultBuffer.GetData(result);
 
 
 
-<div class="image" style="width: 50%;" >
-    <img src="/learn/compute-shader/compute-shader-basis/ray-tracing.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/ray-tracing.jpg]">
+<div class="image image-container" style="width: 50%;" >
+    <img src="/learn/compute-shader/compute-shader-basis/ray-tracing.jpg" alt="image display error, please report: [/learn/compute-shader/compute-shader-basis/ray-tracing.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         引用自 GPU Ray Tracing in Unity
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>參考資料 <a href="http://blog.three-eyed-games.com/2018/05/03/gpu-ray-tracing-in-unity-part-1/" target="_blank">GPU Ray Tracing in Unity</a>, <a href="https://youtu.be/Cp5WWtMoeKg" target="_blank">Coding Adventure: Ray Marching</a></p>
 <h2 id="感謝閱讀">感謝閱讀</h2>
@@ -1411,6 +2187,10 @@ resultBuffer.GetData(result);
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1606,6 +2386,10 @@ resultBuffer.GetData(result);
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>

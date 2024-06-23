@@ -123,6 +123,12 @@
 
 
 
+<link rel="stylesheet" href="https://angus945.github.io/image-display.3a4899cc8bb2c29227ce3bf5be587d80f6e512917eceda9ae630897532d73137.css" integrity="sha256-OkiZzIuywpInzjv1vlh9gPblEpF&#43;ztqa5jCJdTLXMTc=">
+
+
+
+
+
 
 
 
@@ -593,13 +599,83 @@
 
 
 
-<div class="image" style="width: ;" >
-    <img src="/article/around-the-island/day2-0_mirror-3.jpg" alt="image display error, please report: [/article/around-the-island/day2-0_mirror-3.jpg]">
+<div class="image image-container" style="width: ;" >
+    <img src="/article/around-the-island/day2-0_mirror-3.jpg" alt="image display error, please report: [/article/around-the-island/day2-0_mirror-3.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>對了，其實臺鐵每站都有站章可以收集，如果每個停留地點都有蓋到 TRPass 上的話，看起來應該會蠻壯觀的，如果有蓋到的話，但我從第一站就忘記這回事了 (ゝ∀･)</p>
 <h3 id="行人地獄">行人地獄</h3>
@@ -613,13 +689,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/article/around-the-island/end-child-dead.jpg" alt="image display error, please report: [/article/around-the-island/end-child-dead.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/article/around-the-island/end-child-dead.jpg" alt="image display error, please report: [/article/around-the-island/end-child-dead.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         111 年的兒童交通死傷人數高達九千人，圖片來自道安資訊查詢網
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>臺灣去年的<r>交通死亡人數三千人，受傷人數逼近五萬</r>，平均下來，光是<r>單周交通死亡人數就超越近期最大的太魯閣事故</r>，付出的<a href="https://www.cna.com.tw/news/aipl/202110080163.aspx" target="_blank">社會成本高達六千億元</a>。臺南死傷人數更是<a href="https://roadsafety.tw/Dashboard/Custom?type=%E7%B8%A3%E5%B8%82%E6%AF%8F%E5%8D%81%E8%90%AC%E4%BA%BA%E6%AD%BB%28%E5%82%B7%29%E6%95%B8" target="_blank">位居 21 個縣市之首</a>，而我正在這裡讀書，每天走在貨車穿梭的道路前往學校。</p>
 
@@ -629,13 +775,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/around-the-island/end-death-with-road.jpg" alt="image display error, please report: [/article/around-the-island/end-death-with-road.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/around-the-island/end-death-with-road.jpg" alt="image display error, please report: [/article/around-the-island/end-death-with-road.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         111 年交通死傷人數，圖片來自道安資訊查詢網
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <!-- https://www.instagram.com/p/B3T0ZRRiepg/ -->
 <p>混亂且危險的交通環境，被外國媒體稱呼為<a href="https://edition.cnn.com/travel/article/taiwan-traffic-war-tourism-intl-hnk/index.html" target="_blank">「行人地獄」(living hell)</a>，這不光是用路人的素質問題，更是整個城市的結構性問題。長期生活在「以車為本」的城市中令人們麻木，某些新聞在描述孩童事故時，也<h>暗示家長未看好小孩才導致事故發生</h>，而非檢討<r>交通環境會對處於探索時期兒童產生多大的威脅。 </r></p>
@@ -653,13 +869,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/article/around-the-island/end-road-taiwan.jpg" alt="image display error, please report: [/article/around-the-island/end-road-taiwan.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/article/around-the-island/end-road-taiwan.jpg" alt="image display error, please report: [/article/around-the-island/end-road-taiwan.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         擷取自影片 阿龍部長出任務－路老師
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>光靠時速限制、測速照相與作秀執法無法解決問題，這是整個城市規劃與道路設計的系統性問題，看著麻木的人們將結果歸因在錯誤的對象上真的很難過。好的設計能引導人們做出安全行為，<h>一個為了「人」而建構的城市是能讓行人放心行走，讓孩童能在街道上玩樂的</h>，一昧的擴大道路只會讓城市充滿高速穿梭的車輛，縮限人們的行動空間。</p>
 
@@ -669,13 +955,83 @@
 
 
 
-<div class="image" style="width: 100%;" >
-    <img src="/article/around-the-island/end-road-netherlands.jpg" alt="image display error, please report: [/article/around-the-island/end-road-netherlands.jpg]">
+<div class="image image-container" style="width: 100%;" >
+    <img src="/article/around-the-island/end-road-netherlands.jpg" alt="image display error, please report: [/article/around-the-island/end-road-netherlands.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         Google 街景 707 Prinsengracht、阿姆斯特丹, 北荷蘭省
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <p>我的文章並不重要，如果你願意了解更多，請閱讀以下的內容，並將它們分享出去給更多人知道。裡面解釋了許多詳細的交通問題，希望能有更多人意識到問題所在，讓我們朝那些真正先進的國家看齊，讓城市變成吸引人群活動的地點，讓孩童能在安全的環境中自由探索與成長。</p>
 <p><a href="https://home.gamer.com.tw/artwork.php?sn=5520745" target="_blank">交通無混亂: 被強姦到麻木的台灣人，以及每天強姦人的系統性錯誤</a></p>
@@ -697,13 +1053,83 @@
 
 
 
-<div class="image" style="width: 80%;" >
-    <img src="/article/around-the-island/mobility-pyramid.jpg" alt="image display error, please report: [/article/around-the-island/mobility-pyramid.jpg]">
+<div class="image image-container" style="width: 80%;" >
+    <img src="/article/around-the-island/mobility-pyramid.jpg" alt="image display error, please report: [/article/around-the-island/mobility-pyramid.jpg]" class="thumbnail">
     <p style="opacity: 0.5">
         機動性金字塔（Mobility Pyramid）
     </p>
 </div>
 
+<div id="popup" class="popup">
+    <span class="close">&times;</span>
+    <img class="popup-content" id="popup-img">
+</div>
+
+<script type="text/javascript">
+
+
+var popup = document.getElementById('popup');
+
+
+var imgs = document.querySelectorAll('.thumbnail');
+var popupImg = document.getElementById("popup-img");
+
+
+var isZoomed = false;
+var scrollX = 0;
+var scrollY = 0;
+
+imgs.forEach(function(img) {
+    img.onclick = function(){
+        popup.style.display = "flex";  
+        document.body.style.overflow = 'hidden';  
+        popupImg.src = this.src;
+        isZoomed = false;  
+        popupImg.classList.remove("zoomed");  
+        popupImg.style.transformOrigin = 'center center';  
+        popupImg.style.transform = 'scale(1)';  
+    }
+});
+
+
+popupImg.onclick = function(event) {
+    if (isZoomed) {
+        popupImg.classList.remove("zoomed");
+        
+        popupImg.style.transform = 'scale(1)';
+    } else {
+        var rect = popupImg.getBoundingClientRect();
+        var offsetX = (event.clientX - rect.left) / rect.width * 100; 
+        var offsetY = (event.clientY - rect.top) / rect.height * 100; 
+
+        scrollX = window.scrollX;  
+        scrollY = window.scrollY;
+
+        popupImg.classList.add("zoomed");
+        popupImg.style.transformOrigin = `${offsetX}% ${offsetY}%`;
+        popupImg.style.transform = 'scale(2)'; 
+    }
+    isZoomed = !isZoomed;  
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+span.onclick = function() { 
+    popup.style.display = "none";
+    document.body.style.overflow = '';  
+}
+
+
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+        document.body.style.overflow = '';  
+    }
+}
+
+</script>
 
 <h3 id="轉載規則">轉載規則</h3>
 <p>請注意，本文不適用 <a href="https://angus945.github.io/about/">About</a> 中的轉載規則，內容不允許任何形式的轉載或擷取，喜歡文章請透過網址分享完整內容。</p>
@@ -841,6 +1267,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
@@ -1007,6 +1437,10 @@
             
             <li>
                 <a href="https://home.gamer.com.tw/homeindex.php?owner=angus945" target="_blank"><span>Bahamut</span></a>
+            </li>
+            
+            <li>
+                <a href="https://www.instagram.com/angus_chan_yi/" target="_blank"><span>Instagram</span></a>
             </li>
             
         </ul>
