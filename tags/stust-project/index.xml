@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>stust-project on AngusChan&#39;s Devlog</title>
+    <link>https://angus945.github.io/tags/stust-project/</link>
+    <description>Recent content in stust-project on AngusChan&#39;s Devlog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Thu, 24 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://angus945.github.io/tags/stust-project/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【專題】實驗專案 - 太空漂流</title>
+      <link>https://angus945.github.io/devlog/stust-project/1-wandering-space/</link>
+      <pubDate>Thu, 24 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://angus945.github.io/devlog/stust-project/1-wandering-space/</guid>
+      <description>&lt;!-- &amp;nbsp; --&gt;
+&lt;!-- [text]({ ref &#34;relpath&#34; })。 --&gt;
+&lt;p&gt;一直很喜歡《奧術》那種筆觸感強烈的風格化渲染，雖然懂部分原理但從未親自實踐，這次在專題組員的協助下總算有可見成果了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
